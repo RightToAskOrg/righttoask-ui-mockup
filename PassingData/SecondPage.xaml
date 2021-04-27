@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="PassingData.SecondPage"
+			 Title="Help me direct my question">
+	<ContentPage.Content>
+		<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+			<StackLayout Orientation="Horizontal">
+				<Editor Placeholder="Enter your question" Completed="Question_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+			</StackLayout>
+			<Button x:Name="navigateBackButton" Text="Previous Page" Clicked="OnNavigateBackButtonClicked" />
+			<Button x:Name="navigateForwardButton" Text="Question Reading Page" Clicked="OnNavigateForwardButtonClicked" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

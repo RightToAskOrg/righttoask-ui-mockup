@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="PassingData.ReadingPage"
+			 Title="Read Questions">
+	<ContentPage.Content>
+		<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+			<StackLayout Orientation="Horizontal">
+         		<Label Text="Keyword: " FontSize="Medium" HorizontalOptions="FillAndExpand" />
+         		<Label Text="{Binding SearchKeyword}" FontSize="Medium" FontAttributes="Bold" />
+        	</StackLayout>
+            <StackLayout Orientation="Horizontal">
+            	<Label Text="Top 10?" FontSize="Medium" HorizontalOptions="FillAndExpand" />
+            	<Label Text="{Binding TopTen}" FontSize="Medium" FontAttributes="Bold" />
+            </StackLayout>
+			<ListView x:Name="QuestionListView" ItemsSource="{Binding Questions}">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout Orientation="Vertical" Spacing="4">
+								<Label Text="{Binding QuestionText }" />	
+								<StackLayout Orientation="Horizontal">
+									<Label Text="Asked by" />
+									<Label Text="{Binding QuestionAsker }" />	
+									<Label Text="Upvotes " />
+									<Label Text="{Binding UpVotes }" />
+									<Label Text="| Downvotes " />
+									<Label Text="{Binding DownVotes}" />
+								</StackLayout>
+							</StackLayout>			
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+            <StackLayout Orientation="Horizontal">
+            	<Label Text="Draft Question: " FontSize="Medium" HorizontalOptions="FillAndExpand" />
+            	<Label Text="{Binding DraftQuestion}" FontSize="Medium" FontAttributes="Bold" />
+            </StackLayout>
+			<Button x:Name="navigateButton" Text="Back" Clicked="OnNavigateButtonClicked" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

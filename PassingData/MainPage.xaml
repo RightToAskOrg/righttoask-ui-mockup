@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="PassingData.MainPage"
+			 Title="Right To Ask UI mock-up">
+	<ContentPage.Content>
+		<StackLayout VerticalOptions="CenterAndExpand">
+			<StackLayout Orientation="Vertical" VerticalOptions="Center">
+				<Label Text="Read" FontSize="Medium" HorizontalOptions="Center" />
+				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+					<Entry x:Name="readByKeywordButton" Placeholder="by keyword" Completed="OnReadByKeywordFieldCompleted" HorizontalOptions="Center"/>
+					<Button x:Name="Top10NowButton" Text="top 10 now" Clicked="OnTop10NowButtonClicked" HorizontalOptions="Center"/>
+				</StackLayout>
+			</StackLayout>
+			<StackLayout Orientation="Vertical" VerticalOptions="Center">
+				<Label Text="Go Direct" FontSize="Medium" HorizontalOptions="Center" />
+				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+					<Button x:Name="CommitteeButton" Text="Committee" Clicked="OnCommitteeButtonClicked" HorizontalOptions="Center"/>
+					<Button x:Name="MPButton" Text="MP" Clicked="OnMPButtonClicked" HorizontalOptions="Center"/>
+				</StackLayout>
+			</StackLayout>
+			<StackLayout Orientation="Vertical" VerticalOptions="Center">
+				<Label Text="I have a question!" FontSize="Medium" HorizontalOptions="Center" />
+				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+					<Button x:Name="navigateButton" Text="Help me send it to the right place" Clicked="OnNavigateButtonClicked" HorizontalOptions="Center"/>
+				</StackLayout>
+			</StackLayout>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
