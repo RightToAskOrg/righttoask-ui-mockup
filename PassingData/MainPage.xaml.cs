@@ -7,7 +7,8 @@ namespace PassingData
 	{
 		public MainPage (string date)
 		{
-			InitializeComponent ();
+			InitializeComponent();
+
 		}
 
 		async void OnTop10NowButtonClicked(object sender, EventArgs e)

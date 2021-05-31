@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-			 x:Class="PassingData.ReadingPage"
+             x:Class="PassingData.ReadingPage"
 			 Title="Read Questions">
 	<ContentPage.Content>
-		<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+		<StackLayout HorizontalOptions="Center" VerticalOptions="Start">
 			<StackLayout Orientation="Horizontal">
          		<Label Text="Keyword: " FontSize="Medium" HorizontalOptions="FillAndExpand" />
          		<Label Text="{Binding SearchKeyword}" FontSize="Medium" FontAttributes="Bold" />
@@ -13,11 +13,12 @@
             	<Label Text="Top 10?" FontSize="Medium" HorizontalOptions="FillAndExpand" />
             	<Label Text="{Binding TopTen}" FontSize="Medium" FontAttributes="Bold" />
             </StackLayout>
+			<ScrollView>
 			<ListView x:Name="QuestionListView" ItemsSource="{Binding Questions}">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
-							<StackLayout Orientation="Vertical" Spacing="4">
+							<StackLayout Orientation="Vertical" VerticalOptions="Start" Spacing="4">
 								<Label Text="{Binding QuestionText }" />	
 								<StackLayout Orientation="Horizontal">
 									<Label Text="Asked by" />
@@ -32,11 +33,11 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
+			</ScrollView>	
             <StackLayout Orientation="Horizontal">
-            	<Label Text="Draft Question: " FontSize="Medium" HorizontalOptions="FillAndExpand" />
-            	<Label Text="{Binding DraftQuestion}" FontSize="Medium" FontAttributes="Bold" />
+            	<Editor Placeholder="Draft Question: " Text="{Binding DraftQuestion}" HorizontalOptions="FillAndExpand" Completed="Question_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
             </StackLayout>
-			<Button x:Name="navigateButton" Text="Back" Clicked="OnNavigateButtonClicked" />
+			<Button x:Name="navigateButton" Text="Save Draft" Clicked="OnSaveButtonClicked" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

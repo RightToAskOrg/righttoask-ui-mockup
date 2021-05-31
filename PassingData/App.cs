@@ -1,6 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
+using Application = Xamarin.Forms.Application;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace PassingData
