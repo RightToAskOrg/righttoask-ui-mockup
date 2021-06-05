@@ -31,7 +31,7 @@ namespace PassingData
 		{
 			draftQuestion = ((Editor) sender).Text;
 		}
-		async void OnSaveButtonClicked (object sender, EventArgs e)
+		void OnSaveButtonClicked (object sender, EventArgs e)
 		{
 			// Note that this doesn't really save the question (yet)
 			// It just updates the question list with some things like the draft q'n.

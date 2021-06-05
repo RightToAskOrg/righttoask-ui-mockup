@@ -29,15 +29,8 @@ namespace PassingData
 
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
-			var contact = new Contact {
-				Name = "Jane Doe",
-				Age = 30,
-				Occupation = "Developer",
-				Country = "USA"
-			};
-
 			var secondPage = new SecondPageCS ();
-			secondPage.BindingContext = contact;
+			//secondPage.BindingContext = contact;
 			await Navigation.PushAsync (secondPage);
 		}
 	}

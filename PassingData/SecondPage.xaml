@@ -3,13 +3,35 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 			 x:Class="PassingData.SecondPage"
 			 Title="Help me direct my question">
+	<!--
+			 xmlns:viewModel="clr-namespace:PassingData;assembly=PassingData"
+	<ContentPage.BindingContext>
+		<viewModel:SecondPage/>
+	</ContentPage.BindingContext>
+	-->
 	<ContentPage.Content>
 		<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-			<StackLayout Orientation="Horizontal">
-				<Editor Placeholder="Enter your question" Completed="Question_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+				<Label x:Name="matchCountReporter" Text="{Binding MatchingQuestions }" FontSize="Medium" HorizontalOptions="Center" /> 
+				<!-- <Label x:Name="matchCountReporter" Text="Matching questions: 456" FontSize="Medium" HorizontalOptions="Center" /> -->
+			<StackLayout Orientation="Vertical">
+				<Label Text="Who should answer the question?" FontSize="Medium" HorizontalOptions="Center" />
+				<Button x:Name="ministerOrDeptButton" Text="A minister or department" Clicked="OnMinisterOrDeptButtonClicked" />
+				<Button x:Name="otherPublicAuthorityButton" Text="Another public Authority" Clicked="OnOtherPublicAuthorityButtonClicked" />
+				<Button x:Name="myMP" Text="My MP" Clicked="OnMPAnswerButtonClicked" />
 			</StackLayout>
-			<Button x:Name="navigateBackButton" Text="Previous Page" Clicked="OnNavigateBackButtonClicked" />
-			<Button x:Name="navigateForwardButton" Text="Question Reading Page" Clicked="OnNavigateForwardButtonClicked" />
+			<StackLayout Orientation="Vertical">
+				<Label Text="Who should ask the question?" FontSize="Medium" HorizontalOptions="Center" />
+				<Button x:Name="findACommitteeButton" Text="Find a Committee" Clicked="OnFindCommitteeButtonClicked" />
+				<Button x:Name="myMPShouldRaiseItButton" Text="My MP should raise it" Clicked="OnMPRaiseButtonClicked" />
+			</StackLayout>
+			<StackLayout Orientation="Vertical">
+				<Label Text="What is the question?" FontSize="Medium" HorizontalOptions="Center" />
+				<Editor Placeholder="Enter your question" Completed="Question_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+			</StackLayout >
+			<StackLayout Orientation="Horizontal">
+				<Button x:Name="navigateBackButton" Text="Previous Page" Clicked="OnNavigateBackButtonClicked" />
+				<Button x:Name="navigateForwardButton" Text="Question Reading Page" Clicked="OnNavigateForwardButtonClicked" />
+			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -37,8 +37,14 @@ namespace PassingData
 		}
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
+			
+			var readingContext = new ReadingContext{
+				MatchingQuestions= 42,
+				TopTen = false
+			};
+			
 			var secondPage = new SecondPage ();
-			// secondPage.BindingContext = readingContext;
+			secondPage.BindingContext = readingContext;
 			await Navigation.PushAsync (secondPage);
 		}
 		
