@@ -33,9 +33,18 @@ namespace PassingData
 			await Navigation.PopAsync ();
 		}
 
-		void OnMinisterOrDeptButtonClicked(object sender, EventArgs e)
+		async void OnMinisterOrDeptButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = $"Finding Minister or Dept not implemented yet";
+			
+			var readingContext = new ReadingContext{
+         				SearchKeyword = "",
+         				TopTen = false,
+         			};
+			
+         	var departmentExploringPage = new ExploringPage();
+        	departmentExploringPage.BindingContext = readingContext;
+        	await Navigation.PushAsync (departmentExploringPage);
+			// ((Button) sender).Text = $"Finding Minister or Dept not implemented yet";
 		}
 
 		private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)

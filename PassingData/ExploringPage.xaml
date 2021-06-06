@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PassingData.ExploringPage">
+    <ContentPage.Content>
+		<StackLayout HorizontalOptions="Center" VerticalOptions="Start">
+			<ScrollView>
+			<ListView x:Name="AuthorityListView" ItemsSource="{Binding Departments}"> 
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout Orientation="Vertical" VerticalOptions="Start" Spacing="4">
+								<Label Text="{Binding TagLabel }" />	
+								<StackLayout Orientation="Horizontal">
+									<Label Text="Selected? " />
+									<Label Text="{Binding Selected }" />	
+								</StackLayout>
+							</StackLayout>			
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+			</ScrollView>	
+		</StackLayout>
+    </ContentPage.Content>
+</ContentPage>

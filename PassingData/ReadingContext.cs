@@ -1,3 +1,7 @@
+using System;
+using System.Collections.ObjectModel;
+using Xamarin.Forms;
+
 namespace PassingData
 {
 	public class ReadingContext
@@ -12,6 +16,10 @@ namespace PassingData
 		
 		public string DraftQuestion { get; set; }	
 		
+		public ObservableCollection<Tag> Departments { get; set; }
+		
+		public ObservableCollection<Tag> OtherAuthorities { get; set; }
+		
 		public int MatchingQuestions { get; set; }
 		
 		public override string ToString ()
@@ -21,7 +29,9 @@ namespace PassingData
 			       "Committee: " + Committee + '\n' +
 			       "MP: " + MP + '\n' +
 			       "Question: " + DraftQuestion + '\n' +
-			       "Number of matching questions: " + MatchingQuestions.ToString() + '\n';
+			       "Number of matching questions: " + MatchingQuestions.ToString() + '\n' +
+			       "Departments: " + Departments.ToString() + '\n' +
+			       "Other Authorities: " + OtherAuthorities.ToString() + '\n';
 		}
 	}
 }
