@@ -7,21 +7,9 @@ namespace PassingData
 	{
 		private string question;
 
-		private string matchCountVar;
-		//public string MatchCount
-		//{
-		//	get { return matchCountVar; }
-		//	set
-		//	{
-		//		matchCountVar = value;
-		//		OnPropertyChanged(nameof(matchCountVar)); // Notify that there was a change on this property	
-		//	}
-		//}
 		public SecondPage ()
 		{
 			InitializeComponent ();
-			//BindingContext = this;
-			//matchCountVar = "Current matching questions: 4332";
 		}
 
 		void Question_Entered(object sender, EventArgs e)
@@ -35,7 +23,6 @@ namespace PassingData
 				TopTen = false,
 				DraftQuestion = question
 			};
-			// ((Button) sender).Text = $"Forward navigation isn't implemented yet.";
 			var readingPage = new ReadingPage();
 			
 			readingPage.BindingContext = readingContext;

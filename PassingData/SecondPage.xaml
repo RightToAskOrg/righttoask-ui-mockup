@@ -3,16 +3,12 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 			 x:Class="PassingData.SecondPage"
 			 Title="Help me direct my question">
-	<!--
-			 xmlns:viewModel="clr-namespace:PassingData;assembly=PassingData"
-	<ContentPage.BindingContext>
-		<viewModel:SecondPage/>
-	</ContentPage.BindingContext>
-	-->
 	<ContentPage.Content>
 		<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+			<StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+				<Label Text="Current matching questions: " FontSize="Medium" HorizontalOptions="Center" /> 
 				<Label x:Name="matchCountReporter" Text="{Binding MatchingQuestions }" FontSize="Medium" HorizontalOptions="Center" /> 
-				<!-- <Label x:Name="matchCountReporter" Text="Matching questions: 456" FontSize="Medium" HorizontalOptions="Center" /> -->
+			</StackLayout>
 			<StackLayout Orientation="Vertical">
 				<Label Text="Who should answer the question?" FontSize="Medium" HorizontalOptions="Center" />
 				<Button x:Name="ministerOrDeptButton" Text="A minister or department" Clicked="OnMinisterOrDeptButtonClicked" />
