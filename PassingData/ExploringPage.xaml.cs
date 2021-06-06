@@ -13,21 +13,21 @@ namespace PassingData
 //    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ExploringPage : ContentPage
     {
-		private ObservableCollection<Tag> authorities = new ObservableCollection<Tag>();
+		// private ObservableCollection<Tag> authorities = new ObservableCollection<Tag>();
 
-		public ObservableCollection<Tag> Authorities
-		{
-			get { return authorities; }
-		}
+		// public ObservableCollection<Tag> Authorities
+		//{
+		//	get { return authorities; }
+		//}
 
 		public ExploringPage()
         {
             InitializeComponent();
 
-			AuthorityListView.ItemsSource = authorities;
+		//	AuthorityListView.ItemsSource = authorities;
 			
-			authorities.Add(new Tag{TagLabel = "This is a test authority", Selected = true});
-			authorities.Add(new Tag{TagLabel = "This is a different test authority", Selected =false});
+		// 	authorities.Add(new Tag{TagLabel = "This is a test department", Selected = true});
+		//	authorities.Add(new Tag{TagLabel = "This is a different test department", Selected =false});
 		}
     }
 }

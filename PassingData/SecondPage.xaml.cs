@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Net.Mime;
 using Xamarin.Forms;
 
 namespace PassingData
@@ -6,6 +8,7 @@ namespace PassingData
 	public partial class SecondPage : ContentPage
 	{
 		private string question;
+		private ObservableCollection<Tag> authorities = new ObservableCollection<Tag>();
 
 		public SecondPage ()
 		{
@@ -35,10 +38,13 @@ namespace PassingData
 
 		async void OnMinisterOrDeptButtonClicked(object sender, EventArgs e)
 		{
+			authorities.Add(new Tag{TagLabel = "This is a test minister/dept", Selected = true});
+			authorities.Add(new Tag{TagLabel = "This is a different test minister/dept", Selected =false});
 			
 			var readingContext = new ReadingContext{
          				SearchKeyword = "",
          				TopTen = false,
+                        Departments = authorities
          			};
 			
          	var departmentExploringPage = new ExploringPage();
