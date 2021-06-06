@@ -8,7 +8,8 @@ namespace PassingData
 	public partial class SecondPage : ContentPage
 	{
 		private string question;
-		private ObservableCollection<Tag> authorities = new ObservableCollection<Tag>();
+		private ObservableCollection<Tag> departmentAuthorities;
+		private ObservableCollection<Tag> otherAuthorities;
 
 		public SecondPage ()
 		{
@@ -38,13 +39,14 @@ namespace PassingData
 
 		async void OnMinisterOrDeptButtonClicked(object sender, EventArgs e)
 		{
-			authorities.Add(new Tag{TagLabel = "This is a test minister/dept", Selected = true});
-			authorities.Add(new Tag{TagLabel = "This is a different test minister/dept", Selected =false});
+			departmentAuthorities = new ObservableCollection<Tag>();
+			departmentAuthorities.Add(new Tag{TagLabel = "This is a test minister/dept", Selected = true});
+			departmentAuthorities.Add(new Tag{TagLabel = "This is a different test minister/dept", Selected =false});
 			
 			var readingContext = new ReadingContext{
          				SearchKeyword = "",
          				TopTen = false,
-                        Departments = authorities
+                        Departments = departmentAuthorities
          			};
 			
          	var departmentExploringPage = new ExploringPage();
@@ -53,9 +55,21 @@ namespace PassingData
 			// ((Button) sender).Text = $"Finding Minister or Dept not implemented yet";
 		}
 
-		private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
+		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = $"Public Authority list not implemented yet";
+        	otherAuthorities = new ObservableCollection<Tag>();
+        	otherAuthorities.Add(new Tag{TagLabel = "This is a test other authority", Selected = true});
+        	otherAuthorities.Add(new Tag{TagLabel = "This is a different test other authority", Selected =false});
+        	
+        	var readingContext = new ReadingContext{
+        				SearchKeyword = "",
+          				TopTen = false,
+                        Departments = otherAuthorities
+           			};
+         			
+           	var departmentExploringPage = new ExploringPage();
+            departmentExploringPage.BindingContext = readingContext;
+           	await Navigation.PushAsync (departmentExploringPage);
 		}
 
 		private void OnMPAnswerButtonClicked(object sender, EventArgs e)
