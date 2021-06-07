@@ -49,10 +49,11 @@ namespace PassingData
                         Departments = departmentAuthorities
          			};
 			
-         	var departmentExploringPage = new ExploringPage();
-        	departmentExploringPage.BindingContext = readingContext;
-        	await Navigation.PushAsync (departmentExploringPage);
-			// ((Button) sender).Text = $"Finding Minister or Dept not implemented yet";
+         	var departmentPickerPage = new PickerPage();
+        	departmentPickerPage.BindingContext = readingContext;
+         	//var departmentExploringPage = new ExploringPage();
+        	//departmentExploringPage.BindingContext = readingContext;
+        	await Navigation.PushAsync (departmentPickerPage);
 		}
 
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)

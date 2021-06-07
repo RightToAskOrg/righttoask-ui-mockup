@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PassingData.PickerPage">
+    <ContentPage.Content>
+			<!-- <Picker x:Name="DepartmentListView" Title="Select a department" ItemsSource="{Binding Departments}"> -->
+			<Picker x:Name="DepartmentListView" Title="Select a department" >
+				<Picker.ItemsSource>
+					<x:Array Type="{x:Type x:String}">
+						<x:String>Health</x:String>
+						<x:String>Finance</x:String>
+						<x:String>Environment</x:String>
+						<x:String>Communications</x:String>
+						<x:String>Attorney General</x:String>
+						<x:String>Treasury</x:String>
+						<x:String>Industry, Innovation and Science</x:String>
+					</x:Array>
+				</Picker.ItemsSource>
+			</Picker>
+    </ContentPage.Content>
+</ContentPage>
