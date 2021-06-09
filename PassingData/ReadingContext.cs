@@ -14,7 +14,8 @@ namespace PassingData
 		
 		public string MP { get; set; }
 		
-		public string DraftQuestion { get; set; }	
+		public ObservableCollection<Question> ExistingQuestions { get; set; }
+		public string DraftQuestion { get; set; }
 		
 		public ObservableCollection<Tag> Departments { get; set; }
 		public String SelectedDepartment { get; set; }
@@ -22,7 +23,29 @@ namespace PassingData
 		public ObservableCollection<Tag> OtherAuthorities { get; set; }
 		
 		public int MatchingQuestions { get; set; }
-		
+
+		// At the moment, this simply populates the reading context with a
+		// hardcoded set of "existing" questions, authorities, etc.
+		public void InitializeDefaultSetup()
+		{
+			MatchingQuestions= 4782;
+			
+			Departments = new ObservableCollection<Tag>();
+			Departments.Add(new Tag{TagLabel = "Environment", Selected = false});
+			Departments.Add(new Tag{TagLabel = "Home Affairs", Selected = false});
+			Departments.Add(new Tag{TagLabel = "Defence", Selected = false});
+			Departments.Add(new Tag{TagLabel = "Health", Selected = false});
+			Departments.Add(new Tag{TagLabel = "Treasury", Selected = false});
+			Departments.Add(new Tag{TagLabel = "Human Services", Selected = false});
+			Departments.Add(new Tag{TagLabel = "Innovation, Industry and Science", Selected = false});
+			Departments.Add(new Tag{TagLabel = "Communications", Selected = false});
+
+			ExistingQuestions = new ObservableCollection<Question>();
+			ExistingQuestions.Add(new Question{QuestionText   = "This is a test question", QuestionAsker = "Alice", DownVotes = 1, UpVotes = 2});
+			ExistingQuestions.Add(new Question{QuestionText   = "This is a another test question", QuestionAsker = "Bob", DownVotes = 3, UpVotes = 1});
+			ExistingQuestions.Add(new Question{QuestionText   = "This is an interesting question", QuestionAsker = "Chloe", DownVotes = 1, UpVotes = 2});
+			ExistingQuestions.Add(new Question{QuestionText   = "This is a test question", QuestionAsker = "Darius", DownVotes = 1, UpVotes = 2});
+		}
 		public override string ToString ()
 		{
 			return "Keyword: " + SearchKeyword + '\n' +

@@ -11,6 +11,7 @@ namespace PassingData
 			InitializeComponent();
 
 			readingContext = new ReadingContext { };
+			readingContext.InitializeDefaultSetup();
 		}
 
 		async void OnTop10NowButtonClicked(object sender, EventArgs e)
@@ -32,7 +33,6 @@ namespace PassingData
 		}
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
-			readingContext.MatchingQuestions= 4782;
 			
 			var secondPage = new SecondPage ();
 			secondPage.BindingContext = readingContext;

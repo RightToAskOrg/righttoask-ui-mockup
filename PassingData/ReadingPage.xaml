@@ -19,7 +19,8 @@
             	<Label Text="{Binding TopTen}" FontSize="Medium" FontAttributes="Bold" />
             </StackLayout>
 			<ScrollView>
-			<ListView x:Name="QuestionListView" ItemsSource="{Binding Questions}">
+			<ListView x:Name="QuestionListView" ItemsSource="{Binding ExistingQuestions}"> 
+			<!-- <ListView x:Name="QuestionListView">  -->
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>

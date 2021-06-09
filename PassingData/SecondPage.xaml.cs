@@ -8,7 +8,6 @@ namespace PassingData
 	public partial class SecondPage : ContentPage
 	{
 		private string question;
-		private ObservableCollection<Tag> departmentAuthorities;
 		private ObservableCollection<Tag> otherAuthorities;
 
 		public SecondPage ()
@@ -39,31 +38,22 @@ namespace PassingData
 
 		async void OnMinisterOrDeptButtonClicked(object sender, EventArgs e)
 		{
-			departmentAuthorities = new ObservableCollection<Tag>();
-			departmentAuthorities.Add(new Tag{TagLabel = "Environment", Selected = false});
-			departmentAuthorities.Add(new Tag{TagLabel = "Home Affairs", Selected = false});
-			departmentAuthorities.Add(new Tag{TagLabel = "Defence", Selected = false});
-			departmentAuthorities.Add(new Tag{TagLabel = "Health", Selected = false});
-			departmentAuthorities.Add(new Tag{TagLabel = "Treasury", Selected = false});
-			departmentAuthorities.Add(new Tag{TagLabel = "Human Services", Selected = false});
-			departmentAuthorities.Add(new Tag{TagLabel = "Innovation, Industry and Science", Selected = false});
-			departmentAuthorities.Add(new Tag{TagLabel = "Communications", Selected = false});
-			
-			var readingContext = new ReadingContext{
-         				SearchKeyword = "",
-         				TopTen = false,
-                        Departments = departmentAuthorities
-         			};
-			
+
+			// var readingContext = new ReadingContext{
+         	//			SearchKeyword = "",
+         //				TopTen = false,
+          //              Departments = departmentAuthorities
+         //			};
+		
          	var departmentPickerPage = new PickerPage();
-        	departmentPickerPage.BindingContext = readingContext;
+        	departmentPickerPage.BindingContext = BindingContext;
          	//var departmentExploringPage = new ExploringPage();
         	//departmentExploringPage.BindingContext = readingContext;
         	await Navigation.PushAsync (departmentPickerPage);
 
             //if (readingContext.SelectedDepartment != null)
             //{
-				((Button) sender).Text = readingContext.SelectedDepartment;
+				((Button) sender).Text = ((ReadingContext) BindingContext).SelectedDepartment;
             //}
 		}
 
