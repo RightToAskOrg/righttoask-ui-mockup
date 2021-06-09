@@ -6,6 +6,11 @@
 	<ContentPage.Content>
 		<StackLayout HorizontalOptions="Center" VerticalOptions="Start">
 			<StackLayout Orientation="Horizontal">
+         		<!-- <Label Text="Answered by: " FontSize="Medium" HorizontalOptions="FillAndExpand" />  -->
+         		<Label Text="To be answered by: " FontSize="Medium" />  
+         		<Label Text="{Binding SelectedDepartment}" FontSize="Medium" FontAttributes="Bold" />
+        	</StackLayout>
+			<StackLayout Orientation="Horizontal">
          		<Label Text="Keyword: " FontSize="Medium" HorizontalOptions="FillAndExpand" />
          		<Label Text="{Binding SearchKeyword}" FontSize="Medium" FontAttributes="Bold" />
         	</StackLayout>

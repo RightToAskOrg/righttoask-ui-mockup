@@ -40,8 +40,14 @@ namespace PassingData
 		async void OnMinisterOrDeptButtonClicked(object sender, EventArgs e)
 		{
 			departmentAuthorities = new ObservableCollection<Tag>();
-			departmentAuthorities.Add(new Tag{TagLabel = "This is a test minister/dept", Selected = true});
-			departmentAuthorities.Add(new Tag{TagLabel = "This is a different test minister/dept", Selected =false});
+			departmentAuthorities.Add(new Tag{TagLabel = "Environment", Selected = false});
+			departmentAuthorities.Add(new Tag{TagLabel = "Home Affairs", Selected = false});
+			departmentAuthorities.Add(new Tag{TagLabel = "Defence", Selected = false});
+			departmentAuthorities.Add(new Tag{TagLabel = "Health", Selected = false});
+			departmentAuthorities.Add(new Tag{TagLabel = "Treasury", Selected = false});
+			departmentAuthorities.Add(new Tag{TagLabel = "Human Services", Selected = false});
+			departmentAuthorities.Add(new Tag{TagLabel = "Innovation, Industry and Science", Selected = false});
+			departmentAuthorities.Add(new Tag{TagLabel = "Communications", Selected = false});
 			
 			var readingContext = new ReadingContext{
          				SearchKeyword = "",
@@ -54,6 +60,11 @@ namespace PassingData
          	//var departmentExploringPage = new ExploringPage();
         	//departmentExploringPage.BindingContext = readingContext;
         	await Navigation.PushAsync (departmentPickerPage);
+
+            //if (readingContext.SelectedDepartment != null)
+            //{
+				((Button) sender).Text = readingContext.SelectedDepartment;
+            //}
 		}
 
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)

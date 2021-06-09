@@ -5,30 +5,25 @@ namespace PassingData
 {
 	public partial class MainPage : ContentPage
 	{
+		public ReadingContext readingContext;
 		public MainPage (string date)
 		{
 			InitializeComponent();
 
+			readingContext = new ReadingContext { };
 		}
 
 		async void OnTop10NowButtonClicked(object sender, EventArgs e)
 		{
-			var readingContext = new ReadingContext{
-				SearchKeyword = "",
-				TopTen = true 
-			};
+			readingContext.TopTen = true;
 
 			var readingPage = new ReadingPage ();
 			readingPage.BindingContext = readingContext;
 			await Navigation.PushAsync (readingPage);
-			// ((Button) sender).Text = $"Top 10 now not implemented yet";
 		}
 		async void OnReadByKeywordFieldCompleted(object sender, EventArgs e)
 		{
-			var readingContext = new ReadingContext{
-				SearchKeyword = ((Entry)sender).Text,
-				TopTen = false
-			};
+			readingContext.SearchKeyword = ((Entry)sender).Text;
 
 			var readingPage = new ReadingPage ();
 			readingPage.BindingContext = readingContext;
@@ -37,11 +32,7 @@ namespace PassingData
 		}
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
-			
-			var readingContext = new ReadingContext{
-				MatchingQuestions= 4782,
-				TopTen = false
-			};
+			readingContext.MatchingQuestions= 4782;
 			
 			var secondPage = new SecondPage ();
 			secondPage.BindingContext = readingContext;

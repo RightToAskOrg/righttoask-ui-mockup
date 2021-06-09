@@ -17,6 +17,7 @@ namespace PassingData
 		public string DraftQuestion { get; set; }	
 		
 		public ObservableCollection<Tag> Departments { get; set; }
+		public String SelectedDepartment { get; set; }
 		
 		public ObservableCollection<Tag> OtherAuthorities { get; set; }
 		
@@ -30,6 +31,7 @@ namespace PassingData
 			       "MP: " + MP + '\n' +
 			       "Question: " + DraftQuestion + '\n' +
 			       "Number of matching questions: " + MatchingQuestions.ToString() + '\n' +
+			       "Selected Department: " + SelectedDepartment + '\n' +
 			       "Departments: " + Departments.ToString() + '\n' +
 			       "Other Authorities: " + OtherAuthorities.ToString() + '\n';
 		}

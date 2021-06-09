@@ -16,5 +16,20 @@ namespace PassingData
         {
             InitializeComponent();
 		}
+        void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            String chosenDept;
+            var picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+            Tag selectedDept = (Tag) picker.ItemsSource[selectedIndex];
+
+            if (selectedIndex != -1)
+            {
+                selectedDept.Selected = true;
+                chosenDept = selectedDept.TagLabel;
+                ((ReadingContext) BindingContext).SelectedDepartment = chosenDept;
+
+            }
+        }
     }
 }
