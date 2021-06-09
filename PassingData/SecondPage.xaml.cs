@@ -17,18 +17,12 @@ namespace PassingData
 
 		void Question_Entered(object sender, EventArgs e)
 		{
-			question = ((Editor) sender).Text;
+			((ReadingContext) BindingContext).DraftQuestion = ((Editor) sender).Text;
 		}
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
-			var readingContext = new ReadingContext{
-				SearchKeyword = "",
-				TopTen = false,
-				DraftQuestion = question
-			};
 			var readingPage = new ReadingPage();
-			
-			readingPage.BindingContext = readingContext;
+			readingPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (readingPage);
 		}
 		async void OnNavigateBackButtonClicked (object sender, EventArgs e)
@@ -59,18 +53,10 @@ namespace PassingData
 
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
 		{
-        	otherAuthorities = new ObservableCollection<Tag>();
-        	otherAuthorities.Add(new Tag{TagLabel = "This is a test other authority", Selected = true});
-        	otherAuthorities.Add(new Tag{TagLabel = "This is a different test other authority", Selected =false});
         	
-        	var readingContext = new ReadingContext{
-        				SearchKeyword = "",
-          				TopTen = false,
-                        Departments = otherAuthorities
-           			};
          			
            	var departmentExploringPage = new ExploringPage();
-            departmentExploringPage.BindingContext = readingContext;
+            departmentExploringPage.BindingContext = BindingContext;
            	await Navigation.PushAsync (departmentExploringPage);
 		}
 

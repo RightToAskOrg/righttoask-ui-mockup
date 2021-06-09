@@ -5,7 +5,7 @@
     <ContentPage.Content>
 		<StackLayout HorizontalOptions="Center" VerticalOptions="Start">
 			<ScrollView>
-			<ListView x:Name="AuthorityListView" ItemsSource="{Binding Departments}"> 
+			<ListView x:Name="AuthorityListView" ItemsSource="{Binding OtherAuthorities}"> 
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>

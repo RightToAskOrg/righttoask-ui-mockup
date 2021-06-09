@@ -45,6 +45,12 @@ namespace PassingData
 			ExistingQuestions.Add(new Question{QuestionText   = "This is a another test question", QuestionAsker = "Bob", DownVotes = 3, UpVotes = 1});
 			ExistingQuestions.Add(new Question{QuestionText   = "This is an interesting question", QuestionAsker = "Chloe", DownVotes = 1, UpVotes = 2});
 			ExistingQuestions.Add(new Question{QuestionText   = "This is a test question", QuestionAsker = "Darius", DownVotes = 1, UpVotes = 2});
+			
+        	OtherAuthorities = new ObservableCollection<Tag>();
+        	OtherAuthorities.Add(new Tag{TagLabel = "Australian Electoral Commission", Selected = true});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Digital Transformation Authority", Selected = true});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Office of the Australian Information Commissioner", Selected =false});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Australian Taxation Office", Selected =false});
 		}
 		public override string ToString ()
 		{
