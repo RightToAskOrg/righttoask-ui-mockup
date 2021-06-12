@@ -7,6 +7,11 @@
 			<Label x:Name="QuestionDetailView" >
 			</Label>
 			<Button x:Name="UpVoteButton" Text="Upvote" Clicked="UpVoteButton_OnClicked" HorizontalOptions="Center"/>
+			<StackLayout Orientation="Vertical">
+				<Label Text="Link or answer" FontSize="Medium" HorizontalOptions="Center" />
+				<Editor Placeholder="Add a link or answer" Completed="Answer_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+			</StackLayout >
+			<Button x:Name="SaveAnswerButton" Text="Save Answer" Clicked="SaveAnswerButton_OnClicked" HorizontalOptions="Center"/>
 			<Button x:Name="QuestionAskerButton" Clicked="QuestionAskerButton_OnClicked" HorizontalOptions="Center"/>
 		</StackLayout>
     </ContentPage.Content>

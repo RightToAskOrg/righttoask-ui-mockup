@@ -19,24 +19,28 @@ namespace PassingData
             QuestionAskerButton.Text = "View " + question.QuestionAsker + "'s profile";
         }
         
-        //void LinkOrComment_Entered(object sender, EventArgs e)
-        //{
-        //    linkOrAnswer = ((Editor) sender).Text;
-        //}
-        //void OnSaveButtonClicked (object sender, EventArgs e)
-        //{
-            // Note that this doesn't really save the question (yet)
-            // It just updates the question list with some things like the draft q'n.
-            // ((ReadingContext) BindingContext).ExistingQuestions.Insert(0,new Question{QuestionText = "Another question just like "+draftQuestion, QuestionAsker="Eli", DownVotes = 1, UpVotes = 4});
-        //}
         private void UpVoteButton_OnClicked(object sender, EventArgs e)
         {
             question.UpVotes++;
         }
 
-        private void QuestionAskerButton_OnClicked(object sender, EventArgs e)
+        private async void QuestionAskerButton_OnClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+			var personProfilePage = new PersonProfilePage(question.QuestionAsker);
+			personProfilePage.BindingContext = BindingContext;
+			await Navigation.PushAsync (personProfilePage);
+        }
+        
+        // I'm not actually sure what triggers the 'send' event here, and hence not sure
+        // which of these two functions should be doing the saving.
+		void Answer_Entered(object sender, EventArgs e)
+		{
+			question.LinkOrAnswer = ((Editor) sender).Text;
+		}
+
+        private void SaveAnswerButton_OnClicked(object sender, EventArgs e)
+        {
+            ((Xamarin.Forms.Button) sender).Text = "Answer saved";
         }
     }
 }
