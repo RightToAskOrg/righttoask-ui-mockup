@@ -38,7 +38,6 @@ namespace PassingData
 		// Note: it's possible that this would be better with an ItemTapped event instead.
 		private async void Question_Selected(object sender, ItemTappedEventArgs e)
 		{
-			
 			var questionDetailPage = new QuestionDetailPage((Question) e.Item);
 			questionDetailPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (questionDetailPage);

@@ -6,6 +6,8 @@
 		<StackLayout HorizontalOptions="Center" VerticalOptions="Start">
 			<Label x:Name="QuestionDetailView" >
 			</Label>
+			<Button x:Name="UpVoteButton" Text="Upvote" Clicked="UpVoteButton_OnClicked" HorizontalOptions="Center"/>
+			<Button x:Name="QuestionAskerButton" Clicked="QuestionAskerButton_OnClicked" HorizontalOptions="Center"/>
 		</StackLayout>
     </ContentPage.Content>
 </ContentPage>
