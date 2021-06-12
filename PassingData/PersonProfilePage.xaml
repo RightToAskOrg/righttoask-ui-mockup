@@ -5,6 +5,7 @@
     <ContentPage.Content>
 		<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Start">
 			<ImageButton Source="https://openclipart.org/image/800px/258249"
+			             BackgroundColor="Turquoise"
 			             HorizontalOptions="Center"
 			             VerticalOptions="CenterAndExpand" />	
 			<Button x:Name="FollowButton" Text="Follow" Clicked="FollowButton_OnClicked" HorizontalOptions="Center"/>
