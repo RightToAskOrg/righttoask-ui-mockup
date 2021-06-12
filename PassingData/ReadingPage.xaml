@@ -19,7 +19,7 @@
             	<Label Text="{Binding TopTen}" FontSize="Medium" FontAttributes="Bold" />
             </StackLayout>
 			<ScrollView>
-			<ListView x:Name="QuestionListView" ItemsSource="{Binding ExistingQuestions}" ItemSelected="Question_Selected"> 
+			<ListView x:Name="QuestionListView" ItemsSource="{Binding ExistingQuestions}" ItemTapped="Question_Selected"> 
 			<!-- <ListView x:Name="QuestionListView">  -->
 				<ListView.ItemTemplate>
 					<DataTemplate>
