@@ -17,7 +17,9 @@ namespace PassingData
         public string QuestionText { get; set; }
         
         public string QuestionAsker { get; set; }
-        
+
+        public string LinkOrAnswer { get; set; }
+
         public int UpVotes { get; set; }
         
         public int DownVotes { get; set; }
@@ -27,7 +29,8 @@ namespace PassingData
             return QuestionText+ "\n" +
                    "Asked by: " + QuestionAsker + '\n' +
                    "UpVotes: " + UpVotes+ '\n' +
-                   "DownVotes: " + DownVotes ;
+                   "DownVotes: " + DownVotes + '\n' +
+                   "Link/Answer: " + LinkOrAnswer;
         }
     }
 }

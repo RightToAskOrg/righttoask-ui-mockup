@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Xamarin.Forms.Xaml;
 using Application = Xamarin.Forms.Application;
 
 namespace PassingData
@@ -32,6 +33,15 @@ namespace PassingData
 			// Note that this doesn't really save the question (yet)
 			// It just updates the question list with some things like the draft q'n.
 			((ReadingContext) BindingContext).ExistingQuestions.Insert(0,new Question{QuestionText = "Another question just like "+draftQuestion, QuestionAsker="Eli", DownVotes = 1, UpVotes = 4});
+		}
+
+		// Note: it's possible that this would be better with an ItemTapped event instead.
+		private async void Question_Selected(object sender, SelectedItemChangedEventArgs e)
+		{
+			
+			var questionDetailPage = new QuestionDetailPage((Question) e.SelectedItem);
+			questionDetailPage.BindingContext = BindingContext;
+			await Navigation.PushAsync (questionDetailPage);
 		}
 	}
 }
