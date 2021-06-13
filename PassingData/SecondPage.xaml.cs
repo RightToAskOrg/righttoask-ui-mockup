@@ -70,9 +70,12 @@ namespace PassingData
            	await Navigation.PushAsync (departmentExploringPage);
 		}
 
-		private void OnMPAnswerButtonClicked(object sender, EventArgs e)
+		private async void OnMPAnswerButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = $"MP answering not implemented yet";
+			// ((Button) sender).Text = $"MP answering not implemented yet";
+			var findMyMPPage = new FindMyMP();
+			findMyMPPage.BindingContext = BindingContext;
+			await Navigation.PushAsync (findMyMPPage);
 		}
 
 		private void OnFindCommitteeButtonClicked(object sender, EventArgs e)
@@ -80,9 +83,12 @@ namespace PassingData
 			((Button) sender).Text = $"Finding Committees not implemented yet";	
 		}
 
-		private void OnMPRaiseButtonClicked(object sender, EventArgs e)
+		private async void OnMPRaiseButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = $"MP raising not implemented yet";
+			//((Button) sender).Text = $"MP raising not implemented yet";
+			var findMyMPPage = new FindMyMP();
+			findMyMPPage.BindingContext = BindingContext;
+			await Navigation.PushAsync (findMyMPPage);
 		}
 	}
 }
