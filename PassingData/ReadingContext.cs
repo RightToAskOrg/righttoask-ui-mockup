@@ -10,10 +10,16 @@ namespace PassingData
 
 		public bool TopTen { get; set; }
 
-		public string Committee { get; set; }
+		public string GoDirect_Committee { get; set; }
 		
-		public string MP { get; set; }
-		
+		public string GoDirect_MP { get; set; }
+
+		// This is initiated with a default list of MPs,
+		// from which at the moment you select the ones
+		// that are yours
+		public ObservableCollection<Tag> MyMPs { get; set; }
+		public bool MPsSelected = false;
+
 		public ObservableCollection<Question> ExistingQuestions { get; set; }
 		public string DraftQuestion { get; set; }
 		
@@ -40,6 +46,15 @@ namespace PassingData
 			Departments.Add(new Tag{TagLabel = "Innovation, Industry and Science", Selected = false});
 			Departments.Add(new Tag{TagLabel = "Communications", Selected = false});
 
+			MyMPs = new ObservableCollection<Tag>();
+			MyMPs.Add(new Tag{TagLabel = "Janet Rice", Selected = false});
+			MyMPs.Add(new Tag{TagLabel = "Peter Dutton", Selected = false});
+			MyMPs.Add(new Tag{TagLabel = "Penny Wong", Selected = false});
+			MyMPs.Add(new Tag{TagLabel = "Daniel Andrews", Selected = false});
+			MyMPs.Add(new Tag{TagLabel = "Ged Kearney", Selected = false});
+			MyMPs.Add(new Tag{TagLabel = "Danny O'Brien", Selected = false});
+
+
 			ExistingQuestions = new ObservableCollection<Question>();
 			ExistingQuestions.Add(new Question{QuestionText   = "This is a test question", QuestionAsker = "Alice", DownVotes = 1, UpVotes = 2});
 			ExistingQuestions.Add(new Question{QuestionText   = "This is a another test question", QuestionAsker = "Bob", DownVotes = 3, UpVotes = 1});
@@ -52,12 +67,17 @@ namespace PassingData
         	OtherAuthorities.Add(new Tag{TagLabel = "Office of the Australian Information Commissioner", Selected =false});
         	OtherAuthorities.Add(new Tag{TagLabel = "Australian Taxation Office", Selected =false});
 		}
+		
+		// TODO This ToString doesn't really properly convey the state of
+		// the ReadingContext, e.g. doesn't reflect registering or knowing your
+		// MPs.
 		public override string ToString ()
 		{
 			return "Keyword: " + SearchKeyword + '\n' +
 			       "TopTen: " + TopTen.ToString() + '\n' +
-			       "Committee: " + Committee + '\n' +
-			       "MP: " + MP + '\n' +
+			       "Direct Committee: " + GoDirect_Committee + '\n' +
+			       "Direct MP: " + GoDirect_MP + '\n' +
+			       "My MPs" + (MPsSelected ? "" : " not" + " selected") + '\n' + 
 			       "Question: " + DraftQuestion + '\n' +
 			       "Number of matching questions: " + MatchingQuestions.ToString() + '\n' +
 			       "Selected Department: " + SelectedDepartment + '\n' +

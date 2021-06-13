@@ -9,11 +9,23 @@ namespace PassingData
 	{
 		private string question;
 		private ObservableCollection<Tag> otherAuthorities;
+		private string MPFindPrompt = String.Empty;
 
-		public SecondPage ()
+		public SecondPage (bool MPsAreSelected)
 		{
+
 			InitializeComponent ();
-		}
+			
+			if(!MPsAreSelected)
+			{
+				MPFindPrompt = " - Find my MPs";
+			}
+			//myMP.Text = "My MP";
+
+			myMP.Text = "My MP" + MPFindPrompt;
+			myMPShouldRaiseItButton.Text = "My MP should raise it" + MPFindPrompt;
+
+	}
 
 		void Question_Entered(object sender, EventArgs e)
 		{

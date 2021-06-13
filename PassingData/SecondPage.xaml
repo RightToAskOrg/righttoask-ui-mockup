@@ -13,12 +13,15 @@
 				<Label Text="Who should answer the question?" FontSize="Medium" HorizontalOptions="Center" />
 				<Button x:Name="ministerOrDeptButton" Text="A minister or department" Clicked="OnMinisterOrDeptButtonClicked" />
 				<Button x:Name="otherPublicAuthorityButton" Text="Another public Authority" Clicked="OnOtherPublicAuthorityButtonClicked" />
-				<Button x:Name="myMP" Text="My MP" Clicked="OnMPAnswerButtonClicked" />
+				<!-- <Button x:Name="myMP" Text="My MP" Clicked="OnMPAnswerButtonClicked" /> -->
+				 <Button x:Name="myMP" Clicked="OnMPAnswerButtonClicked" /> 
 			</StackLayout>
 			<StackLayout Orientation="Vertical">
 				<Label Text="Who should ask the question?" FontSize="Medium" HorizontalOptions="Center" />
 				<Button x:Name="findACommitteeButton" Text="Find a Committee" Clicked="OnFindCommitteeButtonClicked" />
-				<Button x:Name="myMPShouldRaiseItButton" Text="My MP should raise it" Clicked="OnMPRaiseButtonClicked" />
+				<!-- <Button x:Name="myMPShouldRaiseItButton" Text="My MP should raise it" Clicked="OnMPRaiseButtonClicked" /> -->
+			    <Button x:Name="myMPShouldRaiseItButton" Clicked="OnMPRaiseButtonClicked" />
+			
 			</StackLayout>
 			<StackLayout Orientation="Vertical">
 				<Label Text="What is the question?" FontSize="Medium" HorizontalOptions="Center" />

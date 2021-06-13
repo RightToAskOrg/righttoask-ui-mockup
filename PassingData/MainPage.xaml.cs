@@ -34,7 +34,7 @@ namespace PassingData
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
 			
-			var secondPage = new SecondPage ();
+			var secondPage = new SecondPage (readingContext.MPsSelected);
 			secondPage.BindingContext = readingContext;
 			await Navigation.PushAsync (secondPage);
 		}
