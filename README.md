@@ -13,3 +13,10 @@ This sample sketches the information flow through some of the important early sc
 
 It was derived from Microsoft's [Passing Data](https://github.com/xamarin/xamarin-forms-samples/tree/master/Navigation/PassingData) sample.
 
+## Setup Instructions
+
+TODO: Add Eleanor's Xamarin-on-Linux setup instructions to the docs.
+
+TODO: Add instructions for compiling on Mac.
+
+
