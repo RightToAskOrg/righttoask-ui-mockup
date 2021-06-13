@@ -20,8 +20,6 @@ namespace PassingData
 			{
 				MPFindPrompt = " - Find my MPs";
 			}
-			//myMP.Text = "My MP";
-
 			myMP.Text = "My MP" + MPFindPrompt;
 			myMPShouldRaiseItButton.Text = "My MP should raise it" + MPFindPrompt;
 
