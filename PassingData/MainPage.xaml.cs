@@ -39,13 +39,15 @@ namespace PassingData
 			await Navigation.PushAsync (secondPage);
 		}
 		
-		void OnCommitteeButtonClicked (object sender, EventArgs e)
+		void OnReadButtonClicked (object sender, EventArgs e)
 		{
-			((Button) sender).Text = $"Committee lists not implemented yet";
+			((Button) sender).Text = "This will take you to a reading page";
 		}
-		void OnMPButtonClicked (object sender, EventArgs e)
+
+		
+		void OnRegisterButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = $"MP lists not implemented yet";
+			((Button) sender).Text = "Registering not implemented yet";
 		}
 	}
 }

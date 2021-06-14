@@ -6,23 +6,28 @@
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="CenterAndExpand">
 			<StackLayout Orientation="Vertical" VerticalOptions="Center">
-				<Label Text="Read" FontSize="Medium" HorizontalOptions="Center" />
+				<Label Text="Browse" FontSize="Medium" HorizontalOptions="Center" />
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 					<Entry x:Name="readByKeywordButton" Placeholder="by keyword" Completed="OnReadByKeywordFieldCompleted" HorizontalOptions="Center"/>
 					<Button x:Name="Top10NowButton" Text="top 10 now" Clicked="OnTop10NowButtonClicked" HorizontalOptions="Center"/>
 				</StackLayout>
 			</StackLayout>
 			<StackLayout Orientation="Vertical" VerticalOptions="Center">
-				<Label Text="Go Direct" FontSize="Medium" HorizontalOptions="Center" />
+				<Label Text="Read" FontSize="Medium" HorizontalOptions="Center" />
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-					<Button x:Name="CommitteeButton" Text="Committee" Clicked="OnCommitteeButtonClicked" HorizontalOptions="Center"/>
-					<Button x:Name="MPButton" Text="MP" Clicked="OnMPButtonClicked" HorizontalOptions="Center"/>
+					<Button x:Name="readButton" Text="Help me find the questions I care about" Clicked="OnReadButtonClicked" HorizontalOptions="Center"/>
 				</StackLayout>
 			</StackLayout>
 			<StackLayout Orientation="Vertical" VerticalOptions="Center">
 				<Label Text="I have a question!" FontSize="Medium" HorizontalOptions="Center" />
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 					<Button x:Name="navigateButton" Text="Help me send it to the right place" Clicked="OnNavigateButtonClicked" HorizontalOptions="Center"/>
+				</StackLayout>
+			</StackLayout>
+			<StackLayout Orientation="Vertical" VerticalOptions="Center">
+				<Label Text="You need to register before you can ask a question or cast a vote" FontSize="Medium" HorizontalOptions="Center" />
+				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+					<Button x:Name="registerButton" Text="Register Now" Clicked="OnRegisterButtonClicked" HorizontalOptions="Center"/>
 				</StackLayout>
 			</StackLayout>
 		</StackLayout>

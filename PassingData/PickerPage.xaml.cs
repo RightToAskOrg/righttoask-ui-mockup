@@ -18,16 +18,14 @@ namespace PassingData
 		}
         void OnPickerSelectedIndexChanged(object sender, EventArgs e)
         {
-            String chosenDept;
             var picker = (Picker)sender;
             int selectedIndex = picker.SelectedIndex;
-            Tag selectedDept = (Tag) picker.ItemsSource[selectedIndex];
 
             if (selectedIndex != -1)
             {
+                Tag selectedDept = (Tag) picker.ItemsSource[selectedIndex];
                 selectedDept.Selected = true;
-                chosenDept = selectedDept.TagLabel;
-                ((ReadingContext) BindingContext).SelectedDepartment = chosenDept;
+                ((ReadingContext) BindingContext).SelectedDepartment = selectedDept.TagLabel;
 
             }
         }
