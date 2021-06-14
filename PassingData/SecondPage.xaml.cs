@@ -10,12 +10,13 @@ namespace PassingData
 		private string question;
 		private ObservableCollection<Tag> otherAuthorities;
 		private string MPFindPrompt = String.Empty;
+		private bool isReadingOnly;
 
-		public SecondPage (bool MPsAreSelected)
+		public SecondPage (bool MPsAreSelected, bool IsReadingOnly)
 		{
-
-			InitializeComponent ();
 			
+			InitializeComponent ();
+			isReadingOnly = IsReadingOnly;	
 			if(!MPsAreSelected)
 			{
 				MPFindPrompt = " - Find my MPs";
@@ -23,15 +24,27 @@ namespace PassingData
 			myMP.Text = "My MP" + MPFindPrompt;
 			myMPShouldRaiseItButton.Text = "My MP should raise it" + MPFindPrompt;
 
-	}
+			if (IsReadingOnly)
+			{
+				TitleBar.Title = "Help me find questions I care about";
+			}
+			else
+			{
+				TitleBar.Title =  "Help me direct my question";
+			}
+
+		}
 
 		void Question_Entered(object sender, EventArgs e)
 		{
 			((ReadingContext) BindingContext).DraftQuestion = ((Editor) sender).Text;
 		}
+		
+		// Initiate a question-reading page that is _not_ read only.
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
-			var readingPage = new ReadingPage();
+			
+			var readingPage = new ReadingPage(isReadingOnly);
 			readingPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (readingPage);
 		}

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 			 x:Class="PassingData.SecondPage"
-			 Title="Help me direct my question">
+			 x:Name="TitleBar" >
 	<ContentPage.Content>
 		<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 			<StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">

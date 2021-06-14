@@ -18,7 +18,7 @@ namespace PassingData
 		{
 			readingContext.TopTen = true;
 
-			var readingPage = new ReadingPage ();
+			var readingPage = new ReadingPage (true);
 			readingPage.BindingContext = readingContext;
 			await Navigation.PushAsync (readingPage);
 		}
@@ -26,7 +26,7 @@ namespace PassingData
 		{
 			readingContext.SearchKeyword = ((Entry)sender).Text;
 
-			var readingPage = new ReadingPage ();
+			var readingPage = new ReadingPage (true);
 			readingPage.BindingContext = readingContext;
 			await Navigation.PushAsync (readingPage);
 			
@@ -34,7 +34,7 @@ namespace PassingData
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
 			
-			var secondPage = new SecondPage (readingContext.MPsSelected);
+			var secondPage = new SecondPage (readingContext.MPsSelected, false);
 			secondPage.BindingContext = readingContext;
 			await Navigation.PushAsync (secondPage);
 		}

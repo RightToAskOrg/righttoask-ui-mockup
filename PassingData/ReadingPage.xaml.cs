@@ -16,13 +16,22 @@ namespace PassingData
 		// {
 			// get { return questions; }
 		// }
-		public ReadingPage ()
+		public ReadingPage (bool isReadingOnly)
 		{
 			InitializeComponent ();
 
+			if (isReadingOnly)
+			{
+				TitleBar.Title = "Read Questions";
+			}
+			else
+			{
+				TitleBar.Title = "Direct your question";
+			}
+
 			// QuestionListView.ItemsSource = questions;
 			// QuestionListView.ItemsSource = ((ReadingContext) BindingContext).ExistingQuestions;
-			
+
 		}
 		void Question_Entered(object sender, EventArgs e)
 		{
