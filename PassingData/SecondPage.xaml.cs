@@ -27,6 +27,7 @@ namespace PassingData
 			if (IsReadingOnly)
 			{
 				TitleBar.Title = "Help me find questions I care about";
+				QuestionDraftingBox.IsVisible = false;
 			}
 			else
 			{

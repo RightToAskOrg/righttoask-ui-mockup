@@ -33,15 +33,17 @@ namespace PassingData
 		}
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
-			
 			var secondPage = new SecondPage (readingContext.MPsSelected, false);
 			secondPage.BindingContext = readingContext;
 			await Navigation.PushAsync (secondPage);
 		}
 		
-		void OnReadButtonClicked (object sender, EventArgs e)
+		async void OnReadButtonClicked (object sender, EventArgs e)
 		{
-			((Button) sender).Text = "This will take you to a reading page";
+			// ((Button) sender).Text = "This will take you to a reading page";
+			var secondPage = new SecondPage (readingContext.MPsSelected, true);
+			secondPage.BindingContext = readingContext;
+			await Navigation.PushAsync (secondPage);
 		}
 
 		

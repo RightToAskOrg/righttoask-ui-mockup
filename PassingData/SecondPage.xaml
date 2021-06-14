@@ -4,11 +4,15 @@
 			 x:Class="PassingData.SecondPage"
 			 x:Name="TitleBar" >
 	<ContentPage.Content>
-		<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-			<StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+		<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+			<StackLayout Orientation="Horizontal" HorizontalOptions="End">
 				<Label Text="Current matching questions: " FontSize="Medium" HorizontalOptions="Center" /> 
 				<Label x:Name="matchCountReporter" Text="{Binding MatchingQuestions }" FontSize="Medium" HorizontalOptions="Center" /> 
 			</StackLayout>
+			<StackLayout Orientation="Vertical" x:Name="QuestionDraftingBox">
+				<Label Text="What is the question?" FontSize="Medium" HorizontalOptions="Center" />
+				<Editor Placeholder="Enter your question" Completed="Question_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+			</StackLayout >
 			<StackLayout Orientation="Vertical">
 				<Label Text="Who should answer the question?" FontSize="Medium" HorizontalOptions="Center" />
 				<Button x:Name="ministerOrDeptButton" Text="A minister or department" Clicked="OnMinisterOrDeptButtonClicked" />
@@ -23,12 +27,7 @@
 			    <Button x:Name="myMPShouldRaiseItButton" Clicked="OnMPRaiseButtonClicked" />
 			
 			</StackLayout>
-			<StackLayout Orientation="Vertical">
-				<Label Text="What is the question?" FontSize="Medium" HorizontalOptions="Center" />
-				<Editor Placeholder="Enter your question" Completed="Question_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
-			</StackLayout >
-			<StackLayout Orientation="Horizontal">
-				<Button x:Name="navigateBackButton" Text="Previous Page" Clicked="OnNavigateBackButtonClicked" />
+			<StackLayout Orientation="Horizontal" HorizontalOptions="End">
 				<Button x:Name="navigateForwardButton" Text="Question Reading Page" Clicked="OnNavigateForwardButtonClicked" />
 			</StackLayout>
 		</StackLayout>

@@ -23,6 +23,8 @@ namespace PassingData
 			if (isReadingOnly)
 			{
 				TitleBar.Title = "Read Questions";
+				QuestionDraftingBox.IsVisible = false;
+				navigateButton.IsVisible = false;
 			}
 			else
 			{
