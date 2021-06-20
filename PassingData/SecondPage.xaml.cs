@@ -35,7 +35,21 @@ namespace PassingData
 			}
 
 		}
+		
+		void OnPickerSelectedIndexChanged(object sender, EventArgs e) 
+		{
+            var picker = (Picker)sender;
+            
+            int selectedIndex = picker.SelectedIndex;
 
+            if (selectedIndex != -1)
+            {
+                Tag selectedDept = (Tag) picker.ItemsSource[selectedIndex];
+                selectedDept.Selected = true;
+                ((ReadingContext) BindingContext).SelectedDepartment = selectedDept.TagLabel;
+
+            }
+        }
 		void Question_Entered(object sender, EventArgs e)
 		{
 			((ReadingContext) BindingContext).DraftQuestion = ((Editor) sender).Text;
@@ -79,7 +93,7 @@ namespace PassingData
 		{
         	
          			
-           	var departmentExploringPage = new ExploringPage();
+           	var departmentExploringPage = new ExploringPage(((ReadingContext) BindingContext).OtherAuthorities);
             departmentExploringPage.BindingContext = BindingContext;
            	await Navigation.PushAsync (departmentExploringPage);
 		}

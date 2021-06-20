@@ -20,8 +20,11 @@ namespace PassingData
         async void OnAddressEntered(object sender, EventArgs e)
         {
             ((ReadingContext) BindingContext).MPsSelected = true;
-            addressAcknowledgement.Text = "Thankyou. RightToAsk will not retain your address.";
-            await Task.Delay(2000);
+           	var mpExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs);
+            mpExploringPage.BindingContext = BindingContext;
+           	await Navigation.PushAsync (mpExploringPage);
+            addressAcknowledgement.Text = "Thankyou for selecting your MPs. RightToAsk will not retain your address.";
+            // await Task.Delay(2000);
             
             
         }

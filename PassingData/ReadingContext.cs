@@ -48,22 +48,23 @@ namespace PassingData
 
 			MyMPs = new ObservableCollection<Tag>();
 			MyMPs.Add(new Tag{TagLabel = "Janet Rice", Selected = false});
+			MyMPs.Add(new Tag{TagLabel = "Danny O'Brien", Selected = false});
 			MyMPs.Add(new Tag{TagLabel = "Peter Dutton", Selected = false});
 			MyMPs.Add(new Tag{TagLabel = "Penny Wong", Selected = false});
 			MyMPs.Add(new Tag{TagLabel = "Daniel Andrews", Selected = false});
 			MyMPs.Add(new Tag{TagLabel = "Ged Kearney", Selected = false});
-			MyMPs.Add(new Tag{TagLabel = "Danny O'Brien", Selected = false});
+			MyMPs.Add(new Tag{TagLabel = "Michael McCormack", Selected = false});
 
 
 			ExistingQuestions = new ObservableCollection<Question>();
-			ExistingQuestions.Add(new Question{QuestionText   = "This is a test question", QuestionAsker = "Alice", DownVotes = 1, UpVotes = 2});
-			ExistingQuestions.Add(new Question{QuestionText   = "This is a another test question", QuestionAsker = "Bob", DownVotes = 3, UpVotes = 1});
-			ExistingQuestions.Add(new Question{QuestionText   = "This is an interesting question", QuestionAsker = "Chloe", DownVotes = 1, UpVotes = 2});
-			ExistingQuestions.Add(new Question{QuestionText   = "This is a test question", QuestionAsker = "Darius", DownVotes = 1, UpVotes = 2});
+			ExistingQuestions.Add(new Question{QuestionText   = "What is the error rate of the Senate Scanning solution?", QuestionAsker = "Alice", DownVotes = 1, UpVotes = 2});
+			ExistingQuestions.Add(new Question{QuestionText   = "What is the monthly payment to AWS for COVIDSafe?", QuestionAsker = "Bob", DownVotes = 3, UpVotes = 1});
+			ExistingQuestions.Add(new Question{QuestionText   = "Why did the ABC decide against an opt-in consent model for data sharing with Facebook and Google?", QuestionAsker = "Chloe", DownVotes = 1, UpVotes = 2});
+			ExistingQuestions.Add(new Question{QuestionText   = "What is the government's position on the right of school children to strike for climate?", QuestionAsker = "Darius", DownVotes = 1, UpVotes = 2});
 			
         	OtherAuthorities = new ObservableCollection<Tag>();
-        	OtherAuthorities.Add(new Tag{TagLabel = "Australian Electoral Commission", Selected = true});
-        	OtherAuthorities.Add(new Tag{TagLabel = "Digital Transformation Authority", Selected = true});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Australian Electoral Commission", Selected = false});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Digital Transformation Authority", Selected = false});
         	OtherAuthorities.Add(new Tag{TagLabel = "Office of the Australian Information Commissioner", Selected =false});
         	OtherAuthorities.Add(new Tag{TagLabel = "Australian Taxation Office", Selected =false});
 		}

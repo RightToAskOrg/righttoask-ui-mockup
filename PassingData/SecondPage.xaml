@@ -15,7 +15,12 @@
 			</StackLayout >
 			<StackLayout Orientation="Vertical">
 				<Label Text="Who should answer the question?" FontSize="Medium" HorizontalOptions="Center" />
-				<Button x:Name="ministerOrDeptButton" Text="A minister or department" Clicked="OnMinisterOrDeptButtonClicked" />
+				<Picker x:Name="minsterOrDeptPicker" Title="A minister or department" 
+			        ItemsSource="{Binding Departments}" 
+			        ItemDisplayBinding="{Binding TagLabel}" 
+			        SelectedIndexChanged="OnPickerSelectedIndexChanged"> 
+				</Picker>
+					<!-- <Button x:Name="ministerOrDeptButton" Text="A minister or department" Clicked="OnMinisterOrDeptButtonClicked" /> -->
 				<Button x:Name="otherPublicAuthorityButton" Text="Another public Authority" Clicked="OnOtherPublicAuthorityButtonClicked" />
 				<!-- <Button x:Name="myMP" Text="My MP" Clicked="OnMPAnswerButtonClicked" /> -->
 				 <Button x:Name="myMP" Clicked="OnMPAnswerButtonClicked" /> 
