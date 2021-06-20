@@ -16,7 +16,7 @@ namespace PassingData
             question = selectedQuestion;
             InitializeComponent ();
             QuestionDetailView.Text = question.ToString();
-            QuestionAskerButton.Text = "View " + question.QuestionAsker + "'s profile";
+            QuestionSuggesterButton.Text = "View " + question.QuestionSuggester + "'s profile";
         }
         
         private void UpVoteButton_OnClicked(object sender, EventArgs e)
@@ -24,9 +24,9 @@ namespace PassingData
             question.UpVotes++;
         }
 
-        private async void QuestionAskerButton_OnClicked(object sender, EventArgs e)
+        private async void QuestionSuggesterButton_OnClicked(object sender, EventArgs e)
         {
-			var personProfilePage = new PersonProfilePage(question.QuestionAsker);
+			var personProfilePage = new PersonProfilePage(question.QuestionSuggester);
 			personProfilePage.BindingContext = BindingContext;
 			await Navigation.PushAsync (personProfilePage);
         }

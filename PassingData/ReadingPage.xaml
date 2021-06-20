@@ -28,7 +28,7 @@
 								<Label Text="{Binding QuestionText }" />	
 								<StackLayout Orientation="Horizontal">
 									<Label Text="Asked by" />
-									<Label Text="{Binding QuestionAsker }" />	
+									<Label Text="{Binding QuestionSuggester }" />	
 									<Label Text="Upvotes " />
 									<Label Text="{Binding UpVotes }" />
 									<Label Text="| Downvotes " />

@@ -55,23 +55,56 @@ namespace PassingData
 			MyMPs.Add(new Tag{TagLabel = "Ged Kearney", Selected = false});
 			MyMPs.Add(new Tag{TagLabel = "Michael McCormack", Selected = false});
 
-
+			
 			ExistingQuestions = new ObservableCollection<Question>();
-			ExistingQuestions.Add(new Question{QuestionText   = "What is the error rate of the Senate Scanning solution?", QuestionAsker = "Alice", DownVotes = 1, UpVotes = 2});
-			ExistingQuestions.Add(new Question{QuestionText   = "What is the monthly payment to AWS for COVIDSafe?", QuestionAsker = "Bob", DownVotes = 3, UpVotes = 1});
-			ExistingQuestions.Add(new Question{QuestionText   = "Why did the ABC decide against an opt-in consent model for data sharing with Facebook and Google?", QuestionAsker = "Chloe", DownVotes = 1, UpVotes = 2});
-			ExistingQuestions.Add(new Question{QuestionText   = "What is the government's position on the right of school children to strike for climate?", QuestionAsker = "Darius", DownVotes = 1, UpVotes = 2});
+			ExistingQuestions.Add(
+				new Question
+				{
+					QuestionText   = "What is the error rate of the Senate Scanning solution?", 
+					QuestionSuggester = "Alice", 
+					QuestionAsker = "",
+					DownVotes = 1, 
+					UpVotes = 2
+				});
+			ExistingQuestions.Add(
+				new Question
+				{
+					QuestionText   = "What is the monthly payment to AWS for COVIDSafe?", 
+					QuestionSuggester = "Bob", 
+					QuestionAsker = "",
+					DownVotes = 3, 
+					UpVotes = 1
+				});
+			ExistingQuestions.Add(
+				new Question
+				{
+					QuestionText   = "Why did the ABC decide against an opt-in consent model for data sharing with Facebook and Google?", 
+					QuestionSuggester = "Chloe", 
+					QuestionAsker = "",
+					DownVotes = 1, 
+					UpVotes = 2
+				});
+			ExistingQuestions.Add(
+				new Question
+				{
+					QuestionText   = "What is the government's position on the right of school children to strike for climate?", 
+					QuestionSuggester = "Darius", 
+					DownVotes = 1, 
+					UpVotes = 2
+				});
 			
         	OtherAuthorities = new ObservableCollection<Tag>();
-        	OtherAuthorities.Add(new Tag{TagLabel = "Australian Electoral Commission", Selected = false});
-        	OtherAuthorities.Add(new Tag{TagLabel = "Digital Transformation Authority", Selected = false});
-        	OtherAuthorities.Add(new Tag{TagLabel = "Office of the Australian Information Commissioner", Selected =false});
-        	OtherAuthorities.Add(new Tag{TagLabel = "Australian Taxation Office", Selected =false});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Australian Electoral Commission (AEC)", Selected = false});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Digital Transformation Authority (DTA)", Selected = false});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Office of the Australian Information Commissioner (OAIC)", Selected =false});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Australian Security Intelligence Organisation (ASIO)", Selected =false});
+        	OtherAuthorities.Add(new Tag{TagLabel = "Australian Taxation Office (ATO)", Selected =false});
 		}
 		
 		// TODO This ToString doesn't really properly convey the state of
 		// the ReadingContext, e.g. doesn't reflect registering or knowing your
 		// MPs.
+		
 		public override string ToString ()
 		{
 			return "Keyword: " + SearchKeyword + '\n' +
