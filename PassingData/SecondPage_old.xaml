@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="PassingData.SecondPage_old"
+			 x:Name="TitleBar" >
+	<!-- This version now deprecated; Replaced by a more elegant version based on Hanna Navissi's design -->
+	<ContentPage.Content>
+		<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+			<StackLayout Orientation="Horizontal" HorizontalOptions="End">
+				<Label Text="Current matching questions: " FontSize="Medium" HorizontalOptions="Center" /> 
+				<Label x:Name="matchCountReporter" Text="{Binding MatchingQuestions }" FontSize="Medium" HorizontalOptions="Center" /> 
+			</StackLayout>
+			<StackLayout Orientation="Vertical" x:Name="QuestionDraftingBox">
+				<Label Text="What is the question?" FontSize="Medium" HorizontalOptions="Center" />
+				<Editor Placeholder="Enter your question" Completed="Question_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+			</StackLayout >
+			<StackLayout Orientation="Vertical">
+				<Label Text="Who should answer the question?" FontSize="Medium" HorizontalOptions="Center" />
+				<Picker x:Name="minsterOrDeptPicker" Title="A minister or department" 
+			        ItemsSource="{Binding Departments}" 
+			        ItemDisplayBinding="{Binding TagLabel}" 
+			        SelectedIndexChanged="OnPickerSelectedIndexChanged"> 
+				</Picker>
+					<!-- <Button x:Name="ministerOrDeptButton" Text="A minister or department" Clicked="OnMinisterOrDeptButtonClicked" /> -->
+				<Button x:Name="otherPublicAuthorityButton" Text="Another public Authority" Clicked="OnOtherPublicAuthorityButtonClicked" />
+				<!-- <Button x:Name="myMP" Text="My MP" Clicked="OnMPAnswerButtonClicked" /> -->
+				 <Button x:Name="myMP" Clicked="OnMPAnswerButtonClicked" /> 
+			</StackLayout>
+			<StackLayout Orientation="Vertical">
+				<Label Text="Who should ask the question?" FontSize="Medium" HorizontalOptions="Center" />
+				<Button x:Name="findACommitteeButton" Text="Find a Committee" Clicked="OnFindCommitteeButtonClicked" />
+				<!-- <Button x:Name="myMPShouldRaiseItButton" Text="My MP should raise it" Clicked="OnMPRaiseButtonClicked" /> -->
+			    <Button x:Name="myMPShouldRaiseItButton" Clicked="OnMPRaiseButtonClicked" />
+			
+			</StackLayout>
+			<StackLayout Orientation="Horizontal" HorizontalOptions="End">
+				<Button x:Name="navigateForwardButton" Text="Question Reading Page" Clicked="OnNavigateForwardButtonClicked" />
+			</StackLayout>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

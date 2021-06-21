@@ -54,6 +54,8 @@ namespace PassingData
 			MyMPs.Add(new Tag{TagLabel = "Daniel Andrews", Selected = false});
 			MyMPs.Add(new Tag{TagLabel = "Ged Kearney", Selected = false});
 			MyMPs.Add(new Tag{TagLabel = "Michael McCormack", Selected = false});
+			MyMPs.Add(new Tag{TagLabel = "Mark Dreyfus", Selected = false});
+			MyMPs.Add(new Tag{TagLabel = "Michaelia Cash", Selected = false});
 
 			
 			ExistingQuestions = new ObservableCollection<Question>();

@@ -38,12 +38,15 @@ namespace PassingData
 		void Question_Entered(object sender, EventArgs e)
 		{
 			draftQuestion = ((Editor) sender).Text;
+			((ReadingContext) BindingContext).DraftQuestion = draftQuestion;
 		}
 		void OnSaveButtonClicked (object sender, EventArgs e)
 		{
 			// Note that this doesn't really save the question (yet)
 			// It just updates the question list with some things like the draft q'n.
-			((ReadingContext) BindingContext).ExistingQuestions.Insert(0,new Question{QuestionText = "Another question just like "+draftQuestion, QuestionSuggester="Eli", DownVotes = 1, UpVotes = 4});
+			((ReadingContext) BindingContext).ExistingQuestions.Insert(0,
+				new Question{QuestionText = "Another question like "+draftQuestion, 
+					QuestionSuggester="Eli", DownVotes = 1, UpVotes = 4});
 		}
 
 		// Note: it's possible that this would be better with an ItemTapped event instead.
