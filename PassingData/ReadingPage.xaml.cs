@@ -11,12 +11,13 @@ namespace PassingData
 	public partial class ReadingPage : ContentPage
 	{
 		private string draftQuestion;
+		private string selectedAuthorities = "";
 		//private ObservableCollection<Question> questions = new ObservableCollection<Question>();
 		// public ObservableCollection<Question> Questions
 		// {
 			// get { return questions; }
 		// }
-		public ReadingPage (bool isReadingOnly)
+		public ReadingPage (bool isReadingOnly, ObservableCollection<Tag> authorities)
 		{
 			InitializeComponent ();
 
@@ -30,6 +31,8 @@ namespace PassingData
 			{
 				TitleBar.Title = "Direct your question";
 			}
+
+			fillInSelectedAnswerers(authorities);
 
 			// QuestionListView.ItemsSource = questions;
 			// QuestionListView.ItemsSource = ((ReadingContext) BindingContext).ExistingQuestions;
@@ -55,6 +58,21 @@ namespace PassingData
 			var questionDetailPage = new QuestionDetailPage((Question) e.Item);
 			questionDetailPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (questionDetailPage);
+		}
+
+		private void fillInSelectedAnswerers(ObservableCollection<Tag> authorities)
+		{
+			foreach (var authority in authorities)
+			{
+				if (authority.Selected)
+				{
+					selectedAuthorities += authority.TagLabel + ", ";
+				}
+			}
+
+
+			AnsweredBySelections.Text = "or "
+			                            + selectedAuthorities;
 		}
 	}
 }
