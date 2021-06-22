@@ -66,7 +66,7 @@ namespace PassingData
 			{
 				if (authority.Selected)
 				{
-					selectedAuthorities += authority.TagLabel + ", ";
+					selectedAuthorities += authority.TagLabel + "\n";
 				}
 			}
 
