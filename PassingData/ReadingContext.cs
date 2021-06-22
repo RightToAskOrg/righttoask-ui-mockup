@@ -6,6 +6,7 @@ namespace PassingData
 {
 	public class ReadingContext
 	{
+		public string Username { get; set; }
 		public string SearchKeyword { get; set; }
 
 		public bool TopTen { get; set; }
