@@ -2,15 +2,22 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Register"
              x:Class="PassingData.RegisterPage1">
     <ContentPage.Content>
         <StackLayout>
             <!-- The helpful little message about the pseudonym is a perfect thing to put in a little ?-box. -->
             <Label Text="Enter your name. You can choose a pseudonym but your MP is likely to look you up." />
-            <Entry x:Name="regiserNameButton" Placeholder="name" Completed="OnRegisterNameFieldCompleted" HorizontalOptions="Center"/>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="registerNameButton" Placeholder="name" Completed="OnRegisterNameFieldCompleted" HorizontalOptions="Center"/>
+			<StackLayout Orientation="Vertical" VerticalOptions="Center">
+				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+					<Button x:Name="registerCitizenButton" Text="Register standard account" Clicked="OnRegisterCitizenButtonClicked" HorizontalOptions="Center"/>
+				</StackLayout>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal" VerticalOptions="Center">
+				<Button x:Name="registerMPButton" Text="Register Now" Clicked="OnRegisterMPButtonClicked" HorizontalOptions="Center"/>
+				<Button x:Name="registerOrgButton" Text="Register Now" Clicked="OnRegisterOrgButtonClicked" HorizontalOptions="Center"/>
+			</StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

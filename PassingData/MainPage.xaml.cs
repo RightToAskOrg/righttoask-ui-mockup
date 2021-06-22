@@ -47,9 +47,11 @@ namespace PassingData
 		}
 
 		
-		void OnRegisterButtonClicked(object sender, EventArgs e)
+		async void OnRegisterButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = "Registering not implemented yet";
+			// ((Button) sender).Text = "Registering not implemented yet";
+			var registrationPage = new RegisterPage1(readingContext);
+			await Navigation.PushAsync (registrationPage);
 		}
 	}
 }
