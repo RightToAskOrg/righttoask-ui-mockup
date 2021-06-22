@@ -12,6 +12,7 @@ namespace PassingData
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage1 : ContentPage
     {
+        ReadingContext BindingContext ;
         public RegisterPage1(ReadingContext context)
         {
             InitializeComponent();
@@ -20,16 +21,20 @@ namespace PassingData
 
         async void OnRegisterNameFieldCompleted(object sender, EventArgs e)
         {
-	        ((ReadingContext) BindingContext).Username = ((Entry) sender).Text;
+	        BindingContext.Username = ((Entry) sender).Text;
+            
+            
 
 	        // var readingPage = new ReadingPage(true);
 	        // readingPage.BindingContext = readingContext;
 	        // await Navigation.PushAsync(readingPage);
         }
         
-        void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
+        async void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
         {
-            ((Button) sender).Text = "Registering not implemented yet";
+            // ((Button) sender).Text = "Registering not implemented yet";
+            var secondRegisterPage = new RegisterPage2(BindingContext);
+			await Navigation.PushAsync (secondRegisterPage);
         }
         void OnRegisterMPButtonClicked(object sender, EventArgs e)
         {

@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <StackLayout>
             <!-- The helpful little message about the pseudonym is a perfect thing to put in a little ?-box. -->
-            <Label Text="Enter your name. You can choose a pseudonym but your MP is likely to look you up." />
+            <Label Text="Enter your name. You can choose a pseudonym but your MP is more likely to listen if you use your real name." />
             <Entry x:Name="registerNameButton" Placeholder="name" Completed="OnRegisterNameFieldCompleted" HorizontalOptions="Center"/>
 			<StackLayout Orientation="Vertical" VerticalOptions="Center">
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">

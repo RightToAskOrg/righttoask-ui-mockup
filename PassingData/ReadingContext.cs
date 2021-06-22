@@ -28,7 +28,16 @@ namespace PassingData
 		public String SelectedDepartment { get; set; }
 		
 		public ObservableCollection<Tag> OtherAuthorities { get; set; }
+
+		public ObservableCollection<Tag> StatesOrTerritories { get; set; }
+		public string SelectedStateOrTerritory { get; set; }
+		public ObservableCollection<Tag> StateElectorates { get; set; }
+		public string SelectedStateElectorate { get; set; }
+
+		public ObservableCollection<Tag> FederalElectorates { get; set; }
+		public string SelectedFederalElectorate { get; set; }
 		
+
 		public int MatchingQuestions { get; set; }
 
 		// At the moment, this simply populates the reading context with a
@@ -102,11 +111,44 @@ namespace PassingData
         	OtherAuthorities.Add(new Tag{TagLabel = "Office of the Australian Information Commissioner (OAIC)", Selected =false});
         	OtherAuthorities.Add(new Tag{TagLabel = "Australian Security Intelligence Organisation (ASIO)", Selected =false});
         	OtherAuthorities.Add(new Tag{TagLabel = "Australian Taxation Office (ATO)", Selected =false});
+            
+        	StatesOrTerritories = new ObservableCollection<Tag>();
+        	StatesOrTerritories.Add(new Tag{TagLabel = "ACT", Selected = false});
+        	StatesOrTerritories.Add(new Tag{TagLabel = "Queensland", Selected = false});
+        	StatesOrTerritories.Add(new Tag{TagLabel = "New South Wales", Selected = false});
+        	StatesOrTerritories.Add(new Tag{TagLabel = "NT", Selected = false});
+        	StatesOrTerritories.Add(new Tag{TagLabel = "South Australia", Selected = false});
+        	StatesOrTerritories.Add(new Tag{TagLabel = "Tasmania", Selected = false});
+        	StatesOrTerritories.Add(new Tag{TagLabel = "Victoria", Selected =false});
+        	StatesOrTerritories.Add(new Tag{TagLabel = "Western Australia", Selected =false});
+            
+        	StateElectorates = new ObservableCollection<Tag>();
+        	StateElectorates.Add(new Tag{TagLabel = "Gippsland South", Selected = false});
+        	StateElectorates.Add(new Tag{TagLabel = "Gembrook", Selected = false});
+        	StateElectorates.Add(new Tag{TagLabel = "Nepean", Selected = false});
+        	StateElectorates.Add(new Tag{TagLabel = "Sunbury", Selected = false});
+        	StateElectorates.Add(new Tag{TagLabel = "Brighton", Selected = false});
+        	StateElectorates.Add(new Tag{TagLabel = "Eildon", Selected = false});
+        	StateElectorates.Add(new Tag{TagLabel = "Ovens Valley", Selected =false});
+        	StateElectorates.Add(new Tag{TagLabel = "Malvern", Selected =false});
+        	StateElectorates.Add(new Tag{TagLabel = "Northcote", Selected =false});
+            
+        	FederalElectorates = new ObservableCollection<Tag>();
+        	FederalElectorates.Add(new Tag{TagLabel = "Cooper", Selected = false});
+        	FederalElectorates.Add(new Tag{TagLabel = "Higgins", Selected = false});
+        	FederalElectorates.Add(new Tag{TagLabel = "Flinders", Selected = false});
+        	FederalElectorates.Add(new Tag{TagLabel = "Isaacs", Selected = false});
+        	FederalElectorates.Add(new Tag{TagLabel = "Melbourne", Selected = false});
+        	FederalElectorates.Add(new Tag{TagLabel = "Mallee", Selected = false});
+        	FederalElectorates.Add(new Tag{TagLabel = "Indi", Selected =false});
+        	FederalElectorates.Add(new Tag{TagLabel = "Monash", Selected =false});
+        	FederalElectorates.Add(new Tag{TagLabel = "Wills", Selected =false});
 		}
 		
 		// TODO This ToString doesn't really properly convey the state of
 		// the ReadingContext, e.g. doesn't reflect registering or knowing your
 		// MPs.
+		// And it probably isn't necessary to write out all the unselectd things.
 		
 		public override string ToString ()
 		{
