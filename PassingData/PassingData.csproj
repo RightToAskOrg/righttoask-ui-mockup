@@ -19,10 +19,12 @@
     <EmbeddedResource Update="SecondPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Remove="SecondPage_old.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Contact.cs" />
+    <Compile Remove="SecondPage_old.xaml.cs" />
   </ItemGroup>
 
 </Project>

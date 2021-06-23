@@ -6,39 +6,59 @@ namespace PassingData
 {
 	public class ReadingContext
 	{
+		// Things about this user.
 		public string Username { get; set; }
+		public string UserEmail { get; set; }
+		public bool Is_Registered { get; set; }
+		// Note that people might register without knowing their electorate,
+		// or might record state but not federal electorates, or vice versa.
+		public bool State_Electorate_Known { get; set; }
+		public bool Federal_Electorate_Known { get; set; }
+		
+		// These selections are made at registration, or at 'complete registration.'
+		public string SelectedStateOrTerritory { get; set; }
+		public string SelectedStateElectorate { get; set; }
+		public string SelectedFederalElectorate { get; set; }
+		
+		// Things about the current search, draft question or other action.
+		public string DraftQuestion { get; set; }
+		public string SelectedDepartment { get; set; }
 		public string SearchKeyword { get; set; }
+		
+		// Whether MPs have been selected for this question.
+		// TODO perhaps we need a different bool for whether they've
+		// been selected for asking or answering.
+		public bool MPsSelected = false;
 
+		// Whether this is a 'top ten' search.
 		public bool TopTen { get; set; }
 
+		// The number of questions 'matching' this query. 
+		// At the moment, just a hardcoded value.
+		public int MatchingQuestions { get; set; }
 		public string GoDirect_Committee { get; set; }
 		
 		public string GoDirect_MP { get; set; }
 
+		// Existing things about the world.
+		// TODO: at the moment, the list of 'my MPs' is the 
+		// same as the original complete set of MPs.
 		// This is initiated with a default list of MPs,
 		// from which at the moment you select the ones
 		// that are yours
 		public ObservableCollection<Tag> MyMPs { get; set; }
-		public bool MPsSelected = false;
 
 		public ObservableCollection<Question> ExistingQuestions { get; set; }
-		public string DraftQuestion { get; set; }
 		
 		public ObservableCollection<Tag> Departments { get; set; }
-		public String SelectedDepartment { get; set; }
 		
 		public ObservableCollection<Tag> OtherAuthorities { get; set; }
 
 		public ObservableCollection<Tag> StatesOrTerritories { get; set; }
-		public string SelectedStateOrTerritory { get; set; }
 		public ObservableCollection<Tag> StateElectorates { get; set; }
-		public string SelectedStateElectorate { get; set; }
-
 		public ObservableCollection<Tag> FederalElectorates { get; set; }
-		public string SelectedFederalElectorate { get; set; }
 		
 
-		public int MatchingQuestions { get; set; }
 
 		// At the moment, this simply populates the reading context with a
 		// hardcoded set of "existing" questions, authorities, etc.

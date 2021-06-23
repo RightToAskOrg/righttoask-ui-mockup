@@ -6,11 +6,10 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Vertical">
-				<Label Text="Welcome " FontSize="Medium" HorizontalOptions="Center" />
+				<Label Text="Registration for " FontSize="Medium" HorizontalOptions="Center" />
 				<Label Text="{Binding Username}" FontSize="Medium" HorizontalOptions="Center" /> 
 				<!-- <Label x:Name="WelcomeName" FontSize="Medium" HorizontalOptions="Center" /> -->
 			</StackLayout >
-			<StackLayout Orientation="Horizontal">
 				<StackLayout Orientation="Vertical">
 					<Label Text="I live in " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
 					<Picker x:Name="stateOrTerritoryPicker" Title="State or Territory" 
@@ -30,10 +29,10 @@
 				        SelectedIndexChanged="OnFederalElectoratePickerSelectedIndexChanged"> 
 					</Picker>
 				</StackLayout>
-			</StackLayout>
 			<StackLayout Orientation="Vertical" HorizontalOptions="Center">
 				<Button x:Name="findMPsbutton" BackgroundColor="Turquoise" Text="Help me find my electorates and MPs" Clicked="OnFindMPsButtonClicked" />
 				<Button x:Name="skipThisStepButton" BackgroundColor="Turquoise" Text="Skip this step" Clicked="OnSkipButtonClicked" />
+				<Button x:Name="completeRegistrationButton" BackgroundColor="Turquoise" Text="Complete Registration" Clicked="OnCompleteRegistrationButtonClicked" />
 			</StackLayout>
         </StackLayout>
     </ContentPage.Content>

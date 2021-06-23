@@ -101,8 +101,8 @@ namespace PassingData
 		private async void OnMPAnswerButtonClicked(object sender, EventArgs e)
 		{
 			// ((Button) sender).Text = $"MP answering not implemented yet";
-			var findMyMPPage = new FindMyMP();
-			findMyMPPage.BindingContext = BindingContext;
+			var findMyMPPage = new FindMyMP((ReadingContext)BindingContext);
+// 			findMyMPPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (findMyMPPage);
 		}
 
@@ -114,8 +114,8 @@ namespace PassingData
 		private async void OnMPRaiseButtonClicked(object sender, EventArgs e)
 		{
 			//((Button) sender).Text = $"MP raising not implemented yet";
-			var findMyMPPage = new FindMyMP();
-			findMyMPPage.BindingContext = BindingContext;
+			var findMyMPPage = new FindMyMP((ReadingContext)BindingContext);
+			// findMyMPPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (findMyMPPage);
 		}
 	}

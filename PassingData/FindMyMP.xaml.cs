@@ -12,9 +12,10 @@ namespace PassingData
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FindMyMP : ContentPage
     {
-        public FindMyMP()
+        public FindMyMP(ReadingContext context)
         {
             InitializeComponent();
+            BindingContext = context;
         }
 
         async void OnAddressEntered(object sender, EventArgs e)

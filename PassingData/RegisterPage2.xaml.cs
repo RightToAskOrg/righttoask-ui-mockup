@@ -16,10 +16,10 @@ namespace PassingData
         
         public RegisterPage2(ReadingContext context)
         {
-            BindingContext = context;
             InitializeComponent();
+            BindingContext = context;
 
-            // ((Label) WelcomeName).Text = context.Username;
+            completeRegistrationButton.IsVisible = false;
         }
         void OnStatePickerSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -63,14 +63,22 @@ namespace PassingData
             }
         }
 
-        private void OnFindMPsButtonClicked(object sender, EventArgs e)
+        async private void OnFindMPsButtonClicked(object sender, EventArgs e)
         {
-            ((Button) sender).Text = "Finding MPs not implemented yet";
+			var findMyMPPage = new FindMyMP((ReadingContext) BindingContext);
+			// findMyMPPage.BindingContext = BindingContext;
+			await Navigation.PushAsync (findMyMPPage);
         }
 
         private void OnSkipButtonClicked(object sender, EventArgs e)
         {
-            ((Button) sender).Text = "Skip not implemented yet";
+            skipThisStepButton.IsVisible = false;
+            completeRegistrationButton.IsVisible = true;
+        }
+
+        private void OnCompleteRegistrationButtonClicked(object sender, EventArgs e)
+        {
+            ((Button) sender).Text = "Registering not implemented yet";
         }
     }
 }

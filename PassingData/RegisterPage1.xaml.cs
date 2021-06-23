@@ -44,6 +44,10 @@ namespace PassingData
         {
             ((Button) sender).Text = "Registering not implemented yet";
         }
-        
+
+        private void OnRegisterEmailFieldCompleted(object sender, EventArgs e)
+        {
+	        BindingContext.UserEmail = ((Entry) sender).Text;
+        }
     }
 }
