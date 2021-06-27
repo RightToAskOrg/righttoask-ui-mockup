@@ -20,6 +20,9 @@ namespace PassingData
             BindingContext = context;
 
             completeRegistrationButton.IsVisible = false;
+
+            updateStateElectorates();
+                
         }
         
         // TODO Refactor this nicely so it isn't copy-pasted in FindMyMP
@@ -97,6 +100,29 @@ namespace PassingData
         private void OnCompleteRegistrationButtonClicked(object sender, EventArgs e)
         {
             ((Button) sender).Text = "Registering not implemented yet";
+        }
+
+        private void updateStateElectorates()
+        {
+            ReadingContext castContext = (ReadingContext) BindingContext;
+            
+            if (castContext.SelectedStateElectorate != null)
+            {
+                stateElectoratePicker.Title = castContext.SelectedStateElectorate;
+            }
+            else
+            {
+                stateElectoratePicker.Title = "state electorate";
+            }
+            
+            if (castContext.SelectedFederalElectorate != null)
+            {
+                federalElectoratePicker.Title = castContext.SelectedFederalElectorate;
+            }
+            else
+            {
+                federalElectoratePicker.Title = "federal electorate";
+            }
         }
     }
 }

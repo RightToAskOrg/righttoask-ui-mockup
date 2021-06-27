@@ -18,7 +18,7 @@
 				        SelectedIndexChanged="OnStatePickerSelectedIndexChanged"> 
 					</Picker>
 					<Label Text="I know my State/Territory electorate " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
-					<Picker x:Name="stateElectoratePicker" Title="State/Territory Electorate" 
+					<Picker x:Name="stateElectoratePicker" Title="State Electorate" 
 				        ItemsSource="{Binding StateElectorates}" 
 				        ItemDisplayBinding="{Binding TagLabel}" 
 				        SelectedIndexChanged="OnStateElectoratePickerSelectedIndexChanged"> 
