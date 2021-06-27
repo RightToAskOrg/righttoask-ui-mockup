@@ -21,6 +21,8 @@ namespace PassingData
 
             completeRegistrationButton.IsVisible = false;
         }
+        
+        // TODO Refactor this nicely so it isn't copy-pasted in FindMyMP
         void OnStatePickerSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
@@ -46,6 +48,12 @@ namespace PassingData
                 Tag selectedStateElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedStateElectorate.Selected = true;
                 ((ReadingContext) BindingContext).SelectedStateElectorate = selectedStateElectorate.TagLabel;
+
+                // If both state and federal electorates are chosen, registration can be completed.
+                if (((ReadingContext) BindingContext).SelectedFederalElectorate != null)
+                {
+                    offerRegistrationCompletion();
+                }
             }
         }
 
@@ -59,7 +67,13 @@ namespace PassingData
             {
                 Tag selectedFederalElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedFederalElectorate.Selected = true;
-                ((ReadingContext) BindingContext).SelectedStateOrTerritory = selectedFederalElectorate.TagLabel;
+                ((ReadingContext) BindingContext).SelectedFederalElectorate = selectedFederalElectorate.TagLabel;
+                
+                // If both state and federal electorates are chosen, registration can be completed.
+                if (((ReadingContext) BindingContext).SelectedStateElectorate != null)
+                {
+                    offerRegistrationCompletion();
+                }
             }
         }
 
@@ -72,10 +86,14 @@ namespace PassingData
 
         private void OnSkipButtonClicked(object sender, EventArgs e)
         {
-            skipThisStepButton.IsVisible = false;
-            completeRegistrationButton.IsVisible = true;
+            offerRegistrationCompletion();
         }
 
+        private void offerRegistrationCompletion()
+        {
+            skipThisStepButton.IsVisible = false;
+            completeRegistrationButton.IsVisible = true;
+        }    
         private void OnCompleteRegistrationButtonClicked(object sender, EventArgs e)
         {
             ((Button) sender).Text = "Registering not implemented yet";

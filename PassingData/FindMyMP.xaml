@@ -9,6 +9,12 @@
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand" />
             <Entry x:Name="address" Placeholder="Enter your address" Completed="OnAddressEntered" HorizontalOptions="Center"/>
+			<Picker x:Name="stateOrTerritoryPicker" Title="State or Territory" 
+			       ItemsSource="{Binding StatesOrTerritories}" 
+			       ItemDisplayBinding="{Binding TagLabel}" 
+			       SelectedIndexChanged="OnStatePickerSelectedIndexChanged"> 
+			</Picker>
+            <Button x:Name="submitAddressButton" Text="Find my electorates" Clicked="OnSubmitAddressButton_Clicked" />
             <Label x:Name="addressAcknowledgement" VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand" />
         </StackLayout>
