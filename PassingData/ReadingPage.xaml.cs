@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 using Application = Xamarin.Forms.Application;
+using Button = Xamarin.Forms.Button;
 
 namespace PassingData
 {
@@ -25,7 +28,8 @@ namespace PassingData
 			{
 				TitleBar.Title = "Read Questions";
 				QuestionDraftingBox.IsVisible = false;
-				navigateButton.IsVisible = false;
+				keepButton.IsVisible = false;
+				discardButton.IsVisible = false;
 			}
 			else
 			{
@@ -42,14 +46,6 @@ namespace PassingData
 		{
 			draftQuestion = ((Editor) sender).Text;
 			((ReadingContext) BindingContext).DraftQuestion = draftQuestion;
-		}
-		void OnSaveButtonClicked (object sender, EventArgs e)
-		{
-			// Note that this doesn't really save the question (yet)
-			// It just updates the question list with some things like the draft q'n.
-			((ReadingContext) BindingContext).ExistingQuestions.Insert(0,
-				new Question{QuestionText = "Another question like "+draftQuestion, 
-					QuestionSuggester="Eli", DownVotes = 1, UpVotes = 4});
 		}
 
 		// Note: it's possible that this would be better with an ItemTapped event instead.
@@ -74,5 +70,45 @@ namespace PassingData
 			AnsweredBySelections.Text = "or "
 			                            + selectedAuthorities;
 		}
-	}
+
+		private void OnDiscardButtonClicked(object sender, EventArgs e)
+		{
+			// throw new NotImplementedException();
+			((Button) sender).Text = "Draft Discarded";
+			((ReadingContext) BindingContext).DraftQuestion = "";
+			keepButton.IsVisible = false;
+		}
+
+
+    async void OnSaveButtonClicked(object sender, EventArgs e)
+    {
+    	// Note that this doesn't really save the question (yet)
+    	// It just updates the question list with some things like the draft q'n.
+
+        ReadingContext context = (ReadingContext) BindingContext;
+
+        // Tag the new question with the authorities that have been selected.
+        ObservableCollection<string> questionAnswerers; 
+	    questionAnswerers = new ObservableCollection<string>(context.OtherAuthorities.Where(w => w.Selected).Select(a=> a.TagLabel));
+	    if (context.SelectedDepartment != null)
+	       questionAnswerers.Insert(0, context.SelectedDepartment);
+	    
+	    Question newQuestion = new Question {
+    			QuestionText = draftQuestion,
+                // TODO: Enforce registration before question-suggesting.
+    			QuestionSuggester = context.Is_Registered ? context.Username : "Anonymous user", 
+                QuestionAnswerers = questionAnswerers, 
+                // TODO: set this.
+                // QuestionAsker = ...;  
+                DownVotes = 0, 
+                UpVotes = 0
+    		};
+
+	    context.ExistingQuestions.Insert(0, newQuestion);
+	        
+		var questionDetailPage = new QuestionDetailPage(newQuestion);
+		questionDetailPage.BindingContext = BindingContext;
+		await Navigation.PushAsync (questionDetailPage);
+    }
+}
 }

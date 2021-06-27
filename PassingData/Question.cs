@@ -23,7 +23,7 @@ namespace PassingData
         public string QuestionSuggester { get; set; }
         
         // The Authority, department, MPs, who are meant to answer 
-        public ObservableCollection<Tag> QuestionAnswerers { get; set; }
+        public ObservableCollection<string> QuestionAnswerers { get; set; }
         
         // The MPs or committee who are meant to ask the question
         public string QuestionAsker { get; set; }
