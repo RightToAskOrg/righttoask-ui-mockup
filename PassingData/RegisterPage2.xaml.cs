@@ -20,9 +20,6 @@ namespace PassingData
             BindingContext = context;
 
             completeRegistrationButton.IsVisible = false;
-
-            updateStateElectorates();
-                
         }
         
         // TODO Refactor this nicely so it isn't copy-pasted in FindMyMP
@@ -97,34 +94,17 @@ namespace PassingData
             skipThisStepButton.IsVisible = false;
             completeRegistrationButton.IsVisible = true;
         }    
+        
+        // When registration is complete, remove (pop) both registration pages
+        // to go back to wherever you were.
         async void OnCompleteRegistrationButtonClicked(object sender, EventArgs e)
         {
+            // Remove page before this, which should be RegisterPage1 
+            ((ReadingContext) BindingContext).Is_Registered = true;
+            this.Navigation.RemovePage (this.Navigation.NavigationStack [this.Navigation.NavigationStack.Count - 2]);
+            // This PopAsync will now go to wherever the user started registration from 
+            // this.Navigation.PopAsync ();
             await Navigation.PopAsync(); 
-        }
-
-        private void updateStateElectorates()
-        {
-            ReadingContext castContext = (ReadingContext) BindingContext;
-            
-            /*
-            if (castContext.SelectedStateElectorate != null)
-            {
-                stateElectoratePicker.Title = castContext.SelectedStateElectorate;
-            }
-            else
-            {
-                stateElectoratePicker.Title = "state electorate";
-            }
-            
-            if (castContext.SelectedFederalElectorate != null)
-            {
-                federalElectoratePicker.Title = castContext.SelectedFederalElectorate;
-            }
-            else
-            {
-                federalElectoratePicker.Title = "federal electorate";
-            }
-            */
         }
     }
 }
