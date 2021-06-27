@@ -51,7 +51,7 @@ namespace PassingData
 		// Note: it's possible that this would be better with an ItemTapped event instead.
 		private async void Question_Selected(object sender, ItemTappedEventArgs e)
 		{
-			var questionDetailPage = new QuestionDetailPage((Question) e.Item);
+			var questionDetailPage = new QuestionDetailPage(false, (Question) e.Item);
 			questionDetailPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (questionDetailPage);
 		}
@@ -82,9 +82,6 @@ namespace PassingData
 
     async void OnSaveButtonClicked(object sender, EventArgs e)
     {
-    	// Note that this doesn't really save the question (yet)
-    	// It just updates the question list with some things like the draft q'n.
-
         ReadingContext context = (ReadingContext) BindingContext;
 
         // Tag the new question with the authorities that have been selected.
@@ -106,7 +103,7 @@ namespace PassingData
 
 	    context.ExistingQuestions.Insert(0, newQuestion);
 	        
-		var questionDetailPage = new QuestionDetailPage(newQuestion);
+		var questionDetailPage = new QuestionDetailPage(true, newQuestion);
 		questionDetailPage.BindingContext = BindingContext;
 		await Navigation.PushAsync (questionDetailPage);
     }

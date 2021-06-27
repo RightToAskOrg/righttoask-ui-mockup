@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Application = Xamarin.Forms.Application;
+using Button = Xamarin.Forms.Button;
 
 namespace PassingData
 {
@@ -11,11 +12,25 @@ namespace PassingData
     {
         private string linkOrAnswer;
         private Question question;
-        public QuestionDetailPage (Question selectedQuestion)
+        public QuestionDetailPage (bool isNewQuestion, Question selectedQuestion)
         {
             question = selectedQuestion;
             InitializeComponent ();
             QuestionDetailView.Text = question.ToString();
+            // Different actions depending on whether it's a new question you're about to submit,
+            // or an existing question you're answering, upvoting or adding links for.
+            if (isNewQuestion)
+            {
+                UpVoteButton.IsVisible = false;
+                LinkOrAnswerSegment.IsVisible = false;
+                SaveAnswerButton.IsVisible = false;
+            }
+            else
+            {
+                BackgroundSegment.IsVisible = false;
+                SaveBackgroundButton.IsVisible = false;
+            }
+            
             QuestionSuggesterButton.Text = "View " + question.QuestionSuggester + "'s profile";
         }
         
@@ -40,7 +55,17 @@ namespace PassingData
 
         private void SaveAnswerButton_OnClicked(object sender, EventArgs e)
         {
-            ((Xamarin.Forms.Button) sender).Text = "Answer saved";
+            ((Button) sender).Text = "Answer saving not implemented";
+        }
+
+        private void Background_Entered(object sender, EventArgs e)
+        {
+            // Doesn't do anything.
+        }
+
+        private void SaveBackgroundButton_OnClicked(object sender, EventArgs e)
+        {
+            ((Button) sender).Text = "Not implemented yet";
         }
     }
 }
