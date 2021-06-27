@@ -97,15 +97,16 @@ namespace PassingData
             skipThisStepButton.IsVisible = false;
             completeRegistrationButton.IsVisible = true;
         }    
-        private void OnCompleteRegistrationButtonClicked(object sender, EventArgs e)
+        async void OnCompleteRegistrationButtonClicked(object sender, EventArgs e)
         {
-            ((Button) sender).Text = "Registering not implemented yet";
+            await Navigation.PopAsync(); 
         }
 
         private void updateStateElectorates()
         {
             ReadingContext castContext = (ReadingContext) BindingContext;
             
+            /*
             if (castContext.SelectedStateElectorate != null)
             {
                 stateElectoratePicker.Title = castContext.SelectedStateElectorate;
@@ -123,6 +124,7 @@ namespace PassingData
             {
                 federalElectoratePicker.Title = "federal electorate";
             }
+            */
         }
     }
 }

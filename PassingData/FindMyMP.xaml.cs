@@ -32,26 +32,19 @@ namespace PassingData
                 ((ReadingContext) BindingContext).SelectedStateOrTerritory = selectedState.TagLabel;
             }
         }
+        
+        // Choose a random state and federal electorate for now,
+        // then pop back to where you came from.
         async void OnAddressEntered(object sender, EventArgs e)
         {
             ReadingContext context = (ReadingContext) BindingContext;
             var random = new Random();
-            // Choose a random state and federal electorate for now.
             int stateElectorateCount = context.StateElectorates.Count;
             int federalElectorateCount = context.FederalElectorates.Count;
-            // int index = random.Next(stateElectorateCount);
 
             context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagLabel;
             context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagLabel;
-
-            // ((ReadingContext) BindingContext).MPsSelected = true;
-            // var mpExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs);
-            // mpExploringPage.BindingContext = BindingContext;
-            // await Navigation.PushAsync (mpExploringPage);
-            // addressAcknowledgement.Text = "Thankyou for selecting your MPs. RightToAsk will not retain your address.";
-            // await Task.Delay(2000);
-
-
+            await Navigation.PopAsync();
         }
 
         async void OnSubmitAddressButton_Clicked(object sender, EventArgs e)

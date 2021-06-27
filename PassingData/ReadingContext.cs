@@ -1,11 +1,24 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace PassingData
 {
-	public class ReadingContext
+	public class ReadingContext : INotifyPropertyChanged
 	{
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        // This function allows for automatic UI updates when these properties change.
+        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
 		// Things about this user.
 		public string Username { get; set; }
 		public string UserEmail { get; set; }
@@ -16,9 +29,10 @@ namespace PassingData
 		public bool Federal_Electorate_Known { get; set; }
 		
 		// These selections are made at registration, or at 'complete registration.'
-		public string SelectedStateOrTerritory { get; set; }
-		public string SelectedStateElectorate { get; set; }
-		public string SelectedFederalElectorate { get; set; }
+		private string selectedStateOrTerritory;
+		private string selectedStateElectorate;
+		private string selectedFederalElectorate;
+		
 		
 		// Things about the current search, draft question or other action.
 		public string DraftQuestion { get; set; }
@@ -182,6 +196,42 @@ namespace PassingData
 			       "Selected Department: " + SelectedDepartment + '\n' +
 			       "Departments: " + Departments.ToString() + '\n' +
 			       "Other Authorities: " + OtherAuthorities.ToString() + '\n';
+		}
+
+		// These functions allow automatic UI updates when these values change.
+		public string SelectedStateOrTerritory 
+        {
+	        get
+	        {
+		        return selectedStateOrTerritory;
+	        }
+	        set
+	        {
+		        selectedStateOrTerritory = value;
+		        OnPropertyChanged("SelectedStateOrTerritory");
+	        }
+        }
+		public string SelectedStateElectorate 
+		{
+		    get
+		    {
+                return selectedStateElectorate;
+            }
+            set
+            {
+                selectedStateElectorate= value;
+                OnPropertyChanged("SelectedStateElectorate");
+            }
+        }
+
+		public string SelectedFederalElectorate
+		{
+			get { return selectedFederalElectorate; }
+			set
+			{
+				selectedFederalElectorate = value;
+				OnPropertyChanged("SelectedFederalElectorate");
+			}
 		}
 	}
 }

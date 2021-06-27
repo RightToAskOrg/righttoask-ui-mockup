@@ -12,18 +12,19 @@
 			</StackLayout >
 				<StackLayout Orientation="Vertical">
 					<Label Text="I live in " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
-					<Picker x:Name="stateOrTerritoryPicker" Title="State or Territory" 
+					<Picker x:Name="stateOrTerritoryPicker" Title="{Binding SelectedStateOrTerritory, StringFormat='State or Territory: {0:F0}'}" 
 				        ItemsSource="{Binding StatesOrTerritories}" 
 				        ItemDisplayBinding="{Binding TagLabel}" 
 				        SelectedIndexChanged="OnStatePickerSelectedIndexChanged"> 
 					</Picker>
 					<Label Text="I know my State/Territory electorate " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
-					<Picker x:Name="stateElectoratePicker" Title="State Electorate" 
+					<Picker x:Name="stateElectoratePicker" Title="{Binding SelectedStateElectorate, StringFormat='State Electorate: {0:F0}'}" 
 				        ItemsSource="{Binding StateElectorates}" 
 				        ItemDisplayBinding="{Binding TagLabel}" 
 				        SelectedIndexChanged="OnStateElectoratePickerSelectedIndexChanged"> 
 					</Picker>
-					<Picker x:Name="federalElectoratePicker" Title="Federal Electorate" 
+					<Label Text="I know my Federal electorate " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
+					<Picker x:Name="federalElectoratePicker" Title="{Binding SelectedFederalElectorate, StringFormat='Federal Electorate: {0:F0}'}" 
 				        ItemsSource="{Binding FederalElectorates}" 
 				        ItemDisplayBinding="{Binding TagLabel}" 
 				        SelectedIndexChanged="OnFederalElectoratePickerSelectedIndexChanged"> 
