@@ -58,14 +58,15 @@ namespace PassingData
             ((Button) sender).Text = "Answer saving not implemented";
         }
 
-        private void Background_Entered(object sender, EventArgs e)
+        private void SubmitNewQuestionButton_OnClicked(object sender, EventArgs e)
         {
-            // Doesn't do anything.
+	        ((ReadingContext) BindingContext).ExistingQuestions.Insert(0, question);
+            ((Button) sender).Text = "Submitted!";
         }
 
-        private void SaveBackgroundButton_OnClicked(object sender, EventArgs e)
+        private void Background_Entered(object sender, EventArgs e)
         {
-            ((Button) sender).Text = "Not implemented yet";
+            // Do nothing.
         }
     }
 }

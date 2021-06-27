@@ -101,7 +101,6 @@ namespace PassingData
                 UpVotes = 0
     		};
 
-	    context.ExistingQuestions.Insert(0, newQuestion);
 	        
 		var questionDetailPage = new QuestionDetailPage(true, newQuestion);
 		questionDetailPage.BindingContext = BindingContext;
