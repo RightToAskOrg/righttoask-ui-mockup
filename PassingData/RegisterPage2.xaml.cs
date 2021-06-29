@@ -13,7 +13,7 @@ namespace PassingData
     public partial class RegisterPage2 : ContentPage
     {
        // private ReadingContext BindingContext;
-        
+       private string address;
         public RegisterPage2(ReadingContext context)
         {
             InitializeComponent();
@@ -88,7 +88,23 @@ namespace PassingData
         {
             offerRegistrationCompletion();
         }
+        async void OnAddressEntered(object sender, EventArgs e)
+        {
+            address = ((Entry) sender).Text;
+            // OnSubmitAddressButton_Clicked();
+        }
 
+        async void OnSubmitAddressButton_Clicked(object sender, EventArgs e)
+        {
+            ReadingContext context = (ReadingContext) BindingContext;
+            
+            var random = new Random();
+            int stateElectorateCount = context.StateElectorates.Count;
+            int federalElectorateCount = context.FederalElectorates.Count;
+
+            context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagLabel;
+            context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagLabel;
+        }
         private void offerRegistrationCompletion()
         {
             skipThisStepButton.IsVisible = false;
@@ -105,6 +121,17 @@ namespace PassingData
             // This PopAsync will now go to wherever the user started registration from 
             // this.Navigation.PopAsync ();
             await Navigation.PopAsync(); 
+        }
+
+        private void OnSaveAddressButtonClicked(object sender, EventArgs e)
+        {
+            ((ReadingContext) BindingContext).Address = address;
+            offerRegistrationCompletion();
+        }
+
+        private void OnNoSaveAddressButtonClicked(object sender, EventArgs e)
+        {
+            offerRegistrationCompletion();
         }
     }
 }

@@ -17,21 +17,30 @@
 				        ItemDisplayBinding="{Binding TagLabel}" 
 				        SelectedIndexChanged="OnStatePickerSelectedIndexChanged"> 
 					</Picker>
-					<Label Text="I know my State/Territory electorate " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
+					<Label Text="I know my State/Territory electorate" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
 					<Picker x:Name="stateElectoratePicker" Title="{Binding SelectedStateElectorate, StringFormat='State Electorate: {0:F0}'}" 
 				        ItemsSource="{Binding StateElectorates}" 
 				        ItemDisplayBinding="{Binding TagLabel}" 
 				        SelectedIndexChanged="OnStateElectoratePickerSelectedIndexChanged"> 
 					</Picker>
-					<Label Text="I know my Federal electorate " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
+					<Label Text="I know my Federal electorate" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
 					<Picker x:Name="federalElectoratePicker" Title="{Binding SelectedFederalElectorate, StringFormat='Federal Electorate: {0:F0}'}" 
 				        ItemsSource="{Binding FederalElectorates}" 
 				        ItemDisplayBinding="{Binding TagLabel}" 
 				        SelectedIndexChanged="OnFederalElectoratePickerSelectedIndexChanged"> 
 					</Picker>
+					<Label Text="I need help to find my electorates" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Entry x:Name="AddressEntry" Placeholder="Enter your address" Completed="OnAddressEntered" HorizontalOptions="Center"/>
+                    <Button x:Name="submitAddressButton" Text="Find my electorates" Clicked="OnSubmitAddressButton_Clicked" />
 				</StackLayout>
 			<StackLayout Orientation="Vertical" HorizontalOptions="Center">
-				<Button x:Name="findMPsbutton" BackgroundColor="Turquoise" Text="Help me find my electorates and MPs" Clicked="OnFindMPsButtonClicked" />
+				<Label Text="Would you like to save your address on your device? (i) If you are on the electoral roll,
+					your MP is more likely to listen to you if you tell them your address. RightToAsk does not learn 
+					your address. Your address will not leave your phone unless you decide to share it with your MP" />
+				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+				<Button x:Name="saveAddressButton" BackgroundColor="Turquoise" Text="Yes, save my address" Clicked="OnSaveAddressButtonClicked" />
+				<Button x:Name="noSaveAddressButton" BackgroundColor="Turquoise" Text="No thanks" Clicked="OnNoSaveAddressButtonClicked" />
+				</StackLayout>
 				<Button x:Name="skipThisStepButton" BackgroundColor="Turquoise" Text="Skip this step" Clicked="OnSkipButtonClicked" />
 				<Button x:Name="completeRegistrationButton" BackgroundColor="Turquoise" Text="Complete Registration" Clicked="OnCompleteRegistrationButtonClicked" />
 			</StackLayout>

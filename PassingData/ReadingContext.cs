@@ -20,15 +20,16 @@ namespace PassingData
         }
         
 		// Things about this user.
-		public string Username { get; set; }
-		public string UserEmail { get; set; }
+		// These selections are made at registration, or at 'complete registration.'
+		private string username;
+		private string userEmail;
 		public bool Is_Registered { get; set; }
 		// Note that people might register without knowing their electorate,
 		// or might record state but not federal electorates, or vice versa.
 		public bool State_Electorate_Known { get; set; }
 		public bool Federal_Electorate_Known { get; set; }
 		
-		// These selections are made at registration, or at 'complete registration.'
+		private string address;
 		private string selectedStateOrTerritory;
 		private string selectedStateElectorate;
 		private string selectedFederalElectorate;
@@ -231,6 +232,36 @@ namespace PassingData
 			{
 				selectedFederalElectorate = value;
 				OnPropertyChanged("SelectedFederalElectorate");
+			}
+		}
+
+		public string Username
+		{
+			get { return username; }
+			set
+			{
+				username = value;
+				OnPropertyChanged("Username");
+			}
+		}
+
+		public string UserEmail
+		{
+			get { return userEmail; }
+			set
+			{
+				userEmail = value;
+				OnPropertyChanged("UserEmail");
+			}
+		}
+		
+		public string Address
+		{
+			get { return address; }
+			set
+			{
+				address = value;
+				OnPropertyChanged("Address");
 			}
 		}
 	}
