@@ -29,21 +29,30 @@
 				        ItemDisplayBinding="{Binding TagLabel}" 
 				        SelectedIndexChanged="OnFederalElectoratePickerSelectedIndexChanged"> 
 					</Picker>
-					<Label Text="I need help to find my electorates" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
+					<Label Text="Use my address to find my electorates" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
+					<Label FontSize="Small" Text="(i) Your address will be sent to direct to your state's electoral commission and not to RightToAsk." />
                     <Entry x:Name="AddressEntry" Placeholder="Enter your address" Completed="OnAddressEntered" HorizontalOptions="Center"/>
                     <Button x:Name="submitAddressButton" Text="Find my electorates" Clicked="OnSubmitAddressButton_Clicked" />
 				</StackLayout>
 			<StackLayout Orientation="Vertical" HorizontalOptions="Center">
-				<Label Text="Would you like to save your address on your device? (i) If you are on the electoral roll,
-					your MP is more likely to listen to you if you tell them your address. RightToAsk does not learn 
-					your address. Your address will not leave your phone unless you decide to share it with your MP" />
+				<Label Text="Save address on this device? " />
+				<Label FontSize="Small" Text="(i) If you are on the electoral roll,
+                             					your MP is more likely to listen to you if you tell them your address. RightToAsk does not learn 
+                             					your address. Your address will not leave your phone unless you decide to share it with your MP" />
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-				<Button x:Name="saveAddressButton" BackgroundColor="Turquoise" Text="Yes, save my address" Clicked="OnSaveAddressButtonClicked" />
-				<Button x:Name="noSaveAddressButton" BackgroundColor="Turquoise" Text="No thanks" Clicked="OnNoSaveAddressButtonClicked" />
+				    <Button x:Name="saveAddressButton" BackgroundColor="Turquoise" Text="Yes, save my address" Clicked="OnSaveAddressButtonClicked" />
+				    <Button x:Name="noSaveAddressButton" BackgroundColor="Turquoise" Text="No thanks" Clicked="OnNoSaveAddressButtonClicked" />
 				</StackLayout>
-				<Button x:Name="skipThisStepButton" BackgroundColor="Turquoise" Text="Skip this step" Clicked="OnSkipButtonClicked" />
-				<Button x:Name="completeRegistrationButton" BackgroundColor="Turquoise" Text="Complete Registration" Clicked="OnCompleteRegistrationButtonClicked" />
 			</StackLayout>
-        </StackLayout>
+			<StackLayout Orientation="Vertical" HorizontalOptions="Center">
+				<Label Text="Register now? " />
+				<Label FontSize="Small" Text="(i) Registering allows you to suggest and vote on questions. Your name will be posted publicly. Your address will not be published. You choose whether to share your electorate." />
+				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+				    <Button x:Name="registerElectoratesButton" BackgroundColor="Turquoise" Text="Register with name and electorates" Clicked="OnRegisterElectoratesButtonClicked" />
+				    <Button x:Name="registerNameOnlyButton" BackgroundColor="Turquoise" Text="Register with only my name" Clicked="OnRegisterNameButtonClicked" />
+			    </StackLayout>
+			    <Button x:Name="noRegisterElectoratesButton" BackgroundColor="Turquoise" Text="Save electorates but skip registration" Clicked="OnNoRegisterButtonClicked" />
+			</StackLayout>
+		</StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -19,7 +19,6 @@ namespace PassingData
             InitializeComponent();
             BindingContext = context;
 
-            completeRegistrationButton.IsVisible = false;
         }
         
         // TODO Refactor this nicely so it isn't copy-pasted in FindMyMP
@@ -48,12 +47,6 @@ namespace PassingData
                 Tag selectedStateElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedStateElectorate.Selected = true;
                 ((ReadingContext) BindingContext).SelectedStateElectorate = selectedStateElectorate.TagLabel;
-
-                // If both state and federal electorates are chosen, registration can be completed.
-                if (((ReadingContext) BindingContext).SelectedFederalElectorate != null)
-                {
-                    offerRegistrationCompletion();
-                }
             }
         }
 
@@ -69,11 +62,6 @@ namespace PassingData
                 selectedFederalElectorate.Selected = true;
                 ((ReadingContext) BindingContext).SelectedFederalElectorate = selectedFederalElectorate.TagLabel;
                 
-                // If both state and federal electorates are chosen, registration can be completed.
-                if (((ReadingContext) BindingContext).SelectedStateElectorate != null)
-                {
-                    offerRegistrationCompletion();
-                }
             }
         }
 
@@ -84,10 +72,6 @@ namespace PassingData
 			await Navigation.PushAsync (findMyMPPage);
         }
 
-        private void OnSkipButtonClicked(object sender, EventArgs e)
-        {
-            offerRegistrationCompletion();
-        }
         async void OnAddressEntered(object sender, EventArgs e)
         {
             address = ((Entry) sender).Text;
@@ -105,33 +89,58 @@ namespace PassingData
             context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagLabel;
             context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagLabel;
         }
-        private void offerRegistrationCompletion()
-        {
-            skipThisStepButton.IsVisible = false;
-            completeRegistrationButton.IsVisible = true;
-        }    
+        // private void offerRegistrationCompletion()
+        // {
+         //   skipThisStepButton.IsVisible = false;
+         //   completeRegistrationButton.IsVisible = true;
+        // }    
         
-        // When registration is complete, remove (pop) both registration pages
-        // to go back to wherever you were.
-        async void OnCompleteRegistrationButtonClicked(object sender, EventArgs e)
-        {
-            // Remove page before this, which should be RegisterPage1 
-            ((ReadingContext) BindingContext).Is_Registered = true;
-            this.Navigation.RemovePage (this.Navigation.NavigationStack [this.Navigation.NavigationStack.Count - 2]);
-            // This PopAsync will now go to wherever the user started registration from 
-            // this.Navigation.PopAsync ();
-            await Navigation.PopAsync(); 
-        }
-
         private void OnSaveAddressButtonClicked(object sender, EventArgs e)
         {
             ((ReadingContext) BindingContext).Address = address;
-            offerRegistrationCompletion();
+            saveAddressButton.Text = "Address saved";
+            noSaveAddressButton.IsVisible = false;
+            // offerRegistrationCompletion();
         }
 
         private void OnNoSaveAddressButtonClicked(object sender, EventArgs e)
         {
-            offerRegistrationCompletion();
+            noSaveAddressButton.Text = "Address not saved";
+            saveAddressButton.IsVisible = false;
+            // offerRegistrationCompletion();
+        }
+
+        // At the moment there is no distinction between registering and not registering,
+        // except the flag set differently.
+        private void OnNoRegisterButtonClicked(object sender, EventArgs e)
+        {
+            ((ReadingContext) BindingContext).Is_Registered = false;
+            completeRegistration();
+        }
+
+        // Register both a name and electorates. At the moment, since there is no
+        // public registration, this is identical to the case in which you register
+        // a name and electorates.
+        private void OnRegisterElectoratesButtonClicked(object sender, EventArgs e)
+        {
+            ((ReadingContext) BindingContext).Is_Registered = true;
+            completeRegistration();
+        }
+
+        private void OnRegisterNameButtonClicked(object sender, EventArgs e)
+        {
+            ((ReadingContext) BindingContext).Is_Registered = true;
+            throw new NotImplementedException();
+        }
+
+        async private void completeRegistration()
+        {
+            // Remove page before this, which should be RegisterPage1 
+            // TODO should check that this is the page we expect it to be before removing it
+            this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+            // This PopAsync will now go to wherever the user started registration from 
+            // this.Navigation.PopAsync ();
+            await Navigation.PopAsync();
         }
     }
 }
