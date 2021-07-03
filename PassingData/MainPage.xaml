@@ -11,7 +11,7 @@
 			<Frame CornerRadius="10"  BackgroundColor="PaleTurquoise"
 			       Padding="0">
 			    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
-			    	<Label Text="Read" TextColor="Teal" FontSize="Large" HorizontalOptions="Center" />
+			    	<Label Text="Read questions" TextColor="Teal" FontSize="Large" HorizontalOptions="Center" />
 			    	<StackLayout Orientation="Vertical" HorizontalOptions="Center">
 			    		<Button x:Name="Top10NowButton" Text="What's trending now" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnTop10NowButtonClicked" HorizontalOptions="Center"/>
 			            <StackLayout Orientation="Horizontal">
@@ -25,9 +25,12 @@
 			<Frame CornerRadius="10"  BackgroundColor="NavajoWhite"
 			       Padding="0">
 			    <StackLayout Orientation="Vertical" VerticalOptions="Center">
-			    	<Label Text="Write" TextColor="Teal" FontSize="Large" HorizontalOptions="Center" />
+			    	<Label Text="Write a question" TextColor="Teal" FontSize="Large" HorizontalOptions="Center" />
 				    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-					    <Button x:Name="navigateButton" Text="I have a question!" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnNavigateButtonClicked" HorizontalOptions="Center"/>
+					    <Button x:Name="navigateButton" Text="To be raised in Parliament" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnNavigateButtonClicked" HorizontalOptions="Center"/>
+				    </StackLayout>
+				    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+					    <Button x:Name="answeredByMPButton" Text="To be answered by my MP" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnAnsweredByMPButtonClicked" HorizontalOptions="Center"/>
 				    </StackLayout>
 			</StackLayout>
 			</Frame>	
