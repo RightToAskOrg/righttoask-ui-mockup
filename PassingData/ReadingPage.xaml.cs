@@ -53,7 +53,7 @@ namespace PassingData
 		{
 			var questionDetailPage = new QuestionDetailPage(false, (Question) e.Item);
 			questionDetailPage.BindingContext = BindingContext;
-			await Navigation.PushAsync (questionDetailPage);
+			await Navigation.PushAsync(questionDetailPage);
 		}
 
 		private void fillInSelectedAnswerers(ObservableCollection<Tag> authorities)

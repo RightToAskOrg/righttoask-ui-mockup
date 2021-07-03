@@ -22,14 +22,27 @@ namespace PassingData
 			readingPage.BindingContext = readingContext;
 			await Navigation.PushAsync (readingPage);
 		}
+		
+		// If either 'enter' is pressed after a keyword change, or the 
+		// 'search by keyword' button is pressed, launch the reading page.
+		// Otherwise, if only the keyword is changed, update it but don't
+		// launch a new page.
 		async void OnReadByKeywordFieldCompleted(object sender, EventArgs e)
 		{
-			readingContext.SearchKeyword = ((Entry)sender).Text;
+			readingContext.SearchKeyword = ((SearchBar)sender).Text;
+			launchKeywordReadingPage();
+		}
+		
+		private void OnKeywordChanged(object sender, TextChangedEventArgs e)
+		{
+			readingContext.SearchKeyword = e.NewTextValue;
+		}
 
+		async void launchKeywordReadingPage()
+		{
 			var readingPage = new ReadingPage (true, readingContext.OtherAuthorities);
 			readingPage.BindingContext = readingContext;
-			await Navigation.PushAsync (readingPage);
-			
+			await Navigation.PushAsync(readingPage);
 		}
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
@@ -53,5 +66,6 @@ namespace PassingData
 			var registrationPage = new RegisterPage1(readingContext);
 			await Navigation.PushAsync (registrationPage);
 		}
+
 	}
 }

@@ -2,34 +2,43 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 			 x:Class="PassingData.MainPage"
-			 Title="Right To Ask UI mock-up">
+			 Title="Right To Ask ">
 	<ContentPage.Content>
-		<StackLayout VerticalOptions="CenterAndExpand">
-			<StackLayout Orientation="Vertical" VerticalOptions="Center">
-				<Label Text="Browse" FontSize="Medium" HorizontalOptions="Center" />
-				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-					<Entry x:Name="readByKeywordButton" Placeholder="by keyword" Completed="OnReadByKeywordFieldCompleted" HorizontalOptions="Center"/>
-					<Button x:Name="Top10NowButton" Text="top 10 now" Clicked="OnTop10NowButtonClicked" HorizontalOptions="Center"/>
-				</StackLayout>
+		<StackLayout VerticalOptions="FillAndExpand">
+			<!-- <Label Text = "Influence without surveillance" /> -->
+			<Label HorizontalOptions="Center" Text = "Make your political questions have an impact" FontSize="Medium" />
+			<Label HorizontalOptions="Center" Text = "You can read and upvote questions, write your own questions, or help other citizens direct their questions" FontSize="Medium" />
+			<Frame CornerRadius="10"  BackgroundColor="PaleTurquoise"
+			       Padding="0">
+			    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+			    	<Label Text="Read" TextColor="Teal" FontSize="Large" HorizontalOptions="Center" />
+			    	<StackLayout Orientation="Vertical" HorizontalOptions="Center">
+			    		<Button x:Name="Top10NowButton" Text="What's trending now" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnTop10NowButtonClicked" HorizontalOptions="Center"/>
+			            <StackLayout Orientation="Horizontal">
+				            <Label Text="Browse " TextColor="Teal" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center" />
+				            <SearchBar x:Name="readByKeywordButton" Placeholder="by keyword (enter here)"   BackgroundColor="Turquoise" SearchButtonPressed="OnReadByKeywordFieldCompleted" TextChanged="OnKeywordChanged" HorizontalOptions="Center"/>
+			            </StackLayout>
+			    		<Button x:Name="readButton" Text="Advanced search" Clicked="OnReadButtonClicked" HorizontalOptions="Center" CornerRadius="20" BackgroundColor="Turquoise"/>
+			    	</StackLayout>
+		    	</StackLayout>
+			</Frame>	
+			<Frame CornerRadius="10"  BackgroundColor="NavajoWhite"
+			       Padding="0">
+			    <StackLayout Orientation="Vertical" VerticalOptions="Center">
+			    	<Label Text="Write" TextColor="Teal" FontSize="Large" HorizontalOptions="Center" />
+				    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+					    <Button x:Name="navigateButton" Text="I have a question!" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnNavigateButtonClicked" HorizontalOptions="Center"/>
+				    </StackLayout>
 			</StackLayout>
-			<StackLayout Orientation="Vertical" VerticalOptions="Center">
-				<Label Text="Read" FontSize="Medium" HorizontalOptions="Center" />
-				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-					<Button x:Name="readButton" Text="Help me find the questions I care about" Clicked="OnReadButtonClicked" HorizontalOptions="Center"/>
-				</StackLayout>
-			</StackLayout>
-			<StackLayout Orientation="Vertical" VerticalOptions="Center">
-				<Label Text="I have a question!" FontSize="Medium" HorizontalOptions="Center" />
-				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-					<Button x:Name="navigateButton" Text="Help me send it to the right place" Clicked="OnNavigateButtonClicked" HorizontalOptions="Center"/>
-				</StackLayout>
-			</StackLayout>
+			</Frame>	
+			<!--
 			<StackLayout Orientation="Vertical" VerticalOptions="Center">
 				<Label Text="You need to register before you can ask a question or cast a vote" FontSize="Medium" HorizontalOptions="Center" />
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 					<Button x:Name="registerButton" Text="Register Now" Clicked="OnRegisterButtonClicked" HorizontalOptions="Center"/>
 				</StackLayout>
 			</StackLayout>
+			-->
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

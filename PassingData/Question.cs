@@ -59,16 +59,18 @@ namespace PassingData
         
         public override string ToString ()
         {
-            List<string> questionAnswerersList = QuestionAnswerers.ToList() ;
+            
+            List<string> questionAnswerersList 
+                = QuestionAnswerers != null ? QuestionAnswerers.ToList() : new List<string>();
             // view.Select(f => return new { Food = f, Selected = selectedFood.Contains(f)});
             return QuestionText+ "\n" +
-                   "Suggested by: " + QuestionSuggester + '\n' +
-                   "To be asked by: " + QuestionAsker + '\n' +
+                   "Suggested by: " + (QuestionSuggester ?? "") + '\n' +
+                   "To be asked by: " + (QuestionAsker ?? "") + '\n' +
                    // var readablePhrase = string.Join(" ", words); 
                    "To be answered by: " + string.Join(", ", questionAnswerersList) + '\n' +
                    "UpVotes: " + UpVotes+ '\n' +
                    "DownVotes: " + DownVotes + '\n' +
-                   "Link/Answer: " + LinkOrAnswer;
+                   "Link/Answer: " + (LinkOrAnswer ?? "");
         }
         
     }
