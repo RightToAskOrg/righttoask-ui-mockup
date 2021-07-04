@@ -20,11 +20,12 @@ namespace PassingData
 		//	get { return authorities; }
 		//}
 
-		public ExploringPage(ObservableCollection<Tag> selectableTags)
+		public ExploringPage(ObservableCollection<Tag> selectableTags, string message)
 		{
 			InitializeComponent();
 
 			AuthorityListView.ItemsSource = selectableTags;
+			introText.Text = message;
 
 			// 	authorities.Add(new Tag{TagLabel = "This is a test department", Selected = true});
 			//	authorities.Add(new Tag{TagLabel = "This is a different test department", Selected =false});

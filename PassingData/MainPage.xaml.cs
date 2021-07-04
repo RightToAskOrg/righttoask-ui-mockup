@@ -51,12 +51,12 @@ namespace PassingData
 			await Navigation.PushAsync (secondPage);
 		}
 		
-		async void OnReadButtonClicked (object sender, EventArgs e)
+		async void OnReadButtonClicked(object sender, EventArgs e)
 		{
 			// ((Button) sender).Text = "This will take you to a reading page";
 			var secondPage = new SecondPage (readingContext.MPsSelected, true);
 			secondPage.BindingContext = readingContext;
-			await Navigation.PushAsync (secondPage);
+			await Navigation.PushAsync(secondPage);
 		}
 
 		
@@ -64,12 +64,14 @@ namespace PassingData
 		{
 			// ((Button) sender).Text = "Registering not implemented yet";
 			var registrationPage = new RegisterPage1(readingContext);
-			await Navigation.PushAsync (registrationPage);
+			await Navigation.PushAsync(registrationPage);
 		}
 
-		private void OnAnsweredByMPButtonClicked(object sender, EventArgs e)
+		async void OnAnsweredByMPButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = "Not implemented yet";
+			// ((Button) sender).Text = "Not implemented yet";
+			var registrationPage = new RegisterPage2(readingContext);
+			await Navigation.PushAsync(registrationPage);
 		}
 	}
 }

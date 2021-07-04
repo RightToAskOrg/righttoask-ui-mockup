@@ -18,6 +18,8 @@ namespace PassingData
         {
             InitializeComponent();
             BindingContext = context;
+            addressSavingStack.IsVisible = false;
+            findMPsButton.IsVisible = false;
 
         }
         
@@ -47,6 +49,11 @@ namespace PassingData
                 Tag selectedStateElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedStateElectorate.Selected = true;
                 ((ReadingContext) BindingContext).SelectedStateElectorate = selectedStateElectorate.TagLabel;
+                
+                if (((ReadingContext) BindingContext).SelectedFederalElectorate != null)
+                {
+                    findMPsButton.IsVisible = true;
+                }
             }
         }
 
@@ -61,15 +68,26 @@ namespace PassingData
                 Tag selectedFederalElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedFederalElectorate.Selected = true;
                 ((ReadingContext) BindingContext).SelectedFederalElectorate = selectedFederalElectorate.TagLabel;
-                
+
+                if (((ReadingContext) BindingContext).SelectedStateElectorate != null)
+                {
+                    findMPsButton.IsVisible = true;
+                }
             }
         }
 
+        // TODO Check that this popping behaviour does what we want.
+        // The intention is that now we know who your MPs are, we no
+        // longer need this page.  So we remove it, expecting that
+        // whenever the user pops the MP-selecting page, they'll go 
+        // back to wherever they visited this page from.
         async private void OnFindMPsButtonClicked(object sender, EventArgs e)
         {
-			var findMyMPPage = new FindMyMP((ReadingContext) BindingContext);
-			// findMyMPPage.BindingContext = BindingContext;
-			await Navigation.PushAsync (findMyMPPage);
+            string message = "These are your MPs.  Select the one(s) you want to answer your question";
+			var selectMyMPsPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
+			selectMyMPsPage.BindingContext = BindingContext;
+			await Navigation.PushAsync(selectMyMPsPage);
+            Navigation.RemovePage(this);
         }
 
         async void OnAddressEntered(object sender, EventArgs e)
@@ -78,6 +96,7 @@ namespace PassingData
             // OnSubmitAddressButton_Clicked();
         }
 
+        // At the moment this just chooses random electorates. 
         async void OnSubmitAddressButton_Clicked(object sender, EventArgs e)
         {
             ReadingContext context = (ReadingContext) BindingContext;
@@ -88,18 +107,20 @@ namespace PassingData
 
             context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagLabel;
             context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagLabel;
+
+            ((Button) sender).Text = "Electorates found! See above";
+            federalElectoratePicker.TextColor = Color.Black;
+            stateElectoratePicker.TextColor = Color.Black;
+            ((Button) sender).IsEnabled = false;
+            addressSavingStack.IsVisible = true;
         }
-        // private void offerRegistrationCompletion()
-        // {
-         //   skipThisStepButton.IsVisible = false;
-         //   completeRegistrationButton.IsVisible = true;
-        // }    
         
         private void OnSaveAddressButtonClicked(object sender, EventArgs e)
         {
             ((ReadingContext) BindingContext).Address = address;
             saveAddressButton.Text = "Address saved";
             noSaveAddressButton.IsVisible = false;
+            findMPsButton.IsVisible = true;
             // offerRegistrationCompletion();
         }
 
@@ -107,6 +128,7 @@ namespace PassingData
         {
             noSaveAddressButton.Text = "Address not saved";
             saveAddressButton.IsVisible = false;
+            findMPsButton.IsVisible = true;
             // offerRegistrationCompletion();
         }
 

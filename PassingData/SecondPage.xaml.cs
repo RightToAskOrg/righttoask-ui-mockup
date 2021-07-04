@@ -55,10 +55,6 @@ namespace PassingData
 			((ReadingContext) BindingContext).DraftQuestion = ((Editor) sender).Text;
 		}
 		
-		private void Question_Changed(object sender, TextChangedEventArgs e)
-		{
-			// ((ReadingContext) BindingContext).DraftQuestion = e.NewTextValue;
-		}
 		// Initiate a question-reading page that is _not_ read only.
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
@@ -95,9 +91,9 @@ namespace PassingData
 
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
 		{
-        	
-         			
-           	var departmentExploringPage = new ExploringPage(((ReadingContext) BindingContext).OtherAuthorities);
+			string message = "Choose the authorities that should answer your question";
+			
+           	var departmentExploringPage = new ExploringPage(((ReadingContext) BindingContext).OtherAuthorities, message);
             departmentExploringPage.BindingContext = BindingContext;
            	await Navigation.PushAsync (departmentExploringPage);
 		}

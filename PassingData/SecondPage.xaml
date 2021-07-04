@@ -7,7 +7,7 @@
 		<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
 			<StackLayout Orientation="Vertical" x:Name="QuestionDraftingBox">
 				<Label Text="My question is..." FontSize="Medium" HorizontalOptions="Center" />
-				<Editor Placeholder="Enter your question" Completed="Question_Entered" TextChanged="Question_Changed" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+				<Editor Placeholder="Enter your question" Completed="Question_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
 			</StackLayout >
 			<StackLayout Orientation="Horizontal">
 				<Label Text="To be answered by " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
