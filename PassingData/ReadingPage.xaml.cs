@@ -73,7 +73,6 @@ namespace PassingData
 
 		private void OnDiscardButtonClicked(object sender, EventArgs e)
 		{
-			// throw new NotImplementedException();
 			((Button) sender).Text = "Draft Discarded";
 			((ReadingContext) BindingContext).DraftQuestion = "";
 			keepButton.IsVisible = false;
@@ -91,7 +90,7 @@ namespace PassingData
 	       questionAnswerers.Insert(0, context.SelectedDepartment);
 	    
 	    Question newQuestion = new Question {
-    			QuestionText = draftQuestion,
+    			QuestionText = ((ReadingContext) BindingContext).DraftQuestion,
                 // TODO: Enforce registration before question-suggesting.
     			QuestionSuggester = context.Is_Registered ? context.Username : "Anonymous user", 
                 QuestionAnswerers = questionAnswerers, 

@@ -55,6 +55,10 @@ namespace PassingData
 			((ReadingContext) BindingContext).DraftQuestion = ((Editor) sender).Text;
 		}
 		
+		private void Question_Changed(object sender, TextChangedEventArgs e)
+		{
+			// ((ReadingContext) BindingContext).DraftQuestion = e.NewTextValue;
+		}
 		// Initiate a question-reading page that is _not_ read only.
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
@@ -120,6 +124,7 @@ namespace PassingData
 			// findMyMPPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (registerPage1);
 		}
+
 	}
 }
 

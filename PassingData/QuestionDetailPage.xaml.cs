@@ -58,10 +58,12 @@ namespace PassingData
             ((Button) sender).Text = "Answer saving not implemented";
         }
 
+        // TODO: Re-enable button if you choose to draft another question.
         private void SubmitNewQuestionButton_OnClicked(object sender, EventArgs e)
         {
 	        ((ReadingContext) BindingContext).ExistingQuestions.Insert(0, question);
             ((Button) sender).Text = "Submitted!";
+            ((Button) sender).IsEnabled = false;
         }
 
         private void Background_Entered(object sender, EventArgs e)
