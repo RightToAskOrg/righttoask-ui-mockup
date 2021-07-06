@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Net.Mime;
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace PassingData
@@ -9,20 +11,13 @@ namespace PassingData
 	{
 		private string question;
 		private ObservableCollection<Tag> otherAuthorities;
-		private string MPFindPrompt = String.Empty;
 		private bool isReadingOnly;
 
 		public SecondPage (bool MPsAreSelected, bool IsReadingOnly)
 		{
 			
 			InitializeComponent ();
-			isReadingOnly = IsReadingOnly;	
-			if(!MPsAreSelected)
-			{
-				MPFindPrompt = " - Find my MPs";
-			}
-			myMP.Text = "My MP" + MPFindPrompt;
-			myMPShouldRaiseItButton.Text = "My MP should raise it" + MPFindPrompt;
+			isReadingOnly = IsReadingOnly;
 
 			if (IsReadingOnly)
 			{
@@ -68,27 +63,6 @@ namespace PassingData
 			await Navigation.PopAsync ();
 		}
 
-		async void OnMinisterOrDeptButtonClicked(object sender, EventArgs e)
-		{
-
-			// var readingContext = new ReadingContext{
-         	//			SearchKeyword = "",
-         //				TopTen = false,
-          //              Departments = departmentAuthorities
-         //			};
-		
-         	var departmentPickerPage = new PickerPage();
-        	departmentPickerPage.BindingContext = BindingContext;
-         	//var departmentExploringPage = new ExploringPage();
-        	//departmentExploringPage.BindingContext = readingContext;
-        	await Navigation.PushAsync (departmentPickerPage);
-
-            //if (readingContext.SelectedDepartment != null)
-            //{
-				((Button) sender).Text = ((ReadingContext) BindingContext).SelectedDepartment;
-            //}
-		}
-
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
 		{
 			string message = "Choose the authorities that should answer your question";
@@ -98,13 +72,33 @@ namespace PassingData
            	await Navigation.PushAsync (departmentExploringPage);
 		}
 
-		private async void OnMPAnswerButtonClicked(object sender, EventArgs e)
+	    // If we already know the electorates (and hence responsible MPs), go
+	    // straight to the Explorer page that lists them.
+	    // If we don't, go to the page for entering address and finding them.
+	    // It will pop back to here.
+		async void OnAnsweredByMPButtonClicked(object sender, EventArgs e)
 		{
-			// ((Button) sender).Text = $"MP answering not implemented yet";
-			// var findMyMPPage = new FindMyMP((ReadingContext)BindingContext);
-			var registerPage1 = new RegisterPage1((ReadingContext) BindingContext);
-// 			findMyMPPage.BindingContext = BindingContext;
-			await Navigation.PushAsync (registerPage1);
+            string message = "These are your MPs.  Select the one(s) you want to answer your question";
+			
+			if (! ((ReadingContext) BindingContext).MPsSelected)
+			{
+				var registrationPage = new RegisterPage2((ReadingContext) BindingContext);
+				
+				var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+				registrationPage.Disappearing += (sender2, e2) =>
+				{
+					waitHandle.Set();
+				};
+				
+				await Navigation.PushAsync(registrationPage);
+				System.Diagnostics.Debug.WriteLine("The modal page is now on screen, hit back button");
+				await Task.Run(() => waitHandle.WaitOne());
+				System.Diagnostics.Debug.WriteLine("The modal page is dismissed, do something now");
+
+			}
+           	var mpsExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
+            mpsExploringPage.BindingContext = BindingContext;
+           	await Navigation.PushAsync (mpsExploringPage);
 		}
 
 		private void OnFindCommitteeButtonClicked(object sender, EventArgs e)

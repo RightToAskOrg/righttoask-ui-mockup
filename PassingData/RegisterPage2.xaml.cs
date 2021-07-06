@@ -53,6 +53,7 @@ namespace PassingData
                 if (((ReadingContext) BindingContext).SelectedFederalElectorate != null)
                 {
                     findMPsButton.IsVisible = true;
+                    ((ReadingContext) BindingContext).MPsSelected = true;
                 }
             }
         }
@@ -72,22 +73,19 @@ namespace PassingData
                 if (((ReadingContext) BindingContext).SelectedStateElectorate != null)
                 {
                     findMPsButton.IsVisible = true;
+                    ((ReadingContext) BindingContext).MPsSelected = true;
                 }
             }
         }
 
-        // TODO Check that this popping behaviour does what we want.
-        // The intention is that now we know who your MPs are, we no
-        // longer need this page.  So we remove it, expecting that
-        // whenever the user pops the MP-selecting page, they'll go 
-        // back to wherever they visited this page from.
         async private void OnFindMPsButtonClicked(object sender, EventArgs e)
         {
-            string message = "These are your MPs.  Select the one(s) you want to answer your question";
-			var selectMyMPsPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
-			selectMyMPsPage.BindingContext = BindingContext;
-			await Navigation.PushAsync(selectMyMPsPage);
-            Navigation.RemovePage(this);
+            // string message = "These are your MPs.  Select the one(s) you want to answer your question";
+			// var selectMyMPsPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
+			// selectMyMPsPage.BindingContext = BindingContext;
+			// await Navigation.PushAsync(selectMyMPsPage);
+            // Navigation.RemovePage(this);
+            await Navigation.PopAsync();
         }
 
         async void OnAddressEntered(object sender, EventArgs e)
@@ -107,6 +105,7 @@ namespace PassingData
 
             context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagLabel;
             context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagLabel;
+            context.MPsSelected = true;
 
             ((Button) sender).Text = "Electorates found! See above";
             federalElectoratePicker.TextColor = Color.Black;

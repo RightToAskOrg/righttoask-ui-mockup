@@ -67,11 +67,5 @@ namespace PassingData
 			await Navigation.PushAsync(registrationPage);
 		}
 
-		async void OnAnsweredByMPButtonClicked(object sender, EventArgs e)
-		{
-			// ((Button) sender).Text = "Not implemented yet";
-			var registrationPage = new RegisterPage2(readingContext);
-			await Navigation.PushAsync(registrationPage);
-		}
 	}
 }

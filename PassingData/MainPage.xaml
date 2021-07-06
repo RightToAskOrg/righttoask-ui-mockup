@@ -7,7 +7,7 @@
 		<StackLayout VerticalOptions="FillAndExpand">
 			<!-- <Label Text = "Influence without surveillance" /> -->
 			<Label HorizontalOptions="Center" Text = "Make your political questions have an impact" FontSize="Medium" />
-			<Label HorizontalOptions="Center" Text = "You can read and upvote questions, write your own questions, or help other citizens direct their questions" FontSize="Medium" />
+			<Label HorizontalOptions="Center" Text = "You can read and upvote questions, or write your own questions" FontSize="Medium" />
 			<Frame CornerRadius="10"  BackgroundColor="PaleTurquoise"
 			       Padding="0">
 			    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
@@ -27,11 +27,12 @@
 			    <StackLayout Orientation="Vertical" VerticalOptions="Center">
 			    	<Label Text="Write a question" TextColor="Teal" FontSize="Large" HorizontalOptions="Center" />
 				    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-					    <Button x:Name="navigateButton" Text="To be raised in Parliament" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnNavigateButtonClicked" HorizontalOptions="Center"/>
+					    <Button x:Name="navigateButton" Text="Start drafting" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnNavigateButtonClicked" HorizontalOptions="Center"/>
 				    </StackLayout>
+			        <!-- 
 				    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 					    <Button x:Name="answeredByMPButton" Text="To be answered by my MP" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnAnsweredByMPButtonClicked" HorizontalOptions="Center"/>
-				    </StackLayout>
+				    </StackLayout> -->
 			</StackLayout>
 			</Frame>	
 			<!--
