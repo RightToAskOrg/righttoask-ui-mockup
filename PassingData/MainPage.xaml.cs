@@ -54,9 +54,8 @@ namespace PassingData
 		async void OnReadButtonClicked(object sender, EventArgs e)
 		{
 			// ((Button) sender).Text = "This will take you to a reading page";
-			var secondPage = new NavigationPage(new SecondPage (readingContext.MPsSelected, true));
+			var secondPage = new SecondPage (readingContext.MPsSelected, true);
 			secondPage.BindingContext = readingContext;
-			secondPage.Title = "This is a test";
 			await Navigation.PushAsync(secondPage);
 		}
 

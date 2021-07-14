@@ -14,16 +14,19 @@ namespace PassingData
 	public partial class ReadingPage : ContentPage
 	{
 		private string draftQuestion;
+
 		private string selectedAuthorities = "";
+
 		//private ObservableCollection<Question> questions = new ObservableCollection<Question>();
 		// public ObservableCollection<Question> Questions
 		// {
-			// get { return questions; }
+		// get { return questions; }
 		// }
-		public ReadingPage (bool isReadingOnly, ObservableCollection<Tag> authorities)
+		public ReadingPage(bool isReadingOnly, ObservableCollection<Tag> authorities)
 		{
-			InitializeComponent ();
+			InitializeComponent();
 
+			// TODO: reset these in case you visit, read, and then come back.
 			if (isReadingOnly)
 			{
 				TitleBar.Title = "Read Questions";
@@ -34,6 +37,7 @@ namespace PassingData
 			else
 			{
 				TitleBar.Title = "Direct your question";
+				finishedReadingButton.IsVisible = false;
 			}
 
 			fillInSelectedAnswerers(authorities);
@@ -42,6 +46,7 @@ namespace PassingData
 			// QuestionListView.ItemsSource = ((ReadingContext) BindingContext).ExistingQuestions;
 
 		}
+
 		void Question_Entered(object sender, EventArgs e)
 		{
 			draftQuestion = ((Editor) sender).Text;
@@ -79,31 +84,39 @@ namespace PassingData
 		}
 
 
-    async void OnSaveButtonClicked(object sender, EventArgs e)
-    {
-        ReadingContext context = (ReadingContext) BindingContext;
+		async void OnSaveButtonClicked(object sender, EventArgs e)
+		{
+			ReadingContext context = (ReadingContext) BindingContext;
 
-        // Tag the new question with the authorities that have been selected.
-        ObservableCollection<string> questionAnswerers; 
-	    questionAnswerers = new ObservableCollection<string>(context.OtherAuthorities.Where(w => w.Selected).Select(a=> a.TagLabel));
-	    if (context.SelectedDepartment != null)
-	       questionAnswerers.Insert(0, context.SelectedDepartment);
-	    
-	    Question newQuestion = new Question {
-    			QuestionText = ((ReadingContext) BindingContext).DraftQuestion,
-                // TODO: Enforce registration before question-suggesting.
-    			QuestionSuggester = context.Is_Registered ? context.Username : "Anonymous user", 
-                QuestionAnswerers = questionAnswerers, 
-                // TODO: set this.
-                // QuestionAsker = ...;  
-                DownVotes = 0, 
-                UpVotes = 0
-    		};
+			// Tag the new question with the authorities that have been selected.
+			ObservableCollection<string> questionAnswerers;
+			questionAnswerers =
+				new ObservableCollection<string>(
+					context.OtherAuthorities.Where(w => w.Selected).Select(a => a.TagLabel));
+			if (context.SelectedDepartment != null)
+				questionAnswerers.Insert(0, context.SelectedDepartment);
 
-	        
-		var questionDetailPage = new QuestionDetailPage(true, newQuestion);
-		questionDetailPage.BindingContext = BindingContext;
-		await Navigation.PushAsync (questionDetailPage);
-    }
-}
+			Question newQuestion = new Question
+			{
+				QuestionText = ((ReadingContext) BindingContext).DraftQuestion,
+				// TODO: Enforce registration before question-suggesting.
+				QuestionSuggester = context.Is_Registered ? context.Username : "Anonymous user",
+				QuestionAnswerers = questionAnswerers,
+				// TODO: set this.
+				// QuestionAsker = ...;  
+				DownVotes = 0,
+				UpVotes = 0
+			};
+
+
+			var questionDetailPage = new QuestionDetailPage(true, newQuestion);
+			questionDetailPage.BindingContext = BindingContext;
+			await Navigation.PushAsync(questionDetailPage);
+		}
+
+		async void OnFinishedReadingButtonClicked(object sender, EventArgs e)
+		{
+			await Navigation.PopAsync();
+		}
+	}
 }

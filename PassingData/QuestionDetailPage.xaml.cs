@@ -39,6 +39,8 @@ namespace PassingData
             question.UpVotes++;
         }
 
+        // TODO: Present the UI more nicely here - this should happen if you click on the person's 
+        // name, not with a separate button.
         private async void QuestionSuggesterButton_OnClicked(object sender, EventArgs e)
         {
 			var personProfilePage = new PersonProfilePage(question.QuestionSuggester);

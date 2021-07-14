@@ -58,7 +58,7 @@ namespace PassingData
                     new Setter
                     {
                         Property = Xamarin.Forms.Button.BackgroundColorProperty,
-                        Value = "DarkGreen",
+                        Value = "Teal",
                     },
                     new Setter
                     {
@@ -69,6 +69,26 @@ namespace PassingData
                 }
             };
             Resources.Add(doneButton);
+            
+            var normalButton = new Style(typeof(Xamarin.Forms.Button))
+            {
+                Class = "NormalButton",
+                ApplyToDerivedTypes = true,
+                Setters =
+                {
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.BackgroundColorProperty,
+                        Value = "Turquoise"
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.CornerRadiusProperty,
+                        Value = "20",
+                    }
+                }
+            };
+            Resources.Add(normalButton);
         }
     }
 }

@@ -45,8 +45,9 @@
             <StackLayout Orientation="Horizontal" x:Name="QuestionDraftingBox">
             	<Editor Placeholder="Draft Question: " Text="{Binding DraftQuestion}" HorizontalOptions="FillAndExpand" Completed="Question_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
             </StackLayout>
-			<Button x:Name="discardButton" Text="Discard Draft (I've found a duplicate)" Clicked="OnDiscardButtonClicked" />
-			<Button x:Name="keepButton" Text="Keep question: Review for upload" Clicked="OnSaveButtonClicked" />
+			<Button x:Name="discardButton" StyleClass="NormalButton" Text="Discard Draft (I've found a duplicate)" Clicked="OnDiscardButtonClicked" />
+			<Button x:Name="keepButton" StyleClass="DoneButton" Text="Keep question: Review for upload" Clicked="OnSaveButtonClicked" />
+			<Button x:Name="finishedReadingButton" StyleClass="DoneButton" Clicked="OnFinishedReadingButtonClicked" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

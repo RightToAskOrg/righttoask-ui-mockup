@@ -29,20 +29,8 @@
 				    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 					    <Button x:Name="navigateButton" Text="Start drafting" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnNavigateButtonClicked" HorizontalOptions="Center"/>
 				    </StackLayout>
-			        <!-- 
-				    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-					    <Button x:Name="answeredByMPButton" Text="To be answered by my MP" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnAnsweredByMPButtonClicked" HorizontalOptions="Center"/>
-				    </StackLayout> -->
 			</StackLayout>
 			</Frame>	
-			<!--
-			<StackLayout Orientation="Vertical" VerticalOptions="Center">
-				<Label Text="You need to register before you can ask a question or cast a vote" FontSize="Medium" HorizontalOptions="Center" />
-				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-					<Button x:Name="registerButton" Text="Register Now" Clicked="OnRegisterButtonClicked" HorizontalOptions="Center"/>
-				</StackLayout>
-			</StackLayout>
-			-->
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

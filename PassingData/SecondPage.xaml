@@ -31,7 +31,7 @@
 			
 			</StackLayout>
 			<StackLayout Orientation="Horizontal" HorizontalOptions="End">
-				<Button x:Name="navigateForwardButton" BackgroundColor="Turquoise" Text="Check for similar questions" Clicked="OnNavigateForwardButtonClicked" />
+				<Button x:Name="navigateForwardButton" StyleClass="DoneButton" Clicked="OnNavigateForwardButtonClicked" />
 			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>

@@ -23,7 +23,7 @@
 				</ListView.ItemTemplate>
 			</ListView>
 			</ScrollView>	
-			<Button StyleClass="DoneButton" />
+			<Button StyleClass="DoneButton" Clicked="DoneButton_OnClicked" />
 		</StackLayout>
     </ContentPage.Content>
 </ContentPage>

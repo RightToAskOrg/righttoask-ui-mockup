@@ -39,5 +39,14 @@ namespace PassingData
 			// questionDetailPage.BindingContext = BindingContext;
 			//await Navigation.PushAsync (questionDetailPage);
 		}
+
+		// Note: At the moment, this simply pops the page, i.e. the same
+		// as Back.
+		// Consider whether the semantics of 'back' should be different from
+		// 'done', i.e. whether 'back' should undo.
+		async void DoneButton_OnClicked(object sender, EventArgs e)
+		{
+			await Navigation.PopAsync();
+		}
 	}
 }
