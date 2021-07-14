@@ -26,7 +26,6 @@ namespace PassingData
 		{
 			InitializeComponent();
 
-			// TODO: reset these in case you visit, read, and then come back.
 			if (isReadingOnly)
 			{
 				TitleBar.Title = "Read Questions";
@@ -36,7 +35,7 @@ namespace PassingData
 			}
 			else
 			{
-				TitleBar.Title = "Direct your question";
+				TitleBar.Title = "Similar questions";
 				finishedReadingButton.IsVisible = false;
 			}
 

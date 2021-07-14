@@ -43,7 +43,7 @@ namespace PassingData
 		// Whether MPs have been selected for this question.
 		// TODO perhaps we need a different bool for whether they've
 		// been selected for asking or answering.
-		public bool MPsSelected = false;
+		public bool MPsKnown = false;
 
 		// Whether this is a 'top ten' search.
 		public bool TopTen { get; set; }
@@ -191,7 +191,7 @@ namespace PassingData
 			       "TopTen: " + TopTen.ToString() + '\n' +
 			       "Direct Committee: " + GoDirect_Committee + '\n' +
 			       "Direct MP: " + GoDirect_MP + '\n' +
-			       "My MPs" + (MPsSelected ? "" : " not" + " selected") + '\n' + 
+			       "My MPs" + (MPsKnown ? "" : " not" + " selected") + '\n' + 
 			       "Question: " + DraftQuestion + '\n' +
 			       "Number of matching questions: " + MatchingQuestions.ToString() + '\n' +
 			       "Selected Department: " + SelectedDepartment + '\n' +

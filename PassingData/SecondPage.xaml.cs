@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Mime;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace PassingData
 			else
 			{
 				TitleBar.Title =  "Help me direct my question";
+				questionAsker.IsVisible = false;
+				navigateForwardButton.Text = "Next";
 			}
 
 		}
@@ -50,13 +53,32 @@ namespace PassingData
 			((ReadingContext) BindingContext).DraftQuestion = ((Editor) sender).Text;
 		}
 		
-		// Initiate a question-reading page that is _not_ read only.
+		// If in read-only mode, initiate a question-reading page.
+		// Similarly if my MP is answering.
+		// If drafting, load a question-asker page, which will then 
+		// lead to a question-reading page.
+		// TODO at the moment, it gives you question-directing if you've chosen
+		// anything other than your MP.  Think about whether this is the right
+		// behaviour. 
+		// TODO also doesn't do the right thing if you've previously selected
+		// someone other than your MP, because this is stored in the global binding
+		// context.
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
+			bool needToFindAnswerer = ((ReadingContext) BindingContext).SelectedDepartment != null
+			       || ((ReadingContext) BindingContext).OtherAuthorities.Where(w => w.Selected).Count() != 0;
 			
-			var readingPage = new ReadingPage(isReadingOnly, ((ReadingContext) BindingContext).OtherAuthorities);
-			readingPage.BindingContext = BindingContext;
-			await Navigation.PushAsync (readingPage);
+			if (isReadingOnly || !needToFindAnswerer)
+			{
+				var readingPage = new ReadingPage(isReadingOnly, ((ReadingContext) BindingContext).OtherAuthorities);
+				readingPage.BindingContext = BindingContext;
+				await Navigation.PushAsync (readingPage);
+			}
+			else 
+			{
+				var questionAskerPage = new QuestionAskerPage((ReadingContext) BindingContext);
+				await Navigation.PushAsync(questionAskerPage);
+			}
 		}
 		async void OnNavigateBackButtonClicked (object sender, EventArgs e)
 		{
@@ -80,7 +102,7 @@ namespace PassingData
 		{
             string message = "These are your MPs.  Select the one(s) you want to answer your question";
 			
-			if (! ((ReadingContext) BindingContext).MPsSelected)
+			if (! ((ReadingContext) BindingContext).MPsKnown)
 			{
 				var registrationPage = new RegisterPage2((ReadingContext) BindingContext);
 				

@@ -53,7 +53,7 @@ namespace PassingData
                 if (((ReadingContext) BindingContext).SelectedFederalElectorate != null)
                 {
                     findMPsButton.IsVisible = true;
-                    ((ReadingContext) BindingContext).MPsSelected = true;
+                    ((ReadingContext) BindingContext).MPsKnown = true;
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace PassingData
                 if (((ReadingContext) BindingContext).SelectedStateElectorate != null)
                 {
                     findMPsButton.IsVisible = true;
-                    ((ReadingContext) BindingContext).MPsSelected = true;
+                    ((ReadingContext) BindingContext).MPsKnown = true;
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace PassingData
 
             context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagLabel;
             context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagLabel;
-            context.MPsSelected = true;
+            context.MPsKnown = true;
 
             ((Button) sender).Text = "Electorates found! See above";
             federalElectoratePicker.TextColor = Color.Black;

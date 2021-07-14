@@ -6,18 +6,18 @@
 		<StackLayout HorizontalOptions="Center" VerticalOptions="Start">
 			<Label x:Name="QuestionDetailView" >
 			</Label>
-			<Button x:Name="UpVoteButton" Text="Upvote" Clicked="UpVoteButton_OnClicked" HorizontalOptions="Center"/>
+			<Button x:Name="UpVoteButton" Text="Upvote" StyleClass="NormalButton" Clicked="UpVoteButton_OnClicked" HorizontalOptions="Center"/>
 			<StackLayout x:Name="LinkOrAnswerSegment" Orientation="Vertical">
 				<Label Text="Link or answer" FontSize="Medium" HorizontalOptions="Center" />
-				<Editor Placeholder="Add a link or answer" Completed="Answer_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+				<Editor Placeholder="Add a link or answer" Completed="Answer_Entered" StyleClass="NormalEditor" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
 			</StackLayout >
 			<StackLayout x:Name="BackgroundSegment" Orientation="Vertical">
 				<Label Text="Background" FontSize="Medium" HorizontalOptions="Center" />
-				<Editor Placeholder="Add Background (optional)" Completed="Background_Entered" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+				<Editor Placeholder="Add Background (optional)" Completed="Background_Entered" StyleClass="NormalEditor" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
 			</StackLayout >
-			<Button x:Name="SaveAnswerButton" Text="Save Answer" Clicked="SaveAnswerButton_OnClicked" HorizontalOptions="Center"/>
+			<Button x:Name="SaveAnswerButton" StyleClass="NormalButton" Text="Save Answer" Clicked="SaveAnswerButton_OnClicked" HorizontalOptions="Center"/>
 			<Button x:Name="SaveBackgroundButton" StyleClass="DoneButton" Text="Submit New Question!" Clicked="SubmitNewQuestionButton_OnClicked" HorizontalOptions="Center"/>
-			<Button x:Name="QuestionSuggesterButton" Clicked="QuestionSuggesterButton_OnClicked" HorizontalOptions="Center"/>
+			<Button x:Name="QuestionSuggesterButton" StyleClass="NormalButton" Clicked="QuestionSuggesterButton_OnClicked" HorizontalOptions="Center"/>
 		</StackLayout>
     </ContentPage.Content>
 </ContentPage>

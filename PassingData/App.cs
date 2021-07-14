@@ -62,6 +62,11 @@ namespace PassingData
                     },
                     new Setter
                     {
+                        Property = Xamarin.Forms.Button.TextColorProperty,
+                        Value = "White",
+                    },
+                    new Setter
+                    {
                         Property = Xamarin.Forms.Button.TextProperty,
                         Value = "Done",
                     }
@@ -89,6 +94,21 @@ namespace PassingData
                 }
             };
             Resources.Add(normalButton);
+            
+            var normalEditor = new Style(typeof(Xamarin.Forms.Editor))
+            {
+                Class = "NormalEditor",
+                ApplyToDerivedTypes = true,
+                Setters =
+                {
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Editor.BackgroundColorProperty,
+                        Value = "Turquoise"
+                    },
+                }
+            };
+            Resources.Add(normalEditor);
         }
     }
 }

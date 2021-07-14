@@ -7,7 +7,7 @@
 		<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
 			<StackLayout Orientation="Vertical" x:Name="QuestionDraftingBox">
 				<Label Text="My question is..." FontSize="Medium" HorizontalOptions="Center" />
-				<Editor Placeholder="Enter your question" Completed="Question_Entered" AutoSize="TextChanges" BackgroundColor="Turquoise" FontSize="Medium" FontAttributes="Bold" />
+				<Editor Placeholder="Enter your question" Completed="Question_Entered" StyleClass="NormalEditor" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
 			</StackLayout >
 			<StackLayout Orientation="Horizontal">
 				<Label Text="To be answered by " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
@@ -23,7 +23,7 @@
 					 <Button x:Name="myMP" Text="My MP" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnAnsweredByMPButtonClicked" HorizontalOptions="Center"/>
 				</StackLayout>
 			</StackLayout>
-			<StackLayout Orientation="Vertical">
+			<StackLayout x:Name="questionAsker" Orientation="Vertical">
 				<Label Text="Who should ask the question?" FontSize="Medium" HorizontalOptions="Center" />
 				<Button CornerRadius="20" HeightRequest="40" x:Name="findACommitteeButton" Text="Find a Committee" BackgroundColor="Turquoise" Clicked="OnFindCommitteeButtonClicked" />
 				<!-- <Button x:Name="myMPShouldRaiseItButton" Text="My MP should raise it" Clicked="OnMPRaiseButtonClicked" /> -->
