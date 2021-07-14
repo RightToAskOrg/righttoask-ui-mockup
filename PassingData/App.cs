@@ -8,10 +8,11 @@ using Application = Xamarin.Forms.Application;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace PassingData
 {
-    public class App : Application
+    public partial class App : Application
     {
         public App()
         {
+            setTheStyles();
             MainPage = new NavigationPage(new MainPage(DateTime.Now.ToString("u")));
         }
 
@@ -28,6 +29,46 @@ namespace PassingData
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private void setTheStyles()
+        {
+            
+            var redButton = new Style(typeof(Xamarin.Forms.Button))
+            {
+                Class = "RedColouredButton",
+                ApplyToDerivedTypes = true,
+                Setters =
+                {
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.BackgroundColorProperty,
+                        Value = "Red"
+                    }
+                }
+            };
+            Resources.Add(redButton);
+            
+            var doneButton = new Style(typeof(Xamarin.Forms.Button))
+            {
+                Class = "DoneButton",
+                ApplyToDerivedTypes = true,
+                Setters =
+                {
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.BackgroundColorProperty,
+                        Value = "DarkGreen",
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.TextProperty,
+                        Value = "Done",
+                    }
+                    
+                }
+            };
+            Resources.Add(doneButton);
         }
     }
 }
