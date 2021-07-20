@@ -17,24 +17,42 @@ namespace PassingData
         {
             InitializeComponent();
             BindingContext = context;
+            if (context.MPsKnown)
+            {
+                registerCitizenButton.IsVisible = true;
+                findMPsButton.IsVisible = false;
+            }
+            else
+            {
+                registerCitizenButton.IsVisible = false;
+                findMPsButton.IsVisible = true;
+            }
         }
 
         async void OnRegisterNameFieldCompleted(object sender, EventArgs e)
         {
 	        BindingContext.Username = ((Entry) sender).Text;
-            
-            
-
-	        // var readingPage = new ReadingPage(true);
-	        // readingPage.BindingContext = readingContext;
-	        // await Navigation.PushAsync(readingPage);
         }
         
+        // If MPs are not known, show page that allows finding electorates.
+        // Whether or not they choose some, let them finish registering.
+        // Make sure they've entered a name.
         async void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
         {
-            // ((Button) sender).Text = "Registering not implemented yet";
-            var secondRegisterPage = new RegisterPage2(BindingContext);
-			await Navigation.PushAsync (secondRegisterPage);
+            // TODO This doesn't seem to be doing the right thing.
+            // if (BindingContext.Username == null)
+            //{
+            //    registerNameInstructions.BackgroundColor = Color.Red;
+            //}
+            BindingContext.Is_Registered = true;
+            Navigation.PopAsync();
+        }
+
+        async void OnFindMPsButtonClicked(object sender, EventArgs e)
+        {
+                var secondRegisterPage = new RegisterPage2(BindingContext);
+			    await Navigation.PushAsync (secondRegisterPage);
+                registerCitizenButton.IsVisible = true;
         }
         void OnRegisterMPButtonClicked(object sender, EventArgs e)
         {

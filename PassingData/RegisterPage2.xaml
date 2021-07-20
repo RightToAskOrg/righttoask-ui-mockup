@@ -21,13 +21,13 @@
 				    <StackLayout Orientation="Vertical">
 					    <Label x:Name="knowElectorates" Text="I know my State/Territory electorates" HorizontalOptions="Center" 
 					           TextColor="Teal" FontSize="Large" VerticalOptions="Center" /> 
-					    <Picker x:Name="stateElectoratePicker" Title="{Binding SelectedStateElectorate, StringFormat='I know my State Electorate: {0:F0}'}" 
+					    <Picker x:Name="stateElectoratePicker" Title="{Binding SelectedStateElectorate, StringFormat='State Electorate: {0:F0}'}" 
 				            ItemsSource="{Binding StateElectorates}" 
 				            ItemDisplayBinding="{Binding TagLabel}" 
 				            SelectedIndexChanged="OnStateElectoratePickerSelectedIndexChanged"> 
 					    </Picker>
 					    <!-- <Label Text="I know my Federal electorate" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" /> -->
-					    <Picker x:Name="federalElectoratePicker" Title="{Binding SelectedFederalElectorate, StringFormat='I know my Federal Electorate: {0:F0}'}" 
+					    <Picker x:Name="federalElectoratePicker" Title="{Binding SelectedFederalElectorate, StringFormat='Federal Electorate: {0:F0}'}" 
 				            ItemsSource="{Binding FederalElectorates}" 
 				            ItemDisplayBinding="{Binding TagLabel}" 
 				            SelectedIndexChanged="OnFederalElectoratePickerSelectedIndexChanged"> 

@@ -16,7 +16,7 @@
 				<Editor Placeholder="Add Background (optional)" Completed="Background_Entered" StyleClass="NormalEditor" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
 			</StackLayout >
 			<Button x:Name="SaveAnswerButton" StyleClass="NormalButton" Text="Save Answer" Clicked="SaveAnswerButton_OnClicked" HorizontalOptions="Center"/>
-			<Button x:Name="SaveBackgroundButton" StyleClass="DoneButton" Text="Submit New Question!" Clicked="SubmitNewQuestionButton_OnClicked" HorizontalOptions="Center"/>
+			<Button x:Name="SaveBackgroundButton" StyleClass="DoneButton" Text="Publish New Question!" Clicked="SubmitNewQuestionButton_OnClicked" HorizontalOptions="Center"/>
 			<Button x:Name="QuestionSuggesterButton" StyleClass="NormalButton" Clicked="QuestionSuggesterButton_OnClicked" HorizontalOptions="Center"/>
 		</StackLayout>
     </ContentPage.Content>

@@ -109,6 +109,21 @@ namespace PassingData
                 }
             };
             Resources.Add(normalEditor);
+            
+            var normalEntry = new Style(typeof(Xamarin.Forms.Entry))
+            {
+                Class = "NormalEntry",
+                ApplyToDerivedTypes = true,
+                Setters =
+                {
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Entry.BackgroundColorProperty,
+                        Value = "Turquoise"
+                    },
+                }
+            };
+            Resources.Add(normalEntry);
         }
     }
 }

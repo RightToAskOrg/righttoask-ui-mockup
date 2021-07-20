@@ -61,11 +61,25 @@ namespace PassingData
         }
 
         // TODO: Re-enable button if you choose to draft another question.
-        private void SubmitNewQuestionButton_OnClicked(object sender, EventArgs e)
+        // TODO: Think about the flow in the case where you get the popup but then cancel/back
+        // the registration screen. At the moment, it will just go back and (irritatingly)
+        // give you the same options.
+        async void SubmitNewQuestionButton_OnClicked(object sender, EventArgs e)
         {
-	        ((ReadingContext) BindingContext).ExistingQuestions.Insert(0, question);
-            ((Button) sender).Text = "Submitted!";
-            ((Button) sender).IsEnabled = false;
+            if (!((ReadingContext) BindingContext).Is_Registered)
+            {
+                RegisterPage1 registrationPage = new RegisterPage1((ReadingContext) BindingContext);
+                await Navigation.PushAsync(registrationPage);
+            }
+
+            // Note the condition here is necessary because they might have been offered the chance to
+            // register, but have declined.
+            if (((ReadingContext) BindingContext).Is_Registered)
+            {
+	            ((ReadingContext) BindingContext).ExistingQuestions.Insert(0, question);
+                ((Button) sender).Text = "Published!";
+                ((Button) sender).IsEnabled = false;
+            }
         }
 
         private void Background_Entered(object sender, EventArgs e)
