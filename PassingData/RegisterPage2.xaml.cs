@@ -20,7 +20,6 @@ namespace PassingData
             BindingContext = context;
             addressSavingStack.IsVisible = false;
             findMPsButton.IsVisible = false;
-
         }
         
         // TODO Refactor this nicely so it isn't copy-pasted in FindMyMP
@@ -90,7 +89,7 @@ namespace PassingData
 
         async void OnAddressEntered(object sender, EventArgs e)
         {
-            address = ((Entry) sender).Text;
+            address = ((Editor) sender).Text;
             // OnSubmitAddressButton_Clicked();
         }
 

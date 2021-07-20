@@ -74,8 +74,11 @@ namespace PassingData
 
             // Note the condition here is necessary because they might have been offered the chance to
             // register, but have declined.
+            // Also note that setting QuestionSuggester may be unnessary - it may already be set correctly -
+            // but is needed if the person has just registered.
             if (((ReadingContext) BindingContext).Is_Registered)
             {
+                question.QuestionSuggester = ((ReadingContext) BindingContext).Username;
 	            ((ReadingContext) BindingContext).ExistingQuestions.Insert(0, question);
                 ((Button) sender).Text = "Published!";
                 ((Button) sender).IsEnabled = false;

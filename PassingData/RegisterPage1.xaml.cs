@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -31,7 +32,7 @@ namespace PassingData
 
         async void OnRegisterNameFieldCompleted(object sender, EventArgs e)
         {
-	        BindingContext.Username = ((Entry) sender).Text;
+	        BindingContext.Username = ((Editor) sender).Text;
         }
         
         // If MPs are not known, show page that allows finding electorates.
@@ -40,19 +41,22 @@ namespace PassingData
         async void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
         {
             // TODO This doesn't seem to be doing the right thing.
-            // if (BindingContext.Username == null)
-            //{
-            //    registerNameInstructions.BackgroundColor = Color.Red;
-            //}
-            BindingContext.Is_Registered = true;
-            Navigation.PopAsync();
+            if (BindingContext.Username == "Anonymous user")
+            {
+                registerNameInstructions.BackgroundColor = Color.Red;
+            }
+            else
+            {
+                BindingContext.Is_Registered = true;
+                Navigation.PopAsync();
+            }
         }
 
         async void OnFindMPsButtonClicked(object sender, EventArgs e)
         {
+                registerCitizenButton.IsVisible = true;
                 var secondRegisterPage = new RegisterPage2(BindingContext);
 			    await Navigation.PushAsync (secondRegisterPage);
-                registerCitizenButton.IsVisible = true;
         }
         void OnRegisterMPButtonClicked(object sender, EventArgs e)
         {
@@ -65,7 +69,7 @@ namespace PassingData
 
         private void OnRegisterEmailFieldCompleted(object sender, EventArgs e)
         {
-	        BindingContext.UserEmail = ((Entry) sender).Text;
+	        BindingContext.UserEmail = ((Editor) sender).Text;
         }
     }
 }
