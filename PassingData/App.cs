@@ -1,4 +1,5 @@
 ﻿using System;
+using PassingData.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -124,6 +125,23 @@ namespace PassingData
                 }
             };
             Resources.Add(normalEntry);
+            
+            /*
+            var advancedSearchControlStyle = new Style(typeof(AdvancedSearchControl))
+            {
+                Class = "NormalAdvancedSearchControl",
+                ApplyToDerivedTypes = true,
+                Setters =
+                {
+                    new Setter
+                    {
+                        Property = AdvancedSearchControl.KeywordProperty,
+                        Value = "TestKeyword"
+                    }
+                }
+            };
+            Resources.Add(advancedSearchControlStyle);
+            */
         }
     }
 }
