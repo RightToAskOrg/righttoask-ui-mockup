@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using PassingData.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +16,8 @@ namespace PassingData
         {
             BindingContext = context;
             InitializeComponent();
+
+            WholePage.Children.Insert(0,new AdvancedSearchControl("TestingTesting123"));
         }
 
         async void OnNavigateForwardButtonClicked(object sender, EventArgs e)

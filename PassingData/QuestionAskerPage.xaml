@@ -6,9 +6,10 @@
              xmlns:controls="clr-namespace:PassingData.Controls;assembly=PassingData"
              x:Class="PassingData.QuestionAskerPage">
     <ContentPage.Content>
-        <StackLayout>
-            <!-- <controls:AdvancedSearchControl Keyword="Test" Style="AdvancedSearchControlStyle"/> -->
-            <controls:AdvancedSearchControl Keyword="Test" />
+        <StackLayout x:Name = "WholePage">
+            <!-- <controls:AdvancedSearchControl x:Name ="SearchTest1" /> -->
+            <!-- <controls:AdvancedSearchControl x:Name ="searchTest1" Keyword="Manual set test" /> -->
+            <!-- <controls:AdvancedSearchControl Keyword="{Binding SearchKeyword}" /> -->
             <Label Text="This is the hard page where we decide who could ask your question."
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand" />
