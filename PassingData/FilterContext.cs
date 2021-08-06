@@ -78,5 +78,14 @@ namespace PassingData
 				OnPropertyChanged("FilterKeyword");
 			}
 		}
+		
+		// TODO I think this should simply have a list of the ones that were chosen, for
+		// those who should raise it and those who should answer. In each case, if you
+		// click on it, you should get the complete list of options back.
+		// public ObservableCollection<Tag> MyMPs { get; set; }
+
+		// public ObservableCollection<Tag> Departments { get; set; }
+		
+		// public ObservableCollection<Tag> OtherAuthorities { get; set; }
 	}
 }

@@ -15,14 +15,14 @@ namespace PassingData
         public QuestionAskerPage(ReadingContext context)
         {
             // TODO: Construct this properly.
-            // FilterContext currentContext = new FilterContext();
+            FilterContext filters = new FilterContext {FilterKeyword = context.SearchKeyword};
             BindingContext = context;
             // currentContext.FilterKeyword = context.SearchKeyword;
 
             // AdvancedSearchControl firstSearch = new AdvancedSearchControl();
             // firstSearch.AKeyword = context.SearchKeyword;
 
-            FilterDisplayTableView ttestableView = new FilterDisplayTableView();
+            FilterDisplayTableView ttestableView = new FilterDisplayTableView(filters);
             
             InitializeComponent();
 
