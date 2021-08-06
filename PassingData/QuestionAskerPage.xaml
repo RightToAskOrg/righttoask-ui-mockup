@@ -7,9 +7,15 @@
              x:Class="PassingData.QuestionAskerPage">
     <ContentPage.Content>
         <StackLayout x:Name = "WholePage">
-            <!-- <controls:AdvancedSearchControl x:Name ="SearchTest1" /> -->
-            <!-- <controls:AdvancedSearchControl x:Name ="searchTest1" Keyword="Manual set test" /> -->
-            <!-- <controls:AdvancedSearchControl Keyword="{Binding SearchKeyword}" /> -->
+            <!-- <controls:AdvancedSearchControl TableSection.Title="{Binding FilterKeyword}" Keyword="{Binding FilterKeyword}" />  
+            <TableView x:Name="ExampleTableView">
+                <TableRoot>
+                    <TableSection Title="{Binding FilterKeyword}" >
+                        <SwitchCell Text="New Mail" On="true" />
+                    </TableSection>
+                </TableRoot>
+            </TableView> 
+            <passingData:FilterDisplayTableView></passingData:FilterDisplayTableView> -->
             <Label Text="This is the hard page where we decide who could ask your question."
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand" />

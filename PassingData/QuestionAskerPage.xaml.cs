@@ -14,10 +14,38 @@ namespace PassingData
     {
         public QuestionAskerPage(ReadingContext context)
         {
+            // TODO: Construct this properly.
+            // FilterContext currentContext = new FilterContext();
             BindingContext = context;
+            // currentContext.FilterKeyword = context.SearchKeyword;
+
+            // AdvancedSearchControl firstSearch = new AdvancedSearchControl();
+            // firstSearch.AKeyword = context.SearchKeyword;
+
+            FilterDisplayTableView ttestableView = new FilterDisplayTableView();
+            
             InitializeComponent();
 
-            WholePage.Children.Insert(0,new AdvancedSearchControl("TestingTesting123"));
+            // firstSearch.Keyword = "Testing csharp entry.";
+            
+            /*
+            TableView newTable = new TableView
+            {
+                Root = new TableRoot
+                {
+                    new TableSection("CppTest: " + firstSearch.AKeyword)
+                    {
+                        // TableSection constructor takes title as an optional parameter
+                        new SwitchCell { Text = "New Mail", On = true }
+                    }
+                },
+                Intent = TableIntent.Settings
+            };
+ 
+            WholePage.Children.Insert(0,newTable);
+            WholePage.Children.Insert(0,firstSearch);
+            */
+            WholePage.Children.Insert(0,ttestableView);
         }
 
         async void OnNavigateForwardButtonClicked(object sender, EventArgs e)
