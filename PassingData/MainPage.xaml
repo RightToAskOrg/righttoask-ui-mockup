@@ -7,17 +7,16 @@
 		<StackLayout VerticalOptions="Start" Spacing="40">
 			<!-- <Label Text = "Influence without surveillance" FontSize="Medium" TextColor="DodgerBlue" HorizontalOptions="Center" VerticalOptions="Start" /> -->
 			<Label HorizontalOptions="Center" Text = "You can read, vote, or ask!" FontSize="Medium" />
-			<Frame CornerRadius="10"  BackgroundColor="PaleTurquoise"
+			<Frame CornerRadius="10"  BackgroundColor="NavajoWhite"
 			       Padding="0">
 			    <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
-			    	<Label Text="Read questions" TextColor="Teal" FontSize="Large" HorizontalOptions="Center" />
+			    	<Label Text="Read and vote on questions" TextColor="Teal" FontSize="Large" HorizontalOptions="Center" />
 			    	<StackLayout Orientation="Vertical" HorizontalOptions="Center">
 			    		<Button x:Name="Top10NowButton" Text="Trending now" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnTop10NowButtonClicked" HorizontalOptions="Center"/>
-			            <StackLayout Orientation="Horizontal">
-				            <Label Text="Browse " TextColor="Teal" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center" />
-				            <SearchBar x:Name="readByKeywordButton" Placeholder="by keyword (enter here)"   BackgroundColor="Turquoise" SearchButtonPressed="OnReadByKeywordFieldCompleted" TextChanged="OnKeywordChanged" HorizontalOptions="Center"/>
+			            <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+				            <SearchBar x:Name="readByKeywordButton" Placeholder="Search" MinimumWidthRequest="20"  BackgroundColor="Turquoise" SearchButtonPressed="OnReadByKeywordFieldCompleted" TextChanged="OnKeywordChanged" HorizontalOptions="Start"/>
+			    		    <Button x:Name="readButton" Text="Advanced search" Clicked="OnReadButtonClicked" HorizontalOptions="Center" CornerRadius="20" BackgroundColor="Turquoise"/>
 			            </StackLayout>
-			    		<Button x:Name="readButton" Text="Advanced search" Clicked="OnReadButtonClicked" HorizontalOptions="Center" CornerRadius="20" BackgroundColor="Turquoise"/>
 			    	</StackLayout>
 		    	</StackLayout>
 			</Frame>	

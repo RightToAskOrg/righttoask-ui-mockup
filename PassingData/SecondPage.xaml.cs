@@ -22,12 +22,12 @@ namespace PassingData
 
 			if (IsReadingOnly)
 			{
-				TitleBar.Title = "Help me find questions I care about";
+				TitleBar.Title = "Find questions";
 				QuestionDraftingBox.IsVisible = false;
 			}
 			else
 			{
-				TitleBar.Title =  "Help me direct my question";
+				TitleBar.Title =  "Direct my question";
 				questionAsker.IsVisible = false;
 				navigateForwardButton.Text = "Next";
 			}
@@ -45,7 +45,7 @@ namespace PassingData
                 Tag selectedDept = (Tag) picker.ItemsSource[selectedIndex];
                 selectedDept.Selected = true;
                 ((ReadingContext) BindingContext).SelectedDepartment = selectedDept.TagLabel;
-
+                questionAsker.IsVisible = true;
             }
         }
 		void Question_Entered(object sender, EventArgs e)
@@ -85,6 +85,9 @@ namespace PassingData
 			await Navigation.PopAsync ();
 		}
 
+		// TODO At the moment, this just turns the 'who should ask it' on,
+		// if you looked at the authority list, regardless of whether you actually
+		// chose one.
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
 		{
 			string message = "Choose the authorities that should answer your question";
@@ -92,6 +95,8 @@ namespace PassingData
            	var departmentExploringPage = new ExploringPage(((ReadingContext) BindingContext).OtherAuthorities, message);
             departmentExploringPage.BindingContext = BindingContext;
            	await Navigation.PushAsync (departmentExploringPage);
+
+            questionAsker.IsVisible = true;
 		}
 
 	    // If we already know the electorates (and hence responsible MPs), go
@@ -100,8 +105,32 @@ namespace PassingData
 	    // It will pop back to here.
 		async void OnAnsweredByMPButtonClicked(object sender, EventArgs e)
 		{
-            string message = "These are your MPs.  Select the one(s) you want to answer your question";
+            FindMPsIfNotAlreadyKnown();
+            
+            string message = "These are your MPs.  Select the one(s) who should answer the question";
+           	var mpsExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
+            mpsExploringPage.BindingContext = BindingContext;
+           	await Navigation.PushAsync (mpsExploringPage);
+            
+            questionAsker.IsVisible = true;
+		}
+
+
+		// TODO: at the moment this doesn't properly select the MPs-  it just lists them and lets
+		// it looks like you've selected them.
+		private async void OnMyMPRaiseButtonClicked(object sender, EventArgs e)
+		{
+            FindMPsIfNotAlreadyKnown();
+            
+            string message = "These are your MPs.  Select the one(s) who should raise the question in Parliament";
+           	var mpsExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
+            mpsExploringPage.BindingContext = BindingContext;
+           	await Navigation.PushAsync (mpsExploringPage);
 			
+		}
+
+		async void FindMPsIfNotAlreadyKnown()
+		{
 			if (! ((ReadingContext) BindingContext).MPsKnown)
 			{
 				var registrationPage = new RegisterPage2((ReadingContext) BindingContext);
@@ -116,27 +145,17 @@ namespace PassingData
 				System.Diagnostics.Debug.WriteLine("The modal page is now on screen, hit back button");
 				await Task.Run(() => waitHandle.WaitOne());
 				System.Diagnostics.Debug.WriteLine("The modal page is dismissed, do something now");
-
 			}
-           	var mpsExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
-            mpsExploringPage.BindingContext = BindingContext;
-           	await Navigation.PushAsync (mpsExploringPage);
 		}
-
 		private void OnFindCommitteeButtonClicked(object sender, EventArgs e)
 		{
 			((Button) sender).Text = $"Finding Committees not implemented yet";	
 		}
-
-		private async void OnMPRaiseButtonClicked(object sender, EventArgs e)
+		
+		private void OnOtherMPRaiseButtonClicked(object sender, EventArgs e)
 		{
-			//((Button) sender).Text = $"MP raising not implemented yet";
-			// var findMyMPPage = new FindMyMP((ReadingContext)BindingContext);
-			var registerPage1 = new RegisterPage1((ReadingContext) BindingContext);
-			// findMyMPPage.BindingContext = BindingContext;
-			await Navigation.PushAsync (registerPage1);
+			((Button) sender).Text = $"Listing other MPs not implemented yet";	
 		}
-
 	}
 }
 
