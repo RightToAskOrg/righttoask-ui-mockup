@@ -19,8 +19,7 @@ namespace PassingData
             var entry = new EntryCell
             {
                 Label = "Who should answer the question?",
-                Placeholder = "?"
-                // Completed = OnWhoShouldAnswerCompleted
+                Placeholder = "?",
             };
 
             var entry2 = new EntryCell { Label = "Who should raise the question in Parliament?", Placeholder = "?" };
@@ -29,6 +28,7 @@ namespace PassingData
             // var switchc = new SwitchCell { Text = "SwitchCell Text" };
             // var image = new ImageCell { Text = "ImageCell Text", Detail = "ImageCell Detail", ImageSource = "XamarinLogo.png" };
 
+            entry.Completed += OnWhoShouldAnswerCompleted;
             section1.Add(entry);
             section1.Add(entry2);
             section1.Add(keywordentry);
@@ -39,7 +39,7 @@ namespace PassingData
 
         private void OnWhoShouldAnswerCompleted(object sender, EventArgs e)
         {
-            ((EntryCell)sender).Text = "You entered" + ((EntryCell)sender).Text;
+            ((EntryCell)sender).Text = "You entered " + ((EntryCell)sender).Text;
         }
     }
 }
