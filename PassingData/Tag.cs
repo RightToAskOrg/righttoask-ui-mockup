@@ -5,7 +5,7 @@ namespace PassingData
 {
     public class Tag : INotifyPropertyChanged
     {
-        private string tagLabel;
+        private Entity tagEntity;
         private bool selected;
         public event PropertyChangedEventHandler PropertyChanged;
         
@@ -18,16 +18,16 @@ namespace PassingData
             }
         }
 
-        public string TagLabel
+        public Entity TagEntity
         {
             get
             {
-                return tagLabel;
+                return tagEntity;
             }
             set
             {
-                tagLabel = value;
-                OnPropertyChanged("TagLabel");
+                tagEntity = value;
+                OnPropertyChanged("TagEntity");
             }
         }
         
@@ -45,7 +45,7 @@ namespace PassingData
                 }
         public override string ToString ()
         {
-            return TagLabel + "\n" +
+            return TagEntity.EntityName + "("+TagEntity.NickName+")"+ "\n" +
                 (Selected ? "" : "Not ") +
                 "Selected" + "\n";
         }

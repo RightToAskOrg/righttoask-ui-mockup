@@ -66,7 +66,7 @@ namespace PassingData
 			{
 				if (authority.Selected)
 				{
-					selectedAuthorities += authority.TagLabel + "\n";
+					selectedAuthorities += authority.TagEntity.NickName + "\n";
 				}
 			}
 
@@ -88,10 +88,10 @@ namespace PassingData
 			ReadingContext context = (ReadingContext) BindingContext;
 
 			// Tag the new question with the authorities that have been selected.
-			ObservableCollection<string> questionAnswerers;
+			ObservableCollection<Entity> questionAnswerers;
 			questionAnswerers =
-				new ObservableCollection<string>(
-					context.OtherAuthorities.Where(w => w.Selected).Select(a => a.TagLabel));
+				new ObservableCollection<Entity>(
+					context.OtherAuthorities.Where(w => w.Selected).Select(a => a.TagEntity));
 			if (context.SelectedDepartment != null)
 				questionAnswerers.Insert(0, context.SelectedDepartment);
 

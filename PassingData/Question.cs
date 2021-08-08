@@ -25,7 +25,7 @@ namespace PassingData
         public string QuestionSuggester { get; set; }
         
         // The Authority, department, MPs, who are meant to answer 
-        public ObservableCollection<string> QuestionAnswerers { get; set; }
+        public ObservableCollection<Entity> QuestionAnswerers { get; set; }
         
         // The MPs or committee who are meant to ask the question
         public string QuestionAsker { get; set; }
@@ -61,7 +61,8 @@ namespace PassingData
         {
             
             List<string> questionAnswerersList 
-                = QuestionAnswerers != null ? QuestionAnswerers.ToList() : new List<string>();
+                = QuestionAnswerers != null ? QuestionAnswerers.Select(ans => ans.EntityName).ToList()
+                                    : new List<string>();
             // view.Select(f => return new { Food = f, Selected = selectedFood.Contains(f)});
             return QuestionText+ "\n" +
                    "Suggested by: " + (QuestionSuggester ?? "") + '\n' +

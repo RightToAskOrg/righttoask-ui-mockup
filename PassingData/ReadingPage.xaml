@@ -9,7 +9,7 @@
 			<StackLayout Orientation="Horizontal">
          		<!-- <Label Text="Answered by: " FontSize="Medium" HorizontalOptions="FillAndExpand" />  -->
          		<Label Text="To be answered by: " FontSize="Medium" />  
-         		<Label Text="{Binding SelectedDepartment}" FontSize="Medium" FontAttributes="Bold" /> 
+         		<Label Text="{Binding SelectedDepartment.EntityName}" FontSize="Medium" FontAttributes="Bold" /> 
         	</StackLayout>
          	<Label x:Name="AnsweredBySelections" FontSize="Medium" FontAttributes="Bold" /> 
 			<StackLayout Orientation="Horizontal">

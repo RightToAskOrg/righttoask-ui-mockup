@@ -33,7 +33,7 @@ namespace PassingData
             {
                 Tag selectedState = (Tag) picker.ItemsSource[selectedIndex];
                 selectedState.Selected = true;
-                ((ReadingContext) BindingContext).SelectedStateOrTerritory = selectedState.TagLabel;
+                ((ReadingContext) BindingContext).SelectedStateOrTerritory = selectedState.TagEntity.EntityName;
             }
         }
 
@@ -47,7 +47,7 @@ namespace PassingData
             {
                 Tag selectedStateElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedStateElectorate.Selected = true;
-                ((ReadingContext) BindingContext).SelectedStateElectorate = selectedStateElectorate.TagLabel;
+                ((ReadingContext) BindingContext).SelectedStateElectorate = selectedStateElectorate.TagEntity.EntityName;
                 
                 if (((ReadingContext) BindingContext).SelectedFederalElectorate != null)
                 {
@@ -67,7 +67,7 @@ namespace PassingData
             {
                 Tag selectedFederalElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedFederalElectorate.Selected = true;
-                ((ReadingContext) BindingContext).SelectedFederalElectorate = selectedFederalElectorate.TagLabel;
+                ((ReadingContext) BindingContext).SelectedFederalElectorate = selectedFederalElectorate.TagEntity.EntityName;
 
                 if (((ReadingContext) BindingContext).SelectedStateElectorate != null)
                 {
@@ -102,8 +102,8 @@ namespace PassingData
             int stateElectorateCount = context.StateElectorates.Count;
             int federalElectorateCount = context.FederalElectorates.Count;
 
-            context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagLabel;
-            context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagLabel;
+            context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagEntity.EntityName;
+            context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagEntity.EntityName;
             context.MPsKnown = true;
 
             ((Button) sender).Text = "Electorates found! See above";

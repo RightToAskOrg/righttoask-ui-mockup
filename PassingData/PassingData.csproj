@@ -20,12 +20,14 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Remove="SecondPage_old.xaml" />
+    <EmbeddedResource Remove="PickerPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Contact.cs" />
     <Compile Remove="SecondPage_old.xaml.cs" />
     <Compile Remove="App.xaml.cs" />
+    <Compile Remove="PickerPage.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>

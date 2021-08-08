@@ -44,7 +44,7 @@ namespace PassingData
             {
                 Tag selectedDept = (Tag) picker.ItemsSource[selectedIndex];
                 selectedDept.Selected = true;
-                ((ReadingContext) BindingContext).SelectedDepartment = selectedDept.TagLabel;
+                ((ReadingContext) BindingContext).SelectedDepartment = selectedDept.TagEntity;
                 questionAsker.IsVisible = true;
             }
         }

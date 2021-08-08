@@ -11,7 +11,7 @@
             <Entry x:Name="address" Placeholder="Enter your address" Completed="OnAddressEntered" HorizontalOptions="Center"/>
 			<Picker x:Name="stateOrTerritoryPicker" Title="{Binding SelectedStateOrTerritory, StringFormat='State or Territory: {0:F0}'}" 
 			       ItemsSource="{Binding StatesOrTerritories}" 
-			       ItemDisplayBinding="{Binding TagLabel}" 
+			       ItemDisplayBinding="{Binding TagEntity.NickName}" 
 			       SelectedIndexChanged="OnStatePickerSelectedIndexChanged"> 
 			</Picker>
             <Button x:Name="submitAddressButton" Text="Find my electorates" Clicked="OnSubmitAddressButton_Clicked" />

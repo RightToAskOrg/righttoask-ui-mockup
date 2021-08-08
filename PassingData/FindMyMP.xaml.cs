@@ -29,7 +29,7 @@ namespace PassingData
             {
                 Tag selectedState = (Tag) picker.ItemsSource[selectedIndex];
                 selectedState.Selected = true;
-                ((ReadingContext) BindingContext).SelectedStateOrTerritory = selectedState.TagLabel;
+                ((ReadingContext) BindingContext).SelectedStateOrTerritory = selectedState.TagEntity.EntityName;
             }
         }
         
@@ -42,8 +42,8 @@ namespace PassingData
             int stateElectorateCount = context.StateElectorates.Count;
             int federalElectorateCount = context.FederalElectorates.Count;
 
-            context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagLabel;
-            context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagLabel;
+            context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagEntity.EntityName;
+            context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagEntity.EntityName;
             await Navigation.PopAsync();
         }
 

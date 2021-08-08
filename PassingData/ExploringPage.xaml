@@ -11,8 +11,9 @@
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
-							<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="4">
-								<Label Text="{Binding TagLabel }" />	
+							<StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand" Spacing="4">
+								<Label Text="{Binding TagEntity.EntityName }" />	
+								<Label HorizontalOptions="FillAndExpand" />
 								<Switch IsToggled="{Binding Selected}" />
 							</StackLayout>			
 						</ViewCell>

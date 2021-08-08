@@ -26,11 +26,7 @@ namespace PassingData
 
 			AuthorityListView.ItemsSource = selectableTags;
 			introText.Text = message;
-
-			// 	authorities.Add(new Tag{TagLabel = "This is a test department", Selected = true});
-			//	authorities.Add(new Tag{TagLabel = "This is a different test department", Selected =false});
-		}
-
+		} 
 
 		private async void Authority_Selected(object sender, ItemTappedEventArgs e)
 		{

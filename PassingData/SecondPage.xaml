@@ -14,7 +14,7 @@
 				<StackLayout Orientation="Vertical">
 					<Picker x:Name="minsterOrDeptPicker" Title="A minister or department" 
 				        ItemsSource="{Binding Departments}" BackgroundColor="Turquoise"
-				        ItemDisplayBinding="{Binding TagLabel}" 
+				        ItemDisplayBinding="{Binding TagEntity.EntityName}" 
 				        SelectedIndexChanged="OnPickerSelectedIndexChanged"> 
 					</Picker>
 						<!-- <Button x:Name="ministerOrDeptButton" Text="A minister or department" Clicked="OnMinisterOrDeptButtonClicked" /> -->
