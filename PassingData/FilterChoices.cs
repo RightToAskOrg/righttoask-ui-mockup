@@ -20,6 +20,12 @@ namespace PassingData
         }
         
 		private string filterKeyword;
+
+		// These
+		private ObservableCollection<Tag> SelectedAnsweringMPs;
+		private ObservableCollection<Tag> SelectedAskingMPs;
+
+
 		// private string matchingQuestions;
 		
 		// Things about the current search, draft question or other action.

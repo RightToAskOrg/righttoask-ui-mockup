@@ -22,7 +22,7 @@ namespace PassingData
             // AdvancedSearchControl firstSearch = new AdvancedSearchControl();
             // firstSearch.AKeyword = context.SearchKeyword;
 
-            FilterDisplayTableView ttestableView = new FilterDisplayTableView(filters);
+            FilterDisplayTableView ttestableView = new FilterDisplayTableView(context);
             
             InitializeComponent();
 
