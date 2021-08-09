@@ -105,12 +105,14 @@ namespace PassingData
 	    // It will pop back to here.
 		async void OnAnsweredByMPButtonClicked(object sender, EventArgs e)
 		{
-            FindMPsIfNotAlreadyKnown();
             
             string message = "These are your MPs.  Select the one(s) who should answer the question";
            	var mpsExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
             mpsExploringPage.BindingContext = BindingContext;
+            // mpsExploringPage.Appearing += FindMPsIfNotAlreadyKnown();
            	await Navigation.PushAsync (mpsExploringPage);
+            
+            FindMPsIfNotAlreadyKnown();
             
             questionAsker.IsVisible = true;
 		}
@@ -120,31 +122,35 @@ namespace PassingData
 		// it looks like you've selected them.
 		private async void OnMyMPRaiseButtonClicked(object sender, EventArgs e)
 		{
-            FindMPsIfNotAlreadyKnown();
             
             string message = "These are your MPs.  Select the one(s) who should raise the question in Parliament";
            	var mpsExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
             mpsExploringPage.BindingContext = BindingContext;
+            // mpsExploringPage.Appearing += FindMPsIfNotAlreadyKnown();
            	await Navigation.PushAsync (mpsExploringPage);
 			
+            FindMPsIfNotAlreadyKnown();
 		}
 
+		// TODO: This is inelegant at the moment. The underlying page is briefly
+		// visible before it appears - it would be better to pop this up first, then
+		// insert the exploringpage underneath.
 		async void FindMPsIfNotAlreadyKnown()
 		{
 			if (! ((ReadingContext) BindingContext).MPsKnown)
 			{
 				var registrationPage = new RegisterPage2((ReadingContext) BindingContext);
 				
-				var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-				registrationPage.Disappearing += (sender2, e2) =>
-				{
-					waitHandle.Set();
-				};
+				// var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+				// registrationPage.Disappearing += (sender2, e2) =>
+				// {
+				// 	waitHandle.Set();
+				// };
 				
 				await Navigation.PushAsync(registrationPage);
-				System.Diagnostics.Debug.WriteLine("The modal page is now on screen, hit back button");
-				await Task.Run(() => waitHandle.WaitOne());
-				System.Diagnostics.Debug.WriteLine("The modal page is dismissed, do something now");
+				// System.Diagnostics.Debug.WriteLine("The modal page is now on screen, hit back button");
+				// await Task.Run(() => waitHandle.WaitOne());
+				// System.Diagnostics.Debug.WriteLine("The modal page is dismissed, do something now");
 			}
 		}
 		private void OnFindCommitteeButtonClicked(object sender, EventArgs e)

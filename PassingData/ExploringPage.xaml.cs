@@ -31,9 +31,6 @@ namespace PassingData
 		private async void Authority_Selected(object sender, ItemTappedEventArgs e)
 		{
 			((Tag) e.Item).Selected = !((Tag) e.Item).Selected;
-			// var questionDetailPage = new QuestionDetailPage((Question) e.Item);
-			// questionDetailPage.BindingContext = BindingContext;
-			//await Navigation.PushAsync (questionDetailPage);
 		}
 
 		// Note: At the moment, this simply pops the page, i.e. the same
