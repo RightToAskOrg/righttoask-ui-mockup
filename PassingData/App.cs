@@ -69,7 +69,7 @@ namespace PassingData
                     new Setter
                     {
                         Property = Xamarin.Forms.Button.TextProperty,
-                        Value = "Done",
+                        Value = "Next",
                     }
                     
                 }
@@ -111,6 +111,16 @@ namespace PassingData
                     {
                         Property = Xamarin.Forms.Button.CornerRadiusProperty,
                         Value = "20",
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.HorizontalOptionsProperty,
+                        Value = "Center",
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.PaddingProperty,
+                        Value = "0",
                     },
                     new Setter
                     {

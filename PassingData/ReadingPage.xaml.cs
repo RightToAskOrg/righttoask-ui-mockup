@@ -127,8 +127,23 @@ namespace PassingData
 
 		private void OnUpVoteButtonClicked(object sender, EventArgs e)
 		{
+			bool upVoteMode;
+			string upVoteMessage = "+1";
+			string undoMessage = "Undo upvote";
 			Question q = (Question)((Button)sender).BindingContext;
-			q.UpVotes++;
+
+			upVoteMode = !((Button)sender).Text.Equals(undoMessage);
+
+			if (upVoteMode)
+			{
+			    q.UpVotes++;
+			    ((Button)sender).Text = undoMessage;
+			}
+			else
+			{
+				q.UpVotes--;
+			    ((Button)sender).Text = upVoteMessage;
+			}
 		}
 	}
 }
