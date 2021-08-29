@@ -54,7 +54,7 @@
 			            </StackLayout>
 			        </StackLayout>
 				</Frame>
-				<Button x:Name="findMPsButton" HorizontalOptions="Center" CornerRadius="20" BackgroundColor="Turquoise" Text="Find my MPs" Clicked="OnFindMPsButtonClicked" />
+				<Button x:Name="findMPsButton" HorizontalOptions="End" StyleClass="DoneButton" Text="Next" Clicked="OnFindMPsButtonClicked" />
 			<!-- <StackLayout Orientation="Vertical" HorizontalOptions="Center">
 				<Label Text="Register now? " />
 				<Label FontSize="Small" Text="(i) Registering allows you to suggest and vote on questions. Your name will be posted publicly. Your address will not be published. You choose whether to share your electorate." />

@@ -21,12 +21,12 @@ namespace PassingData
             if (context.MPsKnown)
             {
                 registerCitizenButton.IsVisible = true;
-                findMPsButton.IsVisible = false;
+                findElectoratesButton.IsVisible = false;
             }
             else
             {
                 registerCitizenButton.IsVisible = false;
-                findMPsButton.IsVisible = true;
+                findElectoratesButton.IsVisible = true;
             }
         }
 
@@ -52,9 +52,10 @@ namespace PassingData
             }
         }
 
-        async void OnFindMPsButtonClicked(object sender, EventArgs e)
+        async void OnFindElectoratesButtonClicked(object sender, EventArgs e)
         {
                 registerCitizenButton.IsVisible = true;
+                findElectoratesButton.IsVisible = false; 
                 var secondRegisterPage = new RegisterPage2(BindingContext);
 			    await Navigation.PushAsync (secondRegisterPage);
         }
