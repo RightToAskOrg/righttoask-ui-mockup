@@ -17,8 +17,7 @@
          		<Label Text="{Binding SearchKeyword}" FontSize="Medium" FontAttributes="Bold" />
         	</StackLayout>
             <StackLayout Orientation="Horizontal">
-            	<Label Text="Top 10?" FontSize="Medium" HorizontalOptions="FillAndExpand" />
-            	<Label Text="{Binding TopTen}" FontSize="Medium" FontAttributes="Bold" />
+            	<Label Text="Does the up button work?" FontSize="Medium" HorizontalOptions="FillAndExpand" />
             </StackLayout>
 			<ScrollView>
 			<ListView x:Name="QuestionListView" HasUnevenRows="True" ItemsSource="{Binding ExistingQuestions}" ItemTapped="Question_Selected"> 
@@ -29,12 +28,9 @@
 							<StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="4">
 								<Label Text="{Binding QuestionText }" />	
 								<StackLayout Orientation="Horizontal">
-									<Label Text="Asked by" />
-									<Label Text="{Binding QuestionSuggester }" />	
 									<Label Text="Upvotes " />
 									<Label Text="{Binding UpVotes }" />
-									<Label Text="| Downvotes " />
-									<Label Text="{Binding DownVotes}" />
+									<Button StyleClass="UpVoteButton" Clicked="OnUpVoteButtonClicked" />
 								</StackLayout>
 							</StackLayout>			
 						</ViewCell>

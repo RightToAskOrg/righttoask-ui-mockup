@@ -124,5 +124,11 @@ namespace PassingData
 		{
 			await Navigation.PopAsync();
 		}
+
+		private void OnUpVoteButtonClicked(object sender, EventArgs e)
+		{
+			Question q = (Question)((Button)sender).BindingContext;
+			q.UpVotes++;
+		}
 	}
 }

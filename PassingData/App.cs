@@ -96,6 +96,31 @@ namespace PassingData
             };
             Resources.Add(normalButton);
             
+            var upVoteButton = new Style(typeof(Xamarin.Forms.Button))
+            {
+                Class = "UpVoteButton",
+                ApplyToDerivedTypes = true,
+                Setters =
+                {
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.BackgroundColorProperty,
+                        Value = "Turquoise"
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.CornerRadiusProperty,
+                        Value = "20",
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.TextProperty,
+                        Value = "+1",
+                    },
+                }
+            };
+            Resources.Add(upVoteButton);
+            
             var normalEditor = new Style(typeof(Xamarin.Forms.Editor))
             {
                 Class = "NormalEditor",
@@ -126,22 +151,6 @@ namespace PassingData
             };
             Resources.Add(normalEntry);
             
-            /*
-            var advancedSearchControlStyle = new Style(typeof(AdvancedSearchControl))
-            {
-                Class = "NormalAdvancedSearchControl",
-                ApplyToDerivedTypes = true,
-                Setters =
-                {
-                    new Setter
-                    {
-                        Property = AdvancedSearchControl.KeywordProperty,
-                        Value = "TestKeyword"
-                    }
-                }
-            };
-            Resources.Add(advancedSearchControlStyle);
-            */
         }
     }
 }
