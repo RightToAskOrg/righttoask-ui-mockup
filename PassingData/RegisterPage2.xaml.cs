@@ -94,6 +94,7 @@ namespace PassingData
         }
 
         // At the moment this just chooses random electorates. 
+        // TODO: We probably want this to give the person a chance to go back an fix it if wrong.
         async void OnSubmitAddressButton_Clicked(object sender, EventArgs e)
         {
             ReadingContext context = (ReadingContext) BindingContext;
@@ -106,7 +107,10 @@ namespace PassingData
             context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagEntity.EntityName;
             context.MPsKnown = true;
 
-            ((Button) sender).Text = "Electorates found! See above";
+            await DisplayAlert("Electorates found!", 
+                "State Electorate: "+context.SelectedStateElectorate+"\nFederal Electorate: "+context.SelectedFederalElectorate, 
+                "OK");
+            ((Button) sender).IsVisible = false; 
             federalElectoratePicker.TextColor = Color.Black;
             stateElectoratePicker.TextColor = Color.Black;
             ((Button) sender).IsEnabled = false;

@@ -75,10 +75,17 @@ namespace PassingData
 			                            + selectedAuthorities;
 		}
 
-		private void OnDiscardButtonClicked(object sender, EventArgs e)
+		async void OnDiscardButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = "Draft Discarded";
-			((ReadingContext) BindingContext).DraftQuestion = "";
+            bool goHome = await DisplayAlert("Draft discarded", "", "Home", "Related questions");
+            ((ReadingContext)BindingContext).DraftQuestion = null;
+            if (goHome)
+            {
+                await Navigation.PopToRootAsync();
+            }
+
+            ((Button) sender).Text = "Draft Discarded";
+			// ((ReadingContext) BindingContext).DraftQuestion = "";
 			keepButton.IsVisible = false;
 		}
 

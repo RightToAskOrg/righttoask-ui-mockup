@@ -74,14 +74,25 @@ namespace PassingData
 
             // Note the condition here is necessary because they might have been offered the chance to
             // register, but have declined.
-            // Also note that setting QuestionSuggester may be unnessary - it may already be set correctly -
+            // Also note that setting QuestionSuggester may be unnecessary - it may already be set correctly -
             // but is needed if the person has just registered.
             if (((ReadingContext) BindingContext).Is_Registered)
             {
                 question.QuestionSuggester = ((ReadingContext) BindingContext).Username;
 	            ((ReadingContext) BindingContext).ExistingQuestions.Insert(0, question);
-                ((Button) sender).Text = "Published!";
-                ((Button) sender).IsEnabled = false;
+                // ((Button) sender).Text = "Published!";
+                bool goHome = await DisplayAlert("Question published!", "", "Home", "See related questions");
+                // ((Button) sender).IsEnabled = false;
+                ((ReadingContext)BindingContext).DraftQuestion = null;
+                if (goHome)
+                {
+                    await Navigation.PopToRootAsync();
+                }
+                else  // Pop back to readingpage. TODO: fix the context so that it doesn't think you're drafting
+                // a question.  Possibly the right thing to do is pop everything and then push a reading page.
+                {
+                    await Navigation.PopAsync();
+                }
             }
         }
 

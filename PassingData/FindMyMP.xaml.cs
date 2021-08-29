@@ -44,6 +44,7 @@ namespace PassingData
 
             context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagEntity.EntityName;
             context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagEntity.EntityName;
+            await DisplayAlert("Electorates found!", "State Electorate: ", "OK");
             await Navigation.PopAsync();
         }
 
