@@ -70,6 +70,11 @@ namespace PassingData
                     {
                         Property = Xamarin.Forms.Button.TextProperty,
                         Value = "Next",
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.HorizontalOptionsProperty,
+                        Value = "End",
                     }
                     
                 }

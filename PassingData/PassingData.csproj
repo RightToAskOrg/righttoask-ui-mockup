@@ -28,6 +28,7 @@
     <Compile Remove="SecondPage_old.xaml.cs" />
     <Compile Remove="App.xaml.cs" />
     <Compile Remove="PickerPage.xaml.cs" />
+    <Compile Remove="WebviewAuthoritySelect.cs" />
   </ItemGroup>
 
   <ItemGroup>

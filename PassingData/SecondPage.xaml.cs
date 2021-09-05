@@ -88,6 +88,7 @@ namespace PassingData
 		// TODO At the moment, this just turns the 'who should ask it' on,
 		// if you looked at the authority list, regardless of whether you actually
 		// chose one.
+		/*
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
 		{
 			string message = "Choose the authorities that should answer your question";
@@ -98,8 +99,16 @@ namespace PassingData
 
             questionAsker.IsVisible = true;
 		}
+		*/
 
-	    // If we already know the electorates (and hence responsible MPs), go
+
+		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
+		{
+			var webViewAuthoritySelectPage = new WebviewAuthoritySelect((ReadingContext) BindingContext);
+			await Navigation.PushAsync(webViewAuthoritySelectPage);
+		}
+
+		// If we already know the electorates (and hence responsible MPs), go
 	    // straight to the Explorer page that lists them.
 	    // If we don't, go to the page for entering address and finding them.
 	    // It will pop back to here.
