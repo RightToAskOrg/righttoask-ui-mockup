@@ -21,6 +21,9 @@
     </EmbeddedResource>
     <EmbeddedResource Remove="SecondPage_old.xaml" />
     <EmbeddedResource Remove="PickerPage.xaml" />
+    <EmbeddedResource Remove="TestFile2.resx" />
+    <None Remove="Resources\all-authorities.csv" />
+    <EmbeddedResource Include="Resources\all-authorities.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +32,16 @@
     <Compile Remove="App.xaml.cs" />
     <Compile Remove="PickerPage.xaml.cs" />
     <Compile Remove="WebviewAuthoritySelect.cs" />
+    <Compile Remove="TestFile2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="TestFile.txt" />
+    <EmbeddedResource Include="TestFile.txt" />
   </ItemGroup>
 
 </Project>

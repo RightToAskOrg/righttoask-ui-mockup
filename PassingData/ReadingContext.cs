@@ -1,6 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
@@ -142,6 +144,8 @@ namespace PassingData
 					UpVotes = 2
 				});
 
+			readAuthoritiesFromCSV();
+			/*
 			OtherAuthorities = new ObservableCollection<Tag>();
 			OtherAuthorities.Add(new Tag
 			{
@@ -169,6 +173,7 @@ namespace PassingData
 			{
 				TagEntity = new Entity { EntityName = "Australian Taxation Office", NickName = "ATO" }, Selected = false
 			});
+			*/
 
 			StatesOrTerritories = new ObservableCollection<Tag>();
 			StatesOrTerritories.Add(new Tag
@@ -284,6 +289,34 @@ namespace PassingData
 				TagEntity = new Entity { EntityName = "Wills"},
 				Selected = false
 			});
+		}
+
+		private void readAuthoritiesFromCSV()
+		{
+			OtherAuthorities = new ObservableCollection<Tag>();
+			try
+			{
+				Console.WriteLine("Trying to read the CSV file:");
+				// Open the text file using a stream reader.
+				var assembly = IntrospectionExtensions.GetTypeInfo(typeof(ReadingContext)).Assembly;
+				Stream stream = assembly.GetManifestResourceStream("PassingData.Resources.all-authorities.csv");
+				using (var sr = new StreamReader(stream))
+				// using (var sr = new StreamReader("TestFile.txt"))
+				{
+					// Read the first line, which just has headings we can ignore.
+					sr.ReadLine();
+					// Read the stream as a string, and write the string to the console.
+					Console.WriteLine("Here is the first line of the CSV file:");
+					Console.WriteLine(sr.ReadLine());
+					// DisplayAlert("Read the CSV file", sr.ReadLine(), "OK");
+				}
+			}
+			catch (IOException e)
+			{
+				Console.WriteLine("Authorities file could not be read:");
+				Console.WriteLine(e.Message);
+			}
+			
 		}
 
 		// TODO This ToString doesn't really properly convey the state of

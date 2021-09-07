@@ -10,6 +10,7 @@ namespace PassingData
 		{
 			InitializeComponent();
 
+			// TODO Possibly this should go in OnStart instead
 			readingContext = new ReadingContext { };
 			readingContext.InitializeDefaultSetup();
 		}

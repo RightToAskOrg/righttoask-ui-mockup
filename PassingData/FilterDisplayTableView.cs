@@ -87,11 +87,13 @@ namespace PassingData
                         // new View{ authorityList},
                         new StackLayout
                         {
-                            Orientation = StackOrientation.Vertical,
+                            // Orientation = StackOrientation.Vertical,
+                            Orientation = StackOrientation.Horizontal,
                             VerticalOptions = LayoutOptions.Start,
                             Children =
                             {
-                                authorityList
+                                authorityList,
+                                moreButton.View
                             }
                         }
                     }
