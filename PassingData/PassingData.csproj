@@ -41,7 +41,6 @@
 
   <ItemGroup>
     <None Remove="TestFile.txt" />
-    <EmbeddedResource Include="TestFile.txt" />
   </ItemGroup>
 
 </Project>

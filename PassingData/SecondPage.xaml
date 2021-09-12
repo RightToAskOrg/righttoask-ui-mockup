@@ -12,15 +12,14 @@
 			<StackLayout Orientation="Horizontal">
 				<Label Text="To be answered by " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
 				<StackLayout Orientation="Vertical">
-					<Picker x:Name="minsterOrDeptPicker" Title="A minister or department" 
+					<!-- <Picker x:Name="minsterOrDeptPicker" Title="A minister or department" 
 				        ItemsSource="{Binding Departments}" BackgroundColor="Turquoise"
 				        ItemDisplayBinding="{Binding TagEntity.EntityName}" 
 				        SelectedIndexChanged="OnPickerSelectedIndexChanged"> 
-					</Picker>
-						<!-- <Button x:Name="ministerOrDeptButton" Text="A minister or department" Clicked="OnMinisterOrDeptButtonClicked" /> -->
-					<Button CornerRadius="20" HeightRequest="40" x:Name="otherPublicAuthorityButton" Text="Another public Authority" Clicked="OnOtherPublicAuthorityButtonClicked" BackgroundColor="Turquoise"/>
-					<!-- <Button x:Name="myMP" Text="My MP" Clicked="OnMPAnswerButtonClicked" /> -->
-					 <Button x:Name="myMP" Text="My MP" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnAnsweredByMPButtonClicked" HorizontalOptions="Center"/>
+					</Picker> -->
+					<Button CornerRadius="20" HeightRequest="40" x:Name="otherPublicAuthorityButton" Text="A public Authority" Clicked="OnOtherPublicAuthorityButtonClicked" BackgroundColor="Turquoise"/>
+					<Button x:Name="myMP" Text="My MP" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnAnsweredByMPButtonClicked" HorizontalOptions="Center"/>
+					<Button x:Name="otherMP" Text="Another MP" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnAnswerByOtherMPButtonClicked" HorizontalOptions="Center"/>
 				</StackLayout>
 			</StackLayout>
 			<StackLayout x:Name="questionAsker" Orientation="Vertical">

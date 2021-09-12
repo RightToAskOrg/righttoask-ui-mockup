@@ -104,8 +104,11 @@ namespace PassingData
 
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
 		{
-			var webViewAuthoritySelectPage = new WebviewAuthoritySelect((ReadingContext) BindingContext);
-			await Navigation.PushAsync(webViewAuthoritySelectPage);
+			// var webViewAuthoritySelectPage = new WebviewAuthoritySelect((ReadingContext) BindingContext);
+			// await Navigation.PushAsync(webViewAuthoritySelectPage);
+			var exploringPageToSearchAuthorities= new ExploringPageWithSearch(((ReadingContext)BindingContext).OtherAuthorities,
+				"Choose authorties");
+			await Navigation.PushAsync(exploringPageToSearchAuthorities);
 		}
 
 		// If we already know the electorates (and hence responsible MPs), go
@@ -168,6 +171,11 @@ namespace PassingData
 		}
 		
 		private void OnOtherMPRaiseButtonClicked(object sender, EventArgs e)
+		{
+			((Button) sender).Text = $"Listing other MPs not implemented yet";	
+		}
+
+		private void OnAnswerByOtherMPButtonClicked(object sender, EventArgs e)
 		{
 			((Button) sender).Text = $"Listing other MPs not implemented yet";	
 		}

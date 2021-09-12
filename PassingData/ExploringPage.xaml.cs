@@ -24,6 +24,7 @@ namespace PassingData
 		{
 			InitializeComponent();
 
+			BindingContext = selectableTags;
 			AuthorityListView.ItemsSource = selectableTags;
 			introText.Text = message;
 		} 

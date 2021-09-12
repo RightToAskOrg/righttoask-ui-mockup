@@ -44,11 +44,14 @@ namespace PassingData
             AuthorityListView.ItemsSource = listToDisplay;
         }
 
+        // Look up whether either the long-form name or nickname/acronym
+        // includes the queryString.
         private ObservableCollection<Tag> GetSearchResults(string queryString)
         {
             var normalizedQuery = queryString?.ToLower() ?? "";
             return new ObservableCollection<Tag>(existingAuthorities.
-                Where(f => f.TagEntity.EntityName.ToLowerInvariant().Contains(normalizedQuery)).ToList());
+                Where(f => (f.TagEntity.EntityName+':'+f.TagEntity.NickName).
+                    ToLowerInvariant().Contains(normalizedQuery)).ToList());
         } 
         
         // private void OnReadByKeywordFieldCompleted(object sender, EventArgs e)

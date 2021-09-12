@@ -61,7 +61,7 @@ namespace PassingData
         {
             var matchingAuthorities 
                 = new ObservableCollection<Tag>(((ReadingContext)BindingContext).OtherAuthorities.
-                    Where(w => w.TagEntity.EntityName == authority));
+                    Where(w => w.TagEntity.RightToKnowURLSuffix  == authority));
             if (matchingAuthorities.Count == 0)
             {
                 Entity newAuthority = new Entity

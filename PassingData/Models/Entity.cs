@@ -16,6 +16,7 @@ namespace PassingData
         private string entityName;
         private string nickName;
         private UrlWebViewSource url;
+        private string rightToKnowURLSuffix;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -44,6 +45,15 @@ namespace PassingData
             {
                 nickName = value;
                 OnPropertyChanged("NickName");
+            }
+        }
+        public string RightToKnowURLSuffix
+        {
+            get { return rightToKnowURLSuffix; }
+            set
+            {
+                rightToKnowURLSuffix = value;
+                OnPropertyChanged("RightToKnowURLSuffix");
             }
         }
         public UrlWebViewSource URL

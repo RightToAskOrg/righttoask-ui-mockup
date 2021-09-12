@@ -81,7 +81,7 @@ namespace PassingData
                 question.QuestionSuggester = ((ReadingContext) BindingContext).Username;
 	            ((ReadingContext) BindingContext).ExistingQuestions.Insert(0, question);
                 // ((Button) sender).Text = "Published!";
-                bool goHome = await DisplayAlert("Question published!", "", "Home", "See related questions");
+                bool goHome = await DisplayAlert("Question published!", "", "Home", "Write another one");
                 // ((Button) sender).IsEnabled = false;
                 ((ReadingContext)BindingContext).DraftQuestion = null;
                 if (goHome)

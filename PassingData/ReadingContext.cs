@@ -293,22 +293,32 @@ namespace PassingData
 
 		private void readAuthoritiesFromCSV()
 		{
+			string line;
+			
 			OtherAuthorities = new ObservableCollection<Tag>();
 			try
 			{
-				Console.WriteLine("Trying to read the CSV file:");
-				// Open the text file using a stream reader.
+				Entity authorityToAdd;
 				var assembly = IntrospectionExtensions.GetTypeInfo(typeof(ReadingContext)).Assembly;
 				Stream stream = assembly.GetManifestResourceStream("PassingData.Resources.all-authorities.csv");
 				using (var sr = new StreamReader(stream))
-				// using (var sr = new StreamReader("TestFile.txt"))
 				{
 					// Read the first line, which just has headings we can ignore.
 					sr.ReadLine();
-					// Read the stream as a string, and write the string to the console.
-					Console.WriteLine("Here is the first line of the CSV file:");
-					Console.WriteLine(sr.ReadLine());
-					// DisplayAlert("Read the CSV file", sr.ReadLine(), "OK");
+					while ((line = sr.ReadLine()) != null)
+					{
+						Console.WriteLine(line);	
+						
+						authorityToAdd = parseCSVLineAsEntity(line);
+						if (authorityToAdd != null)
+						{
+							OtherAuthorities.Add(new Tag
+							{
+								TagEntity = authorityToAdd, 
+								Selected = false
+							});
+						}
+					}
 				}
 			}
 			catch (IOException e)
@@ -317,6 +327,29 @@ namespace PassingData
 				Console.WriteLine(e.Message);
 			}
 			
+		}
+
+		// This parses a line from Right To Know's CSV file.
+		// It is, obviously, very specific to the expected file format.
+		// Ignore any line that doesn't produce at least 3 words.
+		private Entity parseCSVLineAsEntity(string line)
+		{
+			string[] words = line.Split(',');
+			if (words.Length >= 3)
+			{
+				
+				Entity newAuthority = new Entity
+				{
+					EntityName = words[0],
+					NickName = words[1],
+					RightToKnowURLSuffix = words[2]
+				};
+				return newAuthority;
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 		// TODO This ToString doesn't really properly convey the state of
