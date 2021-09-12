@@ -7,7 +7,6 @@
 			<Label x:Name="introText" />
 			<ScrollView>
 				<ListView x:Name="AuthorityListView" x:FieldModifier="protected" VerticalOptions="FillAndExpand" SelectionMode="None" HasUnevenRows="True" ItemTapped="Authority_Selected"> 
-			<!-- <ListView x:Name="AuthorityListView" ItemsSource="{Binding OtherAuthorities}" ItemTapped="Authority_Selected">  -->
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>

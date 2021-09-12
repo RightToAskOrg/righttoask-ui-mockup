@@ -14,7 +14,7 @@ namespace PassingData
     public partial class ExploringPageWithSearch : ExploringPage
     {
         private string searchingFor;
-        private ObservableCollection<Tag> existingAuthorities;
+        protected ObservableCollection<Tag> existingAuthorities;
 
         // TODO Actually the best way to to this is to put the things that you selected at the beginning,
         // with the unselected things (or possibly everything) in the huge long list underneath.  
@@ -29,7 +29,6 @@ namespace PassingData
             SearchBar authoritySearch = new SearchBar() 
                 { 
                     Placeholder = "Search",
-                    // SearchButtonPressed=OnReadByKeywordFieldCompleted,
                 };
                 authoritySearch.TextChanged += OnKeywordChanged;
                 

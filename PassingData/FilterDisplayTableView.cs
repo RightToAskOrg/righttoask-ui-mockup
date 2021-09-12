@@ -16,13 +16,8 @@ namespace PassingData
             var section1 = new TableSection() { Title = "Filters"};
             var section2 = new TableSection() { };
 
-            /*
-            var entry1 = new Picker()
-            {
-                Title = "Level of government: ",
-                ItemsSource = ,
-            };
-            */
+            // TODO: Export this as its own View; use it in ExploringPageWithSearchAndPreSelections.
+            // Also possibly use it in base ExploringPage.
             var authorityDataTemplate = new DataTemplate(() =>
             {
                 var grid = new Grid();
