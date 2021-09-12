@@ -15,13 +15,13 @@ namespace PassingData
     {
         public ExploringPageWithSearchAndPreSelections(ObservableCollection<Tag> selectableTags, string message) :  base(selectableTags, message)
         {
-            SearchBar authoritySearch = new SearchBar() 
+            Label testInsert = new Label() 
                 { 
-                    Placeholder = "Search",
+                    Text = "This is a test.",
                 };
-                authoritySearch.TextChanged += OnKeywordChanged;
+                // authoritySearch.TextChanged += OnKeywordChanged;
                 
-            MainLayout.Children.Insert(0, RTKThanks);    
+            MainLayout.Children.Insert(1, testInsert);    
         }
     }
 }

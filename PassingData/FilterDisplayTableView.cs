@@ -122,7 +122,7 @@ namespace PassingData
         {
 			string message = "Choose the authorities that should answer your question";
 			
-           	var departmentExploringPage = new ExploringPageWithSearch(((ReadingContext) BindingContext).OtherAuthorities, message);
+           	var departmentExploringPage = new ExploringPageWithSearchAndPreSelections(((ReadingContext) BindingContext).OtherAuthorities, message);
             departmentExploringPage.BindingContext = BindingContext;
            	await Navigation.PushAsync (departmentExploringPage);
         }
