@@ -166,6 +166,22 @@ namespace PassingData
             };
             Resources.Add(normalEntry);
             
+            var selectableDataTemplate = new DataTemplate(() =>
+            {
+                var grid = new Grid();
+                var nameLabel = new Label { FontAttributes = FontAttributes.Bold };
+                var selectedToggle = new Switch();
+
+                // nameLabel.SetBinding(Label.TextProperty, "TagEntity.NickName");
+                nameLabel.SetBinding(Label.TextProperty, "TagEntity.EntityName");
+                selectedToggle.SetBinding(Switch.IsToggledProperty, "Selected");
+
+                grid.Children.Add(nameLabel);
+                grid.Children.Add(selectedToggle, 1, 0);
+                
+                return new Xamarin.Forms.ViewCell { View = grid };
+            });
+            Resources.Add("SelectableDataTemplate",selectableDataTemplate);
         }
     }
 }

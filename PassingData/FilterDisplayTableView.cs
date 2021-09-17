@@ -120,7 +120,7 @@ namespace PassingData
 
         async void OnMoreButtonClicked(object sender, EventArgs e)
         {
-			string message = "Choose the authorities that should answer your question";
+			string message = "Choose others to add";
 			
            	var departmentExploringPage = new ExploringPageWithSearchAndPreSelections(((ReadingContext) BindingContext).OtherAuthorities, message);
             departmentExploringPage.BindingContext = BindingContext;
