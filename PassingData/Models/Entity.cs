@@ -38,6 +38,11 @@ namespace PassingData
             }
         }
 
+        // Return the nickname if there is one, otherwise the long name.
+        public string ShortestName
+        {
+            get { return nickName != "" ? nickName : entityName;}
+        }
         public string NickName
         {
             get { return nickName; }

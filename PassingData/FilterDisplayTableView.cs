@@ -61,7 +61,8 @@ namespace PassingData
                 
                 // VerticalOptions = LayoutOptions.Start,
                 // SelectionMode = ListViewSelectionMode.None,
-                Text = String.Join(", ",readingContext.OtherAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.EntityName))
+                // Text = String.Join(", ",readingContext.OtherAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.EntityName))
+                Text = String.Join(", ",readingContext.OtherAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.ShortestName))
             };
             // BindableLayout.SetItemsSource(authorityList, readingContext.OtherAuthorities);
             // BindableLayout.SetItemTemplate(authorityList, authorityDataTemplate);
