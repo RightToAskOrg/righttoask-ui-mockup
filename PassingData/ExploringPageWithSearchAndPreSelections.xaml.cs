@@ -21,18 +21,22 @@ namespace PassingData
                 };
                 // authoritySearch.TextChanged += OnKeywordChanged;
                 
-            MainLayout.Children.Insert(1, testInsert);    
+            MainLayout.Children.Insert(1, testInsert);
+
+            listPriorSelections(selectableTags);
         }
 
-        /*
-        private listPriorSelections()
+        private void listPriorSelections(ObservableCollection<Tag> currentSelectableTags)
         {
             ListView selections = new ListView()
             {
+                
+                ItemTemplate=(DataTemplate)Application.Current.Resources["SelectableDataTemplate"],
+                ItemsSource = currentSelectableTags.Where(w => w.Selected)
                 // ItemTemplate = StaticResource SelectableDataTemplate,
             };
             MainLayout.Children.Insert(2,selections);
         }
-        */
+        
     }
 }

@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Xamarin.Forms;
 
 namespace PassingData
@@ -42,16 +42,27 @@ namespace PassingData
             entry2.Completed += OnWhoShouldAnswerCompleted;
             */
 
+            /*
             var authorityList = new ListView
             {
                 VerticalOptions = LayoutOptions.Start, 
                 SelectionMode = ListViewSelectionMode.None, 
                 ItemsSource = readingContext.OtherAuthorities,
                 HasUnevenRows = true,
-                ItemTemplate = authorityDataTemplate
+                // ItemTemplate = authorityDataTemplate
+                ItemTemplate=(DataTemplate)Application.Current.Resources["SelectableDataTemplate"]
             };
             // TODO Figure out how to pick up clicks.
             authorityList.ItemTapped += Authority_Selected;
+            */
+
+            var authorityList = new Label()
+            {
+                
+                // VerticalOptions = LayoutOptions.Start,
+                // SelectionMode = ListViewSelectionMode.None,
+                Text = String.Join(", ",readingContext.OtherAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.EntityName))
+            };
             // BindableLayout.SetItemsSource(authorityList, readingContext.OtherAuthorities);
             // BindableLayout.SetItemTemplate(authorityList, authorityDataTemplate);
                 
