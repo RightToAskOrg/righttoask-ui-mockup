@@ -69,6 +69,7 @@ namespace PassingData
 
                 // var authorityListView = new ViewCell { View = authorityList };
                 
+            /*
             var moreButton = new ViewCell
             {
                 View = new StackLayout
@@ -78,6 +79,7 @@ namespace PassingData
                 }
             };
             moreButton.Tapped += OnMoreButtonClicked;
+            */
 
             var whoShouldAnswerItView = new ViewCell
             {
@@ -99,12 +101,14 @@ namespace PassingData
                             Children =
                             {
                                 authorityList,
-                                moreButton.View
+                                // moreButton.View
                             }
-                        }
+                        },
+                        new Label { Text = "Edit" },
                     }
                 }
             };
+            whoShouldAnswerItView.Tapped += OnMoreButtonClicked;
             
             var entry3 = new EntryCell { Label = "Who should raise it in Parliament?", Placeholder = "Not sure" };
             var keywordentry = new EntryCell
@@ -120,7 +124,7 @@ namespace PassingData
 
             // section1.Add(entry2);
             section1.Add(whoShouldAnswerItView);
-            section1.Add(moreButton);
+            // section1.Add(moreButton);
             section2.Add(entry3);
             section2.Add(keywordentry);
             Root = root;
