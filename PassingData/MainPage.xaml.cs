@@ -12,7 +12,7 @@ namespace PassingData
 
 			// TODO Possibly this should go in OnStart instead
 			readingContext = new ReadingContext { };
-			readingContext.InitializeDefaultSetup();
+			// readingContext.InitializeDefaultSetup();
 		}
 
 		async void OnTop10NowButtonClicked(object sender, EventArgs e)

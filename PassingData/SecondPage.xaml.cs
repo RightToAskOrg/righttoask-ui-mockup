@@ -169,10 +169,24 @@ namespace PassingData
 		{
 			((Button) sender).Text = $"Finding Committees not implemented yet";	
 		}
-		
-		private void OnOtherMPRaiseButtonClicked(object sender, EventArgs e)
+
+		private async void OnOtherMPRaiseButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = $"Listing other MPs not implemented yet";	
+			var selectableMPs =
+				new ObservableCollection<Tag>(((ReadingContext)BindingContext).AllMPs.Select
+				(mp => new Tag
+				{
+					TagEntity = new Entity
+					{
+						EntityName = mp.PreferredName + " " + mp.FamilyName
+					},
+					Selected = false
+				}
+				)
+				);
+
+			var mpsPage = new ExploringPageWithSearch(selectableMPs, "Here is the complete list of MPs");
+			await Navigation.PushAsync(mpsPage);
 		}
 
 		private void OnAnswerByOtherMPButtonClicked(object sender, EventArgs e)

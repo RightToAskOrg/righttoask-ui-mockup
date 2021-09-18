@@ -13,10 +13,11 @@ namespace PassingData
 {
     public class Entity : INotifyPropertyChanged
     {
-        private string entityName;
-        private string nickName;
-        private UrlWebViewSource url;
-        private string rightToKnowURLSuffix;
+        protected string entityName;
+        protected string nickName;
+        protected UrlWebViewSource url;
+        // TODO: Refactor into a 'public authority' 
+        protected string rightToKnowURLSuffix;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

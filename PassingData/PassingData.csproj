@@ -24,6 +24,14 @@
     <EmbeddedResource Remove="TestFile2.resx" />
     <None Remove="Resources\all-authorities.csv" />
     <EmbeddedResource Include="Resources\all-authorities.csv" />
+    <None Remove="Resources\allsenstate.csv" />
+    <EmbeddedResource Include="Resources\allsenstate.csv" />
+    <None Remove="Resources\StateRepsCSV.csv" />
+    <EmbeddedResource Include="Resources\StateRepsCSV.csv" />
+    <None Remove="Resources\VicLegislativeAssemblymembers.csv" />
+    <EmbeddedResource Include="Resources\VicLegislativeAssemblymembers.csv" />
+    <None Remove="Resources\VicLeigslativeCouncilmembers.csv" />
+    <EmbeddedResource Include="Resources\VicLeigslativeCouncilmembers.csv" />
   </ItemGroup>
 
   <ItemGroup>

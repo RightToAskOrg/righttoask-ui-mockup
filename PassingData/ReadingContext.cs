@@ -11,7 +11,11 @@ namespace PassingData
 	public class ReadingContext : INotifyPropertyChanged
 	{
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
+        public ReadingContext()
+        {
+	        InitializeDefaultSetup();
+        }
         // This function allows for automatic UI updates when these properties change.
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -64,6 +68,7 @@ namespace PassingData
 		// from which at the moment you select the ones
 		// that are yours
 		public ObservableCollection<Tag> MyMPs { get; set; }
+		public ObservableCollection<MP> AllMPs { get; set; }
 
 		public ObservableCollection<Question> ExistingQuestions { get; set; }
 		
@@ -79,7 +84,7 @@ namespace PassingData
 
 		// At the moment, this simply populates the reading context with a
 		// hardcoded set of "existing" questions, authorities, etc.
-		public void InitializeDefaultSetup()
+		private void InitializeDefaultSetup()
 		{
 			MatchingQuestions = 4782;
 
@@ -145,6 +150,8 @@ namespace PassingData
 				});
 
 			readAuthoritiesFromCSV();
+			AllMPs = new ObservableCollection<MP>();
+			readMPsFromCSV("StateRepsCSV.csv",AllMPs);
 			/*
 			OtherAuthorities = new ObservableCollection<Tag>();
 			OtherAuthorities.Add(new Tag
@@ -307,8 +314,6 @@ namespace PassingData
 					sr.ReadLine();
 					while ((line = sr.ReadLine()) != null)
 					{
-						Console.WriteLine(line);	
-						
 						authorityToAdd = parseCSVLineAsEntity(line);
 						if (authorityToAdd != null)
 						{
@@ -328,6 +333,37 @@ namespace PassingData
 			}
 			
 		}
+
+		private void readMPsFromCSV(string filename, ObservableCollection<MP> MPCollection)
+		{
+			string line;
+
+			try
+			{
+				MP MPToAdd;
+				var assembly = IntrospectionExtensions.GetTypeInfo(typeof(ReadingContext)).Assembly;
+				Stream stream = assembly.GetManifestResourceStream("PassingData.Resources." + filename);
+				using (var sr = new StreamReader(stream))
+				{
+					// Read the first line, which just has headings we can ignore.
+					sr.ReadLine();
+					while ((line = sr.ReadLine()) != null)
+					{
+						MPToAdd = parseCSVLineAsMP(line);
+						if (MPToAdd != null)
+						{
+							MPCollection.Add(MPToAdd);
+						}
+					}
+				}
+			}
+			catch (IOException e)
+			{
+				Console.WriteLine("MP file could not be read: " + filename);
+				Console.WriteLine(e.Message);
+			}
+		}
+		
 
 		// This parses a line from Right To Know's CSV file.
 		// It is, obviously, very specific to the expected file format.
@@ -351,6 +387,26 @@ namespace PassingData
 				return null;
 			}
 		}
+		
+		private MP parseCSVLineAsMP(string line)
+		{
+			string[] words = line.Split(',');
+			if (words.Length >= 5)
+			{
+				MP newMP = new MP
+				{
+					FamilyName = words[1],
+					PreferredName = words[2],
+					ElectorateRepresenting = words[3],
+					StateOrTerritory = words[4],
+					
+				};
+				return newMP;
+			}
+			
+			return null;
+		}
+		
 
 		// TODO This ToString doesn't really properly convey the state of
 		// the ReadingContext, e.g. doesn't reflect registering or knowing your
