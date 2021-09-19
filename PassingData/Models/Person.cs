@@ -19,7 +19,6 @@ namespace PassingData
         protected string stateOrTerritoryLAElectorate;
 
         // TODO add attributes for a nice profile, such as a photo.
-
     }
 
 }

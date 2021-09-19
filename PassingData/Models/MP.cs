@@ -12,6 +12,11 @@ namespace PassingData
     public class MP : Person
     {
         public string ElectorateRepresenting { get; set; }
-    }
+    
+        public override string ToString()
+        {
+            return base.ToString() + ElectorateRepresenting;
+        }
 
+    }
 }

@@ -71,5 +71,10 @@ namespace PassingData
                 OnPropertyChanged("URL");
             }
         }
+
+        public override string ToString()
+        {
+            return EntityName;
+        }
     }
 }

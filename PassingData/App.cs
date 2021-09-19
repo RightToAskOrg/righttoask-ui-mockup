@@ -173,7 +173,7 @@ namespace PassingData
                 var selectedToggle = new Switch();
 
                 // nameLabel.SetBinding(Label.TextProperty, "TagEntity.NickName");
-                nameLabel.SetBinding(Label.TextProperty, "TagEntity.EntityName");
+                nameLabel.SetBinding(Label.TextProperty, "TagEntity");
                 selectedToggle.SetBinding(Switch.IsToggledProperty, "Selected");
 
                 grid.Children.Add(nameLabel);
