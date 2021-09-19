@@ -11,8 +11,8 @@ namespace PassingData
 {
     public class Person : Entity
     {
-        public string PreferredName { get; set; }
-        public string FamilyName { get; set; }
+        // public string PreferredName { get; set; }
+        // public string FamilyName { get; set; }
         public string StateOrTerritory { get; set; }
         protected string federalElectorate;
         protected string stateOrTerritoryLCElectorate;

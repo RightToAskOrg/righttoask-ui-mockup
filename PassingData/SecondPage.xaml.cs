@@ -176,10 +176,7 @@ namespace PassingData
 				new ObservableCollection<Tag>(((ReadingContext)BindingContext).AllMPs.Select
 				(mp => new Tag
 				{
-					TagEntity = new Entity
-					{
-						EntityName = mp.PreferredName + " " + mp.FamilyName
-					},
+					TagEntity = mp, 
 					Selected = false
 				}
 				)

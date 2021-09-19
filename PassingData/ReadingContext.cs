@@ -395,8 +395,9 @@ namespace PassingData
 			{
 				MP newMP = new MP
 				{
-					FamilyName = words[1],
-					PreferredName = words[2],
+					EntityName = words[2] +" "+ words[1],
+					// FamilyName = words[1],
+					// PreferredName = words[2],
 					ElectorateRepresenting = words[3],
 					StateOrTerritory = words[4],
 					
