@@ -19,7 +19,7 @@ namespace PassingData
 		{
 			readingContext.TopTen = true;
 
-			var readingPage = new ReadingPage (true, readingContext.OtherAuthorities);
+			var readingPage = new ReadingPage (true, readingContext.SelectableAuthorities);
 			readingPage.BindingContext = readingContext;
 			await Navigation.PushAsync (readingPage);
 		}
@@ -41,7 +41,7 @@ namespace PassingData
 
 		async void launchKeywordReadingPage()
 		{
-			var readingPage = new ReadingPage (true, readingContext.OtherAuthorities);
+			var readingPage = new ReadingPage (true, readingContext.SelectableAuthorities);
 			readingPage.BindingContext = readingContext;
 			await Navigation.PushAsync(readingPage);
 		}

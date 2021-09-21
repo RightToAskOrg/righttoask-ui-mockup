@@ -60,7 +60,7 @@ namespace PassingData
         private void insertOrSelect(string authority)
         {
             var matchingAuthorities 
-                = new ObservableCollection<Tag>(((ReadingContext)BindingContext).OtherAuthorities.
+                = new ObservableCollection<Tag>(((ReadingContext)BindingContext).SelectableAuthorities.
                     Where(w => w.TagEntity.RightToKnowURLSuffix  == authority));
             if (matchingAuthorities.Count == 0)
             {
@@ -74,7 +74,7 @@ namespace PassingData
                     TagEntity = newAuthority,
                     Selected = true
                 };
-                ((ReadingContext) BindingContext).OtherAuthorities.Add(newAuthorityTag);
+                ((ReadingContext) BindingContext).SelectableAuthorities.Add(newAuthorityTag);
 
             } else if (matchingAuthorities.Count == 1)
             {

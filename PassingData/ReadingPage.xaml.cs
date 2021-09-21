@@ -98,7 +98,7 @@ namespace PassingData
 			ObservableCollection<Entity> questionAnswerers;
 			questionAnswerers =
 				new ObservableCollection<Entity>(
-					context.OtherAuthorities.Where(w => w.Selected).Select(a => a.TagEntity));
+					context.SelectableAuthorities.Where(w => w.Selected).Select(a => a.TagEntity));
 			if (context.SelectedDepartment != null)
 				questionAnswerers.Insert(0, context.SelectedDepartment);
 

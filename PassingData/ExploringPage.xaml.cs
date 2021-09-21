@@ -11,15 +11,8 @@ using Xamarin.Forms.Xaml;
 namespace PassingData
 {
 //    [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ExploringPage : ContentPage
+	public partial class ExploringPage : ContentPage 
 	{
-		// private ObservableCollection<Tag> authorities = new ObservableCollection<Tag>();
-
-		// public ObservableCollection<Tag> Authorities
-		//{
-		//	get { return authorities; }
-		//}
-
 		public ExploringPage(ObservableCollection<Tag> selectableTags, string message)
 		{
 			InitializeComponent();

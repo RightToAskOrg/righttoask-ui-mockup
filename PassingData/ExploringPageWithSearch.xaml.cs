@@ -11,10 +11,10 @@ using Xamarin.Forms.Xaml;
 namespace PassingData
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExploringPageWithSearch : ExploringPage
+    public partial class ExploringPageWithSearch : ExploringPage 
     {
         private string searchingFor;
-        protected ObservableCollection<Tag> existingAuthorities;
+        protected ObservableCollection<Tag> selectableEntities;
 
         // TODO Actually the best way to to this is to put the things that you selected at the beginning,
         // with the unselected things (or possibly everything) in the huge long list underneath.  
@@ -23,7 +23,7 @@ namespace PassingData
         // Also use the BindingContext properly. I think the setting should be in the base, not here.
         public ExploringPageWithSearch(ObservableCollection<Tag> selectableTags, string message) :  base(selectableTags, message)
         {
-            existingAuthorities = selectableTags;
+            selectableEntities = selectableTags;
             // BindingContext = selectableTags;
             Label RTKThanks = new Label() { Text = "Using The Australian Authorities List from Right To Know." };
             SearchBar authoritySearch = new SearchBar() 
@@ -45,17 +45,15 @@ namespace PassingData
 
         // Look up whether either the long-form name or nickname/acronym
         // includes the queryString.
+        // TODO Consider whether this really needs the Entity name or could instead
+        // use ToString and hence make the whole class completely generic.
         private ObservableCollection<Tag> GetSearchResults(string queryString)
         {
             var normalizedQuery = queryString?.ToLower() ?? "";
-            return new ObservableCollection<Tag>(existingAuthorities.
+            return new ObservableCollection<Tag>(selectableEntities.
                 Where(f => (f.TagEntity.EntityName+':'+f.TagEntity.NickName).
                     ToLowerInvariant().Contains(normalizedQuery)).ToList());
         } 
         
-        // private void OnReadByKeywordFieldCompleted(object sender, EventArgs e)
-        // {
-        //    throw new NotImplementedException();
-        // }
     }
 }

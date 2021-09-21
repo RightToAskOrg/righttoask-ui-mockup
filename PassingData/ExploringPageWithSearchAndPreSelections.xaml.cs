@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace PassingData
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExploringPageWithSearchAndPreSelections : ExploringPageWithSearch 
+    public partial class ExploringPageWithSearchAndPreSelections  : ExploringPageWithSearch 
     {
         public ExploringPageWithSearchAndPreSelections(ObservableCollection<Tag> selectableTags, string message) :  base(selectableTags, message)
         {

@@ -62,7 +62,7 @@ namespace PassingData
                 // VerticalOptions = LayoutOptions.Start,
                 // SelectionMode = ListViewSelectionMode.None,
                 // Text = String.Join(", ",readingContext.OtherAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.EntityName))
-                Text = String.Join(", ",readingContext.OtherAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.ShortestName))
+                Text = String.Join(", ",readingContext.SelectableAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.ShortestName))
             };
             // BindableLayout.SetItemsSource(authorityList, readingContext.OtherAuthorities);
             // BindableLayout.SetItemTemplate(authorityList, authorityDataTemplate);
@@ -138,7 +138,7 @@ namespace PassingData
         {
 			string message = "Choose others to add";
 			
-           	var departmentExploringPage = new ExploringPageWithSearchAndPreSelections(((ReadingContext) BindingContext).OtherAuthorities, message);
+           	var departmentExploringPage = new ExploringPageWithSearchAndPreSelections(((ReadingContext) BindingContext).SelectableAuthorities, message);
             departmentExploringPage.BindingContext = BindingContext;
            	await Navigation.PushAsync (departmentExploringPage);
         }

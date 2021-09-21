@@ -37,7 +37,7 @@ namespace PassingData
         // Will they expect to be adding a new stack layer, or popping off old ones?
         private async void SeeQuestionsButton_OnClicked(object sender, EventArgs e)
         {
-			var readingPage = new ReadingPage(true, ((ReadingContext) BindingContext).OtherAuthorities);
+			var readingPage = new ReadingPage(true, ((ReadingContext) BindingContext).SelectableAuthorities);
 			readingPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (readingPage);
         }

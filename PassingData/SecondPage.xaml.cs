@@ -11,7 +11,7 @@ namespace PassingData
 	public partial class SecondPage : ContentPage
 	{
 		private string question;
-		private ObservableCollection<Tag> otherAuthorities;
+		private ObservableCollection<Tag> SelectableAuthorities;
 		private bool isReadingOnly;
 
 		public SecondPage (bool MPsAreSelected, bool IsReadingOnly)
@@ -66,11 +66,11 @@ namespace PassingData
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
 			bool needToFindAnswerer = ((ReadingContext) BindingContext).SelectedDepartment != null
-			       || ((ReadingContext) BindingContext).OtherAuthorities.Where(w => w.Selected).Count() != 0;
+			       || ((ReadingContext) BindingContext).SelectableAuthorities.Where(w => w.Selected).Count() != 0;
 			
 			if (isReadingOnly || !needToFindAnswerer)
 			{
-				var readingPage = new ReadingPage(isReadingOnly, ((ReadingContext) BindingContext).OtherAuthorities);
+				var readingPage = new ReadingPage(isReadingOnly, ((ReadingContext) BindingContext).SelectableAuthorities);
 				readingPage.BindingContext = BindingContext;
 				await Navigation.PushAsync (readingPage);
 			}
@@ -106,7 +106,7 @@ namespace PassingData
 		{
 			// var webViewAuthoritySelectPage = new WebviewAuthoritySelect((ReadingContext) BindingContext);
 			// await Navigation.PushAsync(webViewAuthoritySelectPage);
-			var exploringPageToSearchAuthorities= new ExploringPageWithSearch(((ReadingContext)BindingContext).OtherAuthorities,
+			var exploringPageToSearchAuthorities= new ExploringPageWithSearch(((ReadingContext)BindingContext).SelectableAuthorities,
 				"Choose authorties");
 			await Navigation.PushAsync(exploringPageToSearchAuthorities);
 		}

@@ -50,7 +50,7 @@ namespace PassingData
 
         async void OnNavigateForwardButtonClicked(object sender, EventArgs e)
         {
-			var readingPage = new ReadingPage(false, ((ReadingContext) BindingContext).OtherAuthorities);
+			var readingPage = new ReadingPage(false, ((ReadingContext) BindingContext).SelectableAuthorities);
 			readingPage.BindingContext = BindingContext;
 			await Navigation.PushAsync (readingPage);
         }

@@ -74,7 +74,7 @@ namespace PassingData
 
         public override string ToString()
         {
-            return EntityName;
+            return EntityName + "(" + NickName + ")";
         }
     }
 }

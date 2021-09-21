@@ -10,20 +10,7 @@ namespace PassingData
     public static class BackgroundElectorateAndMPData 
     {
 		public static readonly ObservableCollection<MP> AllMPs = readMPInfoFromFiles();
-		public static readonly ObservableCollection<Entity> 
-
-        // private static readonly List<(string Filename, ObservableCollection<Entity> Datastore)> filesToObjects;
-        // private static ObservableCollection<MP> allMPs;
-
-       // public BackgroundElectorateAndMPData()
-        // {
-            // filesToObjects = new List<(string, ObservableCollection<Entity>)>()
-            // filesToObjects = new List<>()
-            // {
-            //     ("all-authorities.csv", allMPs )
-            // };
-
-       // }
+		public static readonly ObservableCollection<Entity> AllAuthorities = readAuthoritiesFromFiles();
 
         private static ObservableCollection<MP> readMPInfoFromFiles()
         {
@@ -36,6 +23,12 @@ namespace PassingData
 		    return AllMPs;
         }
 
+       private static ObservableCollection<Entity> readAuthoritiesFromFiles()
+       {
+		    var AllAuthorities = new ObservableCollection<Entity>();
+		    readDataFromCSV("all-authorities.csv",AllAuthorities,parseCSVLineAsAuthority);
+		    return AllAuthorities;
+       }
         
 		private static void readDataFromCSV<T>(string filename, ObservableCollection<T> MPCollection, Func<string,T> parseLine)
 		{
@@ -86,5 +79,28 @@ namespace PassingData
 			
 			return null;
 		}	
+		
+		// This parses a line from Right To Know's CSV file as an Authority.
+		// It is, obviously, very specific to the expected file format.
+		// Ignore any line that doesn't produce at least 3 words.
+		private static Entity parseCSVLineAsAuthority(string line)
+		{
+			string[] words = line.Split(',');
+			if (words.Length >= 3)
+			{
+				
+				Entity newAuthority = new Entity
+				{
+					EntityName = words[0],
+					NickName = words[1],
+					RightToKnowURLSuffix = words[2]
+				};
+				return newAuthority;
+			}
+			else
+			{
+				return null;
+			}
+		}
     }
 }

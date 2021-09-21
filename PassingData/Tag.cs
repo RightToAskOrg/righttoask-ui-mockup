@@ -3,8 +3,10 @@ using System.Runtime.CompilerServices;
 
 namespace PassingData
 {
-    public class Tag : INotifyPropertyChanged
+    public class Tag : INotifyPropertyChanged 
     {
+        // TODO probably Entity should be readonly.
+        // TODO Also make generic.
         private Entity tagEntity;
         private bool selected;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,7 +47,7 @@ namespace PassingData
                 }
         public override string ToString ()
         {
-            return TagEntity.EntityName + "("+TagEntity.NickName+")"+ "\n" +
+            return TagEntity.ToString() +"\n" + 
                 (Selected ? "" : "Not ") +
                 "Selected" + "\n";
         }

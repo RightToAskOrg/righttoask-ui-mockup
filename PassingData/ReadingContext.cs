@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
@@ -16,7 +17,6 @@ namespace PassingData
         {
 	        InitializeDefaultSetup();
         }
-        // This function allows for automatic UI updates when these properties change.
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)
@@ -63,18 +63,15 @@ namespace PassingData
 
 		// Existing things about the world.
 		// TODO: at the moment, the list of 'my MPs' is the 
-		// same as the original complete set of MPs.
-		// This is initiated with a default list of MPs,
-		// from which at the moment you select the ones
-		// that are yours
+		// hardcoded and has the generic 'Entity' type. 
+		
 		public ObservableCollection<Tag> MyMPs { get; set; }
-		// public ObservableCollection<MP> AllMPs { get; set; }
 
 		public ObservableCollection<Question> ExistingQuestions { get; set; }
 		
 		public ObservableCollection<Tag> Departments { get; set; }
-		
-		public ObservableCollection<Tag> OtherAuthorities { get; set; }
+
+		public ObservableCollection<Tag> SelectableAuthorities { get; set; }
 
 		public ObservableCollection<Tag> StatesOrTerritories { get; set; }
 		public ObservableCollection<Tag> StateElectorates { get; set; }
@@ -83,11 +80,18 @@ namespace PassingData
 
 
 		// At the moment, this simply populates the reading context with a
-		// hardcoded set of "existing" questions, authorities, etc.
+		// hardcoded set of "existing" questions.
 		private void InitializeDefaultSetup()
 		{
-			// BackgroundElectorateAndMPData backgroundSetup = new BackgroundElectorateAndMPData();
-			//AllMPs = BackgroundElectorateAndMPData.AllMPs;
+			SelectableAuthorities =
+				new ObservableCollection<Tag>(BackgroundElectorateAndMPData.AllAuthorities.Select
+				(authority => new Tag
+				{
+					TagEntity = authority, 
+					Selected = false
+				}
+				)
+				);
 			
 			MatchingQuestions = 4782;
 
@@ -151,39 +155,6 @@ namespace PassingData
 					DownVotes = 1,
 					UpVotes = 2
 				});
-
-			readAuthoritiesFromCSV();
-			// AllMPs = new ObservableCollection<MP>();
-			// readMPsFromCSV("StateRepsCSV.csv",AllMPs);
-			/*
-			OtherAuthorities = new ObservableCollection<Tag>();
-			OtherAuthorities.Add(new Tag
-			{
-				TagEntity = new Entity { EntityName = "Australian Electoral Commission", NickName = "AEC" },
-				Selected = false
-			});
-			OtherAuthorities.Add(new Tag
-			{
-				TagEntity = new Entity { EntityName = "Digital Transformation Authority", NickName = "DTA" },
-				Selected = false
-			});
-			OtherAuthorities.Add(new Tag
-			{
-				TagEntity = new Entity
-					{ EntityName = "Office of the Australian Information Commissioner", NickName = "OAIC" },
-				Selected = false
-			});
-			OtherAuthorities.Add(new Tag
-			{
-				TagEntity = new Entity
-					{ EntityName = "Australian Security Intelligence Organisation", NickName = "ASIO" },
-				Selected = false
-			});
-			OtherAuthorities.Add(new Tag
-			{
-				TagEntity = new Entity { EntityName = "Australian Taxation Office", NickName = "ATO" }, Selected = false
-			});
-			*/
 
 			StatesOrTerritories = new ObservableCollection<Tag>();
 			StatesOrTerritories.Add(new Tag
@@ -301,69 +272,6 @@ namespace PassingData
 			});
 		}
 
-		private void readAuthoritiesFromCSV()
-		{
-			string line;
-			
-			OtherAuthorities = new ObservableCollection<Tag>();
-			try
-			{
-				Entity authorityToAdd;
-				var assembly = IntrospectionExtensions.GetTypeInfo(typeof(ReadingContext)).Assembly;
-				Stream stream = assembly.GetManifestResourceStream("PassingData.Resources.all-authorities.csv");
-				using (var sr = new StreamReader(stream))
-				{
-					// Read the first line, which just has headings we can ignore.
-					sr.ReadLine();
-					while ((line = sr.ReadLine()) != null)
-					{
-						authorityToAdd = parseCSVLineAsEntity(line);
-						if (authorityToAdd != null)
-						{
-							OtherAuthorities.Add(new Tag
-							{
-								TagEntity = authorityToAdd, 
-								Selected = false
-							});
-						}
-					}
-				}
-			}
-			catch (IOException e)
-			{
-				Console.WriteLine("Authorities file could not be read:");
-				Console.WriteLine(e.Message);
-			}
-			
-		}
-
-
-		// This parses a line from Right To Know's CSV file.
-		// It is, obviously, very specific to the expected file format.
-		// Ignore any line that doesn't produce at least 3 words.
-		private Entity parseCSVLineAsEntity(string line)
-		{
-			string[] words = line.Split(',');
-			if (words.Length >= 3)
-			{
-				
-				Entity newAuthority = new Entity
-				{
-					EntityName = words[0],
-					NickName = words[1],
-					RightToKnowURLSuffix = words[2]
-				};
-				return newAuthority;
-			}
-			else
-			{
-				return null;
-			}
-		}
-		
-
-		
-
 		// TODO This ToString doesn't really properly convey the state of
 		// the ReadingContext, e.g. doesn't reflect registering or knowing your
 		// MPs.
@@ -380,7 +288,7 @@ namespace PassingData
 			       "Number of matching questions: " + MatchingQuestions.ToString() + '\n' +
 			       "Selected Department: " + SelectedDepartment.EntityName + '\n' +
 			       "Departments: " + Departments.ToString() + '\n' +
-			       "Other Authorities: " + OtherAuthorities.ToString() + '\n';
+			       "Other Authorities: " + SelectableAuthorities.ToString() + '\n';
 		}
 
 		// These functions allow automatic UI updates when these values change.
