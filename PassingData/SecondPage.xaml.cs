@@ -173,7 +173,7 @@ namespace PassingData
 		private async void OnOtherMPRaiseButtonClicked(object sender, EventArgs e)
 		{
 			var selectableMPs =
-				new ObservableCollection<Tag>(((ReadingContext)BindingContext).AllMPs.Select
+				new ObservableCollection<Tag>(BackgroundElectorateAndMPData.AllMPs.Select
 				(mp => new Tag
 				{
 					TagEntity = mp, 

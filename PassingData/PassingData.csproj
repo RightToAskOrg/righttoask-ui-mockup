@@ -31,7 +31,8 @@
     <None Remove="Resources\VicLegislativeAssemblymembers.csv" />
     <EmbeddedResource Include="Resources\VicLegislativeAssemblymembers.csv" />
     <None Remove="Resources\VicLeigslativeCouncilmembers.csv" />
-    <EmbeddedResource Include="Resources\VicLeigslativeCouncilmembers.csv" />
+    <None Remove="Resources\VicLegislativeCouncilmembers.csv" />
+    <EmbeddedResource Include="Resources\VicLegislativeCouncilmembers.csv" />
   </ItemGroup>
 
   <ItemGroup>

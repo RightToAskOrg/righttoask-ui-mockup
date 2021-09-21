@@ -53,7 +53,7 @@
 
 	/* 5: PassingData.dll */
 	/* uncompressed_file_size */
-	.word	92160
+	.word	373248
 	/* loaded */
 	.byte	0
 	/* data */

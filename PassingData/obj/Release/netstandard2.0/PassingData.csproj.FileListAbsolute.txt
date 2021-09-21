@@ -6,7 +6,6 @@
 /home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/FindMyMP.xaml.g.cs
 /home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/MainPage.xaml.g.cs
 /home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/PersonProfilePage.xaml.g.cs
-/home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/PickerPage.xaml.g.cs
 /home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/QuestionAskerPage.xaml.g.cs
 /home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/QuestionDetailPage.xaml.g.cs
 /home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/ReadingPage.xaml.g.cs
@@ -19,3 +18,7 @@
 /home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/XamlC.stamp
 /home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/PassingData.dll
 /home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/PassingData.pdb
+/home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/AuthoritiesRTKCategories.xaml.g.cs
+/home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/ExploringPageWithSearch.xaml.g.cs
+/home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/ExploringPageWithSearchAndPreSelections.xaml.g.cs
+/home/vanessa/RiderProjects/UIMockUp/PassingData/obj/Release/netstandard2.0/WebviewAuthoritySelect.xaml.g.cs

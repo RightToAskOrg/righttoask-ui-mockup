@@ -73,7 +73,7 @@
 
 	/* 5: PassingData.dll */
 	/* uncompressed_file_size */
-	.long	92160
+	.long	373248
 	/* loaded */
 	.byte	0
 	/* data */
