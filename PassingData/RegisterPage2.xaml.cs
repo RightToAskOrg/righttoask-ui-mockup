@@ -20,6 +20,7 @@ namespace PassingData
             BindingContext = context;
             addressSavingStack.IsVisible = false;
             findMPsButton.IsVisible = false;
+            stateOrTerritoryPicker.ItemsSource = BackgroundElectorateAndMPData.StatesAndTerritories;
         }
         
         // TODO Refactor this nicely so it isn't copy-pasted in FindMyMP
@@ -31,9 +32,7 @@ namespace PassingData
          
             if (selectedIndex != -1)
             {
-                Tag selectedState = (Tag) picker.ItemsSource[selectedIndex];
-                selectedState.Selected = true;
-                ((ReadingContext) BindingContext).SelectedStateOrTerritory = selectedState.TagEntity.EntityName;
+                ((ReadingContext) BindingContext).SelectedStateOrTerritory = (string) picker.SelectedItem;
             }
         }
 

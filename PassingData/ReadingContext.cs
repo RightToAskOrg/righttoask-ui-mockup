@@ -73,7 +73,7 @@ namespace PassingData
 
 		public ObservableCollection<Tag> SelectableAuthorities { get; set; }
 
-		public ObservableCollection<Tag> StatesOrTerritories { get; set; }
+		// public ObservableCollection<Tag> StatesOrTerritories { get; set; }
 		public ObservableCollection<Tag> StateElectorates { get; set; }
 		public ObservableCollection<Tag> FederalElectorates { get; set; }
 		
@@ -156,27 +156,7 @@ namespace PassingData
 					UpVotes = 2
 				});
 
-			StatesOrTerritories = new ObservableCollection<Tag>();
-			StatesOrTerritories.Add(new Tag
-			{
-				TagEntity = new Entity { EntityName = "Australian Capital Territory", NickName = "ACT" },
-				Selected = false
-			});
-			StatesOrTerritories.Add(new Tag
-				{ TagEntity = new Entity { EntityName = "Queensland", NickName = "Qld" }, Selected = false });
-			StatesOrTerritories.Add(new Tag
-				{ TagEntity = new Entity { EntityName = "New South Wales", NickName = "NSW" }, Selected = false });
-			StatesOrTerritories.Add(new Tag
-				{ TagEntity = new Entity { EntityName = "Northern Territory", NickName = "NT" }, Selected = false });
-			StatesOrTerritories.Add(new Tag
-				{ TagEntity = new Entity { EntityName = "South Australia", NickName = "SA" }, Selected = false });
-			StatesOrTerritories.Add(new Tag
-				{ TagEntity = new Entity { EntityName = "Tasmania", NickName = "Tas" }, Selected = false });
-			StatesOrTerritories.Add(new Tag
-				{ TagEntity = new Entity { EntityName = "Victoria", NickName = "Vic" }, Selected = false });
-			StatesOrTerritories.Add(new Tag
-				{ TagEntity = new Entity { EntityName = "Western Australia", NickName = "WA" }, Selected = false });
-
+			
 			StateElectorates = new ObservableCollection<Tag>();
 			StateElectorates.Add(new Tag
 			{

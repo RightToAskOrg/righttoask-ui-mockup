@@ -12,8 +12,7 @@
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 					<Label Text="I live in " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
 					<Picker x:Name="stateOrTerritoryPicker" Title="{Binding SelectedStateOrTerritory, StringFormat='Select State or Territory {0:F0}'}" 
-					    BackgroundColor="Turquoise" ItemsSource="{Binding StatesOrTerritories}" 
-				        ItemDisplayBinding="{Binding TagEntity.NickName}" 
+					    BackgroundColor="Turquoise" 
 				        SelectedIndexChanged="OnStatePickerSelectedIndexChanged"> 
 					</Picker>
 				</StackLayout>

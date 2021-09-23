@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace PassingData
@@ -10,6 +11,13 @@ namespace PassingData
     public static class BackgroundElectorateAndMPData 
     {
 		public static readonly ObservableCollection<MP> AllMPs = readMPInfoFromFiles();
+		public static readonly ObservableCollection<string> StatesAndTerritories = extractStatesFromMPList();
+
+		private static ObservableCollection<string> extractStatesFromMPList()
+		{
+			return new ObservableCollection<string>(AllMPs.Select(mp => mp.StateOrTerritory).Distinct());
+		}
+
 		public static readonly ObservableCollection<Entity> AllAuthorities = readAuthoritiesFromFiles();
 
         private static ObservableCollection<MP> readMPInfoFromFiles()
