@@ -8,37 +8,58 @@ using System.Reflection;
 namespace PassingData
 {
     // This class reads in information about electorates, MPs, etc, from static files.
-    public static class BackgroundElectorateAndMPData 
+    public static class BackgroundElectorateAndMPData
     {
-		public static readonly ObservableCollection<MP> AllMPs = readMPInfoFromFiles();
+	    private static readonly List<MP> FederalMPs = readMPsFromCSV("StateRepsCSV.csv");
+	    private static readonly List<MP> Senators = readMPsFromCSV("allsenstate.csv");
+	    // TODO - at the moment, we only have Vic MPs. Add other states.
+	    private static readonly List<MP> VicLA_MPs = readMPsFromCSV("VicLegislativeAssemblymembers.csv");
+	    private static readonly List<MP> VicLC_MPs =  readMPsFromCSV("VicLegislativeCouncilmembers.csv");
+
+	    public static readonly ObservableCollection<MP> AllMPs = new ObservableCollection<MP>(
+		    FederalMPs.Concat(Senators).Concat(VicLA_MPs).Concat(VicLC_MPs)
+		    );
 		public static readonly ObservableCollection<string> StatesAndTerritories = extractStatesFromMPList();
+		public enum StateOrTerritory
+		{
+			Vic, ACT, NSW, Qld, WA, SA, NT, Tas 
+		}
 
 		private static ObservableCollection<string> extractStatesFromMPList()
 		{
-			return new ObservableCollection<string>(AllMPs.Select(mp => mp.StateOrTerritory).Distinct());
+			return new ObservableCollection<string>(AllMPs.Select(mp => mp.StateOrTerritory.ToUpper()).Distinct());
 		}
 
-		public static readonly ObservableCollection<Entity> AllAuthorities = readAuthoritiesFromFiles();
+		public static readonly ObservableCollection<Entity> AllAuthorities = new ObservableCollection<Entity>(readAuthoritiesFromFiles());
 
-        private static ObservableCollection<MP> readMPInfoFromFiles()
+		private static List<MP> readMPsFromCSV(string filename)
+		{
+			var MPs = new List<MP>();
+			readDataFromCSV(filename, MPs, parseCSVLineAsMP);
+			return MPs;
+		}
+		
+		/*
+        private static ObservableCollection<MP> readMPAndElectorateInfoFromFiles()
         {
-		    var AllMPs = new ObservableCollection<MP>();
+		    // var AllMPs = new ObservableCollection<MP>();
 		    readDataFromCSV("StateRepsCSV.csv",AllMPs, parseCSVLineAsMP);
 		    readDataFromCSV("allsenstate.csv",AllMPs,parseCSVLineAsMP);
-		    readDataFromCSV("VicLegislativeAssemblymembers.csv",AllMPs,parseCSVLineAsMP);
-		    readDataFromCSV("VicLegislativeCouncilmembers.csv", AllMPs,parseCSVLineAsMP);
+		    readDataFromCSV("VicLegislativeAssemblymembers.csv",AllMPs, parseCSVLineAsMP);
+		    readDataFromCSV("VicLegislativeCouncilmembers.csv", AllMPs, parseCSVLineAsMP);
 		    
 		    return AllMPs;
         }
+        */
 
-       private static ObservableCollection<Entity> readAuthoritiesFromFiles()
+       private static List<Entity> readAuthoritiesFromFiles()
        {
-		    var AllAuthorities = new ObservableCollection<Entity>();
+		    var AllAuthorities = new List<Entity>();
 		    readDataFromCSV("all-authorities.csv",AllAuthorities,parseCSVLineAsAuthority);
 		    return AllAuthorities;
        }
         
-		private static void readDataFromCSV<T>(string filename, ObservableCollection<T> MPCollection, Func<string,T> parseLine)
+		private static void readDataFromCSV<T>(string filename, List<T> MPCollection, Func<string,T> parseLine)
 		{
 			string line;
 

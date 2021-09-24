@@ -21,6 +21,7 @@ namespace PassingData
             addressSavingStack.IsVisible = false;
             findMPsButton.IsVisible = false;
             stateOrTerritoryPicker.ItemsSource = BackgroundElectorateAndMPData.StatesAndTerritories;
+            // stateOrTerritoryPicker.ItemsSource = Enum.GetNames(typeof(BackgroundElectorateAndMPData.StateOrTerritory)).ToList();
         }
         
         // TODO Refactor this nicely so it isn't copy-pasted in FindMyMP
