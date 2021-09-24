@@ -74,7 +74,8 @@ namespace PassingData
 
         public override string ToString()
         {
-            return EntityName + "(" + NickName + ")";
+            var NickNameIfPresent = NickName == null ? "" : "(" + NickName + ")";
+            return EntityName + NickNameIfPresent;
         }
     }
 }

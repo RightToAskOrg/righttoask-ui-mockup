@@ -10,48 +10,64 @@ namespace PassingData
     // This class reads in information about electorates, MPs, etc, from static files.
     public static class BackgroundElectorateAndMPData
     {
-	    private static readonly List<MP> FederalMPs = readMPsFromCSV("StateRepsCSV.csv");
-	    private static readonly List<MP> Senators = readMPsFromCSV("allsenstate.csv");
+	    private static readonly List<MP> FederalMPs 
+		    = readMPsFromCSV(Chamber.Australian_House_Of_Representatives, "StateRepsCSV.csv");
+	    private static readonly List<MP> Senators 
+		    = readMPsFromCSV(Chamber.Australian_Senate, "allsenstate.csv");
 	    // TODO - at the moment, we only have Vic MPs. Add other states.
-	    private static readonly List<MP> VicLA_MPs = readMPsFromCSV("VicLegislativeAssemblymembers.csv");
-	    private static readonly List<MP> VicLC_MPs =  readMPsFromCSV("VicLegislativeCouncilmembers.csv");
+	    private static readonly List<MP> VicLA_MPs 
+		    = readMPsFromCSV(Chamber.Vic_Legislative_Assembly, "VicLegislativeAssemblymembers.csv");
+	    private static readonly List<MP> VicLC_MPs 
+		    =  readMPsFromCSV(Chamber.Vic_Legislative_Council, "VicLegislativeCouncilmembers.csv");
 
 	    public static readonly ObservableCollection<MP> AllMPs = new ObservableCollection<MP>(
 		    FederalMPs.Concat(Senators).Concat(VicLA_MPs).Concat(VicLC_MPs)
 		    );
-		public static readonly ObservableCollection<string> StatesAndTerritories = extractStatesFromMPList();
-		public enum StateOrTerritory
-		{
-			Vic, ACT, NSW, Qld, WA, SA, NT, Tas 
-		}
 
-		private static ObservableCollection<string> extractStatesFromMPList()
-		{
-			return new ObservableCollection<string>(AllMPs.Select(mp => mp.StateOrTerritory.ToUpper()).Distinct());
-		}
+	    public static readonly ObservableCollection<string> StatesAndTerritories = new ObservableCollection<string>()
+	    {
+		    "ACT",
+			"NSW",
+			"NT",
+			"QLD",
+			"SA",
+			"Tas",
+			"Vic",
+			"WA"
+	    };
+
+	    public enum Chamber 
+	    {
+			ACT_Legislative_Assembly,
+		    Australian_House_Of_Representatives,
+		    Australian_Senate,
+		    NSW_Legislative_Assembly,
+			NSW_Legislative_Council,
+			NT_Legislative_Assembly,
+		    Qld_Legislative_Assembly,
+		    SA_Legislative_Assembly,
+			SA_Legislative_Council,
+		    Vic_Legislative_Assembly,
+			Vic_Legislative_Council,
+			Tas_House_Of_Assembly,
+			Tas_Legislative_Council,
+			WA_Legislative_Assembly,
+			WA_Legislative_Council
+	    }
+		// private static ObservableCollection<string> extractStatesFromMPList()
+		//{
+		// 	return new ObservableCollection<string>(AllMPs.Select(mp => mp.StateOrTerritory.ToUpper()).Distinct());
+		//}
 
 		public static readonly ObservableCollection<Entity> AllAuthorities = new ObservableCollection<Entity>(readAuthoritiesFromFiles());
 
-		private static List<MP> readMPsFromCSV(string filename)
+		private static List<MP> readMPsFromCSV(Chamber chamber, string filename)
 		{
 			var MPs = new List<MP>();
-			readDataFromCSV(filename, MPs, parseCSVLineAsMP);
+			readDataFromCSV(filename, MPs, (string line) =>  parseCSVLineAsMP(chamber,line) );
 			return MPs;
 		}
 		
-		/*
-        private static ObservableCollection<MP> readMPAndElectorateInfoFromFiles()
-        {
-		    // var AllMPs = new ObservableCollection<MP>();
-		    readDataFromCSV("StateRepsCSV.csv",AllMPs, parseCSVLineAsMP);
-		    readDataFromCSV("allsenstate.csv",AllMPs,parseCSVLineAsMP);
-		    readDataFromCSV("VicLegislativeAssemblymembers.csv",AllMPs, parseCSVLineAsMP);
-		    readDataFromCSV("VicLegislativeCouncilmembers.csv", AllMPs, parseCSVLineAsMP);
-		    
-		    return AllMPs;
-        }
-        */
-
        private static List<Entity> readAuthoritiesFromFiles()
        {
 		    var AllAuthorities = new List<Entity>();
@@ -88,13 +104,14 @@ namespace PassingData
 				Console.WriteLine(e.Message);
 			}
 		}
-		private static MP parseCSVLineAsMP(string line)
+		private static MP parseCSVLineAsMP(Chamber chamber, string line)
 		{
 			string[] words = line.Split(',');
 			if (words.Length >= 5)
 			{
 				MP newMP = new MP
 				{
+					ChamberSeatedIn = chamber,
 					Salutation = (words[0] == "Senator" ? "Senator" : "Member"),
 					EntityName = words[2] +" "+ words[1],
 					// FamilyName = words[1],
