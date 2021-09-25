@@ -6,9 +6,11 @@ namespace PassingData
 {
     public class FilterDisplayTableView : TableView
     {
+        private ReadingContext _context;
         public FilterDisplayTableView(ReadingContext readingContext)
         {
             BindingContext = readingContext;
+            _context = readingContext;
             // Intent = TableIntent.Menu;
             Intent = TableIntent.Settings;
             // HasUnevenRows = true;
@@ -33,54 +35,10 @@ namespace PassingData
                 return new ViewCell { View = grid };
             });
 
-            /*
-            var entry2 = new EntryCell
-            {
-                Label = "Who should answer it?",
-                Placeholder = "Not sure",
-            };
-            entry2.Completed += OnWhoShouldAnswerCompleted;
-            */
-
-            /*
-            var authorityList = new ListView
-            {
-                VerticalOptions = LayoutOptions.Start, 
-                SelectionMode = ListViewSelectionMode.None, 
-                ItemsSource = readingContext.OtherAuthorities,
-                HasUnevenRows = true,
-                // ItemTemplate = authorityDataTemplate
-                ItemTemplate=(DataTemplate)Application.Current.Resources["SelectableDataTemplate"]
-            };
-            // TODO Figure out how to pick up clicks.
-            authorityList.ItemTapped += Authority_Selected;
-            */
-
             var authorityList = new Label()
             {
-                
-                // VerticalOptions = LayoutOptions.Start,
-                // SelectionMode = ListViewSelectionMode.None,
-                // Text = String.Join(", ",readingContext.OtherAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.EntityName))
                 Text = String.Join(", ",readingContext.SelectableAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.ShortestName))
             };
-            // BindableLayout.SetItemsSource(authorityList, readingContext.OtherAuthorities);
-            // BindableLayout.SetItemTemplate(authorityList, authorityDataTemplate);
-                
-
-                // var authorityListView = new ViewCell { View = authorityList };
-                
-            /*
-            var moreButton = new ViewCell
-            {
-                View = new StackLayout
-                {
-                    HorizontalOptions = LayoutOptions.CenterAndExpand,
-                    Children = {  new Label { Text = "More..." } }
-                }
-            };
-            moreButton.Tapped += OnMoreButtonClicked;
-            */
 
             var whoShouldAnswerItView = new ViewCell
             {
@@ -92,17 +50,13 @@ namespace PassingData
                     Children =
                     {
                         new Label { Text = "Who should answer it?" },
-                        // authorityList.ParentView,
-                        // new View{ authorityList},
                         new StackLayout
                         {
-                            // Orientation = StackOrientation.Vertical,
                             Orientation = StackOrientation.Horizontal,
                             VerticalOptions = LayoutOptions.Start,
                             Children =
                             {
                                 authorityList,
-                                // moreButton.View
                             }
                         },
                         new Label { Text = "Edit" },
@@ -120,12 +74,7 @@ namespace PassingData
             };
             keywordentry.Completed += OnKewordEntryCompleted;
             
-            // var switchc = new SwitchCell { Text = "SwitchCell Text" };
-            // var image = new ImageCell { Text = "ImageCell Text", Detail = "ImageCell Detail", ImageSource = "XamarinLogo.png" };
-
-            // section1.Add(entry2);
             section1.Add(whoShouldAnswerItView);
-            // section1.Add(moreButton);
             section2.Add(entry3);
             section2.Add(keywordentry);
             Root = root;
@@ -138,8 +87,7 @@ namespace PassingData
         {
 			string message = "Choose others to add";
 			
-           	var departmentExploringPage = new ExploringPageWithSearchAndPreSelections(((ReadingContext) BindingContext).SelectableAuthorities, message);
-            departmentExploringPage.BindingContext = BindingContext;
+           	var departmentExploringPage = new ExploringPageWithSearchAndPreSelections(_context.SelectableAuthorities, message);
            	await Navigation.PushAsync (departmentExploringPage);
         }
 

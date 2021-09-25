@@ -60,7 +60,6 @@ namespace PassingData
 		{
 			var questionDetailPage 
 				= new QuestionDetailPage(false, (Question) e.Item, _context);
-			questionDetailPage.BindingContext = BindingContext;
 			await Navigation.PushAsync(questionDetailPage);
 		}
 
