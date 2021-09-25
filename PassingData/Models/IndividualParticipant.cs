@@ -19,7 +19,14 @@ namespace PassingData
 		
 		// This is a list of chamber-electorate pairs in which the person
 		// has representatives.
-		private List<(BackgroundElectorateAndMPData.Chamber, string)> ElectoratesRepresentedIn;
+		// Initially, when we don't know the state, it's only the Australian
+		// Parliament.
+		private List<(BackgroundElectorateAndMPData.Chamber, string)> ElectoratesRepresentedIn
+			= new List<(BackgroundElectorateAndMPData.Chamber, string)>()
+			{
+				(BackgroundElectorateAndMPData.Chamber.Australian_House_Of_Representatives, ""),
+				(BackgroundElectorateAndMPData.Chamber.Australian_Senate, "")
+			};
 
 		public IndividualParticipant() : base()
 		{
@@ -39,6 +46,7 @@ namespace PassingData
 	        set
 	        {
 		        selectedStateOrTerritory = value;
+		        UpdateChambers(value);
 		        OnPropertyChanged("SelectedStateOrTerritory");
 	        }
         }
@@ -94,5 +102,46 @@ namespace PassingData
 				OnPropertyChanged("Address");
 			}
 		}
+
+		private void UpdateChambers(string state)
+		{
+			List<(BackgroundElectorateAndMPData.Chamber, string)> NewElectoratesRepresentedIn
+				= new List<(BackgroundElectorateAndMPData.Chamber, string)>();
+			
+			switch (state.ToUpper())
+			{
+				case ("ACT"):
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.ACT_Legislative_Assembly, ""));
+					break;
+				case ("NSW"):
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.NSW_Legislative_Assembly,""));
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.NSW_Legislative_Council,""));
+					break;
+				case ("NT"):
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.NT_Legislative_Assembly, ""));
+					break;
+				case ("QLD"):
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.Qld_Legislative_Assembly, ""));
+					break;
+				case ("SA"):
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.SA_Legislative_Assembly,""));
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.SA_Legislative_Council,""));
+					break;
+				case ("VIC"):
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.Vic_Legislative_Assembly,""));
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.Vic_Legislative_Council,""));
+					break;
+				case ("TAS"):
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.Tas_House_Of_Assembly,""));
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.Tas_Legislative_Council,""));
+					break;
+				case ("WA"):
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.WA_Legislative_Assembly,""));
+					NewElectoratesRepresentedIn.Add((BackgroundElectorateAndMPData.Chamber.WA_Legislative_Council,""));
+					break;
+				
+			}	
+		}
+		
     }
 } 
