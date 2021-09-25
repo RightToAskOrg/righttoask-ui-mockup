@@ -13,11 +13,14 @@ namespace PassingData
 		private string question;
 		private ObservableCollection<Tag> SelectableAuthorities;
 		private bool isReadingOnly;
+		private ReadingContext _context;
 
-		public SecondPage (bool MPsAreSelected, bool IsReadingOnly)
+		public SecondPage(bool IsReadingOnly, ReadingContext context)
 		{
 			
 			InitializeComponent ();
+			BindingContext = context;
+			_context = context;
 			isReadingOnly = IsReadingOnly;
 
 			if (IsReadingOnly)
@@ -65,18 +68,18 @@ namespace PassingData
 		// context.
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
-			bool needToFindAnswerer = ((ReadingContext) BindingContext).SelectedDepartment != null
-			       || ((ReadingContext) BindingContext).SelectableAuthorities.Where(w => w.Selected).Count() != 0;
+			bool needToFindAnswerer = _context.SelectedDepartment != null
+			       || _context.SelectableAuthorities.Where(w => w.Selected).Count() != 0;
 			
 			if (isReadingOnly || !needToFindAnswerer)
 			{
-				var readingPage = new ReadingPage(isReadingOnly, ((ReadingContext) BindingContext).SelectableAuthorities);
+				var readingPage = new ReadingPage(isReadingOnly, _context.SelectableAuthorities, _context);
 				readingPage.BindingContext = BindingContext;
 				await Navigation.PushAsync (readingPage);
 			}
 			else 
 			{
-				var questionAskerPage = new QuestionAskerPage((ReadingContext) BindingContext);
+				var questionAskerPage = new QuestionAskerPage(_context);
 				await Navigation.PushAsync(questionAskerPage);
 			}
 		}
@@ -84,23 +87,6 @@ namespace PassingData
 		{
 			await Navigation.PopAsync ();
 		}
-
-		// TODO At the moment, this just turns the 'who should ask it' on,
-		// if you looked at the authority list, regardless of whether you actually
-		// chose one.
-		/*
-		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
-		{
-			string message = "Choose the authorities that should answer your question";
-			
-           	var departmentExploringPage = new ExploringPage(((ReadingContext) BindingContext).OtherAuthorities, message);
-            departmentExploringPage.BindingContext = BindingContext;
-           	await Navigation.PushAsync (departmentExploringPage);
-
-            questionAsker.IsVisible = true;
-		}
-		*/
-
 
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
 		{

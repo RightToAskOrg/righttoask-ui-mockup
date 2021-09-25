@@ -27,20 +27,8 @@ namespace PassingData
         
 		// Things about this user.
 		// These selections are made at registration, or at 'complete registration.'
-		private string username;
-		private string userEmail;
-		public bool Is_Registered { get; set; }
-		// Note that people might register without knowing their electorate,
-		// or might record state but not federal electorates, or vice versa.
-		public bool State_Electorate_Known { get; set; }
-		public bool Federal_Electorate_Known { get; set; }
-		
-		private string address;
-		private string selectedStateOrTerritory;
-		private string selectedStateElectorate;
-		private string selectedFederalElectorate;
-		
-		
+		public IndividualParticipant ThisParticipant { get; set; }
+
 		// Things about the current search, draft question or other action.
 		public string DraftQuestion { get; set; }
 		public Entity SelectedDepartment { get; set; }
@@ -54,9 +42,6 @@ namespace PassingData
 		// Whether this is a 'top ten' search.
 		public bool TopTen { get; set; }
 
-		// The number of questions 'matching' this query. 
-		// At the moment, just a hardcoded value.
-		public int MatchingQuestions { get; set; }
 		public string GoDirect_Committee { get; set; }
 		
 		public string GoDirect_MP { get; set; }
@@ -73,7 +58,6 @@ namespace PassingData
 
 		public ObservableCollection<Tag> SelectableAuthorities { get; set; }
 
-		// public ObservableCollection<Tag> StatesOrTerritories { get; set; }
 		public ObservableCollection<Tag> StateElectorates { get; set; }
 		public ObservableCollection<Tag> FederalElectorates { get; set; }
 		
@@ -93,7 +77,6 @@ namespace PassingData
 				)
 				);
 			
-			MatchingQuestions = 4782;
 
 			Departments = new ObservableCollection<Tag>();
 			Departments.Add(new Tag { TagEntity = new Entity { EntityName = "Environment" }, Selected = false });
@@ -265,76 +248,10 @@ namespace PassingData
 			       "Direct MP: " + GoDirect_MP + '\n' +
 			       "My MPs" + (MPsKnown ? "" : " not" + " selected") + '\n' + 
 			       "Question: " + DraftQuestion + '\n' +
-			       "Number of matching questions: " + MatchingQuestions.ToString() + '\n' +
 			       "Selected Department: " + SelectedDepartment.EntityName + '\n' +
 			       "Departments: " + Departments.ToString() + '\n' +
 			       "Other Authorities: " + SelectableAuthorities.ToString() + '\n';
 		}
 
-		// These functions allow automatic UI updates when these values change.
-		public string SelectedStateOrTerritory 
-        {
-	        get
-	        {
-		        return selectedStateOrTerritory;
-	        }
-	        set
-	        {
-		        selectedStateOrTerritory = value;
-		        OnPropertyChanged("SelectedStateOrTerritory");
-	        }
-        }
-		public string SelectedStateElectorate 
-		{
-		    get
-		    {
-                return selectedStateElectorate;
-            }
-            set
-            {
-                selectedStateElectorate= value;
-                OnPropertyChanged("SelectedStateElectorate");
-            }
-        }
-
-		public string SelectedFederalElectorate
-		{
-			get { return selectedFederalElectorate; }
-			set
-			{
-				selectedFederalElectorate = value;
-				OnPropertyChanged("SelectedFederalElectorate");
-			}
-		}
-
-		public string Username
-		{
-			get { return username; }
-			set
-			{
-				username = value;
-				OnPropertyChanged("Username");
-			}
-		}
-
-		public string UserEmail
-		{
-			get { return userEmail; }
-			set
-			{
-				userEmail = value;
-				OnPropertyChanged("UserEmail");
-			}
-		}
-		
-		public string Address
-		{
-			get { return address; }
-			set
-			{
-				address = value;
-				OnPropertyChanged("Address");
-			}
-		}
 	}
 }

@@ -5,19 +5,17 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
-// This class represents a public authority,
-// represented in the RightToKnow list.
+// This class represents a human, who might be 
+// an MP or a non-MP participant.
 namespace PassingData
 {
-    public class Person : Entity
+    public abstract class Person : Entity
     {
-        // public string PreferredName { get; set; }
-        // public string FamilyName { get; set; }
         public string StateOrTerritory { get; set; }
-        protected string federalElectorate;
-        protected string stateOrTerritoryLCElectorate;
-        protected string stateOrTerritoryLAElectorate;
-
+        
+		protected string username;
+		protected string userEmail;
+        
         // TODO add attributes for a nice profile, such as a photo.
     }
 

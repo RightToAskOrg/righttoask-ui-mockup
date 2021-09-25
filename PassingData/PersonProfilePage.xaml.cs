@@ -10,9 +10,13 @@ namespace PassingData
 {
     public partial class PersonProfilePage : ContentPage
     {
-        public PersonProfilePage (string name) 
+        private ReadingContext _context;
+        public PersonProfilePage (string name, ReadingContext context) 
         {
             InitializeComponent ();
+            _context = context;
+            BindingContext = context;
+            
             DMButton.Text = "Send Direct Message to " + name;
             SeeQuestionsButton.Text = "Read questions from " + name;
             FollowButton.Text = "Follow " + name;
@@ -37,8 +41,7 @@ namespace PassingData
         // Will they expect to be adding a new stack layer, or popping off old ones?
         private async void SeeQuestionsButton_OnClicked(object sender, EventArgs e)
         {
-			var readingPage = new ReadingPage(true, ((ReadingContext) BindingContext).SelectableAuthorities);
-			readingPage.BindingContext = BindingContext;
+			var readingPage = new ReadingPage(true, _context.SelectableAuthorities, _context);
 			await Navigation.PushAsync (readingPage);
         }
     }

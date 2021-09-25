@@ -33,6 +33,7 @@
     <None Remove="Resources\VicLeigslativeCouncilmembers.csv" />
     <None Remove="Resources\VicLegislativeCouncilmembers.csv" />
     <EmbeddedResource Include="Resources\VicLegislativeCouncilmembers.csv" />
+    <EmbeddedResource Remove="FindMyMP.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +43,7 @@
     <Compile Remove="PickerPage.xaml.cs" />
     <Compile Remove="WebviewAuthoritySelect.cs" />
     <Compile Remove="TestFile2.Designer.cs" />
+    <Compile Remove="FindMyMP.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,8 +12,12 @@ namespace PassingData
     {
         private string linkOrAnswer;
         private Question question;
-        public QuestionDetailPage (bool isNewQuestion, Question selectedQuestion)
+        private IndividualParticipant _thisParticipant;
+        private ReadingContext _context;
+        public QuestionDetailPage (bool isNewQuestion, Question selectedQuestion, ReadingContext context)
         {
+            BindingContext = context;
+            _context = context;
             question = selectedQuestion;
             InitializeComponent ();
             QuestionDetailView.Text = question.ToString();
@@ -43,8 +47,7 @@ namespace PassingData
         // name, not with a separate button.
         private async void QuestionSuggesterButton_OnClicked(object sender, EventArgs e)
         {
-			var personProfilePage = new PersonProfilePage(question.QuestionSuggester);
-			personProfilePage.BindingContext = BindingContext;
+			var personProfilePage = new PersonProfilePage(question.QuestionSuggester, _context);
 			await Navigation.PushAsync (personProfilePage);
         }
         
@@ -66,9 +69,9 @@ namespace PassingData
         // give you the same options.
         async void SubmitNewQuestionButton_OnClicked(object sender, EventArgs e)
         {
-            if (!((ReadingContext) BindingContext).Is_Registered)
+            if (_thisParticipant == null || !_thisParticipant.Is_Registered)
             {
-                RegisterPage1 registrationPage = new RegisterPage1((ReadingContext) BindingContext);
+                RegisterPage1 registrationPage = new RegisterPage1(_thisParticipant, (ReadingContext) BindingContext);
                 await Navigation.PushAsync(registrationPage);
             }
 
@@ -76,9 +79,9 @@ namespace PassingData
             // register, but have declined.
             // Also note that setting QuestionSuggester may be unnecessary - it may already be set correctly -
             // but is needed if the person has just registered.
-            if (((ReadingContext) BindingContext).Is_Registered)
+            if (_thisParticipant != null && _thisParticipant.Is_Registered)
             {
-                question.QuestionSuggester = ((ReadingContext) BindingContext).Username;
+                question.QuestionSuggester = _thisParticipant.Username;
 	            ((ReadingContext) BindingContext).ExistingQuestions.Insert(0, question);
                 // ((Button) sender).Text = "Published!";
                 bool goHome = await DisplayAlert("Question published!", "", "Home", "Write another one");

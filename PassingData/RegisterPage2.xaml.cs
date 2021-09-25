@@ -12,16 +12,16 @@ namespace PassingData
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage2 : ContentPage
     {
-       // private ReadingContext BindingContext;
        private string address;
+       private IndividualParticipant thisParticipant;
         public RegisterPage2(ReadingContext context)
         {
             InitializeComponent();
             BindingContext = context;
+            IndividualParticipant thisParticipant = new IndividualParticipant();
             addressSavingStack.IsVisible = false;
             findMPsButton.IsVisible = false;
             stateOrTerritoryPicker.ItemsSource = BackgroundElectorateAndMPData.StatesAndTerritories;
-            // stateOrTerritoryPicker.ItemsSource = Enum.GetNames(typeof(BackgroundElectorateAndMPData.StateOrTerritory)).ToList();
         }
         
         // TODO Refactor this nicely so it isn't copy-pasted in FindMyMP
@@ -33,10 +33,10 @@ namespace PassingData
          
             if (selectedIndex != -1)
             {
-                ((ReadingContext) BindingContext).SelectedStateOrTerritory = (string) picker.SelectedItem;
+                thisParticipant.StateOrTerritory = (string) picker.SelectedItem;
             }
         }
-
+        
         void OnStateElectoratePickerSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker) sender;
@@ -47,9 +47,9 @@ namespace PassingData
             {
                 Tag selectedStateElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedStateElectorate.Selected = true;
-                ((ReadingContext) BindingContext).SelectedStateElectorate = selectedStateElectorate.TagEntity.EntityName;
+                thisParticipant.SelectedStateElectorate = selectedStateElectorate.TagEntity.EntityName;
                 
-                if (((ReadingContext) BindingContext).SelectedFederalElectorate != null)
+                if (thisParticipant.SelectedFederalElectorate != null)
                 {
                     findMPsButton.IsVisible = true;
                     ((ReadingContext) BindingContext).MPsKnown = true;
@@ -67,9 +67,9 @@ namespace PassingData
             {
                 Tag selectedFederalElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedFederalElectorate.Selected = true;
-                ((ReadingContext) BindingContext).SelectedFederalElectorate = selectedFederalElectorate.TagEntity.EntityName;
+                thisParticipant.SelectedFederalElectorate = selectedFederalElectorate.TagEntity.EntityName;
 
-                if (((ReadingContext) BindingContext).SelectedStateElectorate != null)
+                if (thisParticipant.SelectedStateElectorate != null)
                 {
                     findMPsButton.IsVisible = true;
                     ((ReadingContext) BindingContext).MPsKnown = true;
@@ -79,22 +79,16 @@ namespace PassingData
 
         async private void OnFindMPsButtonClicked(object sender, EventArgs e)
         {
-            // string message = "These are your MPs.  Select the one(s) you want to answer your question";
-			// var selectMyMPsPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
-			// selectMyMPsPage.BindingContext = BindingContext;
-			// await Navigation.PushAsync(selectMyMPsPage);
-            // Navigation.RemovePage(this);
             await Navigation.PopAsync();
         }
 
-        async void OnAddressEntered(object sender, EventArgs e)
+        void OnAddressEntered(object sender, EventArgs e)
         {
             address = ((Editor) sender).Text;
-            // OnSubmitAddressButton_Clicked();
         }
 
         // At the moment this just chooses random electorates. 
-        // TODO: We probably want this to give the person a chance to go back an fix it if wrong.
+        // TODO: We probably want this to give the person a chance to go back and fix it if wrong.
         async void OnSubmitAddressButton_Clicked(object sender, EventArgs e)
         {
             ReadingContext context = (ReadingContext) BindingContext;
@@ -103,13 +97,13 @@ namespace PassingData
             int stateElectorateCount = context.StateElectorates.Count;
             int federalElectorateCount = context.FederalElectorates.Count;
 
-            context.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagEntity.EntityName;
-            context.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagEntity.EntityName;
+            thisParticipant.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagEntity.EntityName;
+            thisParticipant.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagEntity.EntityName;
             context.MPsKnown = true;
 
             await DisplayAlert("Electorates found!", 
-                "State Electorate: "+context.SelectedStateElectorate+"\nFederal Electorate: "+context.SelectedFederalElectorate, 
-                "OK");
+                "State Electorate: "+thisParticipant.SelectedStateElectorate+"\nFederal Electorate: "
+                +thisParticipant.SelectedFederalElectorate, "OK");
             ((Button) sender).IsVisible = false; 
             federalElectoratePicker.TextColor = Color.Black;
             stateElectoratePicker.TextColor = Color.Black;
@@ -119,11 +113,10 @@ namespace PassingData
         
         private void OnSaveAddressButtonClicked(object sender, EventArgs e)
         {
-            ((ReadingContext) BindingContext).Address = address;
+            thisParticipant.Address = address;
             saveAddressButton.Text = "Address saved";
             noSaveAddressButton.IsVisible = false;
             findMPsButton.IsVisible = true;
-            // offerRegistrationCompletion();
         }
 
         private void OnNoSaveAddressButtonClicked(object sender, EventArgs e)
@@ -131,14 +124,13 @@ namespace PassingData
             noSaveAddressButton.Text = "Address not saved";
             saveAddressButton.IsVisible = false;
             findMPsButton.IsVisible = true;
-            // offerRegistrationCompletion();
         }
 
         // At the moment there is no distinction between registering and not registering,
         // except the flag set differently.
         private void OnNoRegisterButtonClicked(object sender, EventArgs e)
         {
-            ((ReadingContext) BindingContext).Is_Registered = false;
+            thisParticipant.Is_Registered = false;
             completeRegistration();
         }
 
@@ -147,13 +139,13 @@ namespace PassingData
         // a name and electorates.
         private void OnRegisterElectoratesButtonClicked(object sender, EventArgs e)
         {
-            ((ReadingContext) BindingContext).Is_Registered = true;
+            thisParticipant.Is_Registered = true;
             completeRegistration();
         }
 
         private void OnRegisterNameButtonClicked(object sender, EventArgs e)
         {
-            ((ReadingContext) BindingContext).Is_Registered = true;
+            thisParticipant.Is_Registered = true;
             throw new NotImplementedException();
         }
 

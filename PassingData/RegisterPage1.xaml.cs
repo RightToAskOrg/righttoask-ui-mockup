@@ -13,10 +13,12 @@ namespace PassingData
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage1 : ContentPage
     {
+        private IndividualParticipant _thisParticipant;
         ReadingContext BindingContext ;
-        public RegisterPage1(ReadingContext context)
+        public RegisterPage1(IndividualParticipant thisParticipant, ReadingContext context)
         {
             InitializeComponent();
+            _thisParticipant = thisParticipant;
             BindingContext = context;
             if (context.MPsKnown)
             {
@@ -32,7 +34,7 @@ namespace PassingData
 
         async void OnRegisterNameFieldCompleted(object sender, EventArgs e)
         {
-	        BindingContext.Username = ((Editor) sender).Text;
+	        _thisParticipant.Username = ((Editor) sender).Text;
         }
         
         // If MPs are not known, show page that allows finding electorates.
@@ -40,14 +42,15 @@ namespace PassingData
         // Make sure they've entered a name.
         async void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
         {
-            // TODO This doesn't seem to be doing the right thing.
-            if (BindingContext.Username == "Anonymous user")
+            // TODO  TODONOW This doesn't seem to be doing the right thing.
+            // Make a nice popup alert instead.
+            if (_thisParticipant.Username == "Anonymous user")
             {
                 registerNameInstructions.BackgroundColor = Color.Red;
             }
             else
             {
-                BindingContext.Is_Registered = true;
+                _thisParticipant.Is_Registered = true;
                 Navigation.PopAsync();
             }
         }
@@ -70,7 +73,7 @@ namespace PassingData
 
         private void OnRegisterEmailFieldCompleted(object sender, EventArgs e)
         {
-	        BindingContext.UserEmail = ((Editor) sender).Text;
+	        _thisParticipant.UserEmail = ((Editor) sender).Text;
         }
     }
 }

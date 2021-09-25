@@ -23,8 +23,6 @@ namespace PassingData
                    + "\n" + (Salutation ?? "")
                    + " for " + (ElectorateRepresenting ?? "")
                    + StateIfNeeded;
-            // + " for " + (ElectorateRepresenting ?? "" )
-            // + " - " + (Salutation != "Senator" ? StateOrTerritory : "");
         }
 
     }

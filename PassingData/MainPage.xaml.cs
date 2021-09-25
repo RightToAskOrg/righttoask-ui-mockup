@@ -5,7 +5,7 @@ namespace PassingData
 {
 	public partial class MainPage : ContentPage
 	{
-		public ReadingContext readingContext;
+		private ReadingContext readingContext;
 		public MainPage (string date)
 		{
 			InitializeComponent();
@@ -19,8 +19,7 @@ namespace PassingData
 		{
 			readingContext.TopTen = true;
 
-			var readingPage = new ReadingPage (true, readingContext.SelectableAuthorities);
-			readingPage.BindingContext = readingContext;
+			var readingPage = new ReadingPage (true, readingContext.SelectableAuthorities, readingContext);
 			await Navigation.PushAsync (readingPage);
 		}
 		
@@ -41,32 +40,30 @@ namespace PassingData
 
 		async void launchKeywordReadingPage()
 		{
-			var readingPage = new ReadingPage (true, readingContext.SelectableAuthorities);
+			var readingPage = new ReadingPage(true, readingContext.SelectableAuthorities, readingContext);
 			readingPage.BindingContext = readingContext;
 			await Navigation.PushAsync(readingPage);
 		}
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
-			var secondPage = new SecondPage (readingContext.MPsKnown, false);
-			secondPage.BindingContext = readingContext;
+			var secondPage = new SecondPage (false, readingContext);
 			await Navigation.PushAsync (secondPage);
 		}
 		
 		async void OnReadButtonClicked(object sender, EventArgs e)
 		{
 			// ((Button) sender).Text = "This will take you to a reading page";
-			var secondPage = new SecondPage (readingContext.MPsKnown, true);
-			secondPage.BindingContext = readingContext;
+			var secondPage = new SecondPage (true, readingContext);
 			await Navigation.PushAsync(secondPage);
 		}
 
 		
-		async void OnRegisterButtonClicked(object sender, EventArgs e)
-		{
+		// async void OnRegisterButtonClicked(object sender, EventArgs e)
+		// {
 			// ((Button) sender).Text = "Registering not implemented yet";
-			var registrationPage = new NavigationPage(new RegisterPage1(readingContext));
-			await Navigation.PushAsync(registrationPage);
-		}
+		// 	var registrationPage = new NavigationPage(new RegisterPage1(readingContext));
+		//	await Navigation.PushAsync(registrationPage);
+		// }
 
 	}
 }

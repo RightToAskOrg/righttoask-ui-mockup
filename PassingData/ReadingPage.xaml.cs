@@ -14,6 +14,7 @@ namespace PassingData
 	public partial class ReadingPage : ContentPage
 	{
 		private string draftQuestion;
+		private ReadingContext _context;
 
 		private string selectedAuthorities = "";
 
@@ -22,9 +23,11 @@ namespace PassingData
 		// {
 		// get { return questions; }
 		// }
-		public ReadingPage(bool isReadingOnly, ObservableCollection<Tag> authorities)
+		public ReadingPage(bool isReadingOnly, ObservableCollection<Tag> authorities, ReadingContext context)
 		{
 			InitializeComponent();
+			_context = context;
+			BindingContext = context;
 
 			if (isReadingOnly)
 			{
@@ -55,7 +58,8 @@ namespace PassingData
 		// Note: it's possible that this would be better with an ItemTapped event instead.
 		private async void Question_Selected(object sender, ItemTappedEventArgs e)
 		{
-			var questionDetailPage = new QuestionDetailPage(false, (Question) e.Item);
+			var questionDetailPage 
+				= new QuestionDetailPage(false, (Question) e.Item, _context);
 			questionDetailPage.BindingContext = BindingContext;
 			await Navigation.PushAsync(questionDetailPage);
 		}
@@ -102,11 +106,13 @@ namespace PassingData
 			if (context.SelectedDepartment != null)
 				questionAnswerers.Insert(0, context.SelectedDepartment);
 
+			IndividualParticipant thisParticipant = context.ThisParticipant;
 			Question newQuestion = new Question
 			{
 				QuestionText = ((ReadingContext) BindingContext).DraftQuestion,
 				// TODO: Enforce registration before question-suggesting.
-				QuestionSuggester = context.Is_Registered ? context.Username : "Anonymous user",
+				QuestionSuggester 
+					= (thisParticipant != null && thisParticipant.Is_Registered) ? thisParticipant.Username : "Anonymous user",
 				QuestionAnswerers = questionAnswerers,
 				// TODO: set this.
 				// QuestionAsker = ...;  
@@ -115,7 +121,7 @@ namespace PassingData
 			};
 
 
-			var questionDetailPage = new QuestionDetailPage(true, newQuestion);
+			var questionDetailPage = new QuestionDetailPage(true, newQuestion, _context);
 			questionDetailPage.BindingContext = BindingContext;
 			await Navigation.PushAsync(questionDetailPage);
 		}
