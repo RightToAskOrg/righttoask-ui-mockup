@@ -37,7 +37,7 @@ namespace PassingData
 		// Whether MPs have been selected for this question.
 		// TODO perhaps we need a different bool for whether they've
 		// been selected for asking or answering.
-		public bool MPsKnown = false;
+		// public bool MPsKnown = false;
 
 		// Whether this is a 'top ten' search.
 		public bool TopTen { get; set; }
@@ -67,6 +67,8 @@ namespace PassingData
 		// hardcoded set of "existing" questions.
 		private void InitializeDefaultSetup()
 		{
+			ThisParticipant = new IndividualParticipant();
+			
 			SelectableAuthorities =
 				new ObservableCollection<Tag>(BackgroundElectorateAndMPData.AllAuthorities.Select
 				(authority => new Tag
@@ -238,19 +240,18 @@ namespace PassingData
 		// TODO This ToString doesn't really properly convey the state of
 		// the ReadingContext, e.g. doesn't reflect registering or knowing your
 		// MPs.
-		// And it probably isn't necessary to write out all the unselectd things.
+		// And it probably isn't necessary to write out all the unselected things.
 		
 		public override string ToString ()
 		{
 			return "Keyword: " + SearchKeyword + '\n' +
-			       "TopTen: " + TopTen.ToString() + '\n' +
+			       "TopTen: " + TopTen + '\n' +
 			       "Direct Committee: " + GoDirect_Committee + '\n' +
 			       "Direct MP: " + GoDirect_MP + '\n' +
-			       "My MPs" + (MPsKnown ? "" : " not" + " selected") + '\n' + 
 			       "Question: " + DraftQuestion + '\n' +
-			       "Selected Department: " + SelectedDepartment.EntityName + '\n' +
-			       "Departments: " + Departments.ToString() + '\n' +
-			       "Other Authorities: " + SelectableAuthorities.ToString() + '\n';
+			       (SelectedDepartment != null ? "Selected Department: "+SelectedDepartment.EntityName+"\n" : "") + 
+			       "Departments: " + Departments + '\n' +
+			       "Other Authorities: " + SelectableAuthorities + '\n';
 		}
 
 	}

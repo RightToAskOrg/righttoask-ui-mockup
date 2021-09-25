@@ -13,20 +13,27 @@ namespace PassingData
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage1 : ContentPage
     {
-        private IndividualParticipant _thisParticipant;
-        ReadingContext BindingContext ;
-        public RegisterPage1(IndividualParticipant thisParticipant, ReadingContext context)
+        private IndividualParticipant thisParticipant;
+        private ReadingContext readingContext;
+        public RegisterPage1(IndividualParticipant thisParticipant, ReadingContext readingContext)
         {
             InitializeComponent();
-            _thisParticipant = thisParticipant;
-            BindingContext = context;
-            if (context.MPsKnown)
+            this.thisParticipant = thisParticipant;
+            BindingContext = readingContext;
+            if (!thisParticipant.Is_Registered)
             {
                 registerCitizenButton.IsVisible = true;
                 findElectoratesButton.IsVisible = false;
             }
             else
             {
+                if (thisParticipant.MPsKnown)
+                {
+                    
+                    DisplayAlert("Electorates already selected",
+                        "You have already selected your electorates - you can change them if you like",
+                        "OK");
+                }
                 registerCitizenButton.IsVisible = false;
                 findElectoratesButton.IsVisible = true;
             }
@@ -34,23 +41,23 @@ namespace PassingData
 
         async void OnRegisterNameFieldCompleted(object sender, EventArgs e)
         {
-	        _thisParticipant.Username = ((Editor) sender).Text;
+	        thisParticipant.Username = ((Editor) sender).Text;
         }
         
         // If MPs are not known, show page that allows finding electorates.
         // Whether or not they choose some, let them finish registering.
         // Make sure they've entered a name.
-        async void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
+        void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
         {
-            // TODO  TODONOW This doesn't seem to be doing the right thing.
-            // Make a nice popup alert instead.
-            if (_thisParticipant.Username == "Anonymous user")
+            if (string.IsNullOrEmpty(thisParticipant.Username))
             {
-                registerNameInstructions.BackgroundColor = Color.Red;
+                DisplayAlert("Enter username",
+                    "You need to choose a username in order to make an account",
+                    "OK");
             }
             else
             {
-                _thisParticipant.Is_Registered = true;
+                // thisParticipant.Is_Registered = true;
                 Navigation.PopAsync();
             }
         }
@@ -59,7 +66,7 @@ namespace PassingData
         {
                 registerCitizenButton.IsVisible = true;
                 findElectoratesButton.IsVisible = false; 
-                var secondRegisterPage = new RegisterPage2(BindingContext);
+                var secondRegisterPage = new RegisterPage2(readingContext);
 			    await Navigation.PushAsync (secondRegisterPage);
         }
         void OnRegisterMPButtonClicked(object sender, EventArgs e)
@@ -73,7 +80,7 @@ namespace PassingData
 
         private void OnRegisterEmailFieldCompleted(object sender, EventArgs e)
         {
-	        _thisParticipant.UserEmail = ((Editor) sender).Text;
+	        thisParticipant.UserEmail = ((Editor) sender).Text;
         }
     }
 }

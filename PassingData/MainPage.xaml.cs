@@ -11,8 +11,7 @@ namespace PassingData
 			InitializeComponent();
 
 			// TODO Possibly this should go in OnStart instead
-			readingContext = new ReadingContext { };
-			// readingContext.InitializeDefaultSetup();
+			readingContext = new ReadingContext(); 
 		}
 
 		async void OnTop10NowButtonClicked(object sender, EventArgs e)
@@ -41,9 +40,9 @@ namespace PassingData
 		async void launchKeywordReadingPage()
 		{
 			var readingPage = new ReadingPage(true, readingContext.SelectableAuthorities, readingContext);
-			readingPage.BindingContext = readingContext;
 			await Navigation.PushAsync(readingPage);
 		}
+		
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
 			var secondPage = new SecondPage (false, readingContext);
@@ -52,18 +51,8 @@ namespace PassingData
 		
 		async void OnReadButtonClicked(object sender, EventArgs e)
 		{
-			// ((Button) sender).Text = "This will take you to a reading page";
 			var secondPage = new SecondPage (true, readingContext);
 			await Navigation.PushAsync(secondPage);
 		}
-
-		
-		// async void OnRegisterButtonClicked(object sender, EventArgs e)
-		// {
-			// ((Button) sender).Text = "Registering not implemented yet";
-		// 	var registrationPage = new NavigationPage(new RegisterPage1(readingContext));
-		//	await Navigation.PushAsync(registrationPage);
-		// }
-
 	}
 }

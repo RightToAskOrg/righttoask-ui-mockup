@@ -12,15 +12,17 @@ namespace PassingData
     {
         private string linkOrAnswer;
         private Question question;
-        private IndividualParticipant _thisParticipant;
-        private ReadingContext _context;
-        public QuestionDetailPage (bool isNewQuestion, Question selectedQuestion, ReadingContext context)
+        private IndividualParticipant thisParticipant;
+        private ReadingContext readingContext;
+        public QuestionDetailPage (bool isNewQuestion, Question selectedQuestion, ReadingContext readingContext)
         {
-            BindingContext = context;
-            _context = context;
+            BindingContext = readingContext;
+            this.readingContext = readingContext;
+            
             question = selectedQuestion;
             InitializeComponent ();
             QuestionDetailView.Text = question.ToString();
+            
             // Different actions depending on whether it's a new question you're about to submit,
             // or an existing question you're answering, upvoting or adding links for.
             if (isNewQuestion)
@@ -47,7 +49,7 @@ namespace PassingData
         // name, not with a separate button.
         private async void QuestionSuggesterButton_OnClicked(object sender, EventArgs e)
         {
-			var personProfilePage = new PersonProfilePage(question.QuestionSuggester, _context);
+			var personProfilePage = new PersonProfilePage(question.QuestionSuggester, readingContext);
 			await Navigation.PushAsync (personProfilePage);
         }
         
@@ -69,9 +71,9 @@ namespace PassingData
         // give you the same options.
         async void SubmitNewQuestionButton_OnClicked(object sender, EventArgs e)
         {
-            if (_thisParticipant == null || !_thisParticipant.Is_Registered)
+            if (thisParticipant == null || !thisParticipant.Is_Registered)
             {
-                RegisterPage1 registrationPage = new RegisterPage1(_thisParticipant, (ReadingContext) BindingContext);
+                RegisterPage1 registrationPage = new RegisterPage1(thisParticipant, readingContext);
                 await Navigation.PushAsync(registrationPage);
             }
 
@@ -79,14 +81,14 @@ namespace PassingData
             // register, but have declined.
             // Also note that setting QuestionSuggester may be unnecessary - it may already be set correctly -
             // but is needed if the person has just registered.
-            if (_thisParticipant != null && _thisParticipant.Is_Registered)
+            if (thisParticipant != null && thisParticipant.Is_Registered)
             {
-                question.QuestionSuggester = _thisParticipant.Username;
-	            ((ReadingContext) BindingContext).ExistingQuestions.Insert(0, question);
+                question.QuestionSuggester = thisParticipant.Username;
+	            readingContext.ExistingQuestions.Insert(0, question);
                 // ((Button) sender).Text = "Published!";
                 bool goHome = await DisplayAlert("Question published!", "", "Home", "Write another one");
                 // ((Button) sender).IsEnabled = false;
-                ((ReadingContext)BindingContext).DraftQuestion = null;
+                readingContext.DraftQuestion = null;
                 if (goHome)
                 {
                     await Navigation.PopToRootAsync();

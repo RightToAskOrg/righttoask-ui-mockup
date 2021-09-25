@@ -13,12 +13,12 @@ namespace PassingData
     public partial class RegisterPage2 : ContentPage
     {
        private string address;
-       private IndividualParticipant thisParticipant;
-        public RegisterPage2(ReadingContext context)
+       private ReadingContext readingContext;
+        public RegisterPage2(ReadingContext readingContext)
         {
             InitializeComponent();
-            BindingContext = context;
-            IndividualParticipant thisParticipant = new IndividualParticipant();
+            BindingContext = readingContext;
+            this.readingContext = readingContext;
             addressSavingStack.IsVisible = false;
             findMPsButton.IsVisible = false;
             stateOrTerritoryPicker.ItemsSource = BackgroundElectorateAndMPData.StatesAndTerritories;
@@ -33,7 +33,7 @@ namespace PassingData
          
             if (selectedIndex != -1)
             {
-                thisParticipant.StateOrTerritory = (string) picker.SelectedItem;
+                readingContext.ThisParticipant.StateOrTerritory = (string) picker.SelectedItem;
             }
         }
         
@@ -47,12 +47,12 @@ namespace PassingData
             {
                 Tag selectedStateElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedStateElectorate.Selected = true;
-                thisParticipant.SelectedStateElectorate = selectedStateElectorate.TagEntity.EntityName;
+                readingContext.ThisParticipant.SelectedStateElectorate = selectedStateElectorate.TagEntity.EntityName;
                 
-                if (thisParticipant.SelectedFederalElectorate != null)
+                if (readingContext.ThisParticipant.SelectedFederalElectorate != null)
                 {
                     findMPsButton.IsVisible = true;
-                    ((ReadingContext) BindingContext).MPsKnown = true;
+                    readingContext.ThisParticipant.MPsKnown = true;
                 }
             }
         }
@@ -67,12 +67,12 @@ namespace PassingData
             {
                 Tag selectedFederalElectorate = (Tag) picker.ItemsSource[selectedIndex];
                 selectedFederalElectorate.Selected = true;
-                thisParticipant.SelectedFederalElectorate = selectedFederalElectorate.TagEntity.EntityName;
+                readingContext.ThisParticipant.SelectedFederalElectorate = selectedFederalElectorate.TagEntity.EntityName;
 
-                if (thisParticipant.SelectedStateElectorate != null)
+                if (readingContext.ThisParticipant.SelectedStateElectorate != null)
                 {
                     findMPsButton.IsVisible = true;
-                    ((ReadingContext) BindingContext).MPsKnown = true;
+                    readingContext.ThisParticipant.MPsKnown = true;
                 }
             }
         }
@@ -91,19 +91,17 @@ namespace PassingData
         // TODO: We probably want this to give the person a chance to go back and fix it if wrong.
         async void OnSubmitAddressButton_Clicked(object sender, EventArgs e)
         {
-            ReadingContext context = (ReadingContext) BindingContext;
-            
             var random = new Random();
-            int stateElectorateCount = context.StateElectorates.Count;
-            int federalElectorateCount = context.FederalElectorates.Count;
+            int stateElectorateCount = readingContext.StateElectorates.Count;
+            int federalElectorateCount = readingContext.FederalElectorates.Count;
 
-            thisParticipant.SelectedStateElectorate = context.StateElectorates[random.Next(stateElectorateCount)].TagEntity.EntityName;
-            thisParticipant.SelectedFederalElectorate= context.FederalElectorates[random.Next(federalElectorateCount)].TagEntity.EntityName;
-            context.MPsKnown = true;
+            readingContext.ThisParticipant.SelectedStateElectorate = readingContext.StateElectorates[random.Next(stateElectorateCount)].TagEntity.EntityName;
+            readingContext.ThisParticipant.SelectedFederalElectorate= readingContext.FederalElectorates[random.Next(federalElectorateCount)].TagEntity.EntityName;
+            readingContext.ThisParticipant.MPsKnown = true;
 
             await DisplayAlert("Electorates found!", 
-                "State Electorate: "+thisParticipant.SelectedStateElectorate+"\nFederal Electorate: "
-                +thisParticipant.SelectedFederalElectorate, "OK");
+                "State Electorate: "+readingContext.ThisParticipant.SelectedStateElectorate+"\nFederal Electorate: "
+                +readingContext.ThisParticipant.SelectedFederalElectorate, "OK");
             ((Button) sender).IsVisible = false; 
             federalElectoratePicker.TextColor = Color.Black;
             stateElectoratePicker.TextColor = Color.Black;
@@ -113,7 +111,7 @@ namespace PassingData
         
         private void OnSaveAddressButtonClicked(object sender, EventArgs e)
         {
-            thisParticipant.Address = address;
+            readingContext.ThisParticipant.Address = address;
             saveAddressButton.Text = "Address saved";
             noSaveAddressButton.IsVisible = false;
             findMPsButton.IsVisible = true;
@@ -128,9 +126,9 @@ namespace PassingData
 
         // At the moment there is no distinction between registering and not registering,
         // except the flag set differently.
+        
         private void OnNoRegisterButtonClicked(object sender, EventArgs e)
         {
-            thisParticipant.Is_Registered = false;
             completeRegistration();
         }
 
@@ -139,18 +137,20 @@ namespace PassingData
         // a name and electorates.
         private void OnRegisterElectoratesButtonClicked(object sender, EventArgs e)
         {
-            thisParticipant.Is_Registered = true;
             completeRegistration();
         }
 
         private void OnRegisterNameButtonClicked(object sender, EventArgs e)
         {
-            thisParticipant.Is_Registered = true;
-            throw new NotImplementedException();
         }
 
         async private void completeRegistration()
         {
+            if (!string.IsNullOrWhiteSpace(readingContext.ThisParticipant.Username))
+            {
+                readingContext.ThisParticipant.Is_Registered = true;
+            }
+            
             // Remove page before this, which should be RegisterPage1 
             // TODO should check that this is the page we expect it to be before removing it
             this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);

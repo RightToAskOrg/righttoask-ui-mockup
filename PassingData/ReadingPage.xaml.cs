@@ -14,20 +14,15 @@ namespace PassingData
 	public partial class ReadingPage : ContentPage
 	{
 		private string draftQuestion;
-		private ReadingContext _context;
+		private ReadingContext readingContext;
 
-		private string selectedAuthorities = "";
+		private string selectedAuthorities = ""; 
 
-		//private ObservableCollection<Question> questions = new ObservableCollection<Question>();
-		// public ObservableCollection<Question> Questions
-		// {
-		// get { return questions; }
-		// }
-		public ReadingPage(bool isReadingOnly, ObservableCollection<Tag> authorities, ReadingContext context)
+		public ReadingPage(bool isReadingOnly, ObservableCollection<Tag> authorities, ReadingContext readingContext)
 		{
 			InitializeComponent();
-			_context = context;
-			BindingContext = context;
+			this.readingContext = readingContext;
+			BindingContext = readingContext;
 
 			if (isReadingOnly)
 			{
@@ -42,10 +37,7 @@ namespace PassingData
 				finishedReadingButton.IsVisible = false;
 			}
 
-			fillInSelectedAnswerers(authorities);
-
-			// QuestionListView.ItemsSource = questions;
-			// QuestionListView.ItemsSource = ((ReadingContext) BindingContext).ExistingQuestions;
+			FillInSelectedAnswerers(authorities);
 
 		}
 
@@ -59,11 +51,11 @@ namespace PassingData
 		private async void Question_Selected(object sender, ItemTappedEventArgs e)
 		{
 			var questionDetailPage 
-				= new QuestionDetailPage(false, (Question) e.Item, _context);
+				= new QuestionDetailPage(false, (Question) e.Item, readingContext);
 			await Navigation.PushAsync(questionDetailPage);
 		}
 
-		private void fillInSelectedAnswerers(ObservableCollection<Tag> authorities)
+		private void FillInSelectedAnswerers(ObservableCollection<Tag> authorities)
 		{
 			foreach (var authority in authorities)
 			{
@@ -74,14 +66,13 @@ namespace PassingData
 			}
 
 
-			AnsweredBySelections.Text = "or "
-			                            + selectedAuthorities;
+			AnsweredBySelections.Text = selectedAuthorities;
 		}
 
 		async void OnDiscardButtonClicked(object sender, EventArgs e)
 		{
             bool goHome = await DisplayAlert("Draft discarded", "", "Home", "Related questions");
-            ((ReadingContext)BindingContext).DraftQuestion = null;
+            readingContext.DraftQuestion = null;
             if (goHome)
             {
                 await Navigation.PopToRootAsync();
@@ -95,20 +86,18 @@ namespace PassingData
 
 		async void OnSaveButtonClicked(object sender, EventArgs e)
 		{
-			ReadingContext context = (ReadingContext) BindingContext;
-
 			// Tag the new question with the authorities that have been selected.
 			ObservableCollection<Entity> questionAnswerers;
 			questionAnswerers =
 				new ObservableCollection<Entity>(
-					context.SelectableAuthorities.Where(w => w.Selected).Select(a => a.TagEntity));
-			if (context.SelectedDepartment != null)
-				questionAnswerers.Insert(0, context.SelectedDepartment);
+					readingContext.SelectableAuthorities.Where(w => w.Selected).Select(a => a.TagEntity));
+			if (readingContext.SelectedDepartment != null)
+				questionAnswerers.Insert(0, readingContext.SelectedDepartment);
 
-			IndividualParticipant thisParticipant = context.ThisParticipant;
+			IndividualParticipant thisParticipant = readingContext.ThisParticipant;
 			Question newQuestion = new Question
 			{
-				QuestionText = ((ReadingContext) BindingContext).DraftQuestion,
+				QuestionText = readingContext.DraftQuestion,
 				// TODO: Enforce registration before question-suggesting.
 				QuestionSuggester 
 					= (thisParticipant != null && thisParticipant.Is_Registered) ? thisParticipant.Username : "Anonymous user",
@@ -120,8 +109,7 @@ namespace PassingData
 			};
 
 
-			var questionDetailPage = new QuestionDetailPage(true, newQuestion, _context);
-			questionDetailPage.BindingContext = BindingContext;
+			var questionDetailPage = new QuestionDetailPage(true, newQuestion, readingContext);
 			await Navigation.PushAsync(questionDetailPage);
 		}
 

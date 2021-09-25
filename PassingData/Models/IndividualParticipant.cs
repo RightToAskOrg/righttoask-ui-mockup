@@ -14,18 +14,22 @@ namespace PassingData
 		private string selectedStateOrTerritory;
 		private string selectedFederalElectorate; 
 		private string selectedStateElectorate;
-		public bool Is_Registered { get; set; }
-		
 		private string address;
+		private string userName;
 		
 		// This is a list of chamber-electorate pairs in which the person
 		// has representatives.
 		private List<(BackgroundElectorateAndMPData.Chamber, string)> ElectoratesRepresentedIn;
 
-		// 	SelectedStateOrTerritory;
-		// public string SelectedStateElectorate;
-		// public string SelectedFederalElectorate;
-		
+		public IndividualParticipant() : base()
+		{
+			MPsKnown = false;
+			Is_Registered = false;
+		}
+		public bool Is_Registered { get; set; }
+		public bool MPsKnown { get; set; }
+
+
 		public string SelectedStateOrTerritory 
         {
 	        get

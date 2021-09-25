@@ -12,15 +12,15 @@ namespace PassingData
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class QuestionAskerPage : ContentPage
     {
-        private ReadingContext _context;
-        public QuestionAskerPage(ReadingContext context)
+        private ReadingContext readingContext;
+        public QuestionAskerPage(ReadingContext readingContext)
         {
             // TODO: Construct this properly.
-            FilterContext filters = new FilterContext {FilterKeyword = context.SearchKeyword};
-            BindingContext = context;
-            _context = context;
+            FilterContext filters = new FilterContext {FilterKeyword = readingContext.SearchKeyword};
+            BindingContext = readingContext;
+            this.readingContext = readingContext;
             
-            FilterDisplayTableView ttestableView = new FilterDisplayTableView(context);
+            FilterDisplayTableView ttestableView = new FilterDisplayTableView(readingContext);
             
             InitializeComponent();
 
@@ -29,7 +29,7 @@ namespace PassingData
 
         async void OnNavigateForwardButtonClicked(object sender, EventArgs e)
         {
-			var readingPage = new ReadingPage(false, _context.SelectableAuthorities, _context);
+			var readingPage = new ReadingPage(false, readingContext.SelectableAuthorities, readingContext);
 			await Navigation.PushAsync (readingPage);
         }
     }

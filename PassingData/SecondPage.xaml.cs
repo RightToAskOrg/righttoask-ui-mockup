@@ -13,14 +13,14 @@ namespace PassingData
 		private string question;
 		private ObservableCollection<Tag> SelectableAuthorities;
 		private bool isReadingOnly;
-		private ReadingContext _context;
+		private ReadingContext readingContext;
 
-		public SecondPage(bool IsReadingOnly, ReadingContext context)
+		public SecondPage(bool IsReadingOnly, ReadingContext readingContext)
 		{
 			
 			InitializeComponent ();
-			BindingContext = context;
-			_context = context;
+			BindingContext = readingContext;
+			this.readingContext = readingContext;
 			isReadingOnly = IsReadingOnly;
 
 			if (IsReadingOnly)
@@ -37,6 +37,7 @@ namespace PassingData
 
 		}
 		
+		/*
 		void OnPickerSelectedIndexChanged(object sender, EventArgs e) 
 		{
             var picker = (Picker)sender;
@@ -47,13 +48,15 @@ namespace PassingData
             {
                 Tag selectedDept = (Tag) picker.ItemsSource[selectedIndex];
                 selectedDept.Selected = true;
-                ((ReadingContext) BindingContext).SelectedDepartment = selectedDept.TagEntity;
+                _context.SelectedDepartment = selectedDept.TagEntity;
                 questionAsker.IsVisible = true;
             }
         }
+        */
+		
 		void Question_Entered(object sender, EventArgs e)
 		{
-			((ReadingContext) BindingContext).DraftQuestion = ((Editor) sender).Text;
+			readingContext.DraftQuestion = ((Editor) sender).Text;
 		}
 		
 		// If in read-only mode, initiate a question-reading page.
@@ -68,18 +71,17 @@ namespace PassingData
 		// context.
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
-			bool needToFindAnswerer = _context.SelectedDepartment != null
-			       || _context.SelectableAuthorities.Where(w => w.Selected).Count() != 0;
+			bool needToFindAnswerer = readingContext.SelectedDepartment != null
+			       || readingContext.SelectableAuthorities.Where(w => w.Selected).Count() != 0;
 			
 			if (isReadingOnly || !needToFindAnswerer)
 			{
-				var readingPage = new ReadingPage(isReadingOnly, _context.SelectableAuthorities, _context);
-				readingPage.BindingContext = BindingContext;
+				var readingPage = new ReadingPage(isReadingOnly, readingContext.SelectableAuthorities, readingContext);
 				await Navigation.PushAsync (readingPage);
 			}
 			else 
 			{
-				var questionAskerPage = new QuestionAskerPage(_context);
+				var questionAskerPage = new QuestionAskerPage(readingContext);
 				await Navigation.PushAsync(questionAskerPage);
 			}
 		}
@@ -92,7 +94,7 @@ namespace PassingData
 		{
 			// var webViewAuthoritySelectPage = new WebviewAuthoritySelect((ReadingContext) BindingContext);
 			// await Navigation.PushAsync(webViewAuthoritySelectPage);
-			var exploringPageToSearchAuthorities= new ExploringPageWithSearch(((ReadingContext)BindingContext).SelectableAuthorities,
+			var exploringPageToSearchAuthorities= new ExploringPageWithSearch(readingContext.SelectableAuthorities,
 				"Choose authorties");
 			await Navigation.PushAsync(exploringPageToSearchAuthorities);
 		}
@@ -103,11 +105,8 @@ namespace PassingData
 	    // It will pop back to here.
 		async void OnAnsweredByMPButtonClicked(object sender, EventArgs e)
 		{
-            
             string message = "These are your MPs.  Select the one(s) who should answer the question";
-           	var mpsExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
-            mpsExploringPage.BindingContext = BindingContext;
-            // mpsExploringPage.Appearing += FindMPsIfNotAlreadyKnown();
+           	var mpsExploringPage = new ExploringPage(readingContext.MyMPs, message);
            	await Navigation.PushAsync (mpsExploringPage);
             
             FindMPsIfNotAlreadyKnown();
@@ -122,9 +121,7 @@ namespace PassingData
 		{
             
             string message = "These are your MPs.  Select the one(s) who should raise the question in Parliament";
-           	var mpsExploringPage = new ExploringPage(((ReadingContext) BindingContext).MyMPs, message);
-            mpsExploringPage.BindingContext = BindingContext;
-            // mpsExploringPage.Appearing += FindMPsIfNotAlreadyKnown();
+           	var mpsExploringPage = new ExploringPage(readingContext.MyMPs, message);
            	await Navigation.PushAsync (mpsExploringPage);
 			
             FindMPsIfNotAlreadyKnown();
@@ -135,20 +132,11 @@ namespace PassingData
 		// insert the exploringpage underneath.
 		async void FindMPsIfNotAlreadyKnown()
 		{
-			if (! ((ReadingContext) BindingContext).MPsKnown)
+			if (readingContext.ThisParticipant == null || ! readingContext.ThisParticipant.MPsKnown)
 			{
-				var registrationPage = new RegisterPage2((ReadingContext) BindingContext);
-				
-				// var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-				// registrationPage.Disappearing += (sender2, e2) =>
-				// {
-				// 	waitHandle.Set();
-				// };
+				var registrationPage = new RegisterPage2(readingContext);
 				
 				await Navigation.PushAsync(registrationPage);
-				// System.Diagnostics.Debug.WriteLine("The modal page is now on screen, hit back button");
-				// await Task.Run(() => waitHandle.WaitOne());
-				// System.Diagnostics.Debug.WriteLine("The modal page is dismissed, do something now");
 			}
 		}
 		private void OnFindCommitteeButtonClicked(object sender, EventArgs e)

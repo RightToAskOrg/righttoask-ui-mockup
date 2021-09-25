@@ -30,7 +30,6 @@ namespace PassingData
 		async void OnNavigateButtonClicked (object sender, EventArgs e)
 		{
 			var secondPage = new NavigationPage(new SecondPageCS ());
-			//secondPage.BindingContext = contact;
 			await Navigation.PushAsync (secondPage);
 		}
 	}
