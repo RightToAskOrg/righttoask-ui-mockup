@@ -6,7 +6,7 @@
              x:Class="PassingData.RegisterPage1">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="You need to create and account to publish questions or vote." />
+            <Label Text="You need to create an account to publish questions or vote." />
             <!-- The helpful little message about the pseudonym is a perfect thing to put in a little ?-box. -->
             <Label x:Name="registerNameInstructions" Text="Enter your name. You can choose a pseudonym but your MP is more likely to listen if you use your real name." />
             <Editor x:Name="registerNameButton" Placeholder="name" Completed="OnRegisterNameFieldCompleted" StyleClass="NormalEditor" HorizontalOptions="Center"/>

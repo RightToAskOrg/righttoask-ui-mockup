@@ -22,6 +22,10 @@ namespace PassingData
 			await Navigation.PushAsync (readingPage);
 		}
 		
+		private void OnExpiringSoonButtonClicked(object sender, EventArgs e)
+		{
+			OnTop10NowButtonClicked(sender, e);
+		}
 		// If either 'enter' is pressed after a keyword change, or the 
 		// 'search by keyword' button is pressed, launch the reading page.
 		// Otherwise, if only the keyword is changed, update it but don't
@@ -54,5 +58,6 @@ namespace PassingData
 			var secondPage = new SecondPage (true, readingContext);
 			await Navigation.PushAsync(secondPage);
 		}
+
 	}
 }

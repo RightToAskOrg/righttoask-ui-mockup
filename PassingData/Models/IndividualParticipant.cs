@@ -21,7 +21,7 @@ namespace PassingData
 		// has representatives.
 		// Initially, when we don't know the state, it's only the Australian
 		// Parliament.
-		private List<(BackgroundElectorateAndMPData.Chamber, string)> ElectoratesRepresentedIn
+		private List<(BackgroundElectorateAndMPData.Chamber, string)> electoratesRepresentedIn
 			= new List<(BackgroundElectorateAndMPData.Chamber, string)>()
 			{
 				(BackgroundElectorateAndMPData.Chamber.Australian_House_Of_Representatives, ""),

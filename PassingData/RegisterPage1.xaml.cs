@@ -13,21 +13,20 @@ namespace PassingData
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage1 : ContentPage
     {
-        private IndividualParticipant thisParticipant;
         private ReadingContext readingContext;
-        public RegisterPage1(IndividualParticipant thisParticipant, ReadingContext readingContext)
+        public RegisterPage1(ReadingContext readingContext)
         {
             InitializeComponent();
-            this.thisParticipant = thisParticipant;
+            this.readingContext = readingContext;
             BindingContext = readingContext;
-            if (!thisParticipant.Is_Registered)
+            if (!readingContext.ThisParticipant.Is_Registered)
             {
                 registerCitizenButton.IsVisible = true;
                 findElectoratesButton.IsVisible = false;
             }
             else
             {
-                if (thisParticipant.MPsKnown)
+                if (readingContext.ThisParticipant.MPsKnown)
                 {
                     
                     DisplayAlert("Electorates already selected",
@@ -41,7 +40,7 @@ namespace PassingData
 
         async void OnRegisterNameFieldCompleted(object sender, EventArgs e)
         {
-	        thisParticipant.Username = ((Editor) sender).Text;
+	        readingContext.ThisParticipant.Username = ((Editor) sender).Text;
         }
         
         // If MPs are not known, show page that allows finding electorates.
@@ -49,7 +48,7 @@ namespace PassingData
         // Make sure they've entered a name.
         void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(thisParticipant.Username))
+            if (string.IsNullOrEmpty(readingContext.ThisParticipant.Username))
             {
                 DisplayAlert("Enter username",
                     "You need to choose a username in order to make an account",
@@ -57,7 +56,7 @@ namespace PassingData
             }
             else
             {
-                // thisParticipant.Is_Registered = true;
+                readingContext.ThisParticipant.Is_Registered = true;
                 Navigation.PopAsync();
             }
         }
@@ -80,7 +79,7 @@ namespace PassingData
 
         private void OnRegisterEmailFieldCompleted(object sender, EventArgs e)
         {
-	        thisParticipant.UserEmail = ((Editor) sender).Text;
+	        readingContext.ThisParticipant.UserEmail = ((Editor) sender).Text;
         }
     }
 }

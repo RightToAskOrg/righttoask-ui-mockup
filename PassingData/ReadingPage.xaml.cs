@@ -71,7 +71,7 @@ namespace PassingData
 
 		async void OnDiscardButtonClicked(object sender, EventArgs e)
 		{
-            bool goHome = await DisplayAlert("Draft discarded", "", "Home", "Related questions");
+            bool goHome = await DisplayAlert("Draft discarded", "Save time and focus support by voting on a similar question", "Home", "Related questions");
             readingContext.DraftQuestion = null;
             if (goHome)
             {

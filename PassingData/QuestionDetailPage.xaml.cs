@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -12,7 +13,6 @@ namespace PassingData
     {
         private string linkOrAnswer;
         private Question question;
-        private IndividualParticipant thisParticipant;
         private ReadingContext readingContext;
         public QuestionDetailPage (bool isNewQuestion, Question selectedQuestion, ReadingContext readingContext)
         {
@@ -30,14 +30,15 @@ namespace PassingData
                 UpVoteButton.IsVisible = false;
                 LinkOrAnswerSegment.IsVisible = false;
                 SaveAnswerButton.IsVisible = false;
+                QuestionSuggesterButton.Text = "Edit your profile";
             }
             else
             {
                 BackgroundSegment.IsVisible = false;
                 SaveBackgroundButton.IsVisible = false;
+                QuestionSuggesterButton.Text = "View " + question.QuestionSuggester + "'s profile";
             }
             
-            QuestionSuggesterButton.Text = "View " + question.QuestionSuggester + "'s profile";
         }
         
         private void UpVoteButton_OnClicked(object sender, EventArgs e)
@@ -71,33 +72,46 @@ namespace PassingData
         // give you the same options.
         async void SubmitNewQuestionButton_OnClicked(object sender, EventArgs e)
         {
-            if (thisParticipant == null || !thisParticipant.Is_Registered)
+            if (!readingContext.ThisParticipant.Is_Registered)
             {
-                RegisterPage1 registrationPage = new RegisterPage1(thisParticipant, readingContext);
-                await Navigation.PushAsync(registrationPage);
+                RegisterPage1 registrationPage = new RegisterPage1(readingContext);
+                registrationPage.Disappearing += saveQuestion;
+                Navigation.PushAsync(registrationPage);
             }
-
-            // Note the condition here is necessary because they might have been offered the chance to
-            // register, but have declined.
-            // Also note that setting QuestionSuggester may be unnecessary - it may already be set correctly -
-            // but is needed if the person has just registered.
-            if (thisParticipant != null && thisParticipant.Is_Registered)
+            else
             {
-                question.QuestionSuggester = thisParticipant.Username;
+                saveQuestion(null, null);
+            }
+            
+            
+        }
+        
+        private async void saveQuestion(object sender, EventArgs e)
+        {
+            
+        // Note the condition here is necessary because they might have been offered the chance to
+        // register, but have declined.
+        // Also note that setting QuestionSuggester may be unnecessary - it may already be set correctly -
+        // but is needed if the person has just registered.
+            if (readingContext.ThisParticipant.Is_Registered)
+            {
+                question.QuestionSuggester = readingContext.ThisParticipant.Username;
 	            readingContext.ExistingQuestions.Insert(0, question);
-                // ((Button) sender).Text = "Published!";
-                bool goHome = await DisplayAlert("Question published!", "", "Home", "Write another one");
-                // ((Button) sender).IsEnabled = false;
+                
                 readingContext.DraftQuestion = null;
-                if (goHome)
-                {
-                    await Navigation.PopToRootAsync();
-                }
-                else  // Pop back to readingpage. TODO: fix the context so that it doesn't think you're drafting
+                
+            }
+            
+            bool goHome = await DisplayAlert("Question published!", "", "Home", "Write another one");
+                
+            if (goHome)
+            {
+                await Navigation.PopToRootAsync();
+            }
+            else  // Pop back to readingpage. TODO: fix the context so that it doesn't think you're drafting
                 // a question.  Possibly the right thing to do is pop everything and then push a reading page.
-                {
-                    await Navigation.PopAsync();
-                }
+            {
+                await Navigation.PopAsync();
             }
         }
 

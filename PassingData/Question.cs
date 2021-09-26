@@ -70,7 +70,7 @@ namespace PassingData
                    // var readablePhrase = string.Join(" ", words); 
                    "To be answered by: " + string.Join(", ", questionAnswerersList) + '\n' +
                    "UpVotes: " + UpVotes+ '\n' +
-                   "DownVotes: " + DownVotes + '\n' +
+                   // "DownVotes: " + DownVotes + '\n' +
                    "Link/Answer: " + (LinkOrAnswer ?? "");
         }
         

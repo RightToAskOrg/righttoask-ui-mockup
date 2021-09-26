@@ -11,7 +11,7 @@
 				<Label Text="Enter your electorates below or use your address to find them" FontSize="Medium" HorizontalOptions="Center" />
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 					<Label Text="I live in " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
-					<Picker x:Name="stateOrTerritoryPicker" Title="{Binding SelectedStateOrTerritory, StringFormat='Select State or Territory {0:F0}'}" 
+					<Picker x:Name="stateOrTerritoryPicker" Title="{Binding ThisParticipant.SelectedStateOrTerritory, StringFormat='Select State or Territory {0:F0}'}" 
 					    BackgroundColor="Turquoise" 
 				        SelectedIndexChanged="OnStatePickerSelectedIndexChanged"> 
 					</Picker>
@@ -20,13 +20,13 @@
 				    <StackLayout Orientation="Vertical">
 					    <Label x:Name="knowElectorates" Text="I know my State/Territory electorates" HorizontalOptions="Center" 
 					           TextColor="Teal" FontSize="Large" VerticalOptions="Center" /> 
-					    <Picker x:Name="stateElectoratePicker" Title="{Binding SelectedStateElectorate, StringFormat='State Electorate: {0:F0}'}" 
+					    <Picker x:Name="stateElectoratePicker" Title="{Binding ThisParticipant.SelectedStateElectorate, StringFormat='State Electorate: {0:F0}'}" 
 				            ItemsSource="{Binding StateElectorates}" 
 				            ItemDisplayBinding="{Binding TagEntity.EntityName}" 
 				            SelectedIndexChanged="OnStateElectoratePickerSelectedIndexChanged"> 
 					    </Picker>
 					    <!-- <Label Text="I know my Federal electorate" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" /> -->
-					    <Picker x:Name="federalElectoratePicker" Title="{Binding SelectedFederalElectorate, StringFormat='Federal Electorate: {0:F0}'}" 
+					    <Picker x:Name="federalElectoratePicker" Title="{Binding ThisParticipant.SelectedFederalElectorate, StringFormat='Federal Electorate: {0:F0}'}" 
 				            ItemsSource="{Binding FederalElectorates}" 
 				            ItemDisplayBinding="{Binding TagEntity.EntityName}" 
 				            SelectedIndexChanged="OnFederalElectoratePickerSelectedIndexChanged"> 

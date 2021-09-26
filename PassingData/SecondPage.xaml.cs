@@ -132,10 +132,11 @@ namespace PassingData
 		// insert the exploringpage underneath.
 		async void FindMPsIfNotAlreadyKnown()
 		{
-			if (readingContext.ThisParticipant == null || ! readingContext.ThisParticipant.MPsKnown)
+			var thisParticipant = readingContext.ThisParticipant;
+			
+			if (thisParticipant == null || ! thisParticipant.MPsKnown)
 			{
 				var registrationPage = new RegisterPage2(readingContext);
-				
 				await Navigation.PushAsync(registrationPage);
 			}
 		}
