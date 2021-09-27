@@ -19,10 +19,15 @@ namespace PassingData
             InitializeComponent();
             this.readingContext = readingContext;
             BindingContext = readingContext;
+            if (!readingContext.ThisParticipant.MPsKnown)
+            {
+                registerCitizenButton.Text = "Next: Find your electorates";
+            }
+            
             if (!readingContext.ThisParticipant.Is_Registered)
             {
                 registerCitizenButton.IsVisible = true;
-                findElectoratesButton.IsVisible = false;
+                // findElectoratesButton.IsVisible = false;
             }
             else
             {
@@ -34,7 +39,7 @@ namespace PassingData
                         "OK");
                 }
                 registerCitizenButton.IsVisible = false;
-                findElectoratesButton.IsVisible = true;
+                // findElectoratesButton.IsVisible = true;
             }
         }
 
@@ -46,7 +51,7 @@ namespace PassingData
         // If MPs are not known, show page that allows finding electorates.
         // Whether or not they choose some, let them finish registering.
         // Make sure they've entered a name.
-        void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
+        async void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(readingContext.ThisParticipant.Username))
             {
@@ -57,15 +62,21 @@ namespace PassingData
             else
             {
                 readingContext.ThisParticipant.Is_Registered = true;
-                Navigation.PopAsync();
+                
+                if (!readingContext.ThisParticipant.MPsKnown)
+                {
+                    var currentPage = Navigation.NavigationStack.LastOrDefault();
+                    var findElectoratesPage = new RegisterPage2(readingContext, true);
+                    await Navigation.PushAsync(findElectoratesPage);
+                    Navigation.RemovePage(currentPage);
+                }
             }
         }
 
         async void OnFindElectoratesButtonClicked(object sender, EventArgs e)
         {
                 registerCitizenButton.IsVisible = true;
-                findElectoratesButton.IsVisible = false; 
-                var secondRegisterPage = new RegisterPage2(readingContext);
+                var secondRegisterPage = new RegisterPage2(readingContext, true);
 			    await Navigation.PushAsync (secondRegisterPage);
         }
         void OnRegisterMPButtonClicked(object sender, EventArgs e)

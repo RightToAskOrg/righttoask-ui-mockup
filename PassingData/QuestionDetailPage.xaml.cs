@@ -74,9 +74,21 @@ namespace PassingData
         {
             if (!readingContext.ThisParticipant.Is_Registered)
             {
-                RegisterPage1 registrationPage = new RegisterPage1(readingContext);
-                registrationPage.Disappearing += saveQuestion;
-                Navigation.PushAsync(registrationPage);
+                string message = "You need to make an account to publish or vote on questions";
+                bool registerNow 
+                    = await DisplayAlert("Make an account?", message, "OK", "Not now");
+                
+                if (registerNow)
+                {
+                    RegisterPage1 registrationPage = new RegisterPage1(readingContext);
+                    // Commenting-out this instruction means that the person has to push
+                    // the 'publish question' button again after they've registered 
+                    // their account. This seems natural to me, but is worth checking
+                    // with users.
+                    // registrationPage.Disappearing += saveQuestion;
+                    
+                    Navigation.PushAsync(registrationPage);
+                }
             }
             else
             {
@@ -89,10 +101,9 @@ namespace PassingData
         private async void saveQuestion(object sender, EventArgs e)
         {
             
-        // Note the condition here is necessary because they might have been offered the chance to
-        // register, but have declined.
-        // Also note that setting QuestionSuggester may be unnecessary - it may already be set correctly -
-        // but is needed if the person has just registered.
+            // Setting QuestionSuggester may be unnecessary
+            // - it may already be set correctly -
+            // but is needed if the person has just registered.
             if (readingContext.ThisParticipant.Is_Registered)
             {
                 question.QuestionSuggester = readingContext.ThisParticipant.Username;
@@ -115,6 +126,11 @@ namespace PassingData
             }
         }
 
+        private async void pushFindElectoratesPage(object sender, EventArgs e)
+        {
+            var findElectoratesPage = new RegisterPage2(readingContext, true);
+            await Navigation.PushAsync(findElectoratesPage);
+        }
         private void Background_Entered(object sender, EventArgs e)
         {
             // Do nothing.

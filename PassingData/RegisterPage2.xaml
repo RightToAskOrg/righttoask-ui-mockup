@@ -53,16 +53,10 @@
 			            </StackLayout>
 			        </StackLayout>
 				</Frame>
-				<Button x:Name="findMPsButton" HorizontalOptions="End" StyleClass="DoneButton" Text="Next" Clicked="OnFindMPsButtonClicked" />
-			<!-- <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-				<Label Text="Register now? " />
-				<Label FontSize="Small" Text="(i) Registering allows you to suggest and vote on questions. Your name will be posted publicly. Your address will not be published. You choose whether to share your electorate." />
-				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-				    <Button x:Name="registerElectoratesButton" BackgroundColor="Turquoise" Text="Register with name and electorates" Clicked="OnRegisterElectoratesButtonClicked" />
-				    <Button x:Name="registerNameOnlyButton" BackgroundColor="Turquoise" Text="Register with only my name" Clicked="OnRegisterNameButtonClicked" />
+				<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+					<Button x:Name="SkipButton" BackgroundColor="Turquoise" Text="Skip this step" Clicked="OnSkipButtonClicked" />
+					<Button x:Name="FindMPsButton" HorizontalOptions="End" StyleClass="DoneButton" Text="Next" Clicked="OnFindMPsButtonClicked" />
 			    </StackLayout>
-			    <Button x:Name="noRegisterElectoratesButton" BackgroundColor="Turquoise" Text="Save electorates but skip registration" Clicked="OnNoRegisterButtonClicked" />
-			</StackLayout>  -->
 			</StackLayout>
 		</StackLayout>
     </ContentPage.Content>
