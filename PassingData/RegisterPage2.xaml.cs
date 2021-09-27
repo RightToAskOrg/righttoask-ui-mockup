@@ -11,11 +11,15 @@ using Xamarin.Forms.Xaml;
  * This page allows a person to find which electorates they live in,
  * and hence which MPs represent them.
  *
- * This is used in two possible places: if the person clicks on 'My MP'
- * when setting question metadata, or if the person tries to vote or post
- * a question.  In the latter case, they also have to generate a name
- * via RegisterPage1.  In the former case, there is a list of MPs loaded for
- * them to choose from.
+ * This is used in two possible places:
+ * (1) if the person clicks on 'My MP' when setting question metadata,
+ * we need to know who their MPs are. After this page,
+ * there is a list of MPs loaded for them to choose from.
+ * This is implemented by inputing a page to go to next.
+ * 
+ * (2) if the person tries to vote or post a question.
+ * In this case, they have generated a name via RegisterPage1
+ * and can skip this step.  
  */
 namespace PassingData
 {
@@ -24,11 +28,13 @@ namespace PassingData
     {
        private string address;
        private ReadingContext readingContext;
-        public RegisterPage2(ReadingContext readingContext, bool showSkip)
+       private Page nextPage;
+        public RegisterPage2(ReadingContext readingContext, bool showSkip, Page nextPage = null)
         {
             InitializeComponent();
             BindingContext = readingContext;
             this.readingContext = readingContext;
+            this.nextPage = nextPage;
             stateOrTerritoryPicker.ItemsSource = BackgroundElectorateAndMPData.StatesAndTerritories;
             
             addressSavingStack.IsVisible = false;
@@ -92,11 +98,20 @@ namespace PassingData
             }
         }
 
+        // If we've been given a nextPage, go there and remove this page,
+        // otherwise just pop.
         private async void OnFindMPsButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            var currentPage = Navigation.NavigationStack.LastOrDefault();
+        
+            if (nextPage != null)
+            {
+                await Navigation.PushAsync(nextPage);
+            }
+            
+            Navigation.RemovePage(currentPage); 
         }
-
+                
         void OnAddressEntered(object sender, EventArgs e)
         {
             address = ((Editor) sender).Text;
@@ -171,7 +186,7 @@ namespace PassingData
             
             // Remove page before this, which should be RegisterPage1 
             // TODO should check that this is the page we expect it to be before removing it
-            this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+            // this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
             // This PopAsync will now go to wherever the user started registration from 
             // this.Navigation.PopAsync ();
             await Navigation.PopAsync();

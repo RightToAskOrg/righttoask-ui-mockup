@@ -92,13 +92,13 @@ namespace PassingData
             }
             else
             {
-                saveQuestion(null, null);
+                SaveQuestion(null, null);
             }
             
             
         }
         
-        private async void saveQuestion(object sender, EventArgs e)
+        private async void SaveQuestion(object sender, EventArgs e)
         {
             
             // Setting QuestionSuggester may be unnecessary

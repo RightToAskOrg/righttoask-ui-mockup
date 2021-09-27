@@ -107,9 +107,9 @@ namespace PassingData
 		{
             string message = "These are your MPs.  Select the one(s) who should answer the question";
            	var mpsExploringPage = new ExploringPage(readingContext.MyMPs, message);
-           	await Navigation.PushAsync (mpsExploringPage);
+           	// await Navigation.PushAsync (mpsExploringPage);
             
-            FindMPsIfNotAlreadyKnown();
+            ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
             
             questionAsker.IsVisible = true;
 		}
@@ -117,27 +117,30 @@ namespace PassingData
 
 		// TODO: at the moment this doesn't properly select the MPs-  it just lists them and lets
 		// it looks like you've selected them.
-		private async void OnMyMPRaiseButtonClicked(object sender, EventArgs e)
+		private void OnMyMPRaiseButtonClicked(object sender, EventArgs e)
 		{
-            
             string message = "These are your MPs.  Select the one(s) who should raise the question in Parliament";
            	var mpsExploringPage = new ExploringPage(readingContext.MyMPs, message);
-           	await Navigation.PushAsync (mpsExploringPage);
 			
-            FindMPsIfNotAlreadyKnown();
+            ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
 		}
 
 		// TODO: This is inelegant at the moment. The underlying page is briefly
 		// visible before it appears - it would be better to pop this up first, then
 		// insert the exploringpage underneath.
-		async void FindMPsIfNotAlreadyKnown()
+		void ListMPsFindFirstIfNotAlreadyKnown(ExploringPage mpsExploringPage)
 		{
 			var thisParticipant = readingContext.ThisParticipant;
 			
 			if (thisParticipant == null || ! thisParticipant.MPsKnown)
 			{
-				var registrationPage = new RegisterPage2(readingContext, false);
-				await Navigation.PushAsync(registrationPage);
+				var registrationPage = new RegisterPage2(readingContext, false, mpsExploringPage);
+				
+				Navigation.PushAsync(registrationPage);
+			}
+			else
+			{
+				Navigation.PushAsync(mpsExploringPage);
 			}
 		}
 		private void OnFindCommitteeButtonClicked(object sender, EventArgs e)

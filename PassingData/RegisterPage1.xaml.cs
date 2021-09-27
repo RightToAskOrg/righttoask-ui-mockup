@@ -63,13 +63,15 @@ namespace PassingData
             {
                 readingContext.ThisParticipant.Is_Registered = true;
                 
+                var currentPage = Navigation.NavigationStack.LastOrDefault();
+                
                 if (!readingContext.ThisParticipant.MPsKnown)
                 {
-                    var currentPage = Navigation.NavigationStack.LastOrDefault();
                     var findElectoratesPage = new RegisterPage2(readingContext, true);
                     await Navigation.PushAsync(findElectoratesPage);
-                    Navigation.RemovePage(currentPage);
                 }
+                
+                Navigation.RemovePage(currentPage);
             }
         }
 
