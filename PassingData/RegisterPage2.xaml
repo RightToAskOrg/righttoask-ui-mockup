@@ -53,7 +53,7 @@
 			            </StackLayout>
 			        </StackLayout>
 				</Frame>
-				<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+				<StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
 					<Button x:Name="SkipButton" BackgroundColor="Turquoise" Text="Skip this step" Clicked="OnSkipButtonClicked" />
 					<Button x:Name="FindMPsButton" HorizontalOptions="End" StyleClass="DoneButton" Text="Next" Clicked="OnFindMPsButtonClicked" />
 			    </StackLayout>

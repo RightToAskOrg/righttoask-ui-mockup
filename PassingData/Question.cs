@@ -46,16 +46,16 @@ namespace PassingData
         }        
         public int DownVotes 
         {
-                    get
-                    {
-                        return downVotes;
-                    }
-                    set
-                    {
-                        downVotes = value;
-                        OnPropertyChanged("DownVotes");
-                    }
-                }
+            get
+            {
+                return downVotes;
+            }
+            set
+            {
+                downVotes = value;
+                OnPropertyChanged("DownVotes");
+            }
+        }
         
         public override string ToString ()
         {

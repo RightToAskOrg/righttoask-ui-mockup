@@ -30,15 +30,9 @@ namespace PassingData
 		public IndividualParticipant ThisParticipant { get; set; }
 
 		// Things about the current search, draft question or other action.
+		public FilterChoices Filters { get; set; }
 		public string DraftQuestion { get; set; }
-		public Entity SelectedDepartment { get; set; }
-		public string SearchKeyword { get; set; }
 		
-		// Whether MPs have been selected for this question.
-		// TODO perhaps we need a different bool for whether they've
-		// been selected for asking or answering.
-		// public bool MPsKnown = false;
-
 		// Whether this is a 'top ten' search.
 		public bool TopTen { get; set; }
 
@@ -50,13 +44,13 @@ namespace PassingData
 		// TODO: at the moment, the list of 'my MPs' is the 
 		// hardcoded and has the generic 'Entity' type. 
 		
-		public ObservableCollection<Tag> MyMPs { get; set; }
+		public ObservableCollection<Entity> AllMPs { get; set; }
 
 		public ObservableCollection<Question> ExistingQuestions { get; set; }
 		
 		public ObservableCollection<Tag> Departments { get; set; }
 
-		public ObservableCollection<Tag> SelectableAuthorities { get; set; }
+		// public ObservableCollection<Tag> SelectableAuthorities { get; set; }
 
 		public ObservableCollection<Tag> StateElectorates { get; set; }
 		public ObservableCollection<Tag> FederalElectorates { get; set; }
@@ -68,17 +62,7 @@ namespace PassingData
 		private void InitializeDefaultSetup()
 		{
 			ThisParticipant = new IndividualParticipant();
-			
-			SelectableAuthorities =
-				new ObservableCollection<Tag>(BackgroundElectorateAndMPData.AllAuthorities.Select
-				(authority => new Tag
-				{
-					TagEntity = authority, 
-					Selected = false
-				}
-				)
-				);
-			
+			Filters = new FilterChoices();
 
 			Departments = new ObservableCollection<Tag>();
 			Departments.Add(new Tag { TagEntity = new Entity { EntityName = "Environment" }, Selected = false });
@@ -91,6 +75,7 @@ namespace PassingData
 				{ TagEntity = new Entity { EntityName = "Innovation, Industry and Science" }, Selected = false });
 			Departments.Add(new Tag { TagEntity = new Entity { EntityName = "Communications" }, Selected = false });
 
+			/*
 			MyMPs = new ObservableCollection<Tag>();
 			MyMPs.Add(new Tag { TagEntity = new Entity { EntityName = "Janet Rice" }, Selected = false });
 			MyMPs.Add(new Tag { TagEntity = new Entity { EntityName = "Danny O'Brien" }, Selected = false });
@@ -101,7 +86,18 @@ namespace PassingData
 			MyMPs.Add(new Tag { TagEntity = new Entity { EntityName = "Michael McCormack" }, Selected = false });
 			MyMPs.Add(new Tag { TagEntity = new Entity { EntityName = "Mark Dreyfus" }, Selected = false });
 			MyMPs.Add(new Tag { TagEntity = new Entity { EntityName = "Michaelia Cash" }, Selected = false });
+			*/
 
+			AllMPs = new ObservableCollection<Entity>();
+			AllMPs.Add(new Entity { EntityName = "Janet Rice" });
+			AllMPs.Add(new Entity { EntityName = "Danny O'Brien" });
+			AllMPs.Add(new Entity { EntityName = "Peter Dutton" });
+			AllMPs.Add(new Entity { EntityName = "Penny Wong" });
+			AllMPs.Add(new Entity { EntityName = "Daniel Andrews" });
+			AllMPs.Add(new Entity { EntityName = "Ged Kearney" });
+			AllMPs.Add(new Entity { EntityName = "Michael McCormack" });
+			AllMPs.Add(new Entity { EntityName = "Mark Dreyfus" });
+			
 			ExistingQuestions = new ObservableCollection<Question>();
 			ExistingQuestions.Add(
 				new Question
@@ -244,14 +240,12 @@ namespace PassingData
 		
 		public override string ToString ()
 		{
-			return "Keyword: " + SearchKeyword + '\n' +
+			return "Keyword: " + Filters.SearchKeyword + '\n' +
 			       "TopTen: " + TopTen + '\n' +
 			       "Direct Committee: " + GoDirect_Committee + '\n' +
 			       "Direct MP: " + GoDirect_MP + '\n' +
 			       "Question: " + DraftQuestion + '\n' +
-			       (SelectedDepartment != null ? "Selected Department: "+SelectedDepartment.EntityName+"\n" : "") + 
-			       "Departments: " + Departments + '\n' +
-			       "Other Authorities: " + SelectableAuthorities + '\n';
+			       "Departments: " + Departments + '\n' ;
 		}
 
 	}

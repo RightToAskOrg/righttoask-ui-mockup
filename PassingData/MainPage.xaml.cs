@@ -18,7 +18,7 @@ namespace PassingData
 		{
 			readingContext.TopTen = true;
 
-			var readingPage = new ReadingPage (true, readingContext.SelectableAuthorities, readingContext);
+			var readingPage = new ReadingPage (true, readingContext);
 			await Navigation.PushAsync (readingPage);
 		}
 		
@@ -32,18 +32,18 @@ namespace PassingData
 		// launch a new page.
 		async void OnReadByKeywordFieldCompleted(object sender, EventArgs e)
 		{
-			readingContext.SearchKeyword = ((SearchBar)sender).Text;
+			readingContext.Filters.SearchKeyword = ((SearchBar)sender).Text;
 			launchKeywordReadingPage();
 		}
 		
 		private void OnKeywordChanged(object sender, TextChangedEventArgs e)
 		{
-			readingContext.SearchKeyword = e.NewTextValue;
+			readingContext.Filters.SearchKeyword = e.NewTextValue;
 		}
 
 		async void launchKeywordReadingPage()
 		{
-			var readingPage = new ReadingPage(true, readingContext.SelectableAuthorities, readingContext);
+			var readingPage = new ReadingPage(true, readingContext);
 			await Navigation.PushAsync(readingPage);
 		}
 		

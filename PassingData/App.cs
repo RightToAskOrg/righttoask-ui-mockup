@@ -81,6 +81,39 @@ namespace PassingData
             };
             Resources.Add(doneButton);
             
+            // Currently identical to the 'done' button, but
+            // separated in case we want to make them different later.
+            var saveButton = new Style(typeof(Xamarin.Forms.Button))
+            {
+                Class = "SaveButton",
+                ApplyToDerivedTypes = true,
+                Setters =
+                {
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.BackgroundColorProperty,
+                        Value = "Teal",
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.TextColorProperty,
+                        Value = "White",
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.TextProperty,
+                        Value = "Save",
+                    },
+                    new Setter
+                    {
+                        Property = Xamarin.Forms.Button.HorizontalOptionsProperty,
+                        Value = "End",
+                    }
+                    
+                }
+            };
+            Resources.Add(saveButton);
+            
             var normalButton = new Style(typeof(Xamarin.Forms.Button))
             {
                 Class = "NormalButton",

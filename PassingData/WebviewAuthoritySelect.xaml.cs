@@ -11,9 +11,11 @@ namespace PassingData
 {
     public partial class WebviewAuthoritySelect : ContentPage
     {
+        private ReadingContext context;
         public WebviewAuthoritySelect (ReadingContext context)
         {
             InitializeComponent ();
+            this.context = context;
             BindingContext = context;
             WebView1.Source = "https://www.righttoknow.org.au/body/list/all";
         }
@@ -60,8 +62,8 @@ namespace PassingData
         private void insertOrSelect(string authority)
         {
             var matchingAuthorities 
-                = new ObservableCollection<Tag>(((ReadingContext)BindingContext).SelectableAuthorities.
-                    Where(w => w.TagEntity.RightToKnowURLSuffix  == authority));
+                = new ObservableCollection<Entity>(BackgroundElectorateAndMPData.AllAuthorities.
+                    Where(w => w.RightToKnowURLSuffix != null && w.RightToKnowURLSuffix  == authority));
             if (matchingAuthorities.Count == 0)
             {
                 Entity newAuthority = new Entity
@@ -69,16 +71,15 @@ namespace PassingData
                     EntityName = authority,
                     NickName = authority
                 };
-                Tag newAuthorityTag = new Tag
-                {
-                    TagEntity = newAuthority,
-                    Selected = true
-                };
-                ((ReadingContext) BindingContext).SelectableAuthorities.Add(newAuthorityTag);
+                BackgroundElectorateAndMPData.AllAuthorities.Add(newAuthority);
 
             } else if (matchingAuthorities.Count == 1)
             {
-                matchingAuthorities[0].Selected = true;
+                var authorityToBeAdded = matchingAuthorities[0]; 
+                if(!context.Filters.SelectedAuthorities.Contains(authorityToBeAdded))
+                {
+                    context.Filters.SelectedAuthorities.Add(authorityToBeAdded);        
+                }
             }
             else
             // TODO Do error handling better. It would be good to

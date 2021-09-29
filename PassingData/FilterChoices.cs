@@ -6,8 +6,61 @@ using Xamarin.Forms;
 
 namespace PassingData
 {
-	public class FilterContext : INotifyPropertyChanged
+	public class FilterChoices : INotifyPropertyChanged
 	{
+		private string searchKeyword;
+		private ObservableCollection<Entity> selectedAnsweringMPs;
+		private ObservableCollection<Entity> selectedAskingMPs;
+
+		private ObservableCollection<Entity> selectedAuthorities;
+
+		public FilterChoices()
+		{
+			selectedAnsweringMPs = new ObservableCollection<Entity>();
+			selectedAskingMPs = new ObservableCollection<Entity>();
+			selectedAuthorities = new ObservableCollection<Entity>();
+		}
+
+		public ObservableCollection<Entity> SelectedAuthorities
+		{
+			get { return selectedAuthorities; }
+			set
+			{
+				selectedAuthorities = value;
+				OnPropertyChanged("SelectedAuthorities");
+			}
+		}
+
+		public string SearchKeyword
+		{
+			get { return searchKeyword; }
+			set
+			{
+				searchKeyword = value;
+				OnPropertyChanged("SearchKeyword");
+			}
+		}
+
+		public ObservableCollection<Entity> SelectedAskingMPs
+		{
+			get { return selectedAskingMPs; }
+			set
+			{
+				selectedAskingMPs = value;
+				OnPropertyChanged("SelectedAskingMPs");
+			}
+		}
+
+		public ObservableCollection<Entity> SelectedAnsweringMPs
+		{
+			get { return selectedAnsweringMPs; }
+			set
+			{
+				selectedAnsweringMPs = value;
+				OnPropertyChanged("SelectedAnsweringMPs");
+			}
+		}
+		
         public event PropertyChangedEventHandler PropertyChanged;
         
         // This function allows for automatic UI updates when these properties change.
@@ -18,80 +71,5 @@ namespace PassingData
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        
-		private string filterKeyword;
-
-		// These
-		private ObservableCollection<Tag> SelectedAnsweringMPs;
-		private ObservableCollection<Tag> SelectedAskingMPs;
-
-
-		// private string matchingQuestions;
-		
-		// Things about the current search, draft question or other action.
-		// public string SelectedDepartment { get; set; }
-		
-		// Existing things about the world.
-		// TODO: at the moment, the list of 'my MPs' is the 
-		// same as the original complete set of MPs.
-		// This is initiated with a default list of MPs,
-		// from which at the moment you select the ones
-		// that are yours
-		// public ObservableCollection<Tag> MyMPs { get; set; }
-
-		// public ObservableCollection<Tag> Departments { get; set; }
-		
-		// public ObservableCollection<Tag> OtherAuthorities { get; set; }
-
-		// At the moment, this simply populates the reading context with a
-		// hardcoded set of "existing" questions, authorities, etc.
-		/*
-		public void InitializeDefaultSetup()
-		{
-			matchingQuestions = 4782;
-			
-			Departments = new ObservableCollection<Tag>();
-
-			MyMPs = new ObservableCollection<Tag>();
-			
-        	OtherAuthorities = new ObservableCollection<Tag>();
-		}
-		*/
-		
-		/*
-		public override string ToString ()
-		{
-			return "Keyword: " + SearchKeyword + '\n' +
-			       "TopTen: " + TopTen.ToString() + '\n' +
-			       "Direct Committee: " + GoDirect_Committee + '\n' +
-			       "Direct MP: " + GoDirect_MP + '\n' +
-			       "My MPs" + (MPsKnown ? "" : " not" + " selected") + '\n' + 
-			       "Question: " + DraftQuestion + '\n' +
-			       "Number of matching questions: " + MatchingQuestions.ToString() + '\n' +
-			       "Selected Department: " + SelectedDepartment + '\n' +
-			       "Departments: " + Departments.ToString() + '\n' +
-			       "Other Authorities: " + OtherAuthorities.ToString() + '\n';
-		}
-		*/
-		
-		// These functions allow automatic UI updates when these values change.
-		public string FilterKeyword
-		{
-			get { return filterKeyword; }
-			set
-			{
-				filterKeyword = value;
-				OnPropertyChanged("FilterKeyword");
-			}
-		}
-		
-		// TODO I think this should simply have a list of the ones that were chosen, for
-		// those who should raise it and those who should answer. In each case, if you
-		// click on it, you should get the complete list of options back.
-		// public ObservableCollection<Tag> MyMPs { get; set; }
-
-		// public ObservableCollection<Tag> Departments { get; set; }
-		
-		// public ObservableCollection<Tag> OtherAuthorities { get; set; }
 	}
 }

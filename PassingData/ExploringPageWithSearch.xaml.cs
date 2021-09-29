@@ -14,17 +14,15 @@ namespace PassingData
     public partial class ExploringPageWithSearch : ExploringPage 
     {
         private string searchingFor;
-        protected ObservableCollection<Tag> selectableEntities;
 
         // TODO Actually the best way to to this is to put the things that you selected at the beginning,
         // with the unselected things (or possibly everything) in the huge long list underneath.  
         // When the user rearranges or unselects things, don't rearrange them (possibly consider adding them into
         // the selected list, but maybe not.
         // Also use the BindingContext properly. I think the setting should be in the base, not here.
-        public ExploringPageWithSearch(ObservableCollection<Tag> selectableTags, string message) :  base(selectableTags, message)
+		public ExploringPageWithSearch(ObservableCollection<Entity> allEntities, 
+			ObservableCollection<Entity> selectedEntities, string message=null) : base (allEntities, selectedEntities, message)
         {
-            selectableEntities = selectableTags;
-            // BindingContext = selectableTags;
             Label RTKThanks = new Label() { Text = "Using The Australian Authorities List from Right To Know." };
             SearchBar authoritySearch = new SearchBar() 
                 { 

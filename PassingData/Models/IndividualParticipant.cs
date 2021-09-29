@@ -16,7 +16,7 @@ namespace PassingData
 		private string selectedStateElectorate;
 		private string address;
 		private string userName;
-		
+
 		// This is a list of chamber-electorate pairs in which the person
 		// has representatives.
 		// Initially, when we don't know the state, it's only the Australian
@@ -32,9 +32,12 @@ namespace PassingData
 		{
 			MPsKnown = false;
 			Is_Registered = false;
+			MyMPs = new ObservableCollection<Entity>();
 		}
 		public bool Is_Registered { get; set; }
 		public bool MPsKnown { get; set; }
+		
+		public ObservableCollection<Entity> MyMPs { get; set; }
 
 
 		public string SelectedStateOrTerritory 

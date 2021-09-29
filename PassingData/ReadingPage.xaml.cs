@@ -16,29 +16,28 @@ namespace PassingData
 		private string draftQuestion;
 		private ReadingContext readingContext;
 
-		private string selectedAuthorities = ""; 
+		// private string selectedAuthorities = ""; 
 
-		public ReadingPage(bool isReadingOnly, ObservableCollection<Tag> authorities, ReadingContext readingContext)
+		public ReadingPage(bool isReadingOnly, ReadingContext readingContext)
 		{
 			InitializeComponent();
 			this.readingContext = readingContext;
 			BindingContext = readingContext;
 
+            FilterDisplayTableView ttestableView = new FilterDisplayTableView(readingContext);
+            WholePage.Children.Insert(1,ttestableView);
+            
 			if (isReadingOnly)
 			{
 				TitleBar.Title = "Read Questions";
 				QuestionDraftingBox.IsVisible = false;
-				keepButton.IsVisible = false;
-				discardButton.IsVisible = false;
+				KeepButton.IsVisible = false;
+				DiscardButton.IsVisible = false;
 			}
 			else
 			{
 				TitleBar.Title = "Similar questions";
-				finishedReadingButton.IsVisible = false;
 			}
-
-			FillInSelectedAnswerers(authorities);
-
 		}
 
 		void Question_Entered(object sender, EventArgs e)
@@ -55,46 +54,36 @@ namespace PassingData
 			await Navigation.PushAsync(questionDetailPage);
 		}
 
-		private void FillInSelectedAnswerers(ObservableCollection<Tag> authorities)
-		{
-			foreach (var authority in authorities)
-			{
-				if (authority.Selected)
-				{
-					selectedAuthorities += authority.TagEntity.NickName + "\n";
-				}
-			}
-
-
-			AnsweredBySelections.Text = selectedAuthorities;
-		}
-
 		async void OnDiscardButtonClicked(object sender, EventArgs e)
 		{
-            bool goHome = await DisplayAlert("Draft discarded", "Save time and focus support by voting on a similar question", "Home", "Related questions");
             readingContext.DraftQuestion = null;
+            DraftEditor.IsVisible = false;
+            DiscardButton.IsVisible = false; 
+			KeepButton.IsVisible = false;
+			
+            bool goHome = await DisplayAlert("Draft discarded", "Save time and focus support by voting on a similar question", "Home", "Related questions");
             if (goHome)
             {
                 await Navigation.PopToRootAsync();
             }
 
-            ((Button) sender).Text = "Draft Discarded";
-			// ((ReadingContext) BindingContext).DraftQuestion = "";
-			keepButton.IsVisible = false;
 		}
 
 
 		async void OnSaveButtonClicked(object sender, EventArgs e)
 		{
 			// Tag the new question with the authorities that have been selected.
-			ObservableCollection<Entity> questionAnswerers;
-			questionAnswerers =
-				new ObservableCollection<Entity>(
-					readingContext.SelectableAuthorities.Where(w => w.Selected).Select(a => a.TagEntity));
-			if (readingContext.SelectedDepartment != null)
-				questionAnswerers.Insert(0, readingContext.SelectedDepartment);
+			// ObservableCollection<Entity> questionAnswerers;
+			var questionAnswerers =
+				new ObservableCollection<Entity>(readingContext.Filters.SelectedAuthorities);
+
+			foreach (var answeringMP in readingContext.Filters.SelectedAnsweringMPs)
+			{
+				questionAnswerers.Add(answeringMP);	
+			}
 
 			IndividualParticipant thisParticipant = readingContext.ThisParticipant;
+			
 			Question newQuestion = new Question
 			{
 				QuestionText = readingContext.DraftQuestion,
@@ -102,8 +91,6 @@ namespace PassingData
 				QuestionSuggester 
 					= (thisParticipant != null && thisParticipant.Is_Registered) ? thisParticipant.Username : "Anonymous user",
 				QuestionAnswerers = questionAnswerers,
-				// TODO: set this.
-				// QuestionAsker = ...;  
 				DownVotes = 0,
 				UpVotes = 0
 			};
@@ -111,11 +98,6 @@ namespace PassingData
 
 			var questionDetailPage = new QuestionDetailPage(true, newQuestion, readingContext);
 			await Navigation.PushAsync(questionDetailPage);
-		}
-
-		async void OnFinishedReadingButtonClicked(object sender, EventArgs e)
-		{
-			await Navigation.PopAsync();
 		}
 
 		private void OnUpVoteButtonClicked(object sender, EventArgs e)

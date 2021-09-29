@@ -16,20 +16,20 @@ namespace PassingData
         public QuestionAskerPage(ReadingContext readingContext)
         {
             // TODO: Construct this properly.
-            FilterContext filters = new FilterContext {FilterKeyword = readingContext.SearchKeyword};
+            // FilterContext filters = new FilterContext {FilterKeyword = readingContext.SearchKeyword};
             BindingContext = readingContext;
             this.readingContext = readingContext;
             
-            FilterDisplayTableView ttestableView = new FilterDisplayTableView(readingContext);
             
             InitializeComponent();
 
+            FilterDisplayTableView ttestableView = new FilterDisplayTableView(readingContext);
             WholePage.Children.Insert(0,ttestableView);
         }
 
         async void OnNavigateForwardButtonClicked(object sender, EventArgs e)
         {
-			var readingPage = new ReadingPage(false, readingContext.SelectableAuthorities, readingContext);
+			var readingPage = new ReadingPage(false, readingContext);
 			await Navigation.PushAsync (readingPage);
         }
     }

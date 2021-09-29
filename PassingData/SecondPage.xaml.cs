@@ -37,23 +37,6 @@ namespace PassingData
 
 		}
 		
-		/*
-		void OnPickerSelectedIndexChanged(object sender, EventArgs e) 
-		{
-            var picker = (Picker)sender;
-            
-            int selectedIndex = picker.SelectedIndex;
-
-            if (selectedIndex != -1)
-            {
-                Tag selectedDept = (Tag) picker.ItemsSource[selectedIndex];
-                selectedDept.Selected = true;
-                _context.SelectedDepartment = selectedDept.TagEntity;
-                questionAsker.IsVisible = true;
-            }
-        }
-        */
-		
 		void Question_Entered(object sender, EventArgs e)
 		{
 			readingContext.DraftQuestion = ((Editor) sender).Text;
@@ -71,12 +54,15 @@ namespace PassingData
 		// context.
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
-			bool needToFindAnswerer = readingContext.SelectedDepartment != null
-			       || readingContext.SelectableAuthorities.Where(w => w.Selected).Count() != 0;
+			// bool needToFindAnswerer = readingContext.Filters.SelectedDepartment != null
+			//        || readingContext.SelectableAuthorities.Where(w => w.Selected).Count() != 0;
+
+			var selectedAuthorities = readingContext.Filters.SelectedAuthorities;
+			bool needToFindAnswerer = selectedAuthorities != null && selectedAuthorities.Any();
 			
 			if (isReadingOnly || !needToFindAnswerer)
 			{
-				var readingPage = new ReadingPage(isReadingOnly, readingContext.SelectableAuthorities, readingContext);
+				var readingPage = new ReadingPage(isReadingOnly, readingContext);
 				await Navigation.PushAsync (readingPage);
 			}
 			else 
@@ -94,8 +80,9 @@ namespace PassingData
 		{
 			// var webViewAuthoritySelectPage = new WebviewAuthoritySelect((ReadingContext) BindingContext);
 			// await Navigation.PushAsync(webViewAuthoritySelectPage);
-			var exploringPageToSearchAuthorities= new ExploringPageWithSearch(readingContext.SelectableAuthorities,
-				"Choose authorties");
+			var exploringPageToSearchAuthorities
+				= new ExploringPageWithSearch(BackgroundElectorateAndMPData.AllAuthorities, readingContext.Filters.SelectedAuthorities,
+				"Choose authorities");
 			await Navigation.PushAsync(exploringPageToSearchAuthorities);
 		}
 
@@ -106,7 +93,8 @@ namespace PassingData
 		async void OnAnsweredByMPButtonClicked(object sender, EventArgs e)
 		{
             string message = "These are your MPs.  Select the one(s) who should answer the question";
-           	var mpsExploringPage = new ExploringPage(readingContext.MyMPs, message);
+            // TODO Fix this up to give the person their MPs, not the complete list.
+           	var mpsExploringPage = new ExploringPage(readingContext.AllMPs, readingContext.Filters.SelectedAnsweringMPs, message);
            	// await Navigation.PushAsync (mpsExploringPage);
             
             ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
@@ -120,7 +108,7 @@ namespace PassingData
 		private void OnMyMPRaiseButtonClicked(object sender, EventArgs e)
 		{
             string message = "These are your MPs.  Select the one(s) who should raise the question in Parliament";
-           	var mpsExploringPage = new ExploringPage(readingContext.MyMPs, message);
+           	var mpsExploringPage = new ExploringPage(readingContext.AllMPs, readingContext.ThisParticipant.MyMPs, message);
 			
             ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
 		}
@@ -160,7 +148,7 @@ namespace PassingData
 				)
 				);
 
-			var mpsPage = new ExploringPageWithSearch(selectableMPs, "Here is the complete list of MPs");
+			var mpsPage = new ExploringPageWithSearch(readingContext.AllMPs, readingContext.Filters.SelectedAskingMPs, "Here is the complete list of MPs");
 			await Navigation.PushAsync(mpsPage);
 		}
 

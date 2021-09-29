@@ -13,26 +13,26 @@ namespace PassingData
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ExploringPageWithSearchAndPreSelections  : ExploringPageWithSearch 
     {
-        public ExploringPageWithSearchAndPreSelections(ObservableCollection<Tag> selectableTags, string message) :  base(selectableTags, message)
+		public ExploringPageWithSearchAndPreSelections(ObservableCollection<Entity> allEntities, 
+			ObservableCollection<Entity> selectedEntities, string message=null) : base (allEntities, selectedEntities, message)
         {
             Label testInsert = new Label() 
                 { 
-                    Text = "Alread selected",
+                    Text = "Already selected",
                 };
-                // authoritySearch.TextChanged += OnKeywordChanged;
                 
             MainLayout.Children.Insert(1, testInsert);
 
-            listPriorSelections(selectableTags);
+            listPriorSelections();
         }
 
-        private void listPriorSelections(ObservableCollection<Tag> currentSelectableTags)
+        private void listPriorSelections()
         {
             ListView selections = new ListView()
             {
                 
                 ItemTemplate=(DataTemplate)Application.Current.Resources["SelectableDataTemplate"],
-                ItemsSource = currentSelectableTags.Where(w => w.Selected)
+                ItemsSource =wrapInTags(selectedEntities,selectedEntities)
                 // ItemTemplate = StaticResource SelectableDataTemplate,
             };
             MainLayout.Children.Insert(2,selections);
