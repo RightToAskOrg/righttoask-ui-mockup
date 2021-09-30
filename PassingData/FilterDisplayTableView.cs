@@ -19,8 +19,7 @@ namespace PassingData
 
             var authorityList = new Label()
             {
-                // Text = String.Join(", ",readingContext.SelectableAuthorities.Where(w => w.Selected).Select(t => t.TagEntity.ShortestName))
-                Text = readingContext.Filters.SelectedAuthorities.ToString()  
+                Text = String.Join(",",readingContext.Filters.SelectedAuthorities.Select((a => a.ShortestName)))
             };
 
             var whoShouldAnswerItView = new ViewCell
@@ -41,8 +40,7 @@ namespace PassingData
                             {
                                 authorityList,
                             }
-                        },
-                        new Label { Text = "Change" },
+                        }
                     }
                 }
             };
