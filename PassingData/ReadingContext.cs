@@ -45,7 +45,7 @@ namespace PassingData
 		// TODO: at the moment, the list of 'my MPs' is the 
 		// hardcoded and has the generic 'Entity' type. 
 		
-		public ObservableCollection<Entity> AllMPs { get; set; }
+		public ObservableCollection<Entity> TestCurrentMPs { get; set; }
 
 		public ObservableCollection<Question> ExistingQuestions { get; set; }
 		
@@ -89,15 +89,15 @@ namespace PassingData
 			MyMPs.Add(new Tag { TagEntity = new Entity { EntityName = "Michaelia Cash" }, Selected = false });
 			*/
 
-			AllMPs = new ObservableCollection<Entity>();
-			AllMPs.Add(new Entity { EntityName = "Janet Rice" });
-			AllMPs.Add(new Entity { EntityName = "Danny O'Brien" });
-			AllMPs.Add(new Entity { EntityName = "Peter Dutton" });
-			AllMPs.Add(new Entity { EntityName = "Penny Wong" });
-			AllMPs.Add(new Entity { EntityName = "Daniel Andrews" });
-			AllMPs.Add(new Entity { EntityName = "Ged Kearney" });
-			AllMPs.Add(new Entity { EntityName = "Michael McCormack" });
-			AllMPs.Add(new Entity { EntityName = "Mark Dreyfus" });
+			TestCurrentMPs = new ObservableCollection<Entity>();
+			TestCurrentMPs.Add(new Entity { EntityName = "Janet Rice" });
+			TestCurrentMPs.Add(new Entity { EntityName = "Danny O'Brien" });
+			TestCurrentMPs.Add(new Entity { EntityName = "Peter Dutton" });
+			TestCurrentMPs.Add(new Entity { EntityName = "Penny Wong" });
+			TestCurrentMPs.Add(new Entity { EntityName = "Daniel Andrews" });
+			TestCurrentMPs.Add(new Entity { EntityName = "Ged Kearney" });
+			TestCurrentMPs.Add(new Entity { EntityName = "Michael McCormack" });
+			TestCurrentMPs.Add(new Entity { EntityName = "Mark Dreyfus" });
 			
 			ExistingQuestions = new ObservableCollection<Question>();
 			ExistingQuestions.Add(

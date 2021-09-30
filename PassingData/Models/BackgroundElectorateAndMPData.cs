@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -54,10 +55,6 @@ namespace PassingData
 			WA_Legislative_Assembly,
 			WA_Legislative_Council
 	    }
-		// private static ObservableCollection<string> extractStatesFromMPList()
-		//{
-		// 	return new ObservableCollection<string>(AllMPs.Select(mp => mp.StateOrTerritory.ToUpper()).Distinct());
-		//}
 
 		public static readonly ObservableCollection<Entity> AllAuthorities = new ObservableCollection<Entity>(readAuthoritiesFromFiles());
 
@@ -114,8 +111,6 @@ namespace PassingData
 					ChamberSeatedIn = chamber,
 					Salutation = (words[0] == "Senator" ? "Senator" : "Member"),
 					EntityName = words[2] +" "+ words[1],
-					// FamilyName = words[1],
-					// PreferredName = words[2],
 					ElectorateRepresenting = words[3],
 					StateOrTerritory = words[4],
 					
@@ -147,6 +142,60 @@ namespace PassingData
 			{
 				return null;
 			}
+		}
+
+		public static List<string> ListElectoratesInChamber(Chamber chamber)
+		{
+			return new List<string>(AllMPs.Where(mp => mp.ChamberSeatedIn == chamber).Select(mp => mp.ElectorateRepresenting));
+		}
+
+		/* Finds all the chambers in which a citizen of this state is represented,
+		 * including the House of Representatives and the Senate.
+		 * If the string input doesn't match any states, it simply
+		 * returns the federal chambers.
+		 */
+		public static List<Chamber> FindChambers(string state)
+		{
+			var chambersForTheState = new List<Chamber>()
+			{
+				Chamber.Australian_House_Of_Representatives,
+				Chamber.Australian_Senate
+			};
+
+			switch (state.ToUpper())
+			{
+				case ("ACT"):
+					chambersForTheState.Add(Chamber.ACT_Legislative_Assembly);
+					break;
+				case ("NSW"):
+					chambersForTheState.Add(Chamber.NSW_Legislative_Assembly);
+					chambersForTheState.Add(Chamber.NSW_Legislative_Council);
+					break;
+				case ("NT"):
+					chambersForTheState.Add(Chamber.NT_Legislative_Assembly);
+					break;
+				case ("QLD"):
+					chambersForTheState.Add(Chamber.Qld_Legislative_Assembly);
+					break;
+				case ("SA"):
+					chambersForTheState.Add(Chamber.SA_Legislative_Assembly);
+					chambersForTheState.Add(Chamber.SA_Legislative_Council);
+					break;
+				case ("VIC"):
+					chambersForTheState.Add(Chamber.Vic_Legislative_Assembly);
+					chambersForTheState.Add(Chamber.Vic_Legislative_Council);
+					break;
+				case ("TAS"):
+					chambersForTheState.Add(Chamber.Tas_House_Of_Assembly);
+					chambersForTheState.Add(Chamber.Tas_Legislative_Council);
+					break;
+				case ("WA"):
+					chambersForTheState.Add(Chamber.WA_Legislative_Assembly);
+					chambersForTheState.Add(Chamber.WA_Legislative_Council);
+					break;
+			}
+
+			return chambersForTheState;
 		}
     }
 }

@@ -20,15 +20,13 @@
 				    <StackLayout Orientation="Vertical">
 					    <Label x:Name="knowElectorates" Text="I know my State/Territory electorates" HorizontalOptions="Center" 
 					           TextColor="Teal" FontSize="Large" VerticalOptions="Center" /> 
-					    <Picker x:Name="stateElectoratePicker" Title="{Binding ThisParticipant.SelectedStateElectorate, StringFormat='State Electorate: {0:F0}'}" 
-				            ItemsSource="{Binding StateElectorates}" 
-				            ItemDisplayBinding="{Binding TagEntity.EntityName}" 
-				            SelectedIndexChanged="OnStateElectoratePickerSelectedIndexChanged"> 
+					    <Picker x:Name="stateLAElectoratePicker" Title="{Binding ThisParticipant.SelectedLAStateElectorate, StringFormat='State Legislative Assembly Electorate: {0:F0}'}" 
+				            SelectedIndexChanged="OnStateLAElectoratePickerSelectedIndexChanged"> 
 					    </Picker>
-					    <!-- <Label Text="I know my Federal electorate" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" /> -->
+					    <Picker x:Name="stateLCElectoratePicker" Title="{Binding ThisParticipant.SelectedLCStateElectorate, StringFormat='State Legislative Council Electorate: {0:F0}'}" 
+				            SelectedIndexChanged="OnStateLCElectoratePickerSelectedIndexChanged"> 
+					    </Picker>
 					    <Picker x:Name="federalElectoratePicker" Title="{Binding ThisParticipant.SelectedFederalElectorate, StringFormat='Federal Electorate: {0:F0}'}" 
-				            ItemsSource="{Binding FederalElectorates}" 
-				            ItemDisplayBinding="{Binding TagEntity.EntityName}" 
 				            SelectedIndexChanged="OnFederalElectoratePickerSelectedIndexChanged"> 
 					    </Picker>
 				    </StackLayout>

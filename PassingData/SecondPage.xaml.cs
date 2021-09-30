@@ -94,7 +94,7 @@ namespace PassingData
 		{
             string message = "These are your MPs.  Select the one(s) who should answer the question";
             // TODO Fix this up to give the person their MPs, not the complete list.
-           	var mpsExploringPage = new ExploringPage(readingContext.AllMPs, readingContext.Filters.SelectedAnsweringMPs, message);
+           	var mpsExploringPage = new ExploringPage(readingContext.TestCurrentMPs, readingContext.Filters.SelectedAnsweringMPs, message);
            	// await Navigation.PushAsync (mpsExploringPage);
             
             ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
@@ -108,7 +108,7 @@ namespace PassingData
 		private void OnMyMPRaiseButtonClicked(object sender, EventArgs e)
 		{
             string message = "These are your MPs.  Select the one(s) who should raise the question in Parliament";
-           	var mpsExploringPage = new ExploringPage(readingContext.AllMPs, readingContext.ThisParticipant.MyMPs, message);
+           	var mpsExploringPage = new ExploringPage(readingContext.TestCurrentMPs, readingContext.ThisParticipant.MyMPs, message);
 			
             ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
 		}
@@ -148,13 +148,18 @@ namespace PassingData
 				)
 				);
 
-			var mpsPage = new ExploringPageWithSearch(readingContext.AllMPs, readingContext.Filters.SelectedAskingMPs, "Here is the complete list of MPs");
+			var allMPsAsEntities = new ObservableCollection<Entity>(BackgroundElectorateAndMPData.AllMPs); 
+			ExploringPageWithSearch mpsPage 
+				= new ExploringPageWithSearch(allMPsAsEntities, readingContext.Filters.SelectedAskingMPs, "Here is the complete list of MPs");
 			await Navigation.PushAsync(mpsPage);
 		}
 
-		private void OnAnswerByOtherMPButtonClicked(object sender, EventArgs e)
+		private async void OnAnswerByOtherMPButtonClicked(object sender, EventArgs e)
 		{
-			((Button) sender).Text = $"Listing other MPs not implemented yet";	
+			var allMPsAsEntities = new ObservableCollection<Entity>(BackgroundElectorateAndMPData.AllMPs); 
+			ExploringPageWithSearch mpsPage 
+				= new ExploringPageWithSearch(allMPsAsEntities, readingContext.Filters.SelectedAnsweringMPs, "Here is the complete list of MPs");
+			await Navigation.PushAsync(mpsPage);
 		}
 	}
 }
