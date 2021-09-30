@@ -14,9 +14,7 @@ namespace PassingData
 	public partial class ReadingPage : ContentPage
 	{
 		private string draftQuestion;
-		private ReadingContext readingContext;
-
-		// private string selectedAuthorities = ""; 
+		private readonly ReadingContext readingContext;
 
 		public ReadingPage(bool isReadingOnly, ReadingContext readingContext)
 		{
