@@ -1,25 +1,26 @@
 using System;
 using System.Linq;
+using PassingData.Models;
 using Xamarin.Forms;
 
-namespace PassingData
+namespace PassingData.Views
 {
     public class FilterDisplayTableView : TableView
     {
-        private ReadingContext context;
-        public FilterDisplayTableView(ReadingContext readingContext)
+        private FilterChoices filterContext;
+        public FilterDisplayTableView(FilterChoices filterContext)
         {
-            BindingContext = readingContext;
-            context = readingContext;
+            BindingContext = filterContext;
+            this.filterContext = filterContext;
             BackgroundColor = Color.NavajoWhite;
             Intent = TableIntent.Settings;
             var root = new TableRoot();
-            var section1 = new TableSection() { Title = "Filters"};
+            var section1 = new TableSection() { Title = "Filters - click to edit"};
             var section2 = new TableSection() { };
 
             var authorityList = new Label()
             {
-                Text = String.Join(",",readingContext.Filters.SelectedAuthorities.Select((a => a.ShortestName)))
+                Text = String.Join(",", filterContext.SelectedAuthorities.Select((a => a.ShortestName)))
             };
 
             var whoShouldAnswerItView = new ViewCell
@@ -51,7 +52,7 @@ namespace PassingData
             {
                 Label = "Keyword", 
                 Placeholder = "?", 
-                Text = context.Filters.SearchKeyword ?? null
+                Text = filterContext.SearchKeyword ?? null
             };
             keywordentry.Completed += OnKewordEntryCompleted;
             
@@ -68,13 +69,14 @@ namespace PassingData
         {
 			string message = "Choose others to add";
 			
-           	var departmentExploringPage = new ExploringPageWithSearchAndPreSelections(BackgroundElectorateAndMPData.AllAuthorities, context.Filters.SelectedAuthorities, message);
+           	var departmentExploringPage = new ExploringPageWithSearchAndPreSelections(BackgroundElectorateAndMPData.AllAuthorities, 
+                filterContext.SelectedAuthorities, message);
            	await Navigation.PushAsync (departmentExploringPage);
         }
 
         private void OnKewordEntryCompleted(object sender, EventArgs e)
         {
-            context.Filters.SearchKeyword = ((EntryCell)sender).Text;
+            filterContext.SearchKeyword = ((EntryCell)sender).Text;
         }
     }
 }

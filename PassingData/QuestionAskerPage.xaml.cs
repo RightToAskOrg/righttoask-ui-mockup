@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PassingData.Controls;
+using PassingData.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,7 +24,7 @@ namespace PassingData
             
             InitializeComponent();
 
-            FilterDisplayTableView ttestableView = new FilterDisplayTableView(readingContext);
+            FilterDisplayTableView ttestableView = new FilterDisplayTableView(readingContext.Filters);
             WholePage.Children.Insert(0,ttestableView);
         }
 

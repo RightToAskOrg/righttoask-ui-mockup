@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using PassingData.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -22,7 +23,7 @@ namespace PassingData
 			this.readingContext = readingContext;
 			BindingContext = readingContext;
 
-            FilterDisplayTableView ttestableView = new FilterDisplayTableView(readingContext);
+            FilterDisplayTableView ttestableView = new FilterDisplayTableView(readingContext.Filters);
             WholePage.Children.Insert(1,ttestableView);
             
 			if (isReadingOnly)

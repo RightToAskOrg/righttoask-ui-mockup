@@ -1,10 +1,8 @@
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
-namespace PassingData
+namespace PassingData.Models
 {
 	public class FilterChoices : INotifyPropertyChanged
 	{
@@ -63,7 +61,6 @@ namespace PassingData
 		
         public event PropertyChangedEventHandler PropertyChanged;
         
-        // This function allows for automatic UI updates when these properties change.
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)
