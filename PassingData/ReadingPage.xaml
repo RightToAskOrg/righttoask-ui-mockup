@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="PassingData.ReadingPage"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:controls="clr-namespace:PassingData.Controls;assembly=PassingData"
+			 xmlns:passingData="clr-namespace:PassingData;assembly=PassingData"
+			 x:Class="PassingData.ReadingPage"
 			 x:Name="TitleBar" >
 	<ContentPage.Content>
 		<StackLayout x:Name = "WholePage" HorizontalOptions="Center" VerticalOptions="Start">
 			<Label Text="Upvote good questions, or click for more detail" FontSize="Medium"></Label>
 			<ScrollView>
-			<ListView x:Name="QuestionListView" HasUnevenRows="True" ItemsSource="{Binding ExistingQuestions}" ItemTapped="Question_Selected"> 
+			<ListView x:Name="QuestionListView" HasUnevenRows="True" ItemsSource="{Binding ExistingQuestions}" ItemTapped="Question_Selected" x:DataType="passingData:ReadingContext" >
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
 							<StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="4">
-								<Label Text="{Binding QuestionText }" />	
+								<Label Text="{Binding QuestionText }"  x:DataType="passingData:Question"/>	
 								<StackLayout Orientation="Horizontal" Padding="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
 									<Label Text="Upvotes " />
-									<Label Text="{Binding UpVotes }" /> 
+									<Label Text="{Binding UpVotes }"  x:DataType="passingData:Question"/> 
+									<!--
 									<Button StyleClass="UpVoteButton" Padding="0" Clicked="OnUpVoteButtonClicked" />
+									-->
+									<controls:ToggleButton ToBeIncremented="{Binding}"  x:DataType="passingData:Question"/>
 								</StackLayout>
 							</StackLayout>			
 						</ViewCell>

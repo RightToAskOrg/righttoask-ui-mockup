@@ -99,6 +99,7 @@ namespace PassingData
 			await Navigation.PushAsync(questionDetailPage);
 		}
 
+		/*
 		private void OnUpVoteButtonClicked(object sender, EventArgs e)
 		{
 			bool upVoteMode;
@@ -119,5 +120,6 @@ namespace PassingData
 			    ((Button)sender).Text = upVoteMessage;
 			}
 		}
+		*/
 	}
 }

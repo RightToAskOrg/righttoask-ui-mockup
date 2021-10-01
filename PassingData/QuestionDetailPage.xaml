@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:PassingData.Views;assembly=PassingData"
              xmlns:passingData="clr-namespace:PassingData;assembly=PassingData"
+             xmlns:controls="clr-namespace:PassingData.Controls;assembly=PassingData"
              x:Class="PassingData.QuestionDetailPage">
     <ContentPage.Content>
 		<StackLayout x:Name="WholePage" HorizontalOptions="Center" VerticalOptions="Start">
@@ -10,7 +11,10 @@
 			<Label x:Name="Suggester" Text="{Binding QuestionSuggester, StringFormat='Written by: {0:F0}'}" x:DataType="passingData:Question" />
 			<StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 				<Label x:Name="Votes" Text="{Binding UpVotes,StringFormat='UpVotes: {0}'}"  x:DataType="passingData:Question" />
+				<!--
 				<Button x:Name="UpVoteButton" Text="Upvote" StyleClass="NormalButton" Clicked="UpVoteButton_OnClicked" HorizontalOptions="Center"/>
+				-->
+				<controls:ToggleButton x:Name="UpVoteButton" BindingContext="{Binding}" x:DataType="passingData:Question" />
 			</StackLayout>
 			<StackLayout x:Name="LinkOrAnswerSegment" Orientation="Vertical">
 				<Label Text="Link or answer" FontSize="Medium" HorizontalOptions="Center" />
