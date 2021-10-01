@@ -8,7 +8,7 @@
 			<Label x:Name="QuestionDetailView" Text="{Binding QuestionText}" FontSize="Medium" />
 			<Label x:Name="Suggester" Text="{Binding QuestionSuggester, StringFormat='Written by: {0:F0}'}"  />
 			<StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-				<Label x:Name="Votes" Text="{Binding UpVotes}" />
+				<Label x:Name="Votes" Text="{Binding UpVotes,StringFormat='UpVotes: {0}'}" />
 				<Button x:Name="UpVoteButton" Text="Upvote" StyleClass="NormalButton" Clicked="UpVoteButton_OnClicked" HorizontalOptions="Center"/>
 			</StackLayout>
 			<StackLayout x:Name="LinkOrAnswerSegment" Orientation="Vertical">
