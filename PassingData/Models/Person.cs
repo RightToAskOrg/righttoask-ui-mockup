@@ -13,10 +13,29 @@ namespace PassingData
     {
         public string StateOrTerritory { get; set; }
         
-		protected string username;
+		protected string userName;
 		protected string userEmail;
         
         // TODO add attributes for a nice profile, such as a photo.
+        public string UserName
+        {
+			get { return userName; }
+			set
+			{
+				userName = value;
+				OnPropertyChanged("UserName");
+			}
+		}
+
+		public string UserEmail
+		{
+			get { return userEmail; }
+			set
+			{
+				userEmail = value;
+				OnPropertyChanged("UserEmail");
+			}
+		}
     }
 
 }

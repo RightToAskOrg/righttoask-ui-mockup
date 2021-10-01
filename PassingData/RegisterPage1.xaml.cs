@@ -45,7 +45,7 @@ namespace PassingData
 
         async void OnRegisterNameFieldCompleted(object sender, EventArgs e)
         {
-	        readingContext.ThisParticipant.Username = ((Editor) sender).Text;
+	        readingContext.ThisParticipant.UserName = ((Editor) sender).Text;
         }
         
         // If MPs are not known, show page that allows finding electorates.
@@ -53,7 +53,7 @@ namespace PassingData
         // Make sure they've entered a name.
         async void OnRegisterCitizenButtonClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(readingContext.ThisParticipant.Username))
+            if (string.IsNullOrEmpty(readingContext.ThisParticipant.UserName))
             {
                 DisplayAlert("Enter username",
                     "You need to choose a username in order to make an account",

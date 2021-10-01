@@ -83,6 +83,9 @@ namespace PassingData
                 if (registerNow)
                 {
                     RegisterPage1 registrationPage = new RegisterPage1(readingContext);
+                    registrationPage.Disappearing += setSuggester;
+                    
+                    // question.QuestionSuggester = readingContext.ThisParticipant.UserName;
                     // Commenting-out this instruction means that the person has to push
                     // the 'publish question' button again after they've registered 
                     // their account. This seems natural to me, but is worth checking
@@ -96,10 +99,12 @@ namespace PassingData
             {
                 SaveQuestion(null, null);
             }
-            
-            
         }
-        
+
+        private void setSuggester(object sender, EventArgs e)
+        {
+            question.QuestionSuggester = readingContext.ThisParticipant.UserName;
+        }
         private async void SaveQuestion(object sender, EventArgs e)
         {
             
@@ -108,9 +113,8 @@ namespace PassingData
             // but is needed if the person has just registered.
             if (readingContext.ThisParticipant.Is_Registered)
             {
-                question.QuestionSuggester = readingContext.ThisParticipant.Username;
+                // question.QuestionSuggester = readingContext.ThisParticipant.UserName;
 	            readingContext.ExistingQuestions.Insert(0, question);
-                
                 readingContext.DraftQuestion = null;
                 
             }

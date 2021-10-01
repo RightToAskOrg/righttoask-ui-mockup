@@ -94,26 +94,6 @@ namespace PassingData
 			}
 		}
 
-		public string Username
-		{
-			get { return username; }
-			set
-			{
-				username = value;
-				OnPropertyChanged("Username");
-			}
-		}
-
-		public string UserEmail
-		{
-			get { return userEmail; }
-			set
-			{
-				userEmail = value;
-				OnPropertyChanged("UserEmail");
-			}
-		}
-		
 		public string Address
 		{
 			get { return address; }

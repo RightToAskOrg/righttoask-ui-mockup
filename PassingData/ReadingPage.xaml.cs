@@ -88,7 +88,7 @@ namespace PassingData
 				QuestionText = readingContext.DraftQuestion,
 				// TODO: Enforce registration before question-suggesting.
 				QuestionSuggester 
-					= (thisParticipant != null && thisParticipant.Is_Registered) ? thisParticipant.Username : "Anonymous user",
+					= (thisParticipant != null && thisParticipant.Is_Registered) ? thisParticipant.UserName : "Anonymous user",
 				QuestionAnswerers = questionAnswerers,
 				DownVotes = 0,
 				UpVotes = 0

@@ -29,6 +29,7 @@ namespace PassingData
             }
         }
 
+        
         public string EntityName
         {
             get { return entityName; }

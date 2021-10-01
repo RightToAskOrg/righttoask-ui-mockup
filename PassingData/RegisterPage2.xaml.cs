@@ -223,7 +223,7 @@ namespace PassingData
 
         async private void completeRegistration()
         {
-            if (!string.IsNullOrWhiteSpace(thisParticipant.Username))
+            if (!string.IsNullOrWhiteSpace(thisParticipant.UserName))
             {
                 thisParticipant.Is_Registered = true;
             }
