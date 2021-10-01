@@ -128,7 +128,7 @@ namespace PassingData
 
         private async void pushFindElectoratesPage(object sender, EventArgs e)
         {
-            var findElectoratesPage = new RegisterPage2(readingContext, true);
+            var findElectoratesPage = new RegisterPage2(readingContext.ThisParticipant, true);
             await Navigation.PushAsync(findElectoratesPage);
         }
         private void Background_Entered(object sender, EventArgs e)

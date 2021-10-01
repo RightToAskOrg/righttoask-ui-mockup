@@ -67,7 +67,7 @@ namespace PassingData
                 
                 if (!readingContext.ThisParticipant.MPsKnown)
                 {
-                    var findElectoratesPage = new RegisterPage2(readingContext, true);
+                    var findElectoratesPage = new RegisterPage2(readingContext.ThisParticipant, true);
                     await Navigation.PushAsync(findElectoratesPage);
                 }
                 
@@ -78,7 +78,7 @@ namespace PassingData
         async void OnFindElectoratesButtonClicked(object sender, EventArgs e)
         {
                 registerCitizenButton.IsVisible = true;
-                var secondRegisterPage = new RegisterPage2(readingContext, true);
+                var secondRegisterPage = new RegisterPage2(readingContext.ThisParticipant, true);
 			    await Navigation.PushAsync (secondRegisterPage);
         }
         void OnRegisterMPButtonClicked(object sender, EventArgs e)

@@ -11,7 +11,7 @@
 				<Label Text="Enter your electorates below or use your address to find them" FontSize="Medium" HorizontalOptions="Center" />
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 					<Label Text="I live in " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
-					<Picker x:Name="stateOrTerritoryPicker" Title="{Binding ThisParticipant.SelectedStateOrTerritory, StringFormat='Select State or Territory {0:F0}'}" 
+					<Picker x:Name="stateOrTerritoryPicker" Title="{Binding SelectedStateOrTerritory, StringFormat='Select State or Territory {0:F0}'}" 
 					    BackgroundColor="Turquoise" 
 				        SelectedIndexChanged="OnStatePickerSelectedIndexChanged"> 
 					</Picker>
@@ -20,13 +20,13 @@
 				    <StackLayout Orientation="Vertical">
 					    <Label x:Name="knowElectorates" Text="I know my State/Territory electorates" HorizontalOptions="Center" 
 					           TextColor="Teal" FontSize="Large" VerticalOptions="Center" /> 
-					    <Picker x:Name="stateLAElectoratePicker" Title="{Binding ThisParticipant.SelectedLAStateElectorate, StringFormat='State Legislative Assembly Electorate: {0:F0}'}" 
+					    <Picker x:Name="stateLAElectoratePicker" Title="{Binding SelectedLAStateElectorate, StringFormat='State Legislative Assembly Electorate: {0:F0}'}" 
 				            SelectedIndexChanged="OnStateLAElectoratePickerSelectedIndexChanged"> 
 					    </Picker>
-					    <Picker x:Name="stateLCElectoratePicker" Title="{Binding ThisParticipant.SelectedLCStateElectorate, StringFormat='State Legislative Council Electorate: {0:F0}'}" 
+					    <Picker x:Name="stateLCElectoratePicker" Title="{Binding SelectedLCStateElectorate, StringFormat='State Legislative Council Electorate: {0:F0}'}" 
 				            SelectedIndexChanged="OnStateLCElectoratePickerSelectedIndexChanged"> 
 					    </Picker>
-					    <Picker x:Name="federalElectoratePicker" Title="{Binding ThisParticipant.SelectedFederalElectorate, StringFormat='Federal Electorate: {0:F0}'}" 
+					    <Picker x:Name="federalElectoratePicker" Title="{Binding SelectedFederalElectorate, StringFormat='Federal Electorate: {0:F0}'}" 
 				            SelectedIndexChanged="OnFederalElectoratePickerSelectedIndexChanged"> 
 					    </Picker>
 				    </StackLayout>

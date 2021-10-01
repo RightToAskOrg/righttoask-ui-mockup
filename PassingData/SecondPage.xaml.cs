@@ -122,7 +122,7 @@ namespace PassingData
 			
 			if (thisParticipant == null || ! thisParticipant.MPsKnown)
 			{
-				var registrationPage = new RegisterPage2(readingContext, false, mpsExploringPage);
+				var registrationPage = new RegisterPage2(readingContext.ThisParticipant, false, mpsExploringPage);
 				
 				Navigation.PushAsync(registrationPage);
 			}

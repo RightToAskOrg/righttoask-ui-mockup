@@ -28,17 +28,17 @@ namespace PassingData
     public partial class RegisterPage2 : ContentPage
     {
         private string address;
-        private ReadingContext readingContext;
+        private IndividualParticipant thisParticipant;
         private Page nextPage;
 
         private List<string> allFederalElectorates;
         private List<string> allStateLAElectorates;
         private List<string> allStateLCElectorates;
-        public RegisterPage2(ReadingContext readingContext, bool showSkip, Page nextPage = null)
+        public RegisterPage2(IndividualParticipant thisParticipant, bool showSkip, Page nextPage = null)
         {
             InitializeComponent();
-            BindingContext = readingContext;
-            this.readingContext = readingContext;
+            BindingContext = thisParticipant;
+            this.thisParticipant = thisParticipant;
             this.nextPage = nextPage;
             stateOrTerritoryPicker.ItemsSource = BackgroundElectorateAndMPData.StatesAndTerritories;
             
@@ -59,13 +59,14 @@ namespace PassingData
             if (selectedIndex != -1)
             {
                 string state = (string) picker.SelectedItem;
-                readingContext.ThisParticipant.StateOrTerritory = state; 
+                thisParticipant.StateOrTerritory = state; 
                 UpdateElectoratePickerSources(state);
             }
         }
 
         // TODO This treats everyone as if they're VIC at the moment.
         // Add specific sources for LC and LA in specific states.
+        // Also clean up repeated code.
         private void UpdateElectoratePickerSources(string state)
         {
             allFederalElectorates = BackgroundElectorateAndMPData.ListElectoratesInChamber(BackgroundElectorateAndMPData.Chamber.Australian_House_Of_Representatives);
@@ -82,20 +83,20 @@ namespace PassingData
         void OnStateLCElectoratePickerSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker) sender;
-            readingContext.ThisParticipant.SelectedLCStateElectorate = ChooseElectorate(picker, allStateLCElectorates);
+            thisParticipant.SelectedLCStateElectorate = ChooseElectorate(picker, allStateLCElectorates);
             RevealNextStepIfElectoratesKnown();
         }
         void OnStateLAElectoratePickerSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker) sender;
-            readingContext.ThisParticipant.SelectedLAStateElectorate = ChooseElectorate(picker, allStateLAElectorates);
+            thisParticipant.SelectedLAStateElectorate = ChooseElectorate(picker, allStateLAElectorates);
             RevealNextStepIfElectoratesKnown();
         }
 
         void OnFederalElectoratePickerSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker) sender;
-            readingContext.ThisParticipant.SelectedFederalElectorate = ChooseElectorate(picker, allFederalElectorates);
+            thisParticipant.SelectedFederalElectorate = ChooseElectorate(picker, allFederalElectorates);
             RevealNextStepIfElectoratesKnown();
 
         }
@@ -116,12 +117,12 @@ namespace PassingData
         
         private void RevealNextStepIfElectoratesKnown()
         {
-            if(!String.IsNullOrEmpty(readingContext.ThisParticipant.SelectedLAStateElectorate)
-                && !String.IsNullOrEmpty(readingContext.ThisParticipant.SelectedLCStateElectorate)
-                && !String.IsNullOrEmpty(readingContext.ThisParticipant.SelectedFederalElectorate))
+            if(!String.IsNullOrEmpty(thisParticipant.SelectedLAStateElectorate)
+                && !String.IsNullOrEmpty(thisParticipant.SelectedLCStateElectorate)
+                && !String.IsNullOrEmpty(thisParticipant.SelectedFederalElectorate))
                 {
                     FindMPsButton.IsVisible = true;
-                    readingContext.ThisParticipant.MPsKnown = true;
+                    thisParticipant.MPsKnown = true;
                 }
         }
         
@@ -150,30 +151,30 @@ namespace PassingData
         {
             var random = new Random();
 
-            if(String.IsNullOrEmpty(readingContext.ThisParticipant.SelectedLAStateElectorate))
+            if(String.IsNullOrEmpty(thisParticipant.SelectedLAStateElectorate))
             {
-                readingContext.ThisParticipant.SelectedLAStateElectorate 
+                thisParticipant.SelectedLAStateElectorate 
                     = allStateLAElectorates[random.Next(allStateLAElectorates.Count)];   
             }
 
-            if (String.IsNullOrEmpty(readingContext.ThisParticipant.SelectedLCStateElectorate))
+            if (String.IsNullOrEmpty(thisParticipant.SelectedLCStateElectorate))
             {
-                readingContext.ThisParticipant.SelectedLCStateElectorate 
+                thisParticipant.SelectedLCStateElectorate 
                     = allStateLCElectorates[random.Next(allStateLCElectorates.Count)];
             }
 
-            if (String.IsNullOrEmpty(readingContext.ThisParticipant.SelectedFederalElectorate))
+            if (String.IsNullOrEmpty(thisParticipant.SelectedFederalElectorate))
             {
-                readingContext.ThisParticipant.SelectedFederalElectorate 
+                thisParticipant.SelectedFederalElectorate 
                     = allFederalElectorates[random.Next(allFederalElectorates.Count)];
             }
             
-            readingContext.ThisParticipant.MPsKnown = true;
+            thisParticipant.MPsKnown = true;
 
             await DisplayAlert("Electorates found!", 
-                "State Assembly Electorate: "+readingContext.ThisParticipant.SelectedLAStateElectorate+"\n"
-                +"State Legislative Council Electorate: "+readingContext.ThisParticipant.SelectedLCStateElectorate+"\n"
-                +"Federal Electorate: "+readingContext.ThisParticipant.SelectedFederalElectorate, "OK");
+                "State Assembly Electorate: "+thisParticipant.SelectedLAStateElectorate+"\n"
+                +"State Legislative Council Electorate: "+thisParticipant.SelectedLCStateElectorate+"\n"
+                +"Federal Electorate: "+thisParticipant.SelectedFederalElectorate, "OK");
             ((Button) sender).IsVisible = false; 
             federalElectoratePicker.TextColor = Color.Black;
             stateLAElectoratePicker.TextColor = Color.Black;
@@ -187,7 +188,7 @@ namespace PassingData
         
         private void OnSaveAddressButtonClicked(object sender, EventArgs e)
         {
-            readingContext.ThisParticipant.Address = address;
+            thisParticipant.Address = address;
             saveAddressButton.Text = "Address saved";
             noSaveAddressButton.IsVisible = false;
             FindMPsButton.IsVisible = true;
@@ -222,9 +223,9 @@ namespace PassingData
 
         async private void completeRegistration()
         {
-            if (!string.IsNullOrWhiteSpace(readingContext.ThisParticipant.Username))
+            if (!string.IsNullOrWhiteSpace(thisParticipant.Username))
             {
-                readingContext.ThisParticipant.Is_Registered = true;
+                thisParticipant.Is_Registered = true;
             }
             
             // Remove page before this, which should be RegisterPage1 
