@@ -4,19 +4,24 @@
 			 x:Class="PassingData.SecondPage"
 			 x:Name="TitleBar" >
 	<ContentPage.Content>
-		<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+		<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"
+		             Padding="30">
 			<StackLayout Orientation="Vertical" x:Name="QuestionDraftingBox">
 				<Label Text="My question is..." FontSize="Medium" HorizontalOptions="Center" />
-				<Editor Placeholder="Enter your question" Completed="Question_Entered" StyleClass="NormalEditor" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />
+				<Editor Completed="Question_Entered" MaxLength="280" 
+				        StyleClass="NormalEditor" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold">
+					<Editor.Placeholder>
+						Enter your question (max 280 chars)
+						  
+						  
+						  
+						.   	
+					</Editor.Placeholder>
+				</Editor>
 			</StackLayout >
 			<StackLayout Orientation="Horizontal">
 				<Label Text="To be answered by " FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" />
 				<StackLayout Orientation="Vertical">
-					<!-- <Picker x:Name="minsterOrDeptPicker" Title="A minister or department" 
-				        ItemsSource="{Binding Departments}" BackgroundColor="Turquoise"
-				        ItemDisplayBinding="{Binding TagEntity.EntityName}" 
-				        SelectedIndexChanged="OnPickerSelectedIndexChanged"> 
-					</Picker> -->
 					<Button CornerRadius="20" HeightRequest="40" x:Name="otherPublicAuthorityButton" Text="A public Authority" Clicked="OnOtherPublicAuthorityButtonClicked" BackgroundColor="Turquoise"/>
 					<Button x:Name="myMP" Text="My MP" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnAnsweredByMPButtonClicked" HorizontalOptions="Center"/>
 					<Button x:Name="otherMP" Text="Another MP" CornerRadius="20" BackgroundColor="Turquoise" Clicked="OnAnswerByOtherMPButtonClicked" HorizontalOptions="Center"/>

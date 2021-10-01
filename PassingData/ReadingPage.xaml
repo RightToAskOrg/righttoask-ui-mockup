@@ -6,17 +6,6 @@
 	<ContentPage.Content>
 		<StackLayout x:Name = "WholePage" HorizontalOptions="Center" VerticalOptions="Start">
 			<Label Text="Upvote good questions, or click for more detail" FontSize="Medium"></Label>
-			<!--
-			<StackLayout Orientation="Horizontal">
-         		<Label Text="To be answered by: " FontSize="Medium" />  
-         		<Label Text="{Binding SelectedDepartment.EntityName}" FontSize="Medium" FontAttributes="Bold" /> 
-        	</StackLayout>
-         	<Label x:Name="AnsweredBySelections" FontSize="Medium" FontAttributes="Bold" /> 
-			<StackLayout Orientation="Horizontal">
-         		<Label Text="Keyword: " FontSize="Medium" HorizontalOptions="FillAndExpand" />
-         		<Label Text="{Binding SearchKeyword}" FontSize="Medium" FontAttributes="Bold" />
-        	</StackLayout>
-        	-->
 			<ScrollView>
 			<ListView x:Name="QuestionListView" HasUnevenRows="True" ItemsSource="{Binding ExistingQuestions}" ItemTapped="Question_Selected"> 
 				<ListView.ItemTemplate>

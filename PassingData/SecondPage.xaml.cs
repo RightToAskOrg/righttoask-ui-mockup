@@ -78,8 +78,6 @@ namespace PassingData
 
 		async private void OnOtherPublicAuthorityButtonClicked(object sender, EventArgs e)
 		{
-			// var webViewAuthoritySelectPage = new WebviewAuthoritySelect((ReadingContext) BindingContext);
-			// await Navigation.PushAsync(webViewAuthoritySelectPage);
 			var exploringPageToSearchAuthorities
 				= new ExploringPageWithSearch(BackgroundElectorateAndMPData.AllAuthorities, readingContext.Filters.SelectedAuthorities,
 				"Choose authorities");
@@ -95,11 +93,8 @@ namespace PassingData
             string message = "These are your MPs.  Select the one(s) who should answer the question";
             // TODO (Issue #9) update to use the properly-computed MPs in ThisParticipant.MyMPs
            	var mpsExploringPage = new ExploringPage(readingContext.TestCurrentMPs, readingContext.Filters.SelectedAnsweringMPsMine, message);
-           	// await Navigation.PushAsync (mpsExploringPage);
             
             ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
-            
-            questionAsker.IsVisible = true;
 		}
 
 
