@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:PassingData.Views;assembly=PassingData"
              x:Class="PassingData.QuestionDetailPage">
     <ContentPage.Content>
-		<StackLayout HorizontalOptions="Center" VerticalOptions="Start">
-			<Label x:Name="QuestionDetailView" >
-			</Label>
-			<Button x:Name="UpVoteButton" Text="Upvote" StyleClass="NormalButton" Clicked="UpVoteButton_OnClicked" HorizontalOptions="Center"/>
+		<StackLayout x:Name="WholePage" HorizontalOptions="Center" VerticalOptions="Start">
+			<Label x:Name="QuestionDetailView" Text="{Binding QuestionText}" FontSize="Medium" />
+			<Label x:Name="Suggester" Text="{Binding QuestionSuggester, StringFormat='Written by: {0:F0}'}"  />
+			<StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+				<Label x:Name="Votes" Text="{Binding UpVotes}" />
+				<Button x:Name="UpVoteButton" Text="Upvote" StyleClass="NormalButton" Clicked="UpVoteButton_OnClicked" HorizontalOptions="Center"/>
+			</StackLayout>
 			<StackLayout x:Name="LinkOrAnswerSegment" Orientation="Vertical">
 				<Label Text="Link or answer" FontSize="Medium" HorizontalOptions="Center" />
 				<Editor Placeholder="Add a link or answer" Completed="Answer_Entered" StyleClass="NormalEditor" AutoSize="TextChanges" FontSize="Medium" FontAttributes="Bold" />

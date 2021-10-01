@@ -14,14 +14,16 @@ namespace PassingData
         private string linkOrAnswer;
         private Question question;
         private ReadingContext readingContext;
-        public QuestionDetailPage (bool isNewQuestion, Question selectedQuestion, ReadingContext readingContext)
+        public QuestionDetailPage (bool isNewQuestion, Question question, ReadingContext readingContext)
         {
-            BindingContext = readingContext;
+            BindingContext = question;
+            this.question = question;
+            
+            // Note: this is never actually used, except to pass on to the account-editing page.
             this.readingContext = readingContext;
             
-            question = selectedQuestion;
             InitializeComponent ();
-            QuestionDetailView.Text = question.ToString();
+            // QuestionDetailView.Text = question.ToString();
             
             // Different actions depending on whether it's a new question you're about to submit,
             // or an existing question you're answering, upvoting or adding links for.
@@ -126,11 +128,6 @@ namespace PassingData
             }
         }
 
-        private async void pushFindElectoratesPage(object sender, EventArgs e)
-        {
-            var findElectoratesPage = new RegisterPage2(readingContext.ThisParticipant, true);
-            await Navigation.PushAsync(findElectoratesPage);
-        }
         private void Background_Entered(object sender, EventArgs e)
         {
             // Do nothing.
