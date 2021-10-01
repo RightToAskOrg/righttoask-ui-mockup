@@ -8,14 +8,17 @@ namespace PassingData.Models
 	{
 		private string searchKeyword;
 		private ObservableCollection<Entity> selectedAnsweringMPs;
+		private ObservableCollection<Entity> selectedAnsweringMPsMine;
 		private ObservableCollection<Entity> selectedAskingMPs;
-
+		private ObservableCollection<Entity> selectedAskingMPsMine;
 		private ObservableCollection<Entity> selectedAuthorities;
 
 		public FilterChoices()
 		{
 			selectedAnsweringMPs = new ObservableCollection<Entity>();
 			selectedAskingMPs = new ObservableCollection<Entity>();
+			selectedAnsweringMPsMine = new ObservableCollection<Entity>();
+			selectedAskingMPsMine = new ObservableCollection<Entity>();
 			selectedAuthorities = new ObservableCollection<Entity>();
 		}
 
@@ -39,6 +42,16 @@ namespace PassingData.Models
 			}
 		}
 
+		public ObservableCollection<Entity> SelectedAskingMPsMine
+		{
+			get { return selectedAskingMPsMine; }
+			set
+			{
+				selectedAskingMPsMine = value;
+				OnPropertyChanged("SelectedAskingMPsMine");
+			}
+		}
+		
 		public ObservableCollection<Entity> SelectedAskingMPs
 		{
 			get { return selectedAskingMPs; }
@@ -49,6 +62,17 @@ namespace PassingData.Models
 			}
 		}
 
+		
+
+		public ObservableCollection<Entity> SelectedAnsweringMPsMine
+		{
+			get { return selectedAnsweringMPsMine; }
+			set
+			{
+				selectedAnsweringMPsMine = value;
+				OnPropertyChanged("SelectedAnsweringMPsMine");
+			}
+		}
 		public ObservableCollection<Entity> SelectedAnsweringMPs
 		{
 			get { return selectedAnsweringMPs; }

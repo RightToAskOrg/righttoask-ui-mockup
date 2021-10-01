@@ -48,6 +48,8 @@ namespace PassingData
 	        }
 	        set
 	        {
+				// TODO (Issue #9) Update MyMPs.
+				// All the Senators for this state should be included.
 		        selectedStateOrTerritory = value;
 		        UpdateChambers(value);
 		        OnPropertyChanged("SelectedStateOrTerritory");
@@ -61,6 +63,10 @@ namespace PassingData
             }
             set
             {
+	            // TODO (Issue #9) when this LC state electorate is
+	            // chosen, add the representative(s) for that electorate to MyMPs.
+	            // Note that you'll need to compare both the chamber and the
+	            // Electorate Name.
                 selectedLCStateElectorate= value;
                 OnPropertyChanged("SelectedLCStateElectorate");
             }
@@ -71,6 +77,7 @@ namespace PassingData
 			get { return selectedLAStateElectorate; }
 			set
 			{
+				// TODO (Issue #9) Update MyMPs.
 				selectedLAStateElectorate = value;
 				OnPropertyChanged("SelectedLAStateElectorate");
 			}
@@ -81,6 +88,7 @@ namespace PassingData
 			get { return selectedFederalElectorate; }
 			set
 			{
+				// TODO (Issue #9) Update MyMPs.
 				selectedFederalElectorate = value;
 				OnPropertyChanged("SelectedFederalElectorate");
 			}

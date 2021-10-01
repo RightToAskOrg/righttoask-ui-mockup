@@ -93,8 +93,8 @@ namespace PassingData
 		async void OnAnsweredByMPButtonClicked(object sender, EventArgs e)
 		{
             string message = "These are your MPs.  Select the one(s) who should answer the question";
-            // TODO Fix this up to give the person their MPs, not the complete list.
-           	var mpsExploringPage = new ExploringPage(readingContext.TestCurrentMPs, readingContext.Filters.SelectedAnsweringMPs, message);
+            // TODO (Issue #9) update to use the properly-computed MPs in ThisParticipant.MyMPs
+           	var mpsExploringPage = new ExploringPage(readingContext.TestCurrentMPs, readingContext.Filters.SelectedAnsweringMPsMine, message);
            	// await Navigation.PushAsync (mpsExploringPage);
             
             ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
@@ -108,7 +108,9 @@ namespace PassingData
 		private void OnMyMPRaiseButtonClicked(object sender, EventArgs e)
 		{
             string message = "These are your MPs.  Select the one(s) who should raise the question in Parliament";
-           	var mpsExploringPage = new ExploringPage(readingContext.TestCurrentMPs, readingContext.ThisParticipant.MyMPs, message);
+            
+            // TODO (Issue #9) update to use the properly-computed MPs in ThisParticipant.MyMPs
+           	var mpsExploringPage = new ExploringPage(readingContext.TestCurrentMPs, readingContext.Filters.SelectedAskingMPsMine, message);
 			
             ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
 		}
