@@ -142,36 +142,51 @@ namespace PassingData
                 
         void OnAddressEntered(object sender, EventArgs e)
         {
-            address = ((Editor) sender).Text;
+            address = ((Entry) sender).Text;
         }
 
         // At the moment this just chooses random electorates. 
         // TODO: We probably want this to give the person a chance to go back and fix it if wrong.
-        async void OnSubmitAddressButton_Clicked(object sender, EventArgs e)
+        // If we don't even know the person's state, we have no idea so they have to go back and pick;
+        // If we know their state but not their Legislative Assembly or Council makeup, we can go on. 
+        void OnSubmitAddressButton_Clicked(object sender, EventArgs e)
         {
             var random = new Random();
 
-            if(String.IsNullOrEmpty(thisParticipant.SelectedLAStateElectorate))
+            if (allFederalElectorates == null)
             {
-                thisParticipant.SelectedLAStateElectorate 
-                    = allStateLAElectorates[random.Next(allStateLAElectorates.Count)];   
+                DisplayAlert("Please choose a state", "", "OK");
+                return;
             }
-
-            if (String.IsNullOrEmpty(thisParticipant.SelectedLCStateElectorate))
-            {
-                thisParticipant.SelectedLCStateElectorate 
-                    = allStateLCElectorates[random.Next(allStateLCElectorates.Count)];
-            }
-
+                
             if (String.IsNullOrEmpty(thisParticipant.SelectedFederalElectorate))
             {
                 thisParticipant.SelectedFederalElectorate 
                     = allFederalElectorates[random.Next(allFederalElectorates.Count)];
             }
             
+            if(String.IsNullOrEmpty(thisParticipant.SelectedLAStateElectorate))
+            {
+                if (!allStateLAElectorates.IsNullOrEmpty())
+                {
+                    thisParticipant.SelectedLAStateElectorate 
+                    = allStateLAElectorates[random.Next(allStateLAElectorates.Count)];   
+                }
+            }
+
+            if (String.IsNullOrEmpty(thisParticipant.SelectedLCStateElectorate))
+            {
+                if (!allStateLCElectorates.IsNullOrEmpty())
+                {
+                    thisParticipant.SelectedLCStateElectorate 
+                      = allStateLCElectorates[random.Next(allStateLCElectorates.Count)];
+                }
+            }
+
+            
             thisParticipant.MPsKnown = true;
 
-            await DisplayAlert("Electorates found!", 
+            DisplayAlert("Electorates found!", 
                 "State Assembly Electorate: "+thisParticipant.SelectedLAStateElectorate+"\n"
                 +"State Legislative Council Electorate: "+thisParticipant.SelectedLCStateElectorate+"\n"
                 +"Federal Electorate: "+thisParticipant.SelectedFederalElectorate, "OK");
