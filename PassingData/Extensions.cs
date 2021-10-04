@@ -20,7 +20,7 @@ namespace PassingData
 
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
         {
-            return enumerable?.Any() ?? false;
+            return !(enumerable?.Any() ?? false);
 
         }
     }

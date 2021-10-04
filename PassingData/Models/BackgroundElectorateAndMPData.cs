@@ -103,8 +103,8 @@ namespace PassingData
 		}
 		private static MP parseCSVLineAsMP(Chamber chamber, string line)
 		{
-			string[] words = line.Split(',');
-			if (words.Length >= 5)
+			string[] words = line?.Split(',');
+			if (words?.Length >= 5)
 			{
 				MP newMP = new MP
 				{

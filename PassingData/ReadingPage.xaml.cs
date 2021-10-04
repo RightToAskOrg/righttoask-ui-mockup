@@ -24,6 +24,7 @@ namespace PassingData
 			BindingContext = readingContext;
 
             FilterDisplayTableView ttestableView = new FilterDisplayTableView(readingContext.Filters);
+            // ttestableView.VerticalOptions = LayoutOptions.Start;
             WholePage.Children.Insert(1,ttestableView);
             
 			if (isReadingOnly)

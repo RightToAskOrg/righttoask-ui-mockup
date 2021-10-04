@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading;
@@ -46,31 +47,27 @@ namespace PassingData
 		// Similarly if my MP is answering.
 		// If drafting, load a question-asker page, which will then 
 		// lead to a question-reading page.
-		// TODO at the moment, it gives you question-directing if you've chosen
-		// anything other than your MP.  Think about whether this is the right
-		// behaviour. 
+		//
 		// TODO also doesn't do the right thing if you've previously selected
-		// someone other than your MP, because this is stored in the global binding
-		// context.
+		// someone other than your MP.  In other words, it should enforce exclusivity -
+		// either your MP(s) answer it, or an authority or other MP answers it.
+		// At the moment this exclusivity is not enforced.
 		async void OnNavigateForwardButtonClicked (object sender, EventArgs e)
 		{
-			// bool needToFindAnswerer = readingContext.Filters.SelectedDepartment != null
-			//        || readingContext.SelectableAuthorities.Where(w => w.Selected).Count() != 0;
+			var needToFindAsker = readingContext.Filters.SelectedAnsweringMPs.IsNullOrEmpty();
 
-			var selectedAuthorities = readingContext.Filters.SelectedAuthorities;
-			bool needToFindAnswerer = selectedAuthorities != null && selectedAuthorities.Any();
-			
-			if (isReadingOnly || !needToFindAnswerer)
-			{
-				var readingPage = new ReadingPage(isReadingOnly, readingContext);
-				await Navigation.PushAsync (readingPage);
-			}
-			else 
+			if (needToFindAsker)
 			{
 				var questionAskerPage = new QuestionAskerPage(readingContext);
 				await Navigation.PushAsync(questionAskerPage);
 			}
+			else
+			{
+				var readingPage = new ReadingPage(isReadingOnly, readingContext);
+				await Navigation.PushAsync (readingPage);
+			} 
 		}
+	
 		async void OnNavigateBackButtonClicked (object sender, EventArgs e)
 		{
 			await Navigation.PopAsync ();
@@ -110,9 +107,6 @@ namespace PassingData
             ListMPsFindFirstIfNotAlreadyKnown(mpsExploringPage);
 		}
 
-		// TODO: This is inelegant at the moment. The underlying page is briefly
-		// visible before it appears - it would be better to pop this up first, then
-		// insert the exploringpage underneath.
 		void ListMPsFindFirstIfNotAlreadyKnown(ExploringPage mpsExploringPage)
 		{
 			var thisParticipant = readingContext.ThisParticipant;

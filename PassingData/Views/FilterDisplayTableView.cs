@@ -14,6 +14,8 @@ namespace PassingData.Views
             this.filterContext = filterContext;
             BackgroundColor = Color.NavajoWhite;
             Intent = TableIntent.Settings;
+            VerticalOptions = LayoutOptions.Start;
+            HeightRequest = Height; 
             var root = new TableRoot();
             var section1 = new TableSection() { Title = "Filters - click to edit"};
             var section2 = new TableSection() { };
@@ -52,7 +54,7 @@ namespace PassingData.Views
             {
                 Label = "Keyword", 
                 Placeholder = "?", 
-                Text = filterContext.SearchKeyword ?? null
+                Text = filterContext.SearchKeyword ?? null,
             };
             keywordentry.Completed += OnKewordEntryCompleted;
             
