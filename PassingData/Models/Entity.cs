@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -75,8 +76,8 @@ namespace PassingData
 
         public override string ToString()
         {
-            var NickNameIfPresent = NickName == null ? "" : "(" + NickName + ")";
-            return EntityName + NickNameIfPresent;
+            var nickNameIfPresent = String.IsNullOrEmpty(NickName) ? "" : "(" + NickName + ")";
+            return EntityName + nickNameIfPresent;
         }
     }
 }
